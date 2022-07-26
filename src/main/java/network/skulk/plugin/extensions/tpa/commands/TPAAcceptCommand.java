@@ -26,7 +26,7 @@ public class TPAAcceptCommand implements CommandExecutor {
             return true;
         } else if (args.length > 1) {
             return false;
-        }//continure refrac
+        }
 
         String userName = user.getName();
         HashSet<String> userIncomingRequests = extension.tpaRequests.computeIfAbsent(userName, k -> new HashSet<>());
