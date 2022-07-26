@@ -1,5 +1,6 @@
 package network.skulk.plugin;
 
+import network.skulk.plugin.extensions.tpa.TPAExtension;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.PluginCommand;
@@ -9,6 +10,7 @@ public final class SkulkNetworkPlugin extends JavaPlugin {
     @Override
     public void onEnable() {
         getLogger().info("[SKULK NETWORK PLUGIN] The plugin has been enabled.");
+        new TPAExtension(this);
     }
 
     @Override
