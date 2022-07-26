@@ -1,7 +1,7 @@
 name: SkulkNetworkPlugin
-version: "${project.version}"
-main: network.skulk.SkulkNetworkPlugin
-api-version: 1.19
+version: "0.1.0"
+main: network.skulk.plugin.SkulkNetworkPlugin
+api-version: "1.19"
 authors: [ RGBCube ]
 description: The main plugin used for the Skulk Network Minecraft server.
 website: skulk.network
