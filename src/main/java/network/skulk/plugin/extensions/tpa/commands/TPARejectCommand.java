@@ -12,23 +12,24 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashSet;
 
 public final class TPARejectCommand implements CommandExecutor {
-    private final TPAExtension extension;
+    private final @NotNull TPAExtension extension;
 
-    public TPARejectCommand(TPAExtension mainExtension) {
-        extension = mainExtension;
+    public TPARejectCommand(@NotNull TPAExtension tpaExtension) {
+        extension = tpaExtension;
         extension.register("tpa-reject", this);
     }
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-        if (!(sender instanceof Player user)) {
+        if (!(sender instanceof Player player)) {
             Message.sendOnlyPlayer(sender);
             return true;
+        } else if (args.length > 1) {
+            return false;
         }
-        if (args.length > 1) return false;
 
-        String userName = user.getName();
-        HashSet<String> userIncomingRequests = extension.tpaRequests.computeIfAbsent(userName, k -> new HashSet<>());
+        String playerName = player.getName();
+        HashSet<String> userIncomingRequests = extension.tpaRequests.computeIfAbsent(playerName, k -> new HashSet<>());
 
         Player target;
         String targetName;
@@ -38,26 +39,22 @@ public final class TPARejectCommand implements CommandExecutor {
         } else {
             // No target was specified.
             if (userIncomingRequests.size() == 1) {
-                // User has 1 incoming TPA request.
+                // The player has 1 incoming TPA request.
                 targetName = userIncomingRequests.iterator().next();
             } else if (userIncomingRequests.size() == 0) {
-                // User has no incoming TPA requests.
-                user.sendRichMessage("<bold><gray>[ <red>!</red> ]</gray></bold> <red>You don't have any incoming TPA requests.</red>");
+                // The player has no incoming TPA requests.
+                player.sendRichMessage("<bold><gray>[ <red>!</red> ]</gray></bold> <red>You don't have any incoming TPA requests.</red>");
                 return true;
             } else {
-                // Multiple people want to TPA to the user.
+                // Multiple people want to TPA to the player.
                 StringBuilder response = new StringBuilder()
                         .append("<bold><gray>[ <blue>?</blue> ]</gray></bold> <blue>Seems like you have multiple people wanting to TPA to you. Which one would you like to reject?</blue>");
 
-                for (String p : userIncomingRequests) {
-                    response.append("\n<bold><red><click:run_command:/tpa-reject ")
-                            .append(p)
-                            .append("[")
-                            .append(p)
-                            .append("]</click><red></bold>");
+                for (String toReject : userIncomingRequests) {
+                    response.append("\n<bold><red><click:run_command:/tpa-reject %s>[%s]</click></red></bold>".formatted(toReject, toReject));
                 }
 
-                user.sendRichMessage(response.toString());
+                player.sendRichMessage(response.toString());
                 return true;
             }
         }
@@ -65,19 +62,17 @@ public final class TPARejectCommand implements CommandExecutor {
         target = Bukkit.getPlayer(targetName);
 
         if (target == null || !target.isOnline()) {
-            Message.sendPlayerOffline(user);
+            Message.sendPlayerOffline(player);
             return true;
-        }
-
-        if (!userIncomingRequests.contains(targetName)) {
-            user.sendRichMessage("<bold><gray>[ <red>!</red> ]</gray> <red>%s</bold> doesn't want to TPA to you.</red>".formatted(targetName));
+        } else if (!userIncomingRequests.contains(targetName)) {
+            player.sendRichMessage("<bold><gray>[ <red>!</red> ]</gray> <red>%s</bold> doesn't want to TPA to you.</red>".formatted(targetName));
             return true;
         }
 
         userIncomingRequests.remove(targetName);
 
-        user.sendRichMessage("<bold><gray>[ <green>✓</green> ]</gray></bold> <green>Rejected <bold>%s</bold>'s TPA request.</green>".formatted(targetName));
-        target.sendRichMessage("<bold><gray>[ <red>!</red> ]</gray> <red>%s</bold> has rejected your TPA request.</red>".formatted(userName));
+        player.sendRichMessage("<bold><gray>[ <green>✓</green> ]</gray></bold> <green>Rejected <bold>%s</bold>'s TPA request.</green>".formatted(targetName));
+        target.sendRichMessage("<bold><gray>[ <red>!</red> ]</gray> <red>%s</bold> has rejected your TPA request.</red>".formatted(playerName));
 
         return true;
     }
