@@ -1,9 +1,7 @@
 package network.skulk.plugin.extensions.tpa;
 
 import network.skulk.plugin.SkulkNetworkPlugin;
-import network.skulk.plugin.extensions.tpa.commands.TPAAcceptCommand;
-import network.skulk.plugin.extensions.tpa.commands.TPACommand;
-import network.skulk.plugin.extensions.tpa.commands.TPARejectCommand;
+import network.skulk.plugin.extensions.tpa.commands.*;
 import org.bukkit.command.CommandExecutor;
 import org.jetbrains.annotations.Nullable;
 
@@ -22,8 +20,9 @@ public final class TPAExtension {
     public TPAExtension(SkulkNetworkPlugin mainPlugin) {
         plugin = mainPlugin;
 
-        new TPACommand(this);
         new TPAAcceptCommand(this);
+        new TPACancelCommand(this);
+        new TPACommand(this);
         new TPARejectCommand(this);
     }
 

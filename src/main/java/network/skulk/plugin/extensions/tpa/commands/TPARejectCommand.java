@@ -76,7 +76,7 @@ public final class TPARejectCommand implements CommandExecutor {
 
         userIncomingRequests.remove(targetName);
 
-        user.sendRichMessage("<bold><gray>[ <green>✔</green> ]</gray></bold> <green>Rejected <bold>%s</bold>'s TPA request.</green>".formatted(targetName));
+        user.sendRichMessage("<bold><gray>[ <green>✓</green> ]</gray></bold> <green>Rejected <bold>%s</bold>'s TPA request.</green>".formatted(targetName));
         target.sendRichMessage("<bold><gray>[ <red>!</red> ]</gray> <red>%s</bold> has rejected your TPA request.</red>".formatted(userName));
 
         return true;

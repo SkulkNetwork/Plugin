@@ -12,10 +12,10 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashSet;
 
 public final class TPACommand implements CommandExecutor {
-    private final TPAExtension extension;
+    private final @NotNull TPAExtension extension;
 
-    public TPACommand(TPAExtension mainExtension) {
-        extension = mainExtension;
+    public TPACommand(@NotNull TPAExtension tpaExtension) {
+        extension = tpaExtension;
         extension.register("tpa", this);
     }
 
@@ -24,8 +24,7 @@ public final class TPACommand implements CommandExecutor {
         if (!(sender instanceof Player player)) {
             Message.sendOnlyPlayer(sender);
             return true;
-        }
-        if (args.length != 1) {
+        } else if (args.length != 1) {
             return false;
         }
 
@@ -57,7 +56,7 @@ public final class TPACommand implements CommandExecutor {
 
         // The player already has a TPA request sent to the target.
         if (targetIncomingRequests.contains(playerName)) {
-            player.sendRichMessage("<bold><gray>[ <red>!</red> ]</gray></bold> <red>You already have a pending TPA request to <bold>%s</bold>.</red>".formatted(targetName));
+            player.sendRichMessage("<bold><gray>[ <color:#ffae1a>!</color> ]</gray></bold> <color:#ffae1a>You already have a pending TPA request to <bold>%s</bold>.</color>".formatted(targetName));
             return true;
         }
 

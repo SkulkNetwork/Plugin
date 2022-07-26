@@ -111,10 +111,10 @@ public class OLD implements CommandExecutor {
 //                    }
 //                }, 60);
 //
-//                player.sendRichMessage("<bold><gray>[ <green>✔</green> ]</gray></bold> Sent a TPA request to <bold>" + targetName + "</bold>.");
+//                player.sendRichMessage("<bold><gray>[ <green>✓</green> ]</gray></bold> Sent a TPA request to <bold>" + targetName + "</bold>.");
 //                target.sendRichMessage("<bold><gray>[ <cyan>?</cyan> ]</gray></bold> "
 //                        + playerName + " has sent a TPA request to you. Do you accept? <bold><red><click:run_command:/tpa-accept "
-//                        + playerName + ">[✔]</click></red><green><click:run_command:/tpa-reject "
+//                        + playerName + ">[✓]</click></red><green><click:run_command:/tpa-reject "
 //                        + playerName + ">[❌]</click></green></bold>");
 //            }
 //
@@ -164,7 +164,7 @@ public class OLD implements CommandExecutor {
 //
 //                playerRequests.remove(targetName);
 //
-//                player.sendRichMessage("<bold><gray>[ <green>✔</green> ]</gray></bold> Rejected <bold>" + targetName + "</bold>'s TPA request.");
+//                player.sendRichMessage("<bold><gray>[ <green>✓</green> ]</gray></bold> Rejected <bold>" + targetName + "</bold>'s TPA request.");
 //                target.sendRichMessage("<bold><gray>[ <red>!</red> ]</gray> " + playerName + "</bold> has rejected your TPA request.");
 //            }
 //
@@ -239,7 +239,7 @@ public class OLD implements CommandExecutor {
                         StringBuilder response = new StringBuilder("<bold><gray>[ <blue>?</blue> ]</gray></bold> Seems like you have multiple pending TPA requests. Which one would you like to cancel?");
 
                         for (String p : playerOutgoingRequests) {
-                            response.append("\n<bold><orange><click:run_command:/tpa-cancel ").append(p).append("[").append(p).append("]</click><orange></bold>");
+                            response.append("\n<bold><color:#ffae1a><click:run_command:/tpa-cancel ").append(p).append("[").append(p).append("]</click></orange></bold>");
                         }
 
                         player.sendRichMessage(response.toString());
@@ -271,7 +271,7 @@ public class OLD implements CommandExecutor {
                     player.sendRichMessage("<bold><gray>[ <red>!</red> ]</gray></bold> This player is not online.");
                     return true;
                 }
-                player.sendRichMessage("<bold><gray>[ <green>✔</green> ]</gray></bold> Rejected <bold>" + targetName + "</bold>'s TPA request.");
+                player.sendRichMessage("<bold><gray>[ <green>✓</green> ]</gray></bold> Rejected <bold>" + targetName + "</bold>'s TPA request.");
                 target.sendRichMessage("<bold><gray>[ <red>!</red> ]</gray> " + targetName + "</bold> has cancelled their TPA request to you.");
             }
         }

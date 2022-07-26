@@ -14,10 +14,10 @@ import java.util.HashSet;
 import java.util.Map;
 
 public final class TPACancelCommand implements CommandExecutor {
-    private final TPAExtension extension;
+    private final @NotNull TPAExtension extension;
 
-    public TPACancelCommand(TPAExtension mainExtension) {
-        extension = mainExtension;
+    public TPACancelCommand(@NotNull TPAExtension tpaExtension) {
+        extension = tpaExtension;
         extension.register("tpa-cancel", this);
     }
 
@@ -55,10 +55,10 @@ public final class TPACancelCommand implements CommandExecutor {
             } else if (userOutGoingRequestsSize == 1) {
                 targetName = userOutGoingRequests.get(0);
             } else {
-                StringBuilder response = new StringBuilder("<bold><gray>[ <blue>?</blue> ]</gray></bold> <blue>Seems like you have multiple pending TPA requests. Which one would you like to cancel?</blue>");
+                StringBuilder response = new StringBuilder("<bold><gray>[ <blue>?</blue> ]</gray></bold> <blue>Seems like you have multiple incoming TPA requests. Which one would you like to cancel?</blue>");
 
                 for (String toCancel : userOutGoingRequests) {
-                    response.append("\n<bold><color:#ffae1a><click:run_command:/tpa-cancel %s>[%s]</click></color></bold>".formatted(toCancel, toCancel));
+                    response.append("\n<bold><gray>-></grey> <color:#ffae1a><click:run_command:/tpa-cancel %s>[%s]</click></color></bold>".formatted(toCancel, toCancel));
                 }
 
                 player.sendRichMessage(response.toString());
@@ -75,10 +75,10 @@ public final class TPACancelCommand implements CommandExecutor {
 
         target = Bukkit.getPlayer(targetName);
 
-        player.sendRichMessage("<bold><gray>[ <green>✓</green> ]</gray></bold> Rejected <bold>%s</bold>'s TPA request.".formatted(targetName));
+        player.sendRichMessage("<bold><gray>[ <green>✓</green> ]</gray></bold> <green>Rejected <bold>%s</bold>'s TPA request.</green>".formatted(targetName));
 
         if (target != null && target.isOnline()) {
-            target.sendRichMessage("<bold><gray>[ <red>!</red> ]</gray> %s</bold> has cancelled their TPA request to you.".formatted(playerName));
+            target.sendRichMessage("<bold><gray>[ <color:#ffae1a>!</color:#ffae1a> ]</gray> <color:#ffae1a>%s</bold> has cancelled their TPA request to you.</color>".formatted(playerName));
         }
 
         return true;
