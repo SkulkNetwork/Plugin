@@ -3,9 +3,11 @@ package network.skulk.plugin;
 import network.skulk.plugin.extensions.Extension;
 import network.skulk.plugin.extensions.tpa.TPAExtension;
 import org.bukkit.Bukkit;
+import org.bukkit.NamespacedKey;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -42,13 +44,13 @@ public final class SkulkNetworkPlugin extends JavaPlugin {
         logger.info("[SKULK NETWORK PLUGIN] The plugin has been disabled.");
     }
 
-    public void reportError(String action, Exception error) {
+    public void reportError(@NotNull String action, @NotNull Exception error) {
         Logger logger = getLogger();
         logger.severe("[SKULK NETWORK PLUGIN] There was an error while %s:".formatted(action));
         logger.severe(Arrays.toString(error.getStackTrace()));
     }
 
-    public void register(String name, CommandExecutor executor) {
+    public void register(@NotNull String name, @NotNull CommandExecutor executor) {
         PluginCommand command = getCommand(name);
 
         if (command == null) {
@@ -59,7 +61,11 @@ public final class SkulkNetworkPlugin extends JavaPlugin {
         command.setExecutor(executor);
     }
 
-    public void runTaskLater(long delay, Runnable runnable) {
+    public void runTaskLater(long delay, @NotNull Runnable runnable) {
         Bukkit.getScheduler().runTaskLater(this, runnable, delay);
+    }
+
+    public @NotNull NamespacedKey makeKey(@NotNull String key) {
+        return new NamespacedKey(this, key);
     }
 }

@@ -4,8 +4,8 @@ import org.bukkit.persistence.PersistentDataAdapterContext;
 import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
 
-// BPDC = BooleanPermanentDataType
-public final class BPDC implements PersistentDataType<Byte, Boolean> {
+// PDC = BooleanPersistentDataType
+public final class BooleanPDC implements PersistentDataType<Byte, Boolean> {
     private static final byte trueByte = 1, falseByte = 0;
 
     public @NotNull Class<Byte> getPrimitiveType() {

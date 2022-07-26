@@ -6,7 +6,9 @@ import network.skulk.plugin.extensions.tpa.commands.TPAAcceptCommand;
 import network.skulk.plugin.extensions.tpa.commands.TPACancelCommand;
 import network.skulk.plugin.extensions.tpa.commands.TPACommand;
 import network.skulk.plugin.extensions.tpa.commands.TPARejectCommand;
+import org.bukkit.NamespacedKey;
 import org.bukkit.command.CommandExecutor;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
@@ -44,11 +46,15 @@ public final class TPAExtension implements Extension {
         }
     }
 
-    public void register(String name, CommandExecutor executor) {
+    public void register(@NotNull String name, @NotNull CommandExecutor executor) {
         plugin.register(name, executor);
     }
 
-    public void runTaskLater(long delay, Runnable runnable) {
+    public void runTaskLater(long delay, @NotNull Runnable runnable) {
         plugin.runTaskLater(delay, runnable);
+    }
+
+    public @NotNull NamespacedKey makeKey(String key) {
+        return plugin.makeKey(key);
     }
 }
