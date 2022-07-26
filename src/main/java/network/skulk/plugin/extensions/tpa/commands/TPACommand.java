@@ -29,8 +29,10 @@ public final class TPACommand implements CommandExecutor {
 
         String userName = user.getName();
 
+        Player target;
         String targetName = args[0];
-        Player target = Bukkit.getPlayer(targetName);
+
+        target = Bukkit.getPlayer(targetName);
 
         if (target == null || !target.isOnline()) {
             Message.sendPlayerOffline(user);

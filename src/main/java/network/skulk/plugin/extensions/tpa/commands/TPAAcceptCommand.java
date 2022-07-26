@@ -37,13 +37,13 @@ public class TPAAcceptCommand implements CommandExecutor {
             targetName = args[0];
         } else {
             // No target was specified.
-            if (userIncomingRequests.size() == 1) {
-                // User has 1 incoming TPA request.
-                targetName = userIncomingRequests.iterator().next();
-            } else if (userIncomingRequests.size() == 0) {
+            if (userIncomingRequests.size() == 0) {
                 // User has no incoming TPA requests.
                 user.sendRichMessage("<bold><gray>[ <red>!</red> ]</gray></bold> <red>You don't have any incoming TPA requests.</red>");
                 return true;
+            } else if (userIncomingRequests.size() == 1) {
+                // User has 1 incoming TPA request.
+                targetName = userIncomingRequests.iterator().next();
             } else {
                 // Multiple people want to TPA to the user.
                 StringBuilder response = new StringBuilder()

@@ -8,7 +8,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public final class SkulkNetworkPlugin extends JavaPlugin {
     @Override
     public void onEnable() {
-        getLogger().info("[SKULK NETWORK PLUGIN] The plugin has been disabled.");
+        getLogger().info("[SKULK NETWORK PLUGIN] The plugin has been enabled.");
     }
 
     @Override
@@ -20,7 +20,7 @@ public final class SkulkNetworkPlugin extends JavaPlugin {
         PluginCommand command = getCommand(name);
 
         if (command == null) {
-            getLogger().severe("The command '" + name + "' could not be registered because it was not included in the plugin.yml.");
+            getLogger().severe("The command '%s' could not be registered because it was not included in the plugin.yml.".formatted(name));
             return;
         }
 
