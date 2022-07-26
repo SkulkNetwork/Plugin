@@ -6,7 +6,7 @@ import org.jetbrains.annotations.NotNull;
 
 // BPDC = BooleanPermanentDataType
 public final class BPDC implements PersistentDataType<Byte, Boolean> {
-    private static final byte TrueByte = 1, FalseByte = 0;
+    private static final byte trueByte = 1, falseByte = 0;
 
     public @NotNull Class<Byte> getPrimitiveType() {
         return Byte.class;
@@ -17,10 +17,10 @@ public final class BPDC implements PersistentDataType<Byte, Boolean> {
     }
 
     public @NotNull Byte toPrimitive(@NotNull Boolean complex, @NotNull PersistentDataAdapterContext context) {
-        return complex ? TrueByte : FalseByte;
+        return complex ? trueByte : falseByte;
     }
 
     public @NotNull Boolean fromPrimitive(@NotNull Byte primitive, @NotNull PersistentDataAdapterContext context) {
-        return primitive == TrueByte;
+        return primitive == trueByte;
     }
 }
