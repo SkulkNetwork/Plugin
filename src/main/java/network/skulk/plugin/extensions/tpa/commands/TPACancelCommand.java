@@ -38,26 +38,26 @@ public final class TPACancelCommand implements CommandExecutor {
         if (args.length == 1)
             targetName = args[0];
         else {
-            ArrayList<String> userOutGoingRequests = new ArrayList<>();
+            ArrayList<String> playerOutGoingRequests = new ArrayList<>();
 
             for (Map.Entry<String, HashSet<String>> entry : extension.tpaRequests.entrySet()) {
                 // Key is the target, the player will be in the value.
                 if (entry.getValue().contains(playerName)) {
-                    userOutGoingRequests.add(entry.getKey());
+                    playerOutGoingRequests.add(entry.getKey());
                 }
             }
 
-            int userOutGoingRequestsSize = userOutGoingRequests.size();
+            int playerOutGoingRequestsSize = playerOutGoingRequests.size();
 
-            if (userOutGoingRequestsSize == 0) {
+            if (playerOutGoingRequestsSize == 0) {
                 player.sendRichMessage("<bold><gray>[ <red>!</red> ]</gray></bold> <red>You don't have any outgoing TPA requests.</red>");
                 return true;
-            } else if (userOutGoingRequestsSize == 1) {
-                targetName = userOutGoingRequests.get(0);
+            } else if (playerOutGoingRequestsSize == 1) {
+                targetName = playerOutGoingRequests.get(0);
             } else {
                 StringBuilder response = new StringBuilder("<bold><gray>[ <blue>?</blue> ]</gray></bold> <blue>Seems like you have multiple incoming TPA requests. Which one would you like to cancel?</blue>");
 
-                for (String toCancel : userOutGoingRequests) {
+                for (String toCancel : playerOutGoingRequests) {
                     response.append("\n<bold><gray>-></grey> <color:#ffae1a><click:run_command:/tpa-cancel %s>[%s]</click></color></bold>".formatted(toCancel, toCancel));
                 }
 

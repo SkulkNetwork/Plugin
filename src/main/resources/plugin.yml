@@ -19,7 +19,7 @@ commands:
     description: Cancels the TPA request you sent to a player.
     usage: /tpa-cancel [player]
   tpa-ignore:
-    description: Ignores a user's TPA requests until the command is ran again for the user.
+    description: Ignores a player's TPA requests until the command is ran again for the player.
     usage: /tpa-ignore <player>
   tpa-ignore-all:
     description: Ignores all TPA requests sent to you until the command is ran again.

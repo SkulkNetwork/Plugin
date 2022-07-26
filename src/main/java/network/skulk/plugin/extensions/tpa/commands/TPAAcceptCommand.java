@@ -21,15 +21,15 @@ public class TPAAcceptCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-        if (!(sender instanceof Player user)) {
+        if (!(sender instanceof Player player)) {
             Message.sendOnlyPlayer(sender);
             return true;
         } else if (args.length > 1) {
             return false;
         }
 
-        String userName = user.getName();
-        HashSet<String> userIncomingRequests = extension.tpaRequests.computeIfAbsent(userName, k -> new HashSet<>());
+        String playerName = player.getName();
+        HashSet<String> playerIncomingRequests = extension.tpaRequests.computeIfAbsent(playerName, k -> new HashSet<>());
 
         Player target;
         String targetName;
@@ -38,23 +38,23 @@ public class TPAAcceptCommand implements CommandExecutor {
             targetName = args[0];
         } else {
             // No target was specified.
-            if (userIncomingRequests.size() == 0) {
+            if (playerIncomingRequests.size() == 0) {
                 // The player has no incoming TPA requests.
-                user.sendRichMessage("<bold><gray>[ <red>!</red> ]</gray></bold> <red>You don't have any incoming TPA requests.</red>");
+                player.sendRichMessage("<bold><gray>[ <red>!</red> ]</gray></bold> <red>You don't have any incoming TPA requests.</red>");
                 return true;
-            } else if (userIncomingRequests.size() == 1) {
+            } else if (playerIncomingRequests.size() == 1) {
                 // The player has 1 incoming TPA request.
-                targetName = userIncomingRequests.iterator().next();
+                targetName = playerIncomingRequests.iterator().next();
             } else {
                 // Multiple people want to TPA to the player.
                 StringBuilder response = new StringBuilder()
                         .append("<bold><gray>[ <blue>?</blue> ]</gray></bold> <blue>Seems like you have multiple people wanting to TPA to you. Which one would you like to accept?</blue>");
 
-                for (String toAccept : userIncomingRequests) {
+                for (String toAccept : playerIncomingRequests) {
                     response.append("\n<bold><green><click:run_command:/tpa-accept %s>[%s]</click></green></bold>".formatted(toAccept, toAccept));
                 }
 
-                user.sendRichMessage(response.toString());
+                player.sendRichMessage(response.toString());
                 return true;
             }
         }
@@ -62,18 +62,18 @@ public class TPAAcceptCommand implements CommandExecutor {
         target = Bukkit.getPlayer(targetName);
 
         if (target == null || !target.isOnline()) {
-            Message.sendPlayerOffline(user);
+            Message.sendPlayerOffline(player);
             return true;
-        } else if (!userIncomingRequests.contains(targetName)) {
-            user.sendRichMessage("<bold><gray>[ <red>!</red> ]</gray> <red>%s</bold> doesn't want to TPA to you.</red>".formatted(targetName));
+        } else if (!playerIncomingRequests.contains(targetName)) {
+            player.sendRichMessage("<bold><gray>[ <red>!</red> ]</gray> <red>%s</bold> doesn't want to TPA to you.</red>".formatted(targetName));
             return true;
         }
 
-        user.sendRichMessage("<bold><gray>[ <green>!</green> ]</gray></bold> <green>Teleporting <bold>%s</bold> to you...</green>".formatted(targetName));
-        target.sendRichMessage("<bold><gray>[ <green>!</green> ]</gray></bold> <green>Teleporting you to <bold>%s</bold>...</green>".formatted(userName));
+        player.sendRichMessage("<bold><gray>[ <green>!</green> ]</gray></bold> <green>Teleporting <bold>%s</bold> to you...</green>".formatted(targetName));
+        target.sendRichMessage("<bold><gray>[ <green>!</green> ]</gray></bold> <green>Teleporting you to <bold>%s</bold>...</green>".formatted(playerName));
 
-        target.teleport(user);
-        userIncomingRequests.remove(targetName);
+        target.teleport(player);
+        playerIncomingRequests.remove(targetName);
 
         return true;
     }
