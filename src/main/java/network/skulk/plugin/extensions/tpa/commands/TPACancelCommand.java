@@ -18,18 +18,19 @@ public final class TPACancelCommand implements CommandExecutor {
 
     public TPACancelCommand(TPAExtension mainExtension) {
         extension = mainExtension;
-        extension.register("tpa", this);
+        extension.register("tpa-cancel", this);
     }
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-        if (!(sender instanceof Player user)) {
+        if (!(sender instanceof Player player)) {
             Message.sendOnlyPlayer(sender);
             return true;
+        } else if (args.length > 1) {
+            return false;
         }
-        if (args.length > 1) return false;
 
-        String userName = user.getName();
+        String playerName = player.getName();
 
         Player target;
         String targetName;
@@ -41,7 +42,7 @@ public final class TPACancelCommand implements CommandExecutor {
 
             for (Map.Entry<String, HashSet<String>> entry : extension.tpaRequests.entrySet()) {
                 // Key is the target, the player will be in the value.
-                if (entry.getValue().contains(userName)) {
+                if (entry.getValue().contains(playerName)) {
                     userOutGoingRequests.add(entry.getKey());
                 }
             }
@@ -49,40 +50,37 @@ public final class TPACancelCommand implements CommandExecutor {
             int userOutGoingRequestsSize = userOutGoingRequests.size();
 
             if (userOutGoingRequestsSize == 0) {
-                user.sendRichMessage("<bold><gray>[ <red>!</red> ]</gray></bold> <red>You don't have any outgoing TPA requests.</red>");
+                player.sendRichMessage("<bold><gray>[ <red>!</red> ]</gray></bold> <red>You don't have any outgoing TPA requests.</red>");
                 return true;
             } else if (userOutGoingRequestsSize == 1) {
                 targetName = userOutGoingRequests.get(0);
             } else {
                 StringBuilder response = new StringBuilder("<bold><gray>[ <blue>?</blue> ]</gray></bold> <blue>Seems like you have multiple pending TPA requests. Which one would you like to cancel?</blue>");
 
-                for (String p : userOutGoingRequests) {
-                    response.append("\n<bold><orange><click:run_command:/tpa-cancel ")
-                            .append(p)
-                            .append("[")
-                            .append(p)
-                            .append("]</click><orange></bold>");
+                for (String toCancel : userOutGoingRequests) {
+                    response.append("\n<bold><color:#ffae1a><click:run_command:/tpa-cancel %s>[%s]</click></color></bold>".formatted(toCancel, toCancel));
                 }
 
-                user.sendRichMessage(response.toString());
+                player.sendRichMessage(response.toString());
                 return true;
-            }
-
-            HashSet<String> targetIncomingRequests = extension.tpaRequests.computeIfAbsent(targetName, k -> new HashSet<>());
-
-            if (!targetIncomingRequests.contains(userName)) {
-                user.sendRichMessage("<bold><gray>[ <red>!</red> ]</gray></bold> <red>You don't have an outgoing TPA request to <bold>%s</bold>.</red>".formatted(targetName));
-                return true;
-            }
-
-            target = Bukkit.getPlayer(targetName);
-
-            user.sendRichMessage("<bold><gray>[ <green>✔</green> ]</gray></bold> Rejected <bold>" + targetName + "</bold>'s TPA request.");
-            if (target != null && target.isOnline()) {
-                target.sendRichMessage("<bold><gray>[ <red>!</red> ]</gray> " + targetName + "</bold> has cancelled their TPA request to you.");
             }
         }
 
-        return false;
+        HashSet<String> targetIncomingRequests = extension.tpaRequests.computeIfAbsent(targetName, k -> new HashSet<>());
+
+        if (!targetIncomingRequests.contains(playerName)) {
+            player.sendRichMessage("<bold><gray>[ <red>!</red> ]</gray></bold> <red>You don't have an outgoing TPA request to <bold>%s</bold>.</red>".formatted(targetName));
+            return true;
+        }
+
+        target = Bukkit.getPlayer(targetName);
+
+        player.sendRichMessage("<bold><gray>[ <green>✓</green> ]</gray></bold> Rejected <bold>%s</bold>'s TPA request.".formatted(targetName));
+
+        if (target != null && target.isOnline()) {
+            target.sendRichMessage("<bold><gray>[ <red>!</red> ]</gray> %s</bold> has cancelled their TPA request to you.".formatted(playerName));
+        }
+
+        return true;
     }
 }
