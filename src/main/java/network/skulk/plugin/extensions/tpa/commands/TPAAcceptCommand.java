@@ -12,10 +12,10 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashSet;
 
 public class TPAAcceptCommand implements CommandExecutor {
-    private final TPAExtension extension;
+    private final @NotNull TPAExtension extension;
 
-    public TPAAcceptCommand(TPAExtension mainExtension) {
-        extension = mainExtension;
+    public TPAAcceptCommand(@NotNull TPAExtension tpaExtension) {
+        extension = tpaExtension;
         extension.register("tpa-accept", this);
     }
 
@@ -24,8 +24,9 @@ public class TPAAcceptCommand implements CommandExecutor {
         if (!(sender instanceof Player user)) {
             Message.sendOnlyPlayer(sender);
             return true;
-        }
-        if (args.length > 1) return false;
+        } else if (args.length > 1) {
+            return false;
+        }//continure refrac
 
         String userName = user.getName();
         HashSet<String> userIncomingRequests = extension.tpaRequests.computeIfAbsent(userName, k -> new HashSet<>());
@@ -38,23 +39,19 @@ public class TPAAcceptCommand implements CommandExecutor {
         } else {
             // No target was specified.
             if (userIncomingRequests.size() == 0) {
-                // User has no incoming TPA requests.
+                // The player has no incoming TPA requests.
                 user.sendRichMessage("<bold><gray>[ <red>!</red> ]</gray></bold> <red>You don't have any incoming TPA requests.</red>");
                 return true;
             } else if (userIncomingRequests.size() == 1) {
-                // User has 1 incoming TPA request.
+                // The player has 1 incoming TPA request.
                 targetName = userIncomingRequests.iterator().next();
             } else {
-                // Multiple people want to TPA to the user.
+                // Multiple people want to TPA to the player.
                 StringBuilder response = new StringBuilder()
                         .append("<bold><gray>[ <blue>?</blue> ]</gray></bold> <blue>Seems like you have multiple people wanting to TPA to you. Which one would you like to accept?</blue>");
 
-                for (String p : userIncomingRequests) {
-                    response.append("\n<bold><green><click:run_command:/tpa-accept ")
-                            .append(p)
-                            .append("[")
-                            .append(p)
-                            .append("]</click><green></bold>");
+                for (String toAccept : userIncomingRequests) {
+                    response.append("\n<bold><green><click:run_command:/tpa-accept %s>[%s]</click></green></bold>".formatted(toAccept, toAccept));
                 }
 
                 user.sendRichMessage(response.toString());
@@ -67,9 +64,7 @@ public class TPAAcceptCommand implements CommandExecutor {
         if (target == null || !target.isOnline()) {
             Message.sendPlayerOffline(user);
             return true;
-        }
-
-        if (!userIncomingRequests.contains(targetName)) {
+        } else if (!userIncomingRequests.contains(targetName)) {
             user.sendRichMessage("<bold><gray>[ <red>!</red> ]</gray> <red>%s</bold> doesn't want to TPA to you.</red>".formatted(targetName));
             return true;
         }
