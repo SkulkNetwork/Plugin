@@ -14,12 +14,14 @@ import org.jetbrains.annotations.Nullable;
 import java.util.HashMap;
 import java.util.HashSet;
 
+// TODO: Remove suppressor.
+@SuppressWarnings("CommentedOutCode")
 public final class TPAExtension implements Extension {
     // K List<V>, V teleports to K.
     public final HashMap<String, @Nullable HashSet<String>> tpaRequests = new HashMap<>();
 
-//    // If "*" is in the HashSet, the player ignores everyone.
-//    public final HashMap<String, @Nullable HashSet<String>> tpaIgnores = new HashMap<>();
+    // // If "*" is in the HashSet, the player ignores everyone.
+    // public final HashMap<String, @Nullable HashSet<String>> tpaIgnores = new HashMap<>();
 
     private final SkulkNetworkPlugin plugin;
 
@@ -39,11 +41,11 @@ public final class TPAExtension implements Extension {
     }
 
     public void onDisable() {
-//        try {
-//
-//        } catch (Exception error) {
-//            plugin.reportError("", error);
-//        }
+        //     try {
+        //
+        //     } catch (Exception error) {
+        //         plugin.reportError("", error);
+        //     }
     }
 
     public void register(@NotNull String name, @NotNull CommandExecutor executor) {
@@ -54,6 +56,8 @@ public final class TPAExtension implements Extension {
         plugin.runTaskLater(delay, runnable);
     }
 
+    // TODO: Remove suppressor.
+    @SuppressWarnings("unused")
     public @NotNull NamespacedKey makeKey(String key) {
         return plugin.makeKey(key);
     }

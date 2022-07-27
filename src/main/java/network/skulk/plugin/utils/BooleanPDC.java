@@ -5,6 +5,8 @@ import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
 
 // PDC = BooleanPersistentDataType
+// TODO: Remove suppressor.
+@SuppressWarnings("unused")
 public final class BooleanPDC implements PersistentDataType<Byte, Boolean> {
     private static final byte trueByte = 1, falseByte = 0;
 

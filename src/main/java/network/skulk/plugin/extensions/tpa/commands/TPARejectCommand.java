@@ -19,6 +19,7 @@ public final class TPARejectCommand implements CommandExecutor {
         extension.register("tpa-reject", this);
     }
 
+    @SuppressWarnings("DuplicatedCode")
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (!(sender instanceof Player player)) {

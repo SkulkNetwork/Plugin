@@ -10,8 +10,12 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.jetbrains.annotations.NotNull;
 
 public final class TPAIgnoreCommand implements CommandExecutor {
+    // TODO: Remove suppressor.
+    @SuppressWarnings("FieldCanBeLocal")
     private final @NotNull TPAExtension extension;
 
+    // TODO: Remove suppressor.
+    @SuppressWarnings("unused")
     public TPAIgnoreCommand(@NotNull TPAExtension tpaExtension) {
         extension = tpaExtension;
         extension.register("tpa", this);
@@ -26,6 +30,8 @@ public final class TPAIgnoreCommand implements CommandExecutor {
             return false;
         }
 
+        // TODO: Remove suppressor.
+        @SuppressWarnings("unused")
         PersistentDataContainer playerContainer = player.getPersistentDataContainer();
 
         return true;

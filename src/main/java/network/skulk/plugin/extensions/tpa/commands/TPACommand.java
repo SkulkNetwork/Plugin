@@ -19,6 +19,8 @@ public final class TPACommand implements CommandExecutor {
         extension.register("tpa", this);
     }
 
+    // TODO: Remove suppressor.
+    @SuppressWarnings("CommentedOutCode")
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (!(sender instanceof Player player)) {
