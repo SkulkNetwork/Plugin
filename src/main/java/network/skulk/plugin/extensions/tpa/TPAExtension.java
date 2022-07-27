@@ -18,8 +18,8 @@ public final class TPAExtension implements Extension {
     // K List<V>, V teleports to K.
     public final HashMap<String, @Nullable HashSet<String>> tpaRequests = new HashMap<>();
 
-    // If "*" is in the HashSet, the player ignores everyone.
-    public final HashMap<String, @Nullable HashSet<String>> tpaIgnores = new HashMap<>();
+//    // If "*" is in the HashSet, the player ignores everyone.
+//    public final HashMap<String, @Nullable HashSet<String>> tpaIgnores = new HashMap<>();
 
     private final SkulkNetworkPlugin plugin;
 

@@ -40,17 +40,17 @@ public final class TPACommand implements CommandExecutor {
             return true;
         }
 
-        HashSet<String> targetIgnores = extension.tpaIgnores.computeIfAbsent(targetName, k -> new HashSet<>());
+//        HashSet<String> targetIgnores = extension.tpaIgnores.computeIfAbsent(targetName, k -> new HashSet<>());
 
-        if (targetIgnores.contains("*")) {
-            // Here the target ignores everyone.
-            player.sendRichMessage("<bold><gray>[ <red>!</red> ]</gray> <red>%s</bold> doesn't accept TPA requests from anyone.</red>".formatted(targetName));
-            return true;
-        } else if (targetIgnores.contains(playerName)) {
-            // Here the target ignores the player.
-            player.sendRichMessage("<bold><gray>[ <red>!</red> ]</gray> <red>%s</bold> doesn't accept TPA requests from you.</red>".formatted(targetName));
-            return true;
-        }
+//        if (targetIgnores.contains("*")) {
+//            // Here the target ignores everyone.
+//            player.sendRichMessage("<bold><gray>[ <red>!</red> ]</gray> <red>%s</bold> doesn't accept TPA requests from anyone.</red>".formatted(targetName));
+//            return true;
+//        } else if (targetIgnores.contains(playerName)) {
+//            // Here the target ignores the player.
+//            player.sendRichMessage("<bold><gray>[ <red>!</red> ]</gray> <red>%s</bold> doesn't accept TPA requests from you.</red>".formatted(targetName));
+//            return true;
+//        }
 
         HashSet<String> targetIncomingRequests = extension.tpaRequests.computeIfAbsent(targetName, k -> new HashSet<>());
 
