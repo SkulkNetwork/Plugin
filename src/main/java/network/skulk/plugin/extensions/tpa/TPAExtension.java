@@ -39,11 +39,11 @@ public final class TPAExtension implements Extension {
     }
 
     public void onDisable() {
-        try {
-
-        } catch (Exception error) {
-            plugin.reportError("", error);
-        }
+//        try {
+//
+//        } catch (Exception error) {
+//            plugin.reportError("", error);
+//        }
     }
 
     public void register(@NotNull String name, @NotNull CommandExecutor executor) {
