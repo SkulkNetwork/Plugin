@@ -6,6 +6,8 @@ import network.skulk.plugin.extensions.tpa.commands.TPAAcceptCommand;
 import network.skulk.plugin.extensions.tpa.commands.TPACancelCommand;
 import network.skulk.plugin.extensions.tpa.commands.TPACommand;
 import network.skulk.plugin.extensions.tpa.commands.TPARejectCommand;
+import network.skulk.plugin.utils.BooleanPDT;
+import network.skulk.plugin.utils.StringArrayPDT;
 import org.bukkit.NamespacedKey;
 import org.bukkit.command.CommandExecutor;
 import org.jetbrains.annotations.NotNull;
@@ -14,14 +16,13 @@ import org.jetbrains.annotations.Nullable;
 import java.util.HashMap;
 import java.util.HashSet;
 
-// TODO: Remove suppressor.
-@SuppressWarnings("CommentedOutCode")
+
 public final class TPAExtension implements Extension {
     // K List<V>, V teleports to K.
     public final HashMap<String, @Nullable HashSet<String>> tpaRequests = new HashMap<>();
 
-    // // If "*" is in the HashSet, the player ignores everyone.
-    // public final HashMap<String, @Nullable HashSet<String>> tpaIgnores = new HashMap<>();
+    public final BooleanPDT BOOLEAN_PDT = SkulkNetworkPlugin.BOOLEAN_PDT;
+    public final StringArrayPDT STRING_ARRAY_PDT = SkulkNetworkPlugin.STRING_ARRAY_PDT;
 
     private final SkulkNetworkPlugin plugin;
 
@@ -41,11 +42,7 @@ public final class TPAExtension implements Extension {
     }
 
     public void onDisable() {
-        //     try {
-        //
-        //     } catch (Exception error) {
-        //         plugin.reportError("", error);
-        //     }
+
     }
 
     public void register(@NotNull String name, @NotNull CommandExecutor executor) {

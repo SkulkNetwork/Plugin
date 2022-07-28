@@ -7,9 +7,8 @@ import org.jetbrains.annotations.NotNull;
 import java.io.*;
 import java.util.ArrayList;
 
-// TODO: Remove suppressor.
-@SuppressWarnings("unused")
-public final class StringArrayPDC implements PersistentDataType<byte[], ArrayList<String>> {
+
+public final class StringArrayPDT implements PersistentDataType<byte[], ArrayList<String>> {
     @SuppressWarnings({"unchecked", "InstantiatingObjectToGetClassObject"})
     private static final Class<ArrayList<String>> stringArrayListType = (Class<ArrayList<String>>) new ArrayList<String>(0).getClass();
 

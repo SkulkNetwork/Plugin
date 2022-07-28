@@ -2,6 +2,8 @@ package network.skulk.plugin;
 
 import network.skulk.plugin.extensions.Extension;
 import network.skulk.plugin.extensions.tpa.TPAExtension;
+import network.skulk.plugin.utils.BooleanPDT;
+import network.skulk.plugin.utils.StringArrayPDT;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.command.CommandExecutor;
@@ -14,6 +16,9 @@ import java.util.Arrays;
 import java.util.logging.Logger;
 
 public final class SkulkNetworkPlugin extends JavaPlugin {
+    public static BooleanPDT BOOLEAN_PDT = new BooleanPDT();
+    public static StringArrayPDT STRING_ARRAY_PDT = new StringArrayPDT();
+
     private final ArrayList<Extension> extensions = new ArrayList<>();
 
     public SkulkNetworkPlugin() {

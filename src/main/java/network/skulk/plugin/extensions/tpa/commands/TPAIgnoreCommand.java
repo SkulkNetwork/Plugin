@@ -9,9 +9,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+
 public final class TPAIgnoreCommand implements CommandExecutor {
-    // TODO: Remove suppressor.
-    @SuppressWarnings("FieldCanBeLocal")
     private final @NotNull TPAExtension extension;
 
     // TODO: Remove suppressor.
@@ -33,6 +33,8 @@ public final class TPAIgnoreCommand implements CommandExecutor {
         // TODO: Remove suppressor.
         @SuppressWarnings("unused")
         PersistentDataContainer playerContainer = player.getPersistentDataContainer();
+
+        ArrayList<String> =playerContainer.getOrDefault(extension.makeKey("tpaIgnores"), )
 
         return true;
     }
