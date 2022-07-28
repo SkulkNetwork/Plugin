@@ -1,5 +1,5 @@
 name: SkulkNetworkPlugin
-version: "0.1.0"
+version: "${project.version}"
 main: network.skulk.plugin.SkulkNetworkPlugin
 api-version: "1.19"
 authors: [ RGBCube ]
