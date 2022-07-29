@@ -1,4 +1,4 @@
-package network.skulk.plugin.utils;
+package network.skulk.plugin.pdts;
 
 import org.bukkit.persistence.PersistentDataAdapterContext;
 import org.bukkit.persistence.PersistentDataType;
@@ -10,14 +10,14 @@ import java.util.ArrayList;
 
 public final class StringArrayPDT implements PersistentDataType<byte[], ArrayList<String>> {
     @SuppressWarnings({"unchecked", "InstantiatingObjectToGetClassObject"})
-    private static final Class<ArrayList<String>> stringArrayListType = (Class<ArrayList<String>>) new ArrayList<String>(0).getClass();
+    private static final Class<ArrayList<String>> COMPLEX_TYPE = (Class<ArrayList<String>>) new ArrayList<String>(0).getClass();
 
     public @NotNull Class<byte[]> getPrimitiveType() {
         return byte[].class;
     }
 
     public @NotNull Class<ArrayList<String>> getComplexType() {
-        return stringArrayListType;
+        return COMPLEX_TYPE;
     }
 
     public byte @NotNull [] toPrimitive(@NotNull ArrayList<String> complex, @NotNull PersistentDataAdapterContext context) {

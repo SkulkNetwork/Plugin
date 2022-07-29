@@ -1,7 +1,7 @@
 package network.skulk.plugin.extensions.tpa.commands;
 
+import network.skulk.plugin.constants.Message;
 import network.skulk.plugin.extensions.tpa.TPAExtension;
-import network.skulk.plugin.utils.Message;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -14,16 +14,16 @@ import java.util.HashSet;
 public class TPAAcceptCommand implements CommandExecutor {
     private final @NotNull TPAExtension extension;
 
-    public TPAAcceptCommand(@NotNull TPAExtension tpaExtension) {
-        extension = tpaExtension;
-        extension.register("tpa-accept", this);
+    public TPAAcceptCommand(@NotNull TPAExtension extension) {
+        this.extension = extension;
+        extension.plugin.registerCommand(this, "tpa-accept");
     }
 
     @SuppressWarnings("DuplicatedCode")
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (!(sender instanceof Player player)) {
-            Message.sendOnlyPlayer(sender);
+            sender.sendRichMessage(Message.CONSOLE_NOT_ALLOWED);
             return true;
         } else if (args.length > 1) {
             return false;
@@ -41,18 +41,17 @@ public class TPAAcceptCommand implements CommandExecutor {
             // No target was specified.
             if (playerIncomingRequests.size() == 0) {
                 // The player has no incoming TPA requests.
-                player.sendRichMessage("<bold><gray>[ <red>!</red> ]</gray></bold> <red>You don't have any incoming TPA requests.</red>");
+                player.sendRichMessage(Message.NO_INCOMING_TPA_REQUESTS);
                 return true;
             } else if (playerIncomingRequests.size() == 1) {
                 // The player has 1 incoming TPA request.
                 targetName = playerIncomingRequests.iterator().next();
             } else {
                 // Multiple people want to TPA to the player.
-                StringBuilder response = new StringBuilder()
-                        .append("<bold><gray>[ <blue>?</blue> ]</gray></bold> <blue>Seems like you have multiple people wanting to TPA to you. Which one would you like to accept?</blue>");
+                StringBuilder response = new StringBuilder(Message.TPA_ACCEPT_DIALOG);
 
                 for (String toAccept : playerIncomingRequests) {
-                    response.append("\n<bold><green><click:run_command:/tpa-accept %s>[%s]</click></green></bold>".formatted(toAccept, toAccept));
+                    response.append(Message.TPA_ACCEPT_DIALOG_OPTION.formatted(toAccept, toAccept));
                 }
 
                 player.sendRichMessage(response.toString());
@@ -63,15 +62,15 @@ public class TPAAcceptCommand implements CommandExecutor {
         target = Bukkit.getPlayer(targetName);
 
         if (target == null || !target.isOnline()) {
-            Message.sendPlayerOffline(player);
+            player.sendRichMessage(Message.PLAYER_OFFLINE);
             return true;
         } else if (!playerIncomingRequests.contains(targetName)) {
-            player.sendRichMessage("<bold><gray>[ <red>!</red> ]</gray> <red>%s</bold> doesn't want to TPA to you.</red>".formatted(targetName));
+            player.sendRichMessage(Message.X_DOESNT_WANT_TO_TPA_TO_YOU.formatted(targetName));
             return true;
         }
 
-        player.sendRichMessage("<bold><gray>[ <green>!</green> ]</gray></bold> <green>Teleporting <bold>%s</bold> to you...</green>".formatted(targetName));
-        target.sendRichMessage("<bold><gray>[ <green>!</green> ]</gray></bold> <green>Teleporting you to <bold>%s</bold>...</green>".formatted(playerName));
+        player.sendRichMessage(Message.TELEPORTING_X_TO_YOU.formatted(targetName));
+        target.sendRichMessage(Message.TELEPORTING_YOU_TO_X.formatted(playerName));
 
         target.teleport(player);
         playerIncomingRequests.remove(targetName);

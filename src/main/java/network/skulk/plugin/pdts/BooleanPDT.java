@@ -1,10 +1,9 @@
-package network.skulk.plugin.utils;
+package network.skulk.plugin.pdts;
 
 import org.bukkit.persistence.PersistentDataAdapterContext;
 import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
 
-// PDC = BooleanPersistentDataType
 public final class BooleanPDT implements PersistentDataType<Byte, Boolean> {
     private static final byte TRUE = 1, FALSE = 0;
 

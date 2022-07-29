@@ -1,7 +1,7 @@
 package network.skulk.plugin.extensions.tpa.commands;
 
+import network.skulk.plugin.constants.Message;
 import network.skulk.plugin.extensions.tpa.TPAExtension;
-import network.skulk.plugin.utils.Message;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -14,17 +14,15 @@ import java.util.HashSet;
 public final class TPACommand implements CommandExecutor {
     private final @NotNull TPAExtension extension;
 
-    public TPACommand(@NotNull TPAExtension tpaExtension) {
-        extension = tpaExtension;
-        extension.register("tpa", this);
+    public TPACommand(@NotNull TPAExtension extension) {
+        this.extension = extension;
+        extension.plugin.registerCommand(this, "tpa");
     }
 
-    // TODO: Remove suppressor.
-    @SuppressWarnings("CommentedOutCode")
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (!(sender instanceof Player player)) {
-            Message.sendOnlyPlayer(sender);
+            sender.sendRichMessage(Message.CONSOLE_NOT_ALLOWED);
             return true;
         } else if (args.length != 1) {
             return false;
@@ -38,7 +36,7 @@ public final class TPACommand implements CommandExecutor {
         target = Bukkit.getPlayer(targetName);
 
         if (target == null || !target.isOnline()) {
-            Message.sendPlayerOffline(player);
+            player.sendRichMessage(Message.PLAYER_OFFLINE);
             return true;
         }
 
@@ -58,7 +56,7 @@ public final class TPACommand implements CommandExecutor {
 
         // The player already has a TPA request sent to the target.
         if (targetIncomingRequests.contains(playerName)) {
-            player.sendRichMessage("<bold><gray>[ <color:#ffae1a>!</color> ]</gray></bold> <color:#ffae1a>You already have a pending TPA request to <bold>%s</bold>.</color>".formatted(targetName));
+            player.sendRichMessage(Message.ALREADY_HAS_PENDING_TPA_REQUEST.formatted(targetName));
             return true;
         }
 
@@ -66,16 +64,16 @@ public final class TPACommand implements CommandExecutor {
         targetIncomingRequests.add(playerName);
 
         // Removing the request 60 seconds later.
-        extension.runTaskLater(60, () -> {
+        extension.plugin.runLater(60, () -> {
             if (targetIncomingRequests.contains(playerName)) {
                 targetIncomingRequests.remove(playerName);
-                player.sendRichMessage("<bold><gray>[ <color:#ffae1a>!</color> ]</gray></bold> <color:#ffae1a>Your TPA request to <bold>%s</bold> has expired.</color>".formatted(targetName));
-                target.sendRichMessage("<bold><gray>[ <color:#ffae1a>!</color> ]</gray></bold> <color:#ffae1a>The TPA request <bold>%s</bold> has sent to you has expired.</color>".formatted(playerName));
+                player.sendRichMessage(Message.TPA_REQUEST_TO_X_EXPIRED.formatted(targetName));
+                target.sendRichMessage(Message.TPA_REQUEST_X_SEND_TO_YOU_EXPIRED.formatted(playerName));
             }
         });
 
-        player.sendRichMessage("<bold><gray>[ <green>✓</green> ]</gray></bold> <green>Sent a TPA request to <bold>%s</bold>.</green>".formatted(targetName));
-        target.sendRichMessage("<bold><gray>[ <blue>?</blue> ]</gray> %s</bold> has sent a TPA request to you. Do you accept? <bold><green><click:run_command:/tpa-accept %s>[✓]</click></green> <red><click:run_command:/tpa-reject %s>[✗]</click></red></bold>".formatted(playerName, playerName, playerName));
+        player.sendRichMessage(Message.TPA_REQUEST_SENT_TO_X.formatted(targetName));
+        target.sendRichMessage(Message.TPA_REQUEST_SENT_BY_X_RECEIVED.formatted(playerName, playerName, playerName));
 
         return true;
     }

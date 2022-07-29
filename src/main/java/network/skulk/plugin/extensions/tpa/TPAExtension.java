@@ -1,61 +1,29 @@
 package network.skulk.plugin.extensions.tpa;
 
-import network.skulk.plugin.SkulkNetworkPlugin;
-import network.skulk.plugin.extensions.Extension;
-import network.skulk.plugin.extensions.tpa.commands.TPAAcceptCommand;
-import network.skulk.plugin.extensions.tpa.commands.TPACancelCommand;
+import network.skulk.plugin.Plugin;
+import network.skulk.plugin.extensions.BaseExtension;
 import network.skulk.plugin.extensions.tpa.commands.TPACommand;
-import network.skulk.plugin.extensions.tpa.commands.TPARejectCommand;
-import network.skulk.plugin.utils.BooleanPDT;
-import network.skulk.plugin.utils.StringArrayPDT;
-import org.bukkit.NamespacedKey;
-import org.bukkit.command.CommandExecutor;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.HashSet;
 
 
-public final class TPAExtension implements Extension {
-    // K List<V>, V teleports to K.
+public final class TPAExtension implements BaseExtension {
+    // K HashSet<V>, V's want to teleport to K.
     public final HashMap<String, @Nullable HashSet<String>> tpaRequests = new HashMap<>();
 
-    public final BooleanPDT BOOLEAN_PDT = SkulkNetworkPlugin.BOOLEAN_PDT;
-    public final StringArrayPDT STRING_ARRAY_PDT = SkulkNetworkPlugin.STRING_ARRAY_PDT;
+    public final Plugin plugin;
 
-    private final SkulkNetworkPlugin plugin;
-
-    public TPAExtension(SkulkNetworkPlugin mainPlugin) {
-        plugin = mainPlugin;
+    public TPAExtension(Plugin plugin) {
+        this.plugin = plugin;
     }
 
     public void onEnable() {
-        try {
-            new TPAAcceptCommand(this);
-            new TPACancelCommand(this);
-            new TPACommand(this);
-            new TPARejectCommand(this);
-        } catch (Exception error) {
-            plugin.reportError("loading the commands for TPAExtension", error);
-        }
+        new TPACommand(this);
     }
 
     public void onDisable() {
 
-    }
-
-    public void register(@NotNull String name, @NotNull CommandExecutor executor) {
-        plugin.register(name, executor);
-    }
-
-    public void runTaskLater(long delay, @NotNull Runnable runnable) {
-        plugin.runTaskLater(delay, runnable);
-    }
-
-    // TODO: Remove suppressor.
-    @SuppressWarnings("unused")
-    public @NotNull NamespacedKey makeKey(String key) {
-        return plugin.makeKey(key);
     }
 }
