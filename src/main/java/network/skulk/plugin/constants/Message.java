@@ -21,4 +21,9 @@ public abstract class Message {
     public static final String FOO = "<bold><gray>[ <red>!</red> ]</gray> <red>%s</bold> doesn't want to TPA to you.</red>";
     public static final String BAR = "<bold><gray>[ <green>✓</green> ]</gray></bold> <green>Rejected <bold>%s</bold>'s TPA request.</green>";
     public static final String BAZ = "<bold><gray>[ <red>!</red> ]</gray> <red>%s</bold> has rejected your TPA request.</red>";
+    public static final String AA = "<bold><gray>[ <blue>?</blue> ]</gray></bold> <blue>Seems like you have multiple incoming TPA requests. Which one would you like to cancel?</blue>";
+    public static final String BB = "\n<bold><gray>-></grey> <color:#ffae1a><click:run_command:/tpa-cancel %s>[%s]</click></color></bold>";
+    public static final String CC = "<bold><gray>[ <red>!</red> ]</gray></bold> <red>You don't have an outgoing TPA request to <bold>%s</bold>.</red>";
+    public static final String DD = "<bold><gray>[ <green>✓</green> ]</gray></bold> <green>Rejected <bold>%s</bold>'s TPA request.</green>";
+    public static final String EE = "<bold><gray>[ <color:#ffae1a>!</color:#ffae1a> ]</gray> <color:#ffae1a>%s</bold> has cancelled their TPA request to you.</color>";
 }
