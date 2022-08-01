@@ -57,33 +57,33 @@ public final class Plugin extends JavaPlugin {
     @Override
     public void onEnable() {
         Logger logger = getLogger();
-        logger.info("[SKULK NETWORK PLUGIN] The plugin is being loaded...");
+        logger.info("The plugin is being loaded...");
 
         for (BaseExtension extension : extensions) {
             try {
                 extension.onEnable();
             } catch (Exception error) {
-                reportError("[SKULK NETWORK PLUGIN] There was an error while loading '%s'.\nHere is the traceback:".formatted(extension.getClass().getName()), error);
+                reportError("There was an error while loading '%s'.\nHere is the traceback:".formatted(extension.getClass().getName()), error);
             }
         }
 
-        logger.info("[SKULK NETWORK PLUGIN] The plugin has been loaded");
+        logger.info("The plugin has been loaded");
     }
 
     @Override
     public void onDisable() {
         Logger logger = getLogger();
-        logger.info("[SKULK NETWORK PLUGIN] The plugin is being unloaded...");
+        logger.info("The plugin is being unloaded...");
 
         for (BaseExtension extension : extensions) {
             try {
                 extension.onDisable();
             } catch (Exception error) {
-                reportError("[SKULK NETWORK PLUGIN] There was an error while unloading %s.\nHere is the traceback:".formatted(extension.getClass().getName()), error);
+                reportError("There was an error while unloading %s.\nHere is the traceback:".formatted(extension.getClass().getName()), error);
             }
         }
 
-        logger.info("[SKULK NETWORK PLUGIN] The plugin has been unloaded");
+        logger.info("The plugin has been unloaded");
     }
 
     // Public attributes.
