@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>network.skulk.plugin</groupId>
-    <artifactId>SkulkNetworkPlugin</artifactId>
+    <artifactId>SNP</artifactId>
     <version>1.1.1-l1</version>
     <packaging>jar</packaging>
 
