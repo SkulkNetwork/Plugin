@@ -33,10 +33,14 @@ public final class TPACommand implements CommandExecutor {
 
         String playerName = player.getName();
 
-        Player target;
         String targetName = args[0];
 
-        target = Bukkit.getPlayer(targetName);
+        if (targetName.equalsIgnoreCase(playerName)) {
+            player.sendRichMessage(Message.TPA_TO_SELF_NOT_ALLOWED);
+            return true;
+        }
+
+        Player target = Bukkit.getPlayer(targetName);
 
         if (target == null) {
             player.sendRichMessage(Message.PLAYER_NOT_ONLINE);

@@ -35,7 +35,7 @@ public final class TPAListIgnoredCommand implements CommandExecutor {
 
         HashSet<String> playerIgnores = playerContainer.getOrDefault(extension.TPA_IGNORES_KEY, Plugin.PersistentDataTypes.STRING_HASH_SET, new HashSet<>());
 
-        if (!playerIgnores.contains(TPAExtension.IGNORE_ALL_SYMBOL)) {
+        if (playerIgnores.contains(TPAExtension.IGNORE_ALL_SYMBOL)) {
             player.sendRichMessage(Message.TPA_IGNORING_ALL);
 
         } else {
