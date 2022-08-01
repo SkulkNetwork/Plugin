@@ -5,10 +5,10 @@
 
     <groupId>network.skulk.plugin</groupId>
     <artifactId>SkulkNetworkPlugin</artifactId>
-    <version>1.1.1</version>
+    <version>1.1.1-l1</version>
     <packaging>jar</packaging>
 
-    <name>SkulkNetworkPlugin</name>
+    <name>SNP</name>
 
     <description>The main plugin used for the Skulk Network Minecraft server.</description>
     <properties>

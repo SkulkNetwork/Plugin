@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Arrays;
 import java.util.HashSet;
 
 public final class TPAIgnoreAllCommand implements CommandExecutor {
@@ -29,6 +30,7 @@ public final class TPAIgnoreAllCommand implements CommandExecutor {
         }
 
         if (args.length != 0) {
+            extension.plugin.getLogger().info(Arrays.toString(args));
             return false;
         }
 

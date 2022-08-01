@@ -1,4 +1,4 @@
-name: SkulkNetworkPlugin
+name: SNP
 version: "${project.version}"
 main: network.skulk.plugin.Plugin
 api-version: "1.19"
