@@ -40,7 +40,7 @@ public final class TPACommand implements CommandExecutor {
             return true;
         }
 
-        Player target = Bukkit.getPlayer(targetName);
+        Player target = Bukkit.getPlayerExact(targetName);
 
         if (target == null) {
             player.sendRichMessage(Message.PLAYER_NOT_ONLINE);

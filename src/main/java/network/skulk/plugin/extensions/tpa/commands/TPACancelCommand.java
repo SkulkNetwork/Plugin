@@ -77,7 +77,7 @@ public final class TPACancelCommand implements CommandExecutor {
             return true;
         }
 
-        target = Bukkit.getPlayer(targetName);
+        target = Bukkit.getPlayerExact(targetName);
 
         player.sendRichMessage(Message.TPA_REQUEST_FROM_X_CANCELLED.formatted(targetName));
 

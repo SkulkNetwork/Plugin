@@ -62,7 +62,7 @@ public class TPAAcceptCommand implements CommandExecutor {
         }
 
         //noinspection DuplicatedCode
-        target = Bukkit.getPlayer(targetName);
+        target = Bukkit.getPlayerExact(targetName);
 
         if (target == null) {
             player.sendRichMessage(Message.PLAYER_NOT_ONLINE);
