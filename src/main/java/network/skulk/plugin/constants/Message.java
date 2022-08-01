@@ -16,4 +16,9 @@ public abstract class Message {
     public static final String X_DOESNT_WANT_TO_TPA_TO_YOU = "<bold><gray>[ <red>!</red> ]</gray> <red>%s</bold> doesn't want to TPA to you.</red>";
     public static final String TELEPORTING_X_TO_YOU = "<bold><gray>[ <green>!</green> ]</gray></bold> <green>Teleporting <bold>%s</bold> to you...</green>";
     public static final String TELEPORTING_YOU_TO_X = "<bold><gray>[ <green>!</green> ]</gray></bold> <green>Teleporting you to <bold>%s</bold>...</green>";
+    public static final String ASD = "<bold><gray>[ <blue>?</blue> ]</gray></bold> <blue>Seems like you have multiple people wanting to TPA to you. Which one would you like to reject?</blue>";
+    public static final String DEF = "\n<bold><red><click:run_command:/tpa-reject %s>[%s]</click></red></bold>";
+    public static final String FOO = "<bold><gray>[ <red>!</red> ]</gray> <red>%s</bold> doesn't want to TPA to you.</red>";
+    public static final String BAR = "<bold><gray>[ <green>✓</green> ]</gray></bold> <green>Rejected <bold>%s</bold>'s TPA request.</green>";
+    public static final String BAZ = "<bold><gray>[ <red>!</red> ]</gray> <red>%s</bold> has rejected your TPA request.</red>";
 }

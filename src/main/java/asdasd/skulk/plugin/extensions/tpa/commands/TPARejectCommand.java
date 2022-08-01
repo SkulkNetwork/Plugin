@@ -1,7 +1,5 @@
-package network.skulk.plugin.extensions.tpa.commands;
+package asdasd.skulk.plugin.extensions.tpa.commands;
 
-import network.skulk.plugin.constants.Message;
-import network.skulk.plugin.extensions.tpa.TPAExtension;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -14,15 +12,16 @@ import java.util.HashSet;
 public final class TPARejectCommand implements CommandExecutor {
     private final @NotNull TPAExtension extension;
 
-    public TPARejectCommand(@NotNull TPAExtension extension) {
-        this.extension = extension;
-        extension.plugin.registerCommand(this, "tpa-reject");
+    public TPARejectCommand(@NotNull TPAExtension tpaExtension) {
+        extension = tpaExtension;
+        extension.register("tpa-reject", this);
     }
 
+    @SuppressWarnings("DuplicatedCode")
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (!(sender instanceof Player player)) {
-            sender.sendRichMessage(Message.CONSOLE_NOT_ALLOWED);
+            Message.sendOnlyPlayer(sender);
             return true;
         } else if (args.length > 1) {
             return false;
@@ -43,15 +42,15 @@ public final class TPARejectCommand implements CommandExecutor {
                 targetName = playerIncomingRequests.iterator().next();
             } else if (playerIncomingRequests.size() == 0) {
                 // The player has no incoming TPA requests.
-                player.sendRichMessage(Message.NO_INCOMING_TPA_REQUESTS);
+                player.sendRichMessage("<bold><gray>[ <red>!</red> ]</gray></bold> <red>You don't have any incoming TPA requests.</red>");
                 return true;
             } else {
                 // Multiple people want to TPA to the player.
                 StringBuilder response = new StringBuilder()
-                        .append(Message.ASD);
+                        .append("<bold><gray>[ <blue>?</blue> ]</gray></bold> <blue>Seems like you have multiple people wanting to TPA to you. Which one would you like to reject?</blue>");
 
                 for (String toReject : playerIncomingRequests) {
-                    response.append(Message.DEF.formatted(toReject, toReject));
+                    response.append("\n<bold><red><click:run_command:/tpa-reject %s>[%s]</click></red></bold>".formatted(toReject, toReject));
                 }
 
                 player.sendRichMessage(response.toString());
@@ -62,17 +61,17 @@ public final class TPARejectCommand implements CommandExecutor {
         target = Bukkit.getPlayer(targetName);
 
         if (target == null || !target.isOnline()) {
-            player.sendRichMessage(Message.PLAYER_OFFLINE);
+            Message.sendPlayerOffline(player);
             return true;
         } else if (!playerIncomingRequests.contains(targetName)) {
-            player.sendRichMessage(Message.FOO.formatted(targetName));
+            player.sendRichMessage("<bold><gray>[ <red>!</red> ]</gray> <red>%s</bold> doesn't want to TPA to you.</red>".formatted(targetName));
             return true;
         }
 
         playerIncomingRequests.remove(targetName);
 
-        player.sendRichMessage(Message.BAR.formatted(targetName));
-        target.sendRichMessage(Message.BAZ.formatted(playerName));
+        player.sendRichMessage("<bold><gray>[ <green>✓</green> ]</gray></bold> <green>Rejected <bold>%s</bold>'s TPA request.</green>".formatted(targetName));
+        target.sendRichMessage("<bold><gray>[ <red>!</red> ]</gray> <red>%s</bold> has rejected your TPA request.</red>".formatted(playerName));
 
         return true;
     }
