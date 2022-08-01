@@ -23,7 +23,7 @@ public final class TPACommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (!(sender instanceof Player player)) {
-            sender.sendRichMessage(Message.ONLY_PLAYERS_ALLOWED);
+            sender.sendRichMessage(Message.ONLY_PLAYERS_CAN_USE_THIS_COMMAND);
             return true;
         }
 
@@ -39,7 +39,7 @@ public final class TPACommand implements CommandExecutor {
         target = Bukkit.getPlayer(targetName);
 
         if (target == null) {
-            player.sendRichMessage(Message.PLAYER_OFFLINE);
+            player.sendRichMessage(Message.PLAYER_NOT_ONLINE);
             return true;
         }
 
@@ -73,7 +73,7 @@ public final class TPACommand implements CommandExecutor {
         });
 
         player.sendRichMessage(Message.TPA_REQUEST_SENT_TO_X.formatted(targetName));
-        target.sendRichMessage(Message.TPA_REQUEST_SENT_BY_X_RECEIVED.formatted(playerName, playerName, playerName));
+        target.sendRichMessage(Message.TPA_REQUEST_SENT_BY_X.formatted(playerName, playerName, playerName));
 
         return true;
     }

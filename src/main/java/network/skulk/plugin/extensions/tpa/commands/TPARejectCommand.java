@@ -23,7 +23,7 @@ public final class TPARejectCommand implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         //noinspection DuplicatedCode
         if (!(sender instanceof Player player)) {
-            sender.sendRichMessage(Message.ONLY_PLAYERS_ALLOWED);
+            sender.sendRichMessage(Message.ONLY_PLAYERS_CAN_USE_THIS_COMMAND);
             return true;
         }
 
@@ -64,7 +64,7 @@ public final class TPARejectCommand implements CommandExecutor {
         target = Bukkit.getPlayer(targetName);
 
         if (target == null) {
-            player.sendRichMessage(Message.PLAYER_OFFLINE);
+            player.sendRichMessage(Message.PLAYER_NOT_ONLINE);
             return true;
         }
 

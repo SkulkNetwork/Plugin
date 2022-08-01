@@ -24,7 +24,7 @@ public final class TPAIgnoreAllCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (!(sender instanceof Player player)) {
-            sender.sendRichMessage(Message.ONLY_PLAYERS_ALLOWED);
+            sender.sendRichMessage(Message.ONLY_PLAYERS_CAN_USE_THIS_COMMAND);
             return true;
         }
 

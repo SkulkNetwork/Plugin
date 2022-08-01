@@ -1,8 +1,8 @@
 package network.skulk.plugin.constants;
 
 public abstract class Message {
-    public static final String ONLY_PLAYERS_ALLOWED = "<bold><gray>[ <red>!</red> ]</gray></bold> <red>This command can only be used by players.</red>";
-    public static final String PLAYER_OFFLINE = "<bold><gray>[ <red>!</red> ]</gray></bold> <red>This player is not online.</red>";
+    public static final String ONLY_PLAYERS_CAN_USE_THIS_COMMAND = "<bold><gray>[ <red>!</red> ]</gray></bold> <red>This command can only be used by players.</red>";
+    public static final String PLAYER_NOT_ONLINE = "<bold><gray>[ <red>!</red> ]</gray></bold> <red>This player is not online.</red>";
 
     /* TPA Commands */
 
@@ -12,7 +12,7 @@ public abstract class Message {
 
     // Sent.
     public static final String TPA_REQUEST_SENT_TO_X = "<bold><gray>[ <green>✓</green> ]</gray></bold> <green>Sent a TPA request to <bold>%s</bold>.</green>";
-    public static final String TPA_REQUEST_SENT_BY_X_RECEIVED = "<bold><gray>[ <blue>?</blue> ]</gray> %s</bold> has sent a TPA request to you. Do you accept? <bold><green><click:run_command:/tpa-accept %s>[✓]</click></green> <red><click:run_command:/tpa-reject %s>[✗]</click></red></bold>";
+    public static final String TPA_REQUEST_SENT_BY_X = "<bold><gray>[ <blue>?</blue> ]</gray> %s</bold> has sent a TPA request to you. Do you accept? <bold><green><click:run_command:/tpa-accept %s>[✓]</click></green> <red><click:run_command:/tpa-reject %s>[✗]</click></red></bold>";
 
     // Already exists.
     public static final String TPA_REQUEST_TO_X_ALREADY_EXISTS = "<bold><gray>[ <color:#ffae1a>!</color> ]</gray></bold> <color:#ffae1a>You already have a pending TPA request to <bold>%s</bold>.</color>";
