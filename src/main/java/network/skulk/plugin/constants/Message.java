@@ -22,7 +22,7 @@ public abstract class Message {
     public static final String TELEPORTING_YOU_TO_X = "<bold><gray>[ <green>!</green> ]</gray></bold> <green>Teleporting you to <bold>%s</bold>...</green>";
 
     // No requests.
-    public static final String NO_OUTGOING_TPA_REQUESTS = "<bold><gray>[ <red>!</red> ]</gray></bold> <red>You don't have an outgoing TPA request to <bold>%s</bold>.</red>";
+    public static final String NO_OUTGOING_TPA_REQUEST_TO_X = "<bold><gray>[ <red>!</red> ]</gray></bold> <red>You don't have an outgoing TPA request to <bold>%s</bold>.</red>";
     public static final String NO_INCOMING_TPA_REQUESTS = "<bold><gray>[ <red>!</red> ]</gray></bold> <red>You don't have any incoming TPA requests.</red>";
     public static final String X_DOESNT_WANT_TO_TPA_TO_YOU = "<bold><gray>[ <red>!</red> ]</gray> <red>%s</bold> doesn't want to TPA to you.</red>";
 
@@ -37,7 +37,8 @@ public abstract class Message {
     public static final String TPA_REJECT_DIALOG_OPTION = "\n<bold><red><click:run_command:/tpa-reject %s>[%s]</click></red></bold>";
 
     // TPA-CANCEL
+    public static final String TPA_REQUEST_FROM_X_CANCELLED = "<bold><gray>[ <green>✓</green> ]</gray></bold> <green>Cancelled <bold>%s</bold>'s TPA request.</green>";
+    public static final String TPA_REQUEST_FROM_X_CANCELLED_BY_SENDER = "<bold><gray>[ <color:#ffae1a>!</color:#ffae1a> ]</gray> <color:#ffae1a>%s</bold> has cancelled their TPA request to you.</color>";
     public static final String TPA_CANCEL_DIALOG = "<bold><gray>[ <blue>?</blue> ]</gray></bold> <blue>Seems like you have multiple incoming TPA requests. Which one would you like to cancel?</blue>";
     public static final String TPA_CANCEL_DIALOG_OPTION = "\n<bold><gray>-></grey> <color:#ffae1a><click:run_command:/tpa-cancel %s>[%s]</click></color></bold>";
-    public static final String TPA_REQUEST_FROM_X_CANCELLED_BY_SENDER = "<bold><gray>[ <color:#ffae1a>!</color:#ffae1a> ]</gray> <color:#ffae1a>%s</bold> has cancelled their TPA request to you.</color>";
 }

@@ -24,7 +24,9 @@ public final class TPARejectCommand implements CommandExecutor {
         if (!(sender instanceof Player player)) {
             sender.sendRichMessage(Message.CONSOLE_NOT_ALLOWED);
             return true;
-        } else if (args.length > 1) {
+        }
+
+        if (args.length > 1) {
             return false;
         }
 
@@ -36,19 +38,17 @@ public final class TPARejectCommand implements CommandExecutor {
 
         if (args.length == 1) {
             targetName = args[0];
+
         } else {
-            // No target was specified.
             if (playerIncomingRequests.size() == 1) {
-                // The player has 1 incoming TPA request.
                 targetName = playerIncomingRequests.iterator().next();
+
             } else if (playerIncomingRequests.size() == 0) {
-                // The player has no incoming TPA requests.
                 player.sendRichMessage(Message.NO_INCOMING_TPA_REQUESTS);
                 return true;
+
             } else {
-                // Multiple people want to TPA to the player.
-                StringBuilder response = new StringBuilder()
-                        .append(Message.TPA_REJECT_DIALOG);
+                StringBuilder response = new StringBuilder(Message.TPA_REJECT_DIALOG);
 
                 for (String toReject : playerIncomingRequests) {
                     response.append(Message.TPA_REJECT_DIALOG_OPTION.formatted(toReject, toReject));
@@ -61,10 +61,12 @@ public final class TPARejectCommand implements CommandExecutor {
 
         target = Bukkit.getPlayer(targetName);
 
-        if (target == null || !target.isOnline()) {
+        if (target == null) {
             player.sendRichMessage(Message.PLAYER_OFFLINE);
             return true;
-        } else if (!playerIncomingRequests.contains(targetName)) {
+        }
+
+        if (!playerIncomingRequests.contains(targetName)) {
             player.sendRichMessage(Message.X_DOESNT_WANT_TO_TPA_TO_YOU.formatted(targetName));
             return true;
         }

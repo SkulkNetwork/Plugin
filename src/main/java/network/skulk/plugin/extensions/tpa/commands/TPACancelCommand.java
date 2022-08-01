@@ -16,9 +16,9 @@ import java.util.Map;
 public final class TPACancelCommand implements CommandExecutor {
     private final @NotNull TPAExtension extension;
 
-    public TPACancelCommand(@NotNull TPAExtension e) {
-        this.extension = e;
-        e.plugin.registerCommand(this, "tpa-cancel");
+    public TPACancelCommand(@NotNull TPAExtension extension) {
+        this.extension = extension;
+        extension.plugin.registerCommand(this, "tpa-cancel");
     }
 
     @Override
@@ -26,7 +26,9 @@ public final class TPACancelCommand implements CommandExecutor {
         if (!(sender instanceof Player player)) {
             sender.sendRichMessage(Message.CONSOLE_NOT_ALLOWED);
             return true;
-        } else if (args.length > 1) {
+        }
+
+        if (args.length > 1) {
             return false;
         }
 
@@ -35,13 +37,13 @@ public final class TPACancelCommand implements CommandExecutor {
         Player target;
         String targetName;
 
-        if (args.length == 1)
+        if (args.length == 1) {
             targetName = args[0];
-        else {
+
+        } else {
             ArrayList<String> playerOutGoingRequests = new ArrayList<>();
 
             for (Map.Entry<String, HashSet<String>> entry : extension.tpaRequests.entrySet()) {
-                // Key is the target, the player will be in the value.
                 if (entry.getValue().contains(playerName)) {
                     playerOutGoingRequests.add(entry.getKey());
                 }
@@ -49,11 +51,13 @@ public final class TPACancelCommand implements CommandExecutor {
 
             int playerOutGoingRequestsSize = playerOutGoingRequests.size();
 
-            if (playerOutGoingRequestsSize == 0) {
+            if (playerOutGoingRequestsSize == 1) {
+                targetName = playerOutGoingRequests.get(0);
+
+            } else if (playerOutGoingRequestsSize == 0) {
                 player.sendRichMessage(Message.NO_INCOMING_TPA_REQUESTS);
                 return true;
-            } else if (playerOutGoingRequestsSize == 1) {
-                targetName = playerOutGoingRequests.get(0);
+
             } else {
                 StringBuilder response = new StringBuilder(Message.TPA_CANCEL_DIALOG);
 
@@ -69,15 +73,15 @@ public final class TPACancelCommand implements CommandExecutor {
         HashSet<String> targetIncomingRequests = extension.tpaRequests.computeIfAbsent(targetName, k -> new HashSet<>());
 
         if (!targetIncomingRequests.contains(playerName)) {
-            player.sendRichMessage(Message.NO_OUTGOING_TPA_REQUESTS.formatted(targetName));
+            player.sendRichMessage(Message.NO_OUTGOING_TPA_REQUEST_TO_X.formatted(targetName));
             return true;
         }
 
         target = Bukkit.getPlayer(targetName);
 
-        player.sendRichMessage(Message.TPA_REQUEST_FROM_X_REJECTED.formatted(targetName));
+        player.sendRichMessage(Message.TPA_REQUEST_FROM_X_CANCELLED.formatted(targetName));
 
-        if (target != null && target.isOnline()) {
+        if (target != null) {
             target.sendRichMessage(Message.TPA_REQUEST_FROM_X_CANCELLED_BY_SENDER.formatted(playerName));
         }
 

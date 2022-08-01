@@ -24,7 +24,9 @@ public final class TPACommand implements CommandExecutor {
         if (!(sender instanceof Player player)) {
             sender.sendRichMessage(Message.CONSOLE_NOT_ALLOWED);
             return true;
-        } else if (args.length != 1) {
+        }
+
+        if (args.length != 1) {
             return false;
         }
 
@@ -35,7 +37,7 @@ public final class TPACommand implements CommandExecutor {
 
         target = Bukkit.getPlayer(targetName);
 
-        if (target == null || !target.isOnline()) {
+        if (target == null) {
             player.sendRichMessage(Message.PLAYER_OFFLINE);
             return true;
         }
@@ -54,16 +56,13 @@ public final class TPACommand implements CommandExecutor {
 
         HashSet<String> targetIncomingRequests = extension.tpaRequests.computeIfAbsent(targetName, k -> new HashSet<>());
 
-        // The player already has a TPA request sent to the target.
         if (targetIncomingRequests.contains(playerName)) {
             player.sendRichMessage(Message.TPA_REQUEST_TO_X_ALREADY_EXISTS.formatted(targetName));
             return true;
         }
 
-        // Adds the request.
         targetIncomingRequests.add(playerName);
 
-        // Removing the request 60 seconds later.
         extension.plugin.runLater(60, () -> {
             if (targetIncomingRequests.contains(playerName)) {
                 targetIncomingRequests.remove(playerName);

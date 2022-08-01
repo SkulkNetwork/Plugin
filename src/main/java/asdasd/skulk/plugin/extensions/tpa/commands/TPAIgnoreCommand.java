@@ -12,8 +12,6 @@
 //public final class TPAIgnoreCommand implements CommandExecutor {
 //    private final @NotNull TPAExtension extension;
 //
-//    // TODO: Remove suppressor.
-//    @SuppressWarnings("unused")
 //    public TPAIgnoreCommand(@NotNull TPAExtension tpaExtension) {
 //        extension = tpaExtension;
 //        extension.register("tpa", this);
@@ -28,8 +26,6 @@
 //            return false;
 //        }
 //
-//        // TODO: Remove suppressor.
-//        @SuppressWarnings("unused")
 //        PersistentDataContainer playerContainer = player.getPersistentDataContainer();
 //
 //        ArrayList<String> s = playerContainer.getOrDefault(extension.makeKey("tpaIgnores"), TPAExtension.STRING_ARRAY_PDT, new ArrayList<>());
