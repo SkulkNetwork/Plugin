@@ -13,10 +13,9 @@ public class PlayerJoinQuitEventListener implements Listener {
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     public void onPlayerJoin(PlayerJoinEvent event) {
         Component newMessage = Component.text("[ ", NamedTextColor.GRAY, TextDecoration.BOLD)
-                .append(Component.text("+", NamedTextColor.GREEN))
-                .append(Component.text(" ] ", NamedTextColor.GRAY))
-                .decoration(TextDecoration.BOLD, false)
-                .append(Component.text(event.getPlayer().getName(), NamedTextColor.GREEN));
+                .append(Component.text("+", NamedTextColor.GREEN, TextDecoration.BOLD))
+                .append(Component.text(" ] ", NamedTextColor.GRAY, TextDecoration.BOLD))
+                .append(Component.text(event.getPlayer().getName(), NamedTextColor.GREEN).decoration(TextDecoration.BOLD, false));
 
         event.joinMessage(newMessage);
     }
@@ -24,10 +23,9 @@ public class PlayerJoinQuitEventListener implements Listener {
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     public void onPlayerQuit(PlayerQuitEvent event) {
         Component newMessage = Component.text("[ ", NamedTextColor.GRAY, TextDecoration.BOLD)
-                .append(Component.text("-", NamedTextColor.RED))
-                .append(Component.text(" ] ", NamedTextColor.GRAY))
-                .decoration(TextDecoration.BOLD, false)
-                .append(Component.text(event.getPlayer().getName(), NamedTextColor.GREEN));
+                .append(Component.text("-", NamedTextColor.RED, TextDecoration.BOLD))
+                .append(Component.text(" ] ", NamedTextColor.GRAY, TextDecoration.BOLD))
+                .append(Component.text(event.getPlayer().getName(), NamedTextColor.GREEN).decoration(TextDecoration.BOLD, false));
 
         event.quitMessage(newMessage);
     }

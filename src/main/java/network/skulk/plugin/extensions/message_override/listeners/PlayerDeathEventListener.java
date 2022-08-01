@@ -13,11 +13,10 @@ public class PlayerDeathEventListener implements Listener {
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     public void onPlayerDeath(@NotNull PlayerDeathEvent event) {
         @SuppressWarnings("ConstantConditions") Component newMessage = Component.text("[ ", NamedTextColor.GRAY, TextDecoration.BOLD)
-                .append(Component.text("☠", NamedTextColor.RED))
-                .append(Component.text(" ] ", NamedTextColor.GRAY))
-                .decoration(TextDecoration.BOLD, false)
-                .append(event.deathMessage().color(NamedTextColor.RED))
-                .append(Component.text("."));
+                .append(Component.text("☠", NamedTextColor.RED, TextDecoration.BOLD))
+                .append(Component.text(" ] ", NamedTextColor.GRAY, TextDecoration.BOLD))
+                .append(event.deathMessage().color(NamedTextColor.RED).decoration(TextDecoration.BOLD, false))
+                .append(Component.text(".").decoration(TextDecoration.BOLD, false));
 
         event.deathMessage(newMessage);
     }
