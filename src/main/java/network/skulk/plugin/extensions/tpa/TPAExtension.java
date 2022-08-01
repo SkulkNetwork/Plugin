@@ -2,7 +2,10 @@ package network.skulk.plugin.extensions.tpa;
 
 import network.skulk.plugin.Plugin;
 import network.skulk.plugin.extensions.BaseExtension;
+import network.skulk.plugin.extensions.tpa.commands.TPAAcceptCommand;
+import network.skulk.plugin.extensions.tpa.commands.TPACancelCommand;
 import network.skulk.plugin.extensions.tpa.commands.TPACommand;
+import network.skulk.plugin.extensions.tpa.commands.TPARejectCommand;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
@@ -20,7 +23,13 @@ public final class TPAExtension implements BaseExtension {
     }
 
     public void onEnable() {
+        new TPAAcceptCommand(this);
+        new TPACancelCommand(this);
         new TPACommand(this);
+        //ignore-all
+        //ignore
+        //list-ignored
+        new TPARejectCommand(this);
     }
 
     public void onDisable() {

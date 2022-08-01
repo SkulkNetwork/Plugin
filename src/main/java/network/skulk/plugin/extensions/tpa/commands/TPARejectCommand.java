@@ -21,6 +21,7 @@ public final class TPARejectCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+        //noinspection DuplicatedCode
         if (!(sender instanceof Player player)) {
             sender.sendRichMessage(Message.CONSOLE_NOT_ALLOWED);
             return true;
@@ -59,6 +60,7 @@ public final class TPARejectCommand implements CommandExecutor {
             }
         }
 
+        //noinspection DuplicatedCode
         target = Bukkit.getPlayer(targetName);
 
         if (target == null) {
