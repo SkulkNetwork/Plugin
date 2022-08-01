@@ -34,7 +34,7 @@ public abstract class Message {
     public static final String TPA_TO_SELF_NOT_ALLOWED = "<bold><gray>[ <red>!</red> ]</gray></bold> <red>You can't TPA to yourself.</red>";
 
     // You aren't ignoring anyone.
-    public static final String NO_TPA_IGNORES = "<bold><gray>[ <color:#ffae1a>!</color> ]</gray></bold> <color:#ffae1a>You aren't ignoring anybodies TPA requests.</color>";
+    public static final String NO_TPA_IGNORES = "<bold><gray>[ <color:#ffae1a>!</color> ]</gray></bold> <color:#ffae1a>You aren't ignoring anyone's TPA requests.</color>";
 
     // TPA-ACCEPT
     public static final String TPA_ACCEPT_DIALOG = "<bold><gray>[ <blue>?</blue> ]</gray></bold> <blue>Seems like you have multiple people wanting to TPA to you. Which one would you like to accept?</blue>";
