@@ -14,7 +14,7 @@ public class PlayerJoinQuitEventListener implements Listener {
     public void onPlayerJoin(PlayerJoinEvent event) {
         Component newMessage = Component.text("[ ", NamedTextColor.GRAY, TextDecoration.BOLD)
                 .append(Component.text("+", NamedTextColor.GREEN, TextDecoration.BOLD))
-                .append(Component.text("[ ", NamedTextColor.GRAY, TextDecoration.BOLD))
+                .append(Component.text(" ] ", NamedTextColor.GRAY, TextDecoration.BOLD))
                 .append(Component.text(event.getPlayer().getName(), NamedTextColor.GREEN));
 
         event.joinMessage(newMessage);
@@ -24,7 +24,7 @@ public class PlayerJoinQuitEventListener implements Listener {
     public void onPlayerQuit(PlayerQuitEvent event) {
         Component newMessage = Component.text("[ ", NamedTextColor.GRAY, TextDecoration.BOLD)
                 .append(Component.text("-", NamedTextColor.RED, TextDecoration.BOLD))
-                .append(Component.text("[ ", NamedTextColor.GRAY, TextDecoration.BOLD))
+                .append(Component.text(" ] ", NamedTextColor.GRAY, TextDecoration.BOLD))
                 .append(Component.text(event.getPlayer().getName(), NamedTextColor.GREEN));
 
         event.quitMessage(newMessage);
