@@ -48,10 +48,10 @@ public final class TPARejectCommand implements CommandExecutor {
             } else {
                 // Multiple people want to TPA to the player.
                 StringBuilder response = new StringBuilder()
-                        .append(Message.ASD);
+                        .append(Message.TPA_REJECT_DIALOG);
 
                 for (String toReject : playerIncomingRequests) {
-                    response.append(Message.DEF.formatted(toReject, toReject));
+                    response.append(Message.TPA_REJECT_DIALOG_OPTION.formatted(toReject, toReject));
                 }
 
                 player.sendRichMessage(response.toString());
@@ -65,14 +65,14 @@ public final class TPARejectCommand implements CommandExecutor {
             player.sendRichMessage(Message.PLAYER_OFFLINE);
             return true;
         } else if (!playerIncomingRequests.contains(targetName)) {
-            player.sendRichMessage(Message.FOO.formatted(targetName));
+            player.sendRichMessage(Message.X_DOESNT_WANT_TO_TPA_TO_YOU.formatted(targetName));
             return true;
         }
 
         playerIncomingRequests.remove(targetName);
 
-        player.sendRichMessage(Message.BAR.formatted(targetName));
-        target.sendRichMessage(Message.BAZ.formatted(playerName));
+        player.sendRichMessage(Message.TPA_REQUEST_FROM_X_REJECTED.formatted(targetName));
+        target.sendRichMessage(Message.X_HAS_REJECTED_YOUR_TPA_REQUEST.formatted(playerName));
 
         return true;
     }

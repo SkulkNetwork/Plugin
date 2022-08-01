@@ -55,10 +55,10 @@ public final class TPACancelCommand implements CommandExecutor {
             } else if (playerOutGoingRequestsSize == 1) {
                 targetName = playerOutGoingRequests.get(0);
             } else {
-                StringBuilder response = new StringBuilder(Message.AA);
+                StringBuilder response = new StringBuilder(Message.TPA_CANCEL_DIALOG);
 
                 for (String toCancel : playerOutGoingRequests) {
-                    response.append(Message.BB.formatted(toCancel, toCancel));
+                    response.append(Message.TPA_CANCEL_DIALOG_OPTION.formatted(toCancel, toCancel));
                 }
 
                 player.sendRichMessage(response.toString());
@@ -69,16 +69,16 @@ public final class TPACancelCommand implements CommandExecutor {
         HashSet<String> targetIncomingRequests = extension.tpaRequests.computeIfAbsent(targetName, k -> new HashSet<>());
 
         if (!targetIncomingRequests.contains(playerName)) {
-            player.sendRichMessage(Message.CC.formatted(targetName));
+            player.sendRichMessage(Message.NO_OUTGOING_TPA_REQUESTS.formatted(targetName));
             return true;
         }
 
         target = Bukkit.getPlayer(targetName);
 
-        player.sendRichMessage(Message.DD.formatted(targetName));
+        player.sendRichMessage(Message.TPA_REQUEST_FROM_X_REJECTED.formatted(targetName));
 
         if (target != null && target.isOnline()) {
-            target.sendRichMessage(Message.EE.formatted(playerName));
+            target.sendRichMessage(Message.TPA_REQUEST_FROM_X_CANCELLED_BY_SENDER.formatted(playerName));
         }
 
         return true;

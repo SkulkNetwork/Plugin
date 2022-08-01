@@ -56,7 +56,7 @@ public final class TPACommand implements CommandExecutor {
 
         // The player already has a TPA request sent to the target.
         if (targetIncomingRequests.contains(playerName)) {
-            player.sendRichMessage(Message.ALREADY_HAS_PENDING_TPA_REQUEST.formatted(targetName));
+            player.sendRichMessage(Message.TPA_REQUEST_TO_X_ALREADY_EXISTS.formatted(targetName));
             return true;
         }
 
@@ -68,7 +68,7 @@ public final class TPACommand implements CommandExecutor {
             if (targetIncomingRequests.contains(playerName)) {
                 targetIncomingRequests.remove(playerName);
                 player.sendRichMessage(Message.TPA_REQUEST_TO_X_EXPIRED.formatted(targetName));
-                target.sendRichMessage(Message.TPA_REQUEST_X_SEND_TO_YOU_EXPIRED.formatted(playerName));
+                target.sendRichMessage(Message.TPA_REQUEST_X_SENT_TO_YOU_EXPIRED.formatted(playerName));
             }
         });
 
