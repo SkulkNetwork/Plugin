@@ -15,7 +15,9 @@ public class PlayerDeathEventListener implements Listener {
         @SuppressWarnings("ConstantConditions") Component newMessage = Component.text("[ ", NamedTextColor.GRAY, TextDecoration.BOLD)
                 .append(Component.text("☠", NamedTextColor.RED, TextDecoration.BOLD))
                 .append(Component.text(" ] ", NamedTextColor.GRAY, TextDecoration.BOLD))
-                .append(event.deathMessage().color(NamedTextColor.RED));
+                .decoration(TextDecoration.BOLD, false)
+                .append(event.deathMessage().color(NamedTextColor.RED))
+                .append(Component.text("."));
 
         event.deathMessage(newMessage);
     }

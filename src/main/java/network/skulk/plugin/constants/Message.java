@@ -54,7 +54,7 @@ public abstract class Message {
     public static final String TPA_CANCEL_DIALOG_OPTION = "\n<bold><gray>-></gray></bold> <color:#ffae1a><click:run_command:/tpa-cancel %s>%s</click></color>";
 
     // TPA-IGNORE
-    public static final String TPA_IGNORED_X = "<bold><gray>[ <green>✓</green> ]</gray></bold> <green>Ignoring the TPA requests from <bold>%s</bold> indefinitely.</green>";
+    public static final String TPA_IGNORED_X = "<bold><gray>[ <green>✓</green> ]</gray></bold> <green>Ignoring TPA requests from <bold>%s</bold> indefinitely.</green>";
     public static final String UN_TPA_IGNORED_X = "<bold><gray>[ <green>✓</green> ]</gray></bold> <green>Un-Ignoring TPA requests from <bold>%s</bold>.</green>";
 
     // TPA-IGNORE-ALL

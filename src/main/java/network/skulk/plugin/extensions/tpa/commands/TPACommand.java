@@ -68,7 +68,7 @@ public final class TPACommand implements CommandExecutor {
 
         targetIncomingRequests.add(playerName);
 
-        extension.plugin.runLater(60, () -> {
+        extension.plugin.runLater(1200, () -> {
             if (targetIncomingRequests.contains(playerName)) {
                 targetIncomingRequests.remove(playerName);
                 player.sendRichMessage(Message.TPA_REQUEST_TO_X_EXPIRED.formatted(targetName));
