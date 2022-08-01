@@ -22,6 +22,7 @@ public abstract class Message {
     public static final String TELEPORTING_X_TO_YOU = "<bold><gray>[ <green>!</green> ]</gray></bold> <green>Teleporting <bold>%s</bold> to you...</green>";
 
     // No requests.
+    public static final String NO_OUTGOING_TPA_REQUESTS = "<bold><gray>[ <red>!</red> ]</gray></bold> <red>You don't have any outgoing TPA requests.</red>";
     public static final String NO_OUTGOING_TPA_REQUEST_TO_X = "<bold><gray>[ <red>!</red> ]</gray></bold> <red>You don't have an outgoing TPA request to <bold>%s</bold>.</red>";
     public static final String NO_INCOMING_TPA_REQUESTS = "<bold><gray>[ <red>!</red> ]</gray></bold> <red>You don't have any incoming TPA requests.</red>";
     public static final String X_DOESNT_WANT_TO_TPA_TO_YOU = "<bold><gray>[ <color:#ffae1a>!</color> ]</gray> <color:#ffae1a>%s</color></bold> <color:#ffae1a>doesn't want to TPA to you.</color>";

@@ -55,7 +55,7 @@ public final class TPACancelCommand implements CommandExecutor {
                 targetName = playerOutGoingRequests.get(0);
 
             } else if (playerOutGoingRequestsSize == 0) {
-                player.sendRichMessage(Message.NO_INCOMING_TPA_REQUESTS);
+                player.sendRichMessage(Message.NO_OUTGOING_TPA_REQUESTS);
                 return true;
 
             } else {
