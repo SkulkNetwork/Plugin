@@ -22,7 +22,7 @@ public final class TPACommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (!(sender instanceof Player player)) {
-            sender.sendRichMessage(Message.CONSOLE_NOT_ALLOWED);
+            sender.sendRichMessage(Message.ONLY_PLAYERS_ALLOWED);
             return true;
         }
 
