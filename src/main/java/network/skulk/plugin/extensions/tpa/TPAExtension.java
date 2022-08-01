@@ -35,6 +35,5 @@ public final class TPAExtension implements BaseExtension {
     }
 
     public void onDisable() {
-
     }
 }
