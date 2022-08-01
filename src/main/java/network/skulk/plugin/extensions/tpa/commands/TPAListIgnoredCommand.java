@@ -10,7 +10,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 
 public final class TPAListIgnoredCommand implements CommandExecutor {
     private final @NotNull TPAExtension extension;
@@ -33,7 +33,7 @@ public final class TPAListIgnoredCommand implements CommandExecutor {
 
         PersistentDataContainer playerContainer = player.getPersistentDataContainer();
 
-        ArrayList<String> playerIgnores = playerContainer.getOrDefault(extension.TPA_IGNORES_KEY, Plugin.PersistentDataTypes.STRING_ARRAY, new ArrayList<>());
+        HashSet<String> playerIgnores = playerContainer.getOrDefault(extension.TPA_IGNORES_KEY, Plugin.PersistentDataTypes.STRING_HASH_SET, new HashSet<>());
 
         if (!playerIgnores.contains(TPAExtension.IGNORE_ALL_SYMBOL)) {
             player.sendRichMessage(Message.TPA_IGNORING_ALL);

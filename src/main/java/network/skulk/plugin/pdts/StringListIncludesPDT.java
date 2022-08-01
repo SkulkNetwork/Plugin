@@ -9,10 +9,10 @@ import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
 
-public final class StringArrayIncludesPDT implements PersistentDataType<byte[], Boolean> {
+public final class StringListIncludesPDT implements PersistentDataType<byte[], Boolean> {
     private final String target;
 
-    public StringArrayIncludesPDT(String target) {
+    public StringListIncludesPDT(String target) {
         this.target = target;
     }
 
@@ -35,7 +35,8 @@ public final class StringArrayIncludesPDT implements PersistentDataType<byte[], 
 
         try {
             while (dataInputStream.available() > 0) {
-                if (dataInputStream.readUTF().equals(target)) {
+                String elem = dataInputStream.readUTF();
+                if (elem.equalsIgnoreCase(target) || elem.equals("*")) {
                     return true;
                 }
             }
