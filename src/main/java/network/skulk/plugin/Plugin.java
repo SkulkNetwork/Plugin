@@ -1,12 +1,14 @@
 package network.skulk.plugin;
 
 import network.skulk.plugin.extensions.BaseExtension;
+import network.skulk.plugin.extensions.message_override.MessageOverrideExtension;
 import network.skulk.plugin.extensions.tpa.TPAExtension;
 import network.skulk.plugin.pdts.BooleanPDT;
 import network.skulk.plugin.pdts.StringHashSetPDT;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.PluginCommand;
+import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
@@ -20,6 +22,7 @@ public final class Plugin extends JavaPlugin {
 
     public Plugin() {
         extensions.add(new TPAExtension(this));
+        extensions.add(new MessageOverrideExtension(this));
     }
 
     // Public methods.
@@ -44,6 +47,10 @@ public final class Plugin extends JavaPlugin {
         }
 
         command.setExecutor(executor);
+    }
+
+    public void registerEvent(Listener listener) {
+        Bukkit.getPluginManager().registerEvents(listener, this);
     }
 
     // Overrides.
