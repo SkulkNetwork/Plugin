@@ -2,6 +2,7 @@ package network.skulk.plugin.extensions.tpa.commands;
 
 import network.skulk.plugin.constants.Message;
 import network.skulk.plugin.extensions.tpa.TPAExtension;
+import network.skulk.plugin.pdts.StringListIncludesPDT;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -42,17 +43,17 @@ public final class TPACommand implements CommandExecutor {
             return true;
         }
 
-//        HashSet<String> targetIgnores = extension.tpaIgnores.computeIfAbsent(targetName, k -> new HashSet<>());
+        int targetIsIgnoring = target.getPersistentDataContainer().getOrDefault(extension.TPA_IGNORES_KEY, new StringListIncludesPDT(playerName), 0);
 
-//        if (targetIgnores.contains("*")) {
-//            // Here the target ignores everyone.
-//            player.sendRichMessage("<bold><gray>[ <red>!</red> ]</gray> <red>%s</bold> doesn't accept TPA requests from anyone.</red>".formatted(targetName));
-//            return true;
-//        } else if (targetIgnores.contains(playerName)) {
-//            // Here the target ignores the player.
-//            player.sendRichMessage("<bold><gray>[ <red>!</red> ]</gray> <red>%s</bold> doesn't accept TPA requests from you.</red>".formatted(targetName));
-//            return true;
-//        }
+        if (targetIsIgnoring == 1) {
+            player.sendRichMessage(Message.X_IGNORING_YOU.formatted(targetName));
+            return true;
+        }
+
+        if (targetIsIgnoring == 2) {
+            player.sendRichMessage(Message.X_IGNORING_ALL.formatted(targetName));
+            return true;
+        }
 
         HashSet<String> targetIncomingRequests = extension.tpaRequests.computeIfAbsent(targetName, k -> new HashSet<>());
 

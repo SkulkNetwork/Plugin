@@ -4,7 +4,6 @@ import network.skulk.plugin.extensions.BaseExtension;
 import network.skulk.plugin.extensions.tpa.TPAExtension;
 import network.skulk.plugin.pdts.BooleanPDT;
 import network.skulk.plugin.pdts.StringHashSetPDT;
-import network.skulk.plugin.pdts.StringListIncludesPDT;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.PluginCommand;
@@ -84,6 +83,5 @@ public final class Plugin extends JavaPlugin {
     public static final class PersistentDataTypes {
         public static final BooleanPDT BOOLEAN = new BooleanPDT();
         public static final StringHashSetPDT STRING_HASH_SET = new StringHashSetPDT();
-        public static final Class<StringListIncludesPDT> STRING_LIST_INCLUDES = StringListIncludesPDT.class;
     }
 }

@@ -26,6 +26,10 @@ public abstract class Message {
     public static final String NO_INCOMING_TPA_REQUESTS = "<bold><gray>[ <red>!</red> ]</gray></bold> <red>You don't have any incoming TPA requests.</red>";
     public static final String X_DOESNT_WANT_TO_TPA_TO_YOU = "<bold><gray>[ <color:#ffae1a>!</color> ]</gray> <color:#ffae1a>%s</bold> doesn't want to TPA to you.</color>";
 
+    // You are ignored.
+    public static final String X_IGNORING_YOU = "<bold><gray>[ <red>!</red> ]</gray> <red>%s</bold> doesn't accept TPA requests from you.</red>";
+    public static final String X_IGNORING_ALL = "<bold><gray>[ <red>!</red> ]</gray> <red>%s</bold> doesn't accept TPA requests from anyone.</red>";
+
     // TPA-ACCEPT
     public static final String TPA_ACCEPT_DIALOG = "<bold><gray>[ <blue>?</blue> ]</gray></bold> <blue>Seems like you have multiple people wanting to TPA to you. Which one would you like to accept?</blue>";
     public static final String TPA_ACCEPT_DIALOG_OPTION = "\n<bold><gray>-></gray> <green><click:run_command:/tpa-accept %s>[%s]</click></green></bold>";
