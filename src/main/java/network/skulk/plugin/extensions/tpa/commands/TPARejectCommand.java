@@ -33,6 +33,12 @@ public final class TPARejectCommand implements CommandExecutor {
 
         String playerName = player.getName();
         HashSet<String> playerIncomingRequests = extension.tpaRequests.computeIfAbsent(playerName, k -> new HashSet<>());
+        int playerIncomingRequestsSize = playerIncomingRequests.size();
+
+        if (playerIncomingRequestsSize == 0) {
+            player.sendRichMessage(Message.NO_INCOMING_TPA_REQUESTS);
+            return true;
+        }
 
         Player target;
         String targetName;
@@ -40,24 +46,19 @@ public final class TPARejectCommand implements CommandExecutor {
         if (args.length == 1) {
             targetName = args[0];
 
-        } else {
-            if (playerIncomingRequests.size() == 1) {
-                targetName = playerIncomingRequests.iterator().next();
+        } else if (playerIncomingRequestsSize != 1) {
+            StringBuilder response = new StringBuilder(Message.TPA_REJECT_DIALOG);
 
-            } else if (playerIncomingRequests.size() == 0) {
-                player.sendRichMessage(Message.NO_INCOMING_TPA_REQUESTS);
-                return true;
-
-            } else {
-                StringBuilder response = new StringBuilder(Message.TPA_REJECT_DIALOG);
-
-                for (String toReject : playerIncomingRequests) {
-                    response.append(Message.TPA_REJECT_DIALOG_OPTION.formatted(toReject, toReject));
-                }
-
-                player.sendRichMessage(response.toString());
-                return true;
+            for (String toReject : playerIncomingRequests) {
+                response.append(Message.TPA_REJECT_DIALOG_OPTION.formatted(toReject, toReject));
             }
+
+            player.sendRichMessage(response.toString());
+            return true;
+
+        } else {
+            // Args is 0 and playerIncomingRequestsSize is 1.
+            targetName = playerIncomingRequests.iterator().next();
         }
 
         //noinspection DuplicatedCode

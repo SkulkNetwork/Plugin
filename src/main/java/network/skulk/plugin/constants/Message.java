@@ -24,15 +24,17 @@ public abstract class Message {
     // No requests.
     public static final String NO_OUTGOING_TPA_REQUEST_TO_X = "<bold><gray>[ <red>!</red> ]</gray></bold> <red>You don't have an outgoing TPA request to <bold>%s</bold>.</red>";
     public static final String NO_INCOMING_TPA_REQUESTS = "<bold><gray>[ <red>!</red> ]</gray></bold> <red>You don't have any incoming TPA requests.</red>";
-    public static final String X_DOESNT_WANT_TO_TPA_TO_YOU = "<bold><gray>[ <color:#ffae1a>!</color> ]</gray> <color:#ffae1a>%s</bold> doesn't want to TPA to you.</color>";
+    public static final String X_DOESNT_WANT_TO_TPA_TO_YOU = "<bold><gray>[ <color:#ffae1a>!</color> ]</gray> <color:#ffae1a>%s</color></bold> <color:#ffae1a>doesn't want to TPA to you.</color>";
 
     // You are ignored.
-    public static final String X_IGNORING_YOU = "<bold><gray>[ <red>!</red> ]</gray> <red>%s</bold> isn't accepting TPA requests from you.</red>";
-    public static final String X_IGNORING_ALL = "<bold><gray>[ <red>!</red> ]</gray> <red>%s</bold> isn't accepting TPA requests from anyone.</red>";
+    public static final String X_IGNORING_YOU = "<bold><gray>[ <red>!</red> ]</gray> <red>%s</red></bold> <red>isn't accepting TPA requests from you.</red>";
+    public static final String X_IGNORING_ALL = "<bold><gray>[ <red>!</red> ]</gray> <red>%s</red></bold> <red>isn't accepting TPA requests from anyone.</red>";
 
     // You can't tpa to yourself.
     public static final String TPA_TO_SELF_NOT_ALLOWED = "<bold><gray>[ <red>!</red> ]</gray></bold> <red>You can't TPA to yourself.</red>";
 
+    // You aren't ignoring anyone.
+    public static final String NO_TPA_IGNORES = "<bold><gray>[ <color:#ffae1a>!</color> ]</gray></bold> <color:#ffae1a>You aren't ignoring anybodies TPA requests.</color>";
 
     // TPA-ACCEPT
     public static final String TPA_ACCEPT_DIALOG = "<bold><gray>[ <blue>?</blue> ]</gray></bold> <blue>Seems like you have multiple people wanting to TPA to you. Which one would you like to accept?</blue>";
@@ -40,23 +42,23 @@ public abstract class Message {
 
     // TPA-REJECT
     public static final String TPA_REQUEST_FROM_X_REJECTED = "<bold><gray>[ <green>✓</green> ]</gray></bold> <green>Rejected the TPA request from <bold>%s</bold>.</green>";
-    public static final String X_HAS_REJECTED_YOUR_TPA_REQUEST = "<bold><gray>[ <red>!</red> ]</gray> <red>%s</bold> has rejected your TPA request.</red>";
+    public static final String X_HAS_REJECTED_YOUR_TPA_REQUEST = "<bold><gray>[ <red>!</red> ]</gray> <red>%s</red></bold> <red>has rejected your TPA request.</red>";
     public static final String TPA_REJECT_DIALOG = "<bold><gray>[ <blue>?</blue> ]</gray></bold> <blue>Seems like you have multiple people wanting to TPA to you. Which one would you like to reject?</blue>";
     public static final String TPA_REJECT_DIALOG_OPTION = "\n<bold><gray>-></gray></bold> <red><click:run_command:/tpa-reject %s>%s</click></red>";
 
     // TPA-CANCEL
     public static final String TPA_REQUEST_FROM_X_CANCELLED = "<bold><gray>[ <green>✓</green> ]</gray></bold> <green>Cancelled the TPA request going to <bold>%s</bold>.</green>";
-    public static final String TPA_REQUEST_FROM_X_CANCELLED_BY_SENDER = "<bold><gray>[ <color:#ffae1a>!</color:#ffae1a> ]</gray> <color:#ffae1a>%s</bold> has cancelled their TPA request to you.</color>";
+    public static final String TPA_REQUEST_FROM_X_CANCELLED_BY_SENDER = "<bold><gray>[ <color:#ffae1a>!</color:#ffae1a> ]</gray> <color:#ffae1a>%s</color></bold> <color:#ffae1a>has cancelled their TPA request to you.</color>";
     public static final String TPA_CANCEL_DIALOG = "<bold><gray>[ <blue>?</blue> ]</gray></bold> <blue>Seems like you have multiple incoming TPA requests. Which one would you like to cancel?</blue>";
     public static final String TPA_CANCEL_DIALOG_OPTION = "\n<bold><gray>-></gray></bold> <color:#ffae1a><click:run_command:/tpa-cancel %s>%s</click></color>";
 
     // TPA-IGNORE
-    public static final String TPA_IGNORED_X = "<bold><gray>[ <green>✓</green> ]</gray></bold> <green>Ignoring the TPA requests from %s indefinitely.</green>";
-    public static final String UN_TPA_IGNORED_X = "<bold><gray>[ <green>✓</green> ]</gray></bold> <green>Un-Ignored TPA requests from %s.</green>";
+    public static final String TPA_IGNORED_X = "<bold><gray>[ <green>✓</green> ]</gray></bold> <green>Ignoring the TPA requests from <bold>%s</bold> indefinitely.</green>";
+    public static final String UN_TPA_IGNORED_X = "<bold><gray>[ <green>✓</green> ]</gray></bold> <green>Un-Ignoring TPA requests from <bold>%s</bold>.</green>";
 
     // TPA-IGNORE-ALL
     public static final String TPA_IGNORED_ALL = "<bold><gray>[ <green>✓</green> ]</gray></bold> <green>Ignoring all TPA requests.</green>";
-    public static final String UN_TPA_IGNORED_ALL = "<bold><gray>[ <green>✓</green> ]</gray></bold> <green>Un-Ignored all TPA requests.</green>";
+    public static final String UN_TPA_IGNORED_ALL = "<bold><gray>[ <green>✓</green> ]</gray></bold> <green>Un-Ignoring all TPA requests.</green>";
     public static final String ALREADY_TPA_IGNORING_ALL = "<bold><gray>[ <red>!</red> ]</gray></bold> <red>You are already ignoring all TPA requests.</red>";
 
     // TPA-LIST-IGNORED
