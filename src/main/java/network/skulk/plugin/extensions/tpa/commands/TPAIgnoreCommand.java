@@ -17,7 +17,7 @@ public final class TPAIgnoreCommand implements CommandExecutor {
 
     public TPAIgnoreCommand(@NotNull TPAExtension extension) {
         this.extension = extension;
-        extension.plugin.registerCommand(this, "tpa-ignore-all");
+        extension.plugin.registerCommand(this, "tpa-ignore");
     }
 
     @Override
