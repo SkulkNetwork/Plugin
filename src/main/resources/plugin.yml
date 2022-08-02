@@ -6,24 +6,36 @@ authors: [ RGBCube ]
 description: The main plugin used for the Skulk Network Minecraft server.
 website: skulk.network
 commands:
-  tpa:
-    description: Sends a TPA request to a player.
-    usage: /tpa <player>
   tpa-accept:
     description: Accepts a TPA request sent to you.
     usage: /tpa-accept [player]
-  tpa-reject:
-    description: Rejects a TPA request sent to you.
-    usage: /tpa-reject [player]
   tpa-cancel:
     description: Cancels the TPA request you sent to a player.
     usage: /tpa-cancel [player]
-  tpa-ignore:
-    description: Ignores a player's TPA requests until the command is ran again for the player.
-    usage: /tpa-ignore <player>
+  tpa:
+    description: Sends a TPA request to a player.
+    usage: /tpa <player>
   tpa-ignore-all:
     description: Ignores all TPA requests sent to you until the command is ran again.
     usage: /tpa-ignore-all
+  tpa-ignore:
+    description: Ignores a player's TPA requests until the command is ran again for the player.
+    usage: /tpa-ignore <player>
   tpa-list-ignored:
     description: Tells you all the people you have ignored.
     usage: /tpa-list-ignored
+  tpa-reject:
+    description: Rejects a TPA request sent to you.
+    usage: /tpa-reject [player]
+  home:
+    description: Teleports you to one of your homes.
+    usage: /home [name]
+  home-delete:
+    description: Deletes a home.
+    usage: /home-delete <name>
+  home-list:
+    description: Lists all your homes.
+    usage: /home-list
+  home-add:
+    description: Makes the current location a home.
+    usage: /home-add [name]
