@@ -17,7 +17,7 @@ public final class HomePDT implements PersistentDataType<byte[], Home> {
     private final String target;
 
     public HomePDT(String target) {
-        this.target = target;
+        this.target = target.toLowerCase();
     }
 
     public @NotNull Class<byte[]> getPrimitiveType() {
