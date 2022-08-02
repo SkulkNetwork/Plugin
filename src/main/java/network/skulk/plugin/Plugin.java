@@ -1,6 +1,7 @@
 package network.skulk.plugin;
 
 import network.skulk.plugin.extensions.BaseExtension;
+import network.skulk.plugin.extensions.homes.HomesExtension;
 import network.skulk.plugin.extensions.message_override.MessageOverrideExtension;
 import network.skulk.plugin.extensions.tpa.TPAExtension;
 import network.skulk.plugin.pdts.BooleanPDT;
@@ -21,8 +22,9 @@ public final class Plugin extends JavaPlugin {
     private final ArrayList<BaseExtension> extensions = new ArrayList<>();
 
     public Plugin() {
-        extensions.add(new TPAExtension(this));
+        extensions.add(new HomesExtension(this));
         extensions.add(new MessageOverrideExtension(this));
+        extensions.add(new TPAExtension(this));
     }
 
     // Public methods.

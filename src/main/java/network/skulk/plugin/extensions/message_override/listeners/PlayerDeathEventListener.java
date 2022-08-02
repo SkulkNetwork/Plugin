@@ -9,7 +9,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.jetbrains.annotations.NotNull;
 
-public class PlayerDeathEventListener implements Listener {
+public final class PlayerDeathEventListener implements Listener {
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     public void onPlayerDeath(@NotNull PlayerDeathEvent event) {
         @SuppressWarnings("ConstantConditions") Component newMessage = Component.text("[ ", NamedTextColor.GRAY, TextDecoration.BOLD)
