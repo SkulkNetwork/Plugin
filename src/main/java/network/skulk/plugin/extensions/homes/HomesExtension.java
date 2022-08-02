@@ -6,6 +6,7 @@ import network.skulk.plugin.extensions.homes.commands.HomeAddCommand;
 import network.skulk.plugin.extensions.homes.commands.HomeCommand;
 import network.skulk.plugin.extensions.homes.commands.HomeDeleteCommand;
 import network.skulk.plugin.extensions.homes.commands.HomeListCommand;
+import network.skulk.plugin.extensions.homes.listeners.TabCompleteEventListener;
 import org.bukkit.NamespacedKey;
 
 public class HomesExtension implements BaseExtension {
@@ -22,6 +23,8 @@ public class HomesExtension implements BaseExtension {
         new HomeDeleteCommand(this);
         new HomeListCommand(this);
         new HomeAddCommand(this);
+
+        new TabCompleteEventListener(this);
     }
 
     public void onDisable() {
