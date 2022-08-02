@@ -68,6 +68,7 @@ public final class TPACommand implements CommandExecutor {
 
         targetIncomingRequests.add(playerName);
 
+        // FIXME: Kill this task when the TPA request is cancelled.
         extension.plugin.runLater(1200, () -> {
             if (targetIncomingRequests.contains(playerName)) {
                 targetIncomingRequests.remove(playerName);
