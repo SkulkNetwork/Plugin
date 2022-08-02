@@ -69,6 +69,8 @@ public class TPAAcceptCommand implements CommandExecutor {
             return true;
         }
 
+        targetName = target.getName();
+
         if (!playerIncomingRequests.contains(targetName)) {
             player.sendRichMessage(Message.X_DOESNT_WANT_TO_TPA_TO_YOU.formatted(targetName));
             return true;

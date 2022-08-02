@@ -47,6 +47,8 @@ public final class TPACommand implements CommandExecutor {
             return true;
         }
 
+        targetName = target.getName();
+
         int targetIsIgnoring = target.getPersistentDataContainer().getOrDefault(extension.TPA_IGNORES_KEY, new StringListIncludesPDT(playerName), 0);
 
         if (targetIsIgnoring == 1) {
@@ -68,11 +70,13 @@ public final class TPACommand implements CommandExecutor {
 
         targetIncomingRequests.add(playerName);
 
+        String targetNameFinal = targetName;
+
         // FIXME: Kill this task when the TPA request is cancelled.
         extension.plugin.runLater(1200, () -> {
             if (targetIncomingRequests.contains(playerName)) {
                 targetIncomingRequests.remove(playerName);
-                player.sendRichMessage(Message.TPA_REQUEST_TO_X_EXPIRED.formatted(targetName));
+                player.sendRichMessage(Message.TPA_REQUEST_TO_X_EXPIRED.formatted(targetNameFinal));
                 target.sendRichMessage(Message.TPA_REQUEST_X_SENT_TO_YOU_EXPIRED.formatted(playerName));
             }
         });
