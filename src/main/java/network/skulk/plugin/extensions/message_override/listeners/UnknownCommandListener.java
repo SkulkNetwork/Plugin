@@ -15,7 +15,7 @@ public final class UnknownCommandListener implements Listener {
         Component newMessage = Component.text("[ ", NamedTextColor.GRAY, TextDecoration.BOLD)
                 .append(Component.text("!", NamedTextColor.RED, TextDecoration.BOLD))
                 .append(Component.text(" ] ", NamedTextColor.GRAY, TextDecoration.BOLD))
-                .append(Component.text("Unknown command: ").color(NamedTextColor.RED).decoration(TextDecoration.BOLD, false))
+                .append(Component.text("Unknown command: ", NamedTextColor.RED).decoration(TextDecoration.BOLD, false))
                 .append(Component.text(event.getCommandLine(), NamedTextColor.RED, TextDecoration.BOLD));
 
         event.message(newMessage);

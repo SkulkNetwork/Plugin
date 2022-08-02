@@ -16,7 +16,7 @@ public final class PlayerDeathEventListener implements Listener {
                 .append(Component.text("☠", NamedTextColor.RED, TextDecoration.BOLD))
                 .append(Component.text(" ] ", NamedTextColor.GRAY, TextDecoration.BOLD))
                 .append(event.deathMessage().color(NamedTextColor.RED).decoration(TextDecoration.BOLD, false))
-                .append(Component.text(".").color(NamedTextColor.RED).decoration(TextDecoration.BOLD, false));
+                .append(Component.text(".", NamedTextColor.RED).decoration(TextDecoration.BOLD, false));
 
         event.deathMessage(newMessage);
     }
