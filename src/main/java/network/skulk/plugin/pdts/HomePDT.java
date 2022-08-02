@@ -49,8 +49,10 @@ public final class HomePDT implements PersistentDataType<byte[], Home> {
                     double x = Double.parseDouble(d[2]);
                     double y = Double.parseDouble(d[3]);
                     double z = Double.parseDouble(d[4]);
+                    float yaw = Float.parseFloat(d[5]);
+                    float pitch = Float.parseFloat(d[6]);
 
-                    Location location = new Location(Bukkit.getWorld(d[1]), x, y, z);
+                    Location location = new Location(Bukkit.getWorld(d[1]), x, y, z, yaw, pitch);
 
                     return new Home(d[0], location);
                 }

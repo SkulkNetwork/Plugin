@@ -28,18 +28,23 @@ public final class HomeAddCommand implements CommandExecutor {
             return true;
         }
 
-        if (args.length != 1) {
+        if (args.length > 1) {
             return false;
         }
 
-        String homeName = args[0].toLowerCase();
+        String homeName;
+
+        if (args.length == 0) {
+            homeName = "home";
+        } else {
+            homeName = args[0].toLowerCase();
+        }
 
         PersistentDataContainer playerContainer = player.getPersistentDataContainer();
         HashSet<String> playerHomes = playerContainer.getOrDefault(extension.HOMES_KEY, Plugin.PersistentDataTypes.STRING_HASH_SET, new HashSet<>());
 
         for (String homeString : playerHomes) {
-            // There is no spaces in the name, so this is fine.
-            if (homeString.startsWith(homeName)) {
+            if (homeString.split(" ")[0].equals(homeName)) {
                 player.sendRichMessage(Message.HOME_ALREADY_EXISTS.formatted(homeName));
                 return true;
             }
@@ -54,8 +59,10 @@ public final class HomeAddCommand implements CommandExecutor {
         double x = l.getX();
         double y = l.getY();
         double z = l.getZ();
+        float yaw = l.getYaw();
+        float pitch = l.getPitch();
 
-        playerHomes.add("%s %s %f %f %f".formatted(homeName, player.getWorld().getName(), x, y, z));
+        playerHomes.add("%s %s %f %f %f %f %f".formatted(homeName, player.getWorld().getName(), x, y, z, yaw, pitch));
 
         playerContainer.set(extension.HOMES_KEY, Plugin.PersistentDataTypes.STRING_HASH_SET, playerHomes);
 

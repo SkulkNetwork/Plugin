@@ -32,7 +32,7 @@ commands:
     usage: /home [name]
   home-delete:
     description: Deletes a home.
-    usage: /home-delete <name>
+    usage: /home-delete [name]
   home-list:
     description: Lists all your homes.
     usage: /home-list
