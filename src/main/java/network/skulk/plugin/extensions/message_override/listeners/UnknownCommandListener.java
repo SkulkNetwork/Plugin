@@ -12,7 +12,6 @@ import org.jetbrains.annotations.NotNull;
 public final class UnknownCommandListener implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public void onUnknownCommand(@NotNull UnknownCommandEvent event) {
-        System.out.println("UnknownCommandEvent: " + event);
         Component newMessage = Component.text("[ ", NamedTextColor.GRAY, TextDecoration.BOLD)
                 .append(Component.text("!", NamedTextColor.RED, TextDecoration.BOLD))
                 .append(Component.text(" ] ", NamedTextColor.GRAY, TextDecoration.BOLD))
