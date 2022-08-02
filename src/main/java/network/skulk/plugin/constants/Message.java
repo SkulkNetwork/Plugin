@@ -37,5 +37,6 @@ public abstract class Message {
     public static final String TPA_IGNORING_FOLLOWING = "<bold><gray>[ <color:#ffae1a>!</color> ]</gray></bold> <color:#ffae1a>You are ignoring the TPA requests from the following people:</color>";
     public static final String TPA_IGNORING_FOLLOWING_ITEM = "\n<bold><gray>-></gray></bold> <color:#ffae1a>%s</color>";
     public static final String HOME_ALREADY_EXISTS = "<bold><gray>[ <red>!</red> ]</gray></bold> <red>You already have a home named <bold>%s</bold></red>";
+    public static final String HOME_LIMIT_REACHED = "<bold><gray>[ <red>!</red> ]</gray></bold> <red>You have reached the home limit of 16.</red>";
     public static final String HOME_ADDED = "<bold><gray>[ <green>✓</green> ]</gray></bold> <green>Added a home named <bold>%s</bold> with the coordinates <bold>%.0f</bold>, <bold>%.0f</bold>, <bold>%.0f</bold>.</green>";
 }

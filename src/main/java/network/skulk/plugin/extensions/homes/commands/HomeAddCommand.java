@@ -45,6 +45,11 @@ public final class HomeAddCommand implements CommandExecutor {
             }
         }
 
+        if (playerHomes.size() >= 16) {
+            player.sendRichMessage(Message.HOME_LIMIT_REACHED);
+            return true;
+        }
+
         Location l = player.getLocation();
         double x = l.getX();
         double y = l.getY();
