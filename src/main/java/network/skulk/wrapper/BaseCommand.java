@@ -4,44 +4,38 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.jetbrains.annotations.NotNull;
 
-import static network.skulk.pluginrewrite.Utils.fmt;
+import java.io.File;
+
+import static network.skulk.utils.Fmt.fmt;
 import static org.jetbrains.annotations.ApiStatus.OverrideOnly;
 
 public class BaseCommand<E extends BaseExtension> implements CommandExecutor {
-    protected static boolean playerOnly;
-    protected static int maxArgs;
-
-    protected final E extension;
-
-    public BaseCommand(final E extension) {
-        this.extension = extension;
-        init();
-    }
+    public E extension;
+    protected String[] aliases;
+    protected boolean playerOnly;
+    protected int maxArgs;
 
     @OverrideOnly
-    protected void init() {
-        playerOnly = true;
-        maxArgs = 0;
+    public void init() {
     }
 
     @SuppressWarnings("unused")
     @OverrideOnly
-    protected boolean execute(final @NotNull CommandSender sender, final @NotNull Command command, final @NotNull String[] args) {
+    protected boolean execute(final CommandSender sender, final Command command, final String[] args) {
         return false;
     }
 
     @SuppressWarnings("unused")
     @OverrideOnly
-    protected boolean execute(final @NotNull Player player, final @NotNull Command command, final @NotNull String[] args) {
+    protected boolean execute(final Player player, final Command command, final String[] args) {
         return false;
     }
 
     @Override
-    public final boolean onCommand(final @NotNull CommandSender sender, final @NotNull Command command, final @NotNull String label, final @NotNull String[] args) {
+    public final boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] args) {
         if (playerOnly && !(sender instanceof Player)) {
-            sender.sendMessage(fmt("red", "!", "This command can only be used by players."));
+            sender.sendMessage(fmt("red", '!', "This command can only be used by players."));
             return true;
         }
 
@@ -54,5 +48,17 @@ public class BaseCommand<E extends BaseExtension> implements CommandExecutor {
         }
 
         return execute(sender, command, args);
+    }
+
+    public final File getDataFolder() {
+        return this.extension.getDataFolder();
+    }
+
+    public final void runAfter(final long delay, final Runnable runnable) {
+        this.extension.runAfter(delay, runnable);
+    }
+
+    public final void runAsync(final Runnable runnable) {
+        this.extension.runAsync(runnable);
     }
 }
