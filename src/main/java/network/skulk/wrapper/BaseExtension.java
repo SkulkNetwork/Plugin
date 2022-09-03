@@ -5,44 +5,21 @@ import java.io.File;
 import static org.jetbrains.annotations.ApiStatus.OverrideOnly;
 
 public class BaseExtension {
+    public final BaseExtension create(final BasePlugin plugin) {
+        this.plugin = plugin;
+        return this;
+    }
+
     public BasePlugin plugin;
 
     @OverrideOnly
-    protected Class<BaseCommand<? extends BaseExtension>>[] commands() {
+    protected Class<BaseCommand<BaseExtension>>[] commands() {
         return null;
     }
 
     @OverrideOnly
-    protected Class<BaseListener<? extends BaseExtension>>[] listeners() {
+    protected Class<BaseListener<BaseExtension>>[] listeners() {
         return null;
-    }
-
-    public final void onEnable() throws Exception {
-        final var commands = this.commands();
-
-        if (commands != null) {
-            for (final Class<BaseCommand<? extends BaseExtension>> Command : commands) {
-                final var command = Command.getDeclaredConstructor().newInstance();
-
-                command.extension = this;
-
-                this.registerCommand(command);
-            }
-        }
-
-        final var listeners = this.listeners();
-
-        if (listeners != null) {
-            for (final Class<BaseListener<? extends BaseExtension>> Listener : listeners) {
-                final var listener = Listener.getDeclaredConstructor().newInstance();
-
-                listener.extension = this;
-
-                this.registerListener(listener);
-            }
-        }
-
-        this.onEnableHook();
     }
 
     @OverrideOnly
@@ -51,6 +28,28 @@ public class BaseExtension {
 
     @OverrideOnly
     public final void onDisableHook() {
+    }
+
+    public final void onEnable() throws Exception {
+        final var commands = this.commands();
+
+        if (commands != null) {
+            for (final Class<BaseCommand<BaseExtension>> Command : commands) {
+                final var command = Command.getDeclaredConstructor().newInstance().create(this);
+                this.registerCommand(command);
+            }
+        }
+
+        final var listeners = this.listeners();
+
+        if (listeners != null) {
+            for (final Class<BaseListener<BaseExtension>> Listener : listeners) {
+                final var listener = Listener.getDeclaredConstructor().newInstance().create(this);
+                this.registerListener(listener);
+            }
+        }
+
+        this.onEnableHook();
     }
 
     public final File getDataFolder() {

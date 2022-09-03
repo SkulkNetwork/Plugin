@@ -11,6 +11,11 @@ import static network.skulk.utils.Fmt.fmt;
 import static org.jetbrains.annotations.ApiStatus.OverrideOnly;
 
 public class BaseCommand<E extends BaseExtension> implements CommandExecutor {
+    public final BaseCommand<E> create(final E extension) {
+        this.extension = extension;
+        return this;
+    }
+
     public E extension;
     protected String[] aliases;
     protected boolean playerOnly;

@@ -26,13 +26,12 @@ public class BasePlugin extends JavaPlugin {
             final BaseExtension extension;
 
             try {
-                extension = Extension.getDeclaredConstructor().newInstance();
+                extension = Extension.getDeclaredConstructor().newInstance().create(this);
             } catch (final Exception error) {
                 this.reportError("Well this should never happen, Failed to init '%s'.\nHere is the traceback:".formatted(Extension.getName()), error);
                 continue;
             }
 
-            extension.plugin = this;
             this.extensions.add(extension);
 
             try {

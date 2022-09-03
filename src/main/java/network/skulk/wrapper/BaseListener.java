@@ -5,6 +5,11 @@ import org.bukkit.event.Listener;
 import java.io.File;
 
 public class BaseListener<E extends BaseExtension> implements Listener {
+    public final BaseListener<E> create(final E extension) {
+        this.extension = extension;
+        return this;
+    }
+
     public E extension;
 
     public final File getDataFolder() {
