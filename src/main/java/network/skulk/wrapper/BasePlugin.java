@@ -13,7 +13,7 @@ public class BasePlugin extends JavaPlugin {
     public final ArrayList<BaseExtension> extensions = new ArrayList<>();
 
     @OverrideOnly
-    protected Class<? extends BaseExtension>[] extensions() {
+    protected BaseExtension[] initExtensions() {
         return null;
     }
 
@@ -22,16 +22,7 @@ public class BasePlugin extends JavaPlugin {
         final var logger = this.getLogger();
         logger.info("The plugin is being loaded...");
 
-        for (final Class<? extends BaseExtension> Extension : this.extensions()) {
-            final BaseExtension extension;
-
-            try {
-                extension = Extension.getDeclaredConstructor().newInstance().create(this);
-            } catch (final Exception error) {
-                this.reportError("Well this should never happen, Failed to init '%s'.\nHere is the traceback:".formatted(Extension.getName()), error);
-                continue;
-            }
-
+        for (final BaseExtension extension : this.initExtensions()) {
             try {
                 extension.onEnable();
             } catch (final Exception error) {
@@ -62,7 +53,7 @@ public class BasePlugin extends JavaPlugin {
 
     public final void registerCommand(final BaseCommand<?> command) {
         for (final String alias : command.aliases) {
-            final var cmd = getCommand(alias);
+            final var cmd = this.getCommand(alias);
 
             if (cmd == null) {
                 this.reportError("The command '%s' could not be registered because it was not included in the plugin.yml.".formatted(alias));

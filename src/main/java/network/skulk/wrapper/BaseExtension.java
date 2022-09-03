@@ -15,13 +15,11 @@ public class BaseExtension {
 
 
     @OverrideOnly
-    protected Class<BaseCommand<BaseExtension>>[] commands() {
-        return null;
+    protected void initCommands() {
     }
 
     @OverrideOnly
-    protected Class<BaseListener<BaseExtension>>[] listeners() {
-        return null;
+    protected void initListeners() {
     }
 
     @OverrideOnly
@@ -33,22 +31,7 @@ public class BaseExtension {
     }
 
     public final void onEnable() throws Exception {
-        final var commands = this.commands();
-
-        if (commands != null) {
-            for (final Class<BaseCommand<BaseExtension>> Command : commands) {
-                Command.getDeclaredConstructor().newInstance().create(this);
-            }
-        }
-
-        final var listeners = this.listeners();
-
-        if (listeners != null) {
-            for (final Class<BaseListener<BaseExtension>> Listener : listeners) {
-                Listener.getDeclaredConstructor().newInstance().create(this);
-            }
-        }
-
+        this.initCommands();
         this.onEnableHook();
     }
 

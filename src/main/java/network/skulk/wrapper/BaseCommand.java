@@ -5,8 +5,6 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.io.File;
-
 import static network.skulk.utils.Fmt.fmt;
 import static org.jetbrains.annotations.ApiStatus.OverrideOnly;
 
@@ -54,10 +52,6 @@ public class BaseCommand<E extends BaseExtension> implements CommandExecutor {
         }
 
         return execute(sender, command, args);
-    }
-
-    public final File getDataFolder() {
-        return this.extension.getDataFolder();
     }
 
     public final void runAfter(final long delay, final Runnable runnable) {
