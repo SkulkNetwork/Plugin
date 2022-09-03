@@ -13,7 +13,7 @@ public class BasePlugin extends JavaPlugin {
     public final ArrayList<BaseExtension> extensions = new ArrayList<>();
 
     @OverrideOnly
-    protected Class<BaseExtension>[] extensions() {
+    protected Class<? extends BaseExtension>[] extensions() {
         return null;
     }
 
@@ -22,7 +22,7 @@ public class BasePlugin extends JavaPlugin {
         final var logger = this.getLogger();
         logger.info("The plugin is being loaded...");
 
-        for (final Class<BaseExtension> Extension : this.extensions()) {
+        for (final Class<? extends BaseExtension> Extension : this.extensions()) {
             final BaseExtension extension;
 
             try {
