@@ -7,6 +7,7 @@ import static org.jetbrains.annotations.ApiStatus.OverrideOnly;
 public class BaseExtension {
     public final BaseExtension create(final BasePlugin plugin) {
         this.plugin = plugin;
+        this.plugin.extensions.add(this);
         return this;
     }
 
@@ -23,11 +24,11 @@ public class BaseExtension {
     }
 
     @OverrideOnly
-    public final void onEnableHook() {
+    public void onEnableHook() throws Exception {
     }
 
     @OverrideOnly
-    public final void onDisableHook() {
+    public void onDisableHook() throws Exception {
     }
 
     public final void onEnable() throws Exception {
@@ -35,8 +36,7 @@ public class BaseExtension {
 
         if (commands != null) {
             for (final Class<BaseCommand<BaseExtension>> Command : commands) {
-                final var command = Command.getDeclaredConstructor().newInstance().create(this);
-                this.registerCommand(command);
+                Command.getDeclaredConstructor().newInstance().create(this);
             }
         }
 
@@ -44,8 +44,7 @@ public class BaseExtension {
 
         if (listeners != null) {
             for (final Class<BaseListener<BaseExtension>> Listener : listeners) {
-                final var listener = Listener.getDeclaredConstructor().newInstance().create(this);
-                this.registerListener(listener);
+                Listener.getDeclaredConstructor().newInstance().create(this);
             }
         }
 

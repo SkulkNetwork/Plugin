@@ -5,7 +5,7 @@ import network.skulk.wrapper.BasePlugin;
 
 public class Plugin extends BasePlugin {
     @Override
-    protected BaseExtension[] extensions() {
+    protected Class<BaseExtension>[] extensions() {
         return null;
     }
 }

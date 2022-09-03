@@ -10,7 +10,7 @@ import java.util.logging.Level;
 import static org.jetbrains.annotations.ApiStatus.OverrideOnly;
 
 public class BasePlugin extends JavaPlugin {
-    private final ArrayList<BaseExtension> extensions = new ArrayList<>();
+    public final ArrayList<BaseExtension> extensions = new ArrayList<>();
 
     @OverrideOnly
     protected Class<BaseExtension>[] extensions() {
@@ -31,8 +31,6 @@ public class BasePlugin extends JavaPlugin {
                 this.reportError("Well this should never happen, Failed to init '%s'.\nHere is the traceback:".formatted(Extension.getName()), error);
                 continue;
             }
-
-            this.extensions.add(extension);
 
             try {
                 extension.onEnable();

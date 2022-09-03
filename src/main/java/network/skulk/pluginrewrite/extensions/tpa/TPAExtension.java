@@ -15,7 +15,7 @@ public final class TPAExtension extends BaseExtension {
     }
 
     @Override
-    public void onEnable() throws Exception {
+    public void onEnableHook() throws Exception {
         final File dataFolder = getDataFolder();
 
 

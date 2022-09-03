@@ -5,9 +5,9 @@ import org.bukkit.event.Listener;
 import java.io.File;
 
 public class BaseListener<E extends BaseExtension> implements Listener {
-    public final BaseListener<E> create(final E extension) {
+    public final void create(final E extension) {
         this.extension = extension;
-        return this;
+        this.extension.registerListener(this);
     }
 
     public E extension;

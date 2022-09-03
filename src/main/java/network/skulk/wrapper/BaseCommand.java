@@ -11,9 +11,9 @@ import static network.skulk.utils.Fmt.fmt;
 import static org.jetbrains.annotations.ApiStatus.OverrideOnly;
 
 public class BaseCommand<E extends BaseExtension> implements CommandExecutor {
-    public final BaseCommand<E> create(final E extension) {
+    public final void create(final E extension) {
         this.extension = extension;
-        return this;
+        this.extension.registerCommand(this);
     }
 
     public E extension;
