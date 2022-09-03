@@ -9,12 +9,12 @@ import java.util.logging.Level;
 
 import static org.jetbrains.annotations.ApiStatus.OverrideOnly;
 
-public class BasePlugin extends JavaPlugin {
+public abstract class BasePlugin extends JavaPlugin {
     public final ArrayList<BaseExtension> extensions = new ArrayList<>();
 
     @OverrideOnly
     protected BaseExtension[] initExtensions() {
-        return null;
+        return new BaseExtension[]{};
     }
 
     @Override
@@ -27,7 +27,10 @@ public class BasePlugin extends JavaPlugin {
                 extension.onEnable();
             } catch (final Exception error) {
                 this.reportError("There was an error while loading '%s'.\nHere is the traceback:".formatted(extension.getClass().getName()), error);
+                continue;
             }
+
+            this.extensions.add(extension);
         }
 
         logger.info("The plugin has been loaded");
@@ -63,6 +66,8 @@ public class BasePlugin extends JavaPlugin {
             cmd.setExecutor(command);
         }
     }
+
+    // Utility functions.
 
     public final void registerListener(final BaseListener<?> listener) {
         Bukkit.getPluginManager().registerEvents(listener, this);

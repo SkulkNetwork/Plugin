@@ -5,10 +5,10 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import static network.skulk.utils.Fmt.fmt;
+import static network.skulk.utils.MessageFormat.fmt;
 import static org.jetbrains.annotations.ApiStatus.OverrideOnly;
 
-public class BaseCommand<E extends BaseExtension> implements CommandExecutor {
+public abstract class BaseCommand<E extends BaseExtension> implements CommandExecutor {
     public E extension;
 
     public final void create(final E extension) {
@@ -20,6 +20,7 @@ public class BaseCommand<E extends BaseExtension> implements CommandExecutor {
     protected boolean playerOnly;
     protected int maxArgs;
 
+    // aliases, playerOnly and marArgs will be set here
     @OverrideOnly
     public void init() {
     }
@@ -53,6 +54,8 @@ public class BaseCommand<E extends BaseExtension> implements CommandExecutor {
 
         return execute(sender, command, args);
     }
+
+    // Utility functions.
 
     public final void runAfter(final long delay, final Runnable runnable) {
         this.extension.runAfter(delay, runnable);

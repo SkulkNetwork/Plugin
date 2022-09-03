@@ -5,13 +5,11 @@ import network.skulk.wrapper.BaseExtension;
 import network.skulk.wrapper.BasePlugin;
 
 public class Plugin extends BasePlugin {
-    private final BaseExtension[] extensions = {
-            new TPAExtension().create(this)
-    };
 
     @Override
     protected BaseExtension[] initExtensions() {
-        new TPAExtension();
-        return this.extensions;
+        return new BaseExtension[]{
+                new TPAExtension().create(this)
+        };
     }
 }

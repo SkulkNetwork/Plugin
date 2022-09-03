@@ -4,12 +4,11 @@ import java.io.File;
 
 import static org.jetbrains.annotations.ApiStatus.OverrideOnly;
 
-public class BaseExtension {
+public abstract class BaseExtension {
     public BasePlugin plugin;
 
     public final BaseExtension create(final BasePlugin plugin) {
         this.plugin = plugin;
-        this.plugin.extensions.add(this);
         return this;
     }
 
@@ -34,6 +33,8 @@ public class BaseExtension {
         this.initCommands();
         this.onEnableHook();
     }
+
+    // Utility functions.
 
     public final File getDataFolder() {
         return this.plugin.getDataFolder();
