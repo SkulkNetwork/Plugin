@@ -5,13 +5,14 @@ import java.io.File;
 import static org.jetbrains.annotations.ApiStatus.OverrideOnly;
 
 public class BaseExtension {
+    public BasePlugin plugin;
+
     public final BaseExtension create(final BasePlugin plugin) {
         this.plugin = plugin;
         this.plugin.extensions.add(this);
         return this;
     }
 
-    public BasePlugin plugin;
 
     @OverrideOnly
     protected Class<BaseCommand<BaseExtension>>[] commands() {
