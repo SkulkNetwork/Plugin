@@ -10,6 +10,7 @@ import java.util.logging.Level;
 import static org.jetbrains.annotations.ApiStatus.OverrideOnly;
 
 public abstract class BasePlugin extends JavaPlugin {
+    // Must be stored to do onDisable.
     public final ArrayList<BaseExtension> extensions = new ArrayList<>();
 
     @OverrideOnly
@@ -54,6 +55,8 @@ public abstract class BasePlugin extends JavaPlugin {
         logger.info("The plugin has been unloaded.");
     }
 
+    // Utility functions.
+
     public final void registerCommand(final BaseCommand<?> command) {
         for (final String alias : command.aliases) {
             final var cmd = this.getCommand(alias);
@@ -66,8 +69,6 @@ public abstract class BasePlugin extends JavaPlugin {
             cmd.setExecutor(command);
         }
     }
-
-    // Utility functions.
 
     public final void registerListener(final BaseListener<?> listener) {
         Bukkit.getPluginManager().registerEvents(listener, this);

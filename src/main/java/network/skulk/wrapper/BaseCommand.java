@@ -25,13 +25,11 @@ public abstract class BaseCommand<E extends BaseExtension> implements CommandExe
     public void init() {
     }
 
-    @SuppressWarnings("unused")
     @OverrideOnly
     protected boolean execute(final CommandSender sender, final Command command, final String[] args) {
         return false;
     }
 
-    @SuppressWarnings("unused")
     @OverrideOnly
     protected boolean execute(final Player player, final Command command, final String[] args) {
         return false;
