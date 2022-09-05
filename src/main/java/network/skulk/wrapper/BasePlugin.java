@@ -6,13 +6,14 @@ import org.bukkit.scheduler.BukkitTask;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 
 import static org.jetbrains.annotations.ApiStatus.OverrideOnly;
 
 public abstract class BasePlugin extends JavaPlugin {
     // Must be stored to do onDisable.
-    private final ArrayList<BaseExtension> extensions = new ArrayList<>();
+    private final List<BaseExtension> extensions = new ArrayList<>();
 
     @OverrideOnly
     protected BaseExtension[] initExtensions() {
