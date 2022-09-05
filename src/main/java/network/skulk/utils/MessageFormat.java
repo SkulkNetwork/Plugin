@@ -1,15 +1,15 @@
 package network.skulk.utils;
 
-import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
+import org.bukkit.command.CommandSender;
 
 import java.util.ArrayList;
 
 public abstract class MessageFormat {
 
-    public static Component fmt(String color, final char symbol, final String text, final String... placeholders) {
+    public static void sendMessage(final CommandSender to, String color, final char symbol, final String text, final String... placeholders) {
         if (color.equalsIgnoreCase("orange")) {
             color = "#ffae1a";
         }
@@ -23,6 +23,6 @@ public abstract class MessageFormat {
             tagResolvers.add(Placeholder.unparsed(Integer.toString(i), placeholders[i]));
         }
 
-        return MiniMessage.miniMessage().deserialize(template, TagResolver.resolver(tagResolvers));
+        to.sendMessage(MiniMessage.miniMessage().deserialize(template, TagResolver.resolver(tagResolvers)));
     }
 }

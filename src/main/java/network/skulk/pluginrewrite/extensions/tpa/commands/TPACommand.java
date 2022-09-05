@@ -5,7 +5,7 @@ import network.skulk.wrapper.BaseCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-import static network.skulk.utils.MessageFormat.fmt;
+import static network.skulk.utils.MessageFormat.sendMessage;
 
 public final class TPACommand extends BaseCommand<TPAExtension> {
     @Override
@@ -23,14 +23,14 @@ public final class TPACommand extends BaseCommand<TPAExtension> {
         String targetName = args[0];
 
         if (targetName.equalsIgnoreCase(playerName)) {
-            player.sendMessage(fmt("red", '!', "You can't TPA to yourself!"));
+            sendMessage(player, "red", '!', "You can't TPA to yourself!");
             return true;
         }
 
         final var target = Bukkit.getPlayer(targetName);
 
         if (target == null) {
-            player.sendMessage(fmt("red", '!', "This player is offline!"));
+            sendMessage(player, "red", '!', "This player is offline!");
             return true;
         }
 
@@ -40,19 +40,19 @@ public final class TPACommand extends BaseCommand<TPAExtension> {
         final var targetIgnores = extension.getTpaIgnores().get(targetName);
 
         if (targetIgnores.contains("*")) {
-            player.sendMessage(fmt("red", '!', "<b><0></b> isn't accepting TPA requests from anyone.", targetName));
+            sendMessage(player, "red", '!', "<b><0></b> isn't accepting TPA requests from anyone.", targetName);
             return true;
         }
 
         if (targetIgnores.contains(playerName.toLowerCase())) {
-            player.sendMessage(fmt("red", '!', "<b><0></b> isn't accepting TPA requests from you.", targetName));
+            sendMessage(player, "red", '!', "<b><0></b> isn't accepting TPA requests from you.", targetName);
             return true;
         }
 
         final var tpaRequests = extension.getTpaRequests();
 
         if (tpaRequests.containsEntry(targetName, playerName)) {
-            player.sendMessage(fmt("red", '!', "You already have a pending request to <b><0></b>", targetName));
+            sendMessage(player, "red", '!', "You already have a pending request to <b><0></b>", targetName);
             return true;
         }
 
@@ -62,8 +62,8 @@ public final class TPACommand extends BaseCommand<TPAExtension> {
         final var task = this.runAfter(1200, () -> {
             if (tpaRequests.containsEntry(finalTargetName, playerName)) {
                 tpaRequests.remove(finalTargetName, playerName);
-                player.sendMessage(fmt("orange", '!', "Your TPA request to <b><0></b> has expired.", finalTargetName));
-                target.sendMessage(fmt("orange", '!', "The TPA request <b><0></b> has sent you has expired.", playerName));
+                sendMessage(player, "orange", '!', "Your TPA request to <b><0></b> has expired.", finalTargetName);
+                sendMessage(target, "orange", '!', "The TPA request <b><0></b> has sent you has expired.", playerName);
             }
         });
 

@@ -37,6 +37,7 @@ public abstract class BaseExtension {
 
     public final void onEnable() throws Exception {
         this.initCommands();
+        this.initListeners();
         this.onEnableHook();
     }
 

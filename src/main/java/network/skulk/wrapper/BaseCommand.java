@@ -6,7 +6,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;
 
-import static network.skulk.utils.MessageFormat.fmt;
+import static network.skulk.utils.MessageFormat.sendMessage;
 import static org.jetbrains.annotations.ApiStatus.OverrideOnly;
 
 public abstract class BaseCommand<E extends BaseExtension> implements CommandExecutor {
@@ -44,7 +44,7 @@ public abstract class BaseCommand<E extends BaseExtension> implements CommandExe
     @Override
     public final boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] args) {
         if (playerOnly && !(sender instanceof Player)) {
-            sender.sendMessage(fmt("red", '!', "This command can only be used by players."));
+            sendMessage(sender, "red", '!', "This command can only be used by players.");
             return true;
         }
 

@@ -19,43 +19,6 @@ public abstract class BasePlugin extends JavaPlugin {
         return new BaseExtension[]{};
     }
 
-    @Override
-    public final void onEnable() {
-        final var logger = this.getLogger();
-        logger.info("The plugin is being loaded...");
-
-        for (final BaseExtension extension : this.initExtensions()) {
-            try {
-                extension.onEnable();
-            } catch (final Exception error) {
-                this.reportError("There was an error while loading '%s'.\nHere is the traceback:".formatted(extension.getClass().getName()), error);
-                continue;
-            }
-
-            this.extensions.add(extension);
-        }
-
-        logger.info("The plugin has been loaded");
-    }
-
-    @Override
-    public final void onDisable() {
-        final var logger = this.getLogger();
-        logger.info("The plugin is being unloaded...");
-
-        for (final BaseExtension extension : this.extensions) {
-            try {
-                extension.onDisableHook();
-            } catch (final Exception error) {
-                this.reportError("There was an error while unloading %s.\nHere is the traceback:".formatted(extension.getClass().getName()), error);
-            }
-        }
-
-        this.extensions.clear();
-
-        logger.info("The plugin has been unloaded.");
-    }
-
     // Public utilities.
 
     public final void registerCommand(final BaseCommand<?> command) {
@@ -95,5 +58,43 @@ public abstract class BasePlugin extends JavaPlugin {
 
     private void reportError(final String message) {
         this.reportError(message, null);
+    }
+
+    // Loading mechanic.
+    @Override
+    public final void onEnable() {
+        final var logger = this.getLogger();
+        logger.info("The plugin is being loaded...");
+
+        for (final BaseExtension extension : this.initExtensions()) {
+            try {
+                extension.onEnable();
+            } catch (final Exception error) {
+                this.reportError("There was an error while loading '%s'.\nHere is the traceback:".formatted(extension.getClass().getName()), error);
+                continue;
+            }
+
+            this.extensions.add(extension);
+        }
+
+        logger.info("The plugin has been loaded");
+    }
+
+    @Override
+    public final void onDisable() {
+        final var logger = this.getLogger();
+        logger.info("The plugin is being unloaded...");
+
+        for (final BaseExtension extension : this.extensions) {
+            try {
+                extension.onDisableHook();
+            } catch (final Exception error) {
+                this.reportError("There was an error while unloading %s.\nHere is the traceback:".formatted(extension.getClass().getName()), error);
+            }
+        }
+
+        this.extensions.clear();
+
+        logger.info("The plugin has been unloaded.");
     }
 }
