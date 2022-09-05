@@ -14,6 +14,7 @@ public abstract class MessageFormat {
 
         final var tagResolvers = new ArrayList<TagResolver>();
 
+        // Example: fmt("red", '!', "Unparsed Input: <0>", "<red>hello")
         for (int i = 0; i < placeholders.length; i++) {
             tagResolvers.add(Placeholder.unparsed(Integer.toString(i), placeholders[i]));
         }

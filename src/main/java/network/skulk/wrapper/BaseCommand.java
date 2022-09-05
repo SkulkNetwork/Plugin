@@ -10,15 +10,14 @@ import static org.jetbrains.annotations.ApiStatus.OverrideOnly;
 
 public abstract class BaseCommand<E extends BaseExtension> implements CommandExecutor {
     public E extension;
+    protected String[] aliases;
+    protected boolean playerOnly;
+    protected int maxArgs;
 
     public final void create(final E extension) {
         this.extension = extension;
         this.extension.registerCommand(this);
     }
-
-    protected String[] aliases;
-    protected boolean playerOnly;
-    protected int maxArgs;
 
     // aliases, playerOnly and marArgs will be set here
     @OverrideOnly
