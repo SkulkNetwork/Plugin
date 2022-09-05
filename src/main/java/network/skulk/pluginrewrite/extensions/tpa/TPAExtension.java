@@ -13,6 +13,7 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
+// TODO: save the ignores every 30 minutes.
 public final class TPAExtension extends BaseExtension {
     // Vs want to TPA to K.
     private final Multimap<String, String> tpaRequests = HashMultimap.create();
