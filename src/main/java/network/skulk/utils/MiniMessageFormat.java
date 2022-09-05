@@ -1,6 +1,7 @@
 package network.skulk.utils;
 
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.Style;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
@@ -30,12 +31,12 @@ public abstract class MiniMessageFormat {
     }
 
     public static Component mmWithComponent(final String text, final Component... components) {
-
         final var tagResolvers = new TagResolver[components.length];
 
         // Example: fmt("My Component: <0>", event.getMessage());
         for (int i = 0; i < components.length; i++) {
-            tagResolvers[i] = Placeholder.component(Integer.toString(i), components[i]);
+            final var component = components[i];
+            tagResolvers[i] = Placeholder.component(Integer.toString(i), component.style(Style.style().build()));
         }
 
         return MiniMessage.miniMessage().deserialize(text, tagResolvers);

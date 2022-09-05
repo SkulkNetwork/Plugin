@@ -11,6 +11,6 @@ import static network.skulk.utils.MiniMessageFormat.fmt;
 public final class UnknownCommandListener extends BaseListener<MessageOverrideExtension> {
     @EventHandler(priority = EventPriority.LOWEST)
     public void onUnknownCommand(final UnknownCommandEvent event) {
-        event.message(fmt("<b><gray>[ <red>!</red> ]</gray></b> <red>Unknown command: %s</red>", event.getCommandLine()));
+        event.message(fmt("<b><gray>[ <red>!</red> ]</gray></b> <red>Unknown command: <0></red>", event.getCommandLine()));
     }
 }
