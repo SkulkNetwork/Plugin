@@ -1,15 +1,21 @@
 package network.skulk.wrapper;
 
+import org.bukkit.scheduler.BukkitTask;
+
 import java.io.File;
 
 import static org.jetbrains.annotations.ApiStatus.OverrideOnly;
 
 public abstract class BaseExtension {
-    public BasePlugin plugin;
+    private BasePlugin plugin;
 
     public final BaseExtension create(final BasePlugin plugin) {
         this.plugin = plugin;
         return this;
+    }
+
+    protected final BasePlugin getPlugin() {
+        return this.plugin;
     }
 
 
@@ -48,8 +54,8 @@ public abstract class BaseExtension {
         this.plugin.registerListener(listener);
     }
 
-    public final void runAfter(final long delay, final Runnable runnable) {
-        this.plugin.runAfter(delay, runnable);
+    public final BukkitTask runAfter(final long delay, final Runnable runnable) {
+        return this.plugin.runAfter(delay, runnable);
     }
 
     public final void runAsync(final Runnable runnable) {

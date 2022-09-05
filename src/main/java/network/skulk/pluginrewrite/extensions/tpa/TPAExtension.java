@@ -9,9 +9,17 @@ import java.io.FileInputStream;
 import java.io.PrintWriter;
 
 public final class TPAExtension extends BaseExtension {
-    public final HashMultimap<String, String> tpaRequests = HashMultimap.create();
-    public final File tpaIgnoresFile = new File(this.getDataFolder(), "tpaIgnores.yml");
-    public HashMultimap<String, String> tpaIgnores;
+    private final HashMultimap<String, String> tpaRequests = HashMultimap.create();
+    private final File tpaIgnoresFile = new File(this.getDataFolder(), "tpaIgnores.yml");
+    private HashMultimap<String, String> tpaIgnores;
+
+    public HashMultimap<String, String> getTpaRequests() {
+        return this.tpaRequests;
+    }
+
+    public HashMultimap<String, String> getTpaIgnores() {
+        return this.tpaIgnores;
+    }
 
     @Override
     public void onEnableHook() throws Exception {

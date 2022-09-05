@@ -9,7 +9,11 @@ import java.util.ArrayList;
 
 public abstract class MessageFormat {
 
-    public static Component fmt(final String color, final char symbol, final String text, final String... placeholders) {
+    public static Component fmt(String color, final char symbol, final String text, final String... placeholders) {
+        if (color.equalsIgnoreCase("orange")) {
+            color = "#ffae1a";
+        }
+
         final var template = "<bold><gray>[ <color:%s>%s</color> ]</gray></bold> <color:%s>%s</color>".formatted(color, symbol, color, text);
 
         final var tagResolvers = new ArrayList<TagResolver>();

@@ -2,6 +2,7 @@ package network.skulk.wrapper;
 
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitTask;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ import static org.jetbrains.annotations.ApiStatus.OverrideOnly;
 
 public abstract class BasePlugin extends JavaPlugin {
     // Must be stored to do onDisable.
-    public final ArrayList<BaseExtension> extensions = new ArrayList<>();
+    private final ArrayList<BaseExtension> extensions = new ArrayList<>();
 
     @OverrideOnly
     protected BaseExtension[] initExtensions() {
@@ -55,7 +56,7 @@ public abstract class BasePlugin extends JavaPlugin {
         logger.info("The plugin has been unloaded.");
     }
 
-    // Utility functions.
+    // Public utilities.
 
     public final void registerCommand(final BaseCommand<?> command) {
         for (final String alias : command.aliases) {
@@ -74,13 +75,15 @@ public abstract class BasePlugin extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(listener, this);
     }
 
-    public final void runAfter(final long delay, final Runnable runnable) {
-        Bukkit.getScheduler().runTaskLater(this, runnable, delay);
+    public final BukkitTask runAfter(final long delay, final Runnable runnable) {
+        return Bukkit.getScheduler().runTaskLater(this, runnable, delay);
     }
 
     public final void runAsync(final Runnable runnable) {
         Bukkit.getScheduler().runTaskAsynchronously(this, runnable);
     }
+
+    // Privates.
 
     private void reportError(final String message, final @Nullable Throwable error) {
         if (error == null) {
