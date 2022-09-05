@@ -26,7 +26,7 @@ public abstract class BaseCommand<E extends BaseExtension> implements CommandExe
         return this.extension;
     }
 
-    // aliases, playerOnly and marArgs will be set here
+    // aliases, playerOnly, marArgs and minArgs will be set here.
     @OverrideOnly
     protected void init() {
     }

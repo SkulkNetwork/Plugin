@@ -16,7 +16,7 @@ public abstract class BasePlugin extends JavaPlugin {
 
     @OverrideOnly
     protected BaseExtension[] initExtensions() {
-        return new BaseExtension[]{};
+        return new BaseExtension[0];
     }
 
     // Public utilities.

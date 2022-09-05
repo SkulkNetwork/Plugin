@@ -1,22 +1,22 @@
 package network.skulk.utils;
 
+import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.Style;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
-import org.bukkit.command.CommandSender;
 
 public abstract class MiniMessageFormat {
 
-    public static void sendMessage(final CommandSender to, String color, final char symbol, final String text, final String... placeholders) {
+    public static void sendMessage(final Audience audience, String color, final char symbol, final String text, final String... placeholders) {
         if (color.equalsIgnoreCase("orange")) {
             color = "#ffae1a";
         }
 
         final var template = "<bold><gray>[ <color:%s>%s</color> ]</gray></bold> <color:%s>%s</color>".formatted(color, symbol, color, text);
 
-        to.sendMessage(MiniMessageFormat.fmt(template, placeholders));
+        audience.sendMessage(MiniMessageFormat.fmt(template, placeholders));
     }
 
     public static Component fmt(final String text, final String... placeholders) {

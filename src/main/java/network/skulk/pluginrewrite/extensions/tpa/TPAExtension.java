@@ -14,6 +14,7 @@ import java.util.HashMap;
 public final class TPAExtension extends BaseExtension {
     // Vs want to TPA to K.
     private final HashMultimap<String, String> tpaRequests = HashMultimap.create();
+    // When V:K cancels their TPA request to V, the task in V:K gets cancelled and removed from the key.
     private final HashMap<String, HashMap<String, BukkitTask>> tpaRequestCancelTasks = new HashMap<>();
 
     private final File tpaIgnoresFile = new File(this.getDataFolder(), "tpaIgnores.yml");
