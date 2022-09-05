@@ -1,6 +1,7 @@
 package network.skulk.pluginrewrite.extensions.tpa;
 
 import com.google.common.collect.HashMultimap;
+import network.skulk.pluginrewrite.extensions.tpa.commands.TPAAcceptCommand;
 import network.skulk.pluginrewrite.extensions.tpa.commands.TPACommand;
 import network.skulk.pluginrewrite.extensions.tpa.commands.TPARejectCommand;
 import network.skulk.wrapper.BaseExtension;
@@ -15,8 +16,9 @@ import java.util.HashMap;
 public final class TPAExtension extends BaseExtension {
     // Vs want to TPA to K.
     private final HashMultimap<String, String> tpaRequests = HashMultimap.create();
-    // When V:K cancels their TPA request to V, the task in V:K gets cancelled and removed from the key.
     private final HashMap<String, HashMap<String, BukkitTask>> tpaRequestCancelTasks = new HashMap<>();
+    //                  X^^^^^^^         Y^^^^^^: X wants to TPA to Y.
+    // Basically outgoing.
 
     private final File tpaIgnoresFile = new File(this.getDataFolder(), "tpaIgnores.yml");
     // V's must be lowercase.
@@ -24,6 +26,7 @@ public final class TPAExtension extends BaseExtension {
 
     @Override
     protected void initCommands() {
+        new TPAAcceptCommand().create(this);
         new TPACommand().create(this);
         new TPARejectCommand().create(this);
     }

@@ -23,14 +23,14 @@ public final class TPACommand extends BaseCommand<TPAExtension> {
         String targetName = args[0];
 
         if (targetName.equalsIgnoreCase(playerName)) {
-            sendMessage(player, "red", '!', "You can't TPA to yourself!");
+            sendMessage(player, "red", '!', "You can't TPA to yourself.");
             return true;
         }
 
         final var target = Bukkit.getPlayer(targetName);
 
         if (target == null) {
-            sendMessage(player, "red", '!', "This player is offline!");
+            sendMessage(player, "red", '!', "This player is offline.");
             return true;
         }
 
@@ -59,8 +59,9 @@ public final class TPACommand extends BaseCommand<TPAExtension> {
         tpaRequests.put(targetName, playerName);
 
         final var finalTargetName = targetName;
-        // This task will get cancelled when the player cancels their TPA request to this person.
-        extension.getTpaRequestCancelTasks().get(targetName).put(playerName, this.runAfter(1200, () -> {
+        // This task will get cancelled when the player cancels their TPA request to this person
+        // or the person accepts the request.
+        extension.getTpaRequestCancelTasks().get(playerName).put(targetName, this.runAfter(1200, () -> {
             if (tpaRequests.containsEntry(finalTargetName, playerName)) {
                 tpaRequests.remove(finalTargetName, playerName);
                 sendMessage(player, "orange", '!', "Your TPA request to <b><0></b> has expired.", finalTargetName);
