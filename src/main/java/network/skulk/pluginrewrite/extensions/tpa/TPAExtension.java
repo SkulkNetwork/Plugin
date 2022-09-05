@@ -1,6 +1,7 @@
 package network.skulk.pluginrewrite.extensions.tpa;
 
 import com.google.common.collect.HashMultimap;
+import network.skulk.pluginrewrite.extensions.tpa.commands.TPACommand;
 import network.skulk.wrapper.BaseExtension;
 import org.yaml.snakeyaml.Yaml;
 
@@ -12,6 +13,11 @@ public final class TPAExtension extends BaseExtension {
     private final HashMultimap<String, String> tpaRequests = HashMultimap.create();
     private final File tpaIgnoresFile = new File(this.getDataFolder(), "tpaIgnores.yml");
     private HashMultimap<String, String> tpaIgnores;
+
+    @Override
+    protected void initCommands() {
+        new TPACommand().create(this);
+    }
 
     @Override
     public void onEnableHook() throws Exception {
