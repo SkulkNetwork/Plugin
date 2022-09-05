@@ -28,6 +28,7 @@ public final class TPACancelCommand extends BaseCommand<TPAExtension> {
 
         if (args.length == 1) {
             targetName = args[0];
+
         } else {
             final var playerOutGoingReqs = new ArrayList<String>();
 

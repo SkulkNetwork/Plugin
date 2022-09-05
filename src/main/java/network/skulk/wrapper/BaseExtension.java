@@ -59,7 +59,7 @@ public abstract class BaseExtension {
         return this.plugin.runAfter(delay, runnable);
     }
 
-    public final void runAsync(final Runnable runnable) {
-        this.plugin.runAsync(runnable);
+    public final BukkitTask runAsync(final Runnable runnable) {
+        return this.plugin.runAsync(runnable);
     }
 }

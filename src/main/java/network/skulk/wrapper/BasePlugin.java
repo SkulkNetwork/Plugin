@@ -42,8 +42,8 @@ public abstract class BasePlugin extends JavaPlugin {
         return Bukkit.getScheduler().runTaskLater(this, runnable, delay);
     }
 
-    public final void runAsync(final Runnable runnable) {
-        Bukkit.getScheduler().runTaskAsynchronously(this, runnable);
+    public final BukkitTask runAsync(final Runnable runnable) {
+        return Bukkit.getScheduler().runTaskAsynchronously(this, runnable);
     }
 
     // Privates.

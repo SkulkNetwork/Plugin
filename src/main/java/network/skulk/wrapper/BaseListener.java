@@ -17,8 +17,8 @@ public abstract class BaseListener<E extends BaseExtension> implements Listener 
         return this.extension.runAfter(delay, runnable);
     }
 
-    protected final void runAsync(final Runnable runnable) {
-        this.extension.runAsync(runnable);
+    protected final BukkitTask runAsync(final Runnable runnable) {
+        return this.extension.runAsync(runnable);
     }
 
     // Getters.

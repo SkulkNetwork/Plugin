@@ -65,7 +65,7 @@ public abstract class BaseCommand<E extends BaseExtension> implements CommandExe
         return this.extension.runAfter(delay, runnable);
     }
 
-    public final void runAsync(final Runnable runnable) {
-        this.extension.runAsync(runnable);
+    public final BukkitTask runAsync(final Runnable runnable) {
+        return this.extension.runAsync(runnable);
     }
 }
