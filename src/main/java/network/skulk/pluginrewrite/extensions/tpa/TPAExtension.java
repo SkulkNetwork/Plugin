@@ -2,6 +2,7 @@ package network.skulk.pluginrewrite.extensions.tpa;
 
 import com.google.common.collect.HashMultimap;
 import network.skulk.pluginrewrite.extensions.tpa.commands.TPACommand;
+import network.skulk.pluginrewrite.extensions.tpa.commands.TPARejectCommand;
 import network.skulk.wrapper.BaseExtension;
 import org.bukkit.scheduler.BukkitTask;
 import org.yaml.snakeyaml.Yaml;
@@ -18,11 +19,13 @@ public final class TPAExtension extends BaseExtension {
     private final HashMap<String, HashMap<String, BukkitTask>> tpaRequestCancelTasks = new HashMap<>();
 
     private final File tpaIgnoresFile = new File(this.getDataFolder(), "tpaIgnores.yml");
+    // V's must be lowercase.
     private HashMultimap<String, String> tpaIgnores;
 
     @Override
     protected void initCommands() {
         new TPACommand().create(this);
+        new TPARejectCommand().create(this);
     }
 
     @Override
