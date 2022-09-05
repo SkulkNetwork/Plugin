@@ -15,6 +15,10 @@ public abstract class MiniMessageFormat {
 
         final var template = "<bold><gray>[ <color:%s>%s</color> ]</gray></bold> <color:%s>%s</color>".formatted(color, symbol, color, text);
 
+        to.sendMessage(MiniMessageFormat.fmt(template, placeholders));
+    }
+
+    public static Component fmt(final String text, final String... placeholders) {
         final var tagResolvers = new TagResolver[placeholders.length];
 
         // Example: sendMessage(player, "red", '!', "Unparsed Input: <0>", "<red>hello");
@@ -22,7 +26,7 @@ public abstract class MiniMessageFormat {
             tagResolvers[i] = Placeholder.unparsed(Integer.toString(i), placeholders[i]);
         }
 
-        to.sendMessage(MiniMessage.miniMessage().deserialize(template, tagResolvers));
+        return MiniMessage.miniMessage().deserialize(text, tagResolvers);
     }
 
     public static Component mmWithComponent(final String text, final Component... components) {
