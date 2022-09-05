@@ -1,10 +1,7 @@
 package network.skulk.pluginrewrite.extensions.tpa;
 
 import com.google.common.collect.HashMultimap;
-import network.skulk.pluginrewrite.extensions.tpa.commands.TPAAcceptCommand;
-import network.skulk.pluginrewrite.extensions.tpa.commands.TPACommand;
-import network.skulk.pluginrewrite.extensions.tpa.commands.TPAListIgnoredCommand;
-import network.skulk.pluginrewrite.extensions.tpa.commands.TPARejectCommand;
+import network.skulk.pluginrewrite.extensions.tpa.commands.*;
 import network.skulk.wrapper.BaseExtension;
 import org.bukkit.scheduler.BukkitTask;
 import org.yaml.snakeyaml.Yaml;
@@ -28,6 +25,7 @@ public final class TPAExtension extends BaseExtension {
     @Override
     protected void initCommands() {
         new TPAAcceptCommand().create(this);
+        new TPACancelCommand().create(this);
         new TPACommand().create(this);
         new TPAListIgnoredCommand().create(this);
         new TPARejectCommand().create(this);
