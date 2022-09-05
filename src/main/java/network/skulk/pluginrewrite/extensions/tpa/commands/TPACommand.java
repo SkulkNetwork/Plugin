@@ -68,6 +68,9 @@ public final class TPACommand extends BaseCommand<TPAExtension> {
             }
         }));
 
+        sendMessage(player, "green", '✓', "Sent a TPA request to <b><0></b>", targetName);
+        sendMessage(target, "blue", '?', "<b><0></b> wants to TPA to you. Do you accept? <b><green><click:run_command:/tpa-accept %s>[✓]</click></green> <red><click:run_command:/tpa-reject %s>[✗]</click></red></b>", playerName);
+
         return true;
     }
 }
