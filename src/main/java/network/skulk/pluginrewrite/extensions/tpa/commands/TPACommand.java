@@ -5,7 +5,7 @@ import network.skulk.wrapper.BaseCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-import static network.skulk.utils.MessageFormat.sendMessage;
+import static network.skulk.utils.MiniMessageFormat.sendMessage;
 
 public final class TPACommand extends BaseCommand<TPAExtension> {
     @Override

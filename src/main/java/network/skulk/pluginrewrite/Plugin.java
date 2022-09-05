@@ -4,7 +4,7 @@ import network.skulk.pluginrewrite.extensions.tpa.TPAExtension;
 import network.skulk.wrapper.BaseExtension;
 import network.skulk.wrapper.BasePlugin;
 
-public class Plugin extends BasePlugin {
+public final class Plugin extends BasePlugin {
 
     @Override
     protected BaseExtension[] initExtensions() {

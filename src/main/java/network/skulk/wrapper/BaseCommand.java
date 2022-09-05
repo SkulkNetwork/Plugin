@@ -6,7 +6,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;
 
-import static network.skulk.utils.MessageFormat.sendMessage;
+import static network.skulk.utils.MiniMessageFormat.sendMessage;
 import static org.jetbrains.annotations.ApiStatus.OverrideOnly;
 
 public abstract class BaseCommand<E extends BaseExtension> implements CommandExecutor {
