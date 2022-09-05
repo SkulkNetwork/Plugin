@@ -4,11 +4,10 @@ import net.kyori.adventure.text.Component;
 import network.skulk.pluginrewrite.extensions.tpa.TPAExtension;
 import network.skulk.wrapper.BaseCommand;
 import org.bukkit.Bukkit;
-import org.bukkit.Particle;
-import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
 import static network.skulk.utils.MiniMessageFormat.*;
+import static network.skulk.utils.SoundPlayer.playTeleport;
 
 public final class TPAAcceptCommand extends BaseCommand<TPAExtension> {
 
@@ -69,23 +68,11 @@ public final class TPAAcceptCommand extends BaseCommand<TPAExtension> {
             return true;
         }
 
-        // Effects start.
-        final var targetWorld = target.getWorld();
-        final var targetLocation = target.getLocation();
-
-        // TODO: does this look good?
-        targetWorld.playSound(targetLocation, Sound.ENTITY_ENDERMAN_TELEPORT, 1, 1);
-        targetWorld.spawnParticle(Particle.PORTAL, targetLocation, 5);
-
-        final var playerWorld = player.getWorld();
-        final var playerLocation = player.getLocation();
-
-        playerWorld.playSound(playerLocation, Sound.ENTITY_ENDERMAN_TELEPORT, 1, 1);
-        playerWorld.spawnParticle(Particle.PORTAL, playerLocation, 5);
-        // Effects end.
-
         sendMessage(player, "green", '!', "Teleporting <b><0></b> to you...", targetName);
         sendMessage(player, "green", '!', "Teleporting you to <b><0></b>...", playerName);
+
+        playTeleport(target);
+        playTeleport(player);
 
         final var cancelTasks = extension.getTpaRequestCancelTasks().get(targetName);
         cancelTasks.get(playerName).cancel();
