@@ -11,8 +11,8 @@ import org.jetbrains.annotations.NotNull;
 
 public final class PlayerDeathEventListener implements Listener {
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
-    public void onPlayerDeath(@NotNull PlayerDeathEvent event) {
-        @SuppressWarnings("ConstantConditions") Component newMessage = Component.text("[ ", NamedTextColor.GRAY, TextDecoration.BOLD)
+    public void onPlayerDeath(@NotNull final PlayerDeathEvent event) {
+        @SuppressWarnings("ConstantConditions") final Component newMessage = Component.text("[ ", NamedTextColor.GRAY, TextDecoration.BOLD)
                 .append(Component.text("☠", NamedTextColor.RED, TextDecoration.BOLD))
                 .append(Component.text(" ] ", NamedTextColor.GRAY, TextDecoration.BOLD))
                 .append(event.deathMessage().color(NamedTextColor.RED).decoration(TextDecoration.BOLD, false))

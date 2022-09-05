@@ -15,13 +15,13 @@ import java.util.HashSet;
 public final class TPAListIgnoredCommand implements CommandExecutor {
     private final @NotNull TPAExtension extension;
 
-    public TPAListIgnoredCommand(@NotNull TPAExtension extension) {
+    public TPAListIgnoredCommand(@NotNull final TPAExtension extension) {
         this.extension = extension;
         extension.plugin.registerCommand(this, "tpa-list-ignored");
     }
 
     @Override
-    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+    public boolean onCommand(@NotNull final CommandSender sender, @NotNull final Command command, @NotNull final String label, @NotNull final String[] args) {
         if (!(sender instanceof Player player)) {
             sender.sendRichMessage(Message.ONLY_PLAYERS_CAN_USE_THIS_COMMAND);
             return true;
@@ -31,9 +31,9 @@ public final class TPAListIgnoredCommand implements CommandExecutor {
             return false;
         }
 
-        PersistentDataContainer playerContainer = player.getPersistentDataContainer();
+        final PersistentDataContainer playerContainer = player.getPersistentDataContainer();
 
-        HashSet<String> playerIgnores = playerContainer.getOrDefault(extension.TPA_IGNORES_KEY, Plugin.PersistentDataTypes.STRING_HASH_SET, new HashSet<>());
+        final HashSet<String> playerIgnores = playerContainer.getOrDefault(extension.TPA_IGNORES_KEY, Plugin.PersistentDataTypes.STRING_HASH_SET, new HashSet<>());
 
         if (playerIgnores.size() == 0) {
             player.sendRichMessage(Message.NO_TPA_IGNORES);
@@ -44,9 +44,9 @@ public final class TPAListIgnoredCommand implements CommandExecutor {
             player.sendRichMessage(Message.TPA_IGNORING_ALL);
 
         } else {
-            StringBuilder response = new StringBuilder(Message.TPA_IGNORING_FOLLOWING);
+            final StringBuilder response = new StringBuilder(Message.TPA_IGNORING_FOLLOWING);
 
-            for (String ignoredName : playerIgnores) {
+            for (final String ignoredName : playerIgnores) {
                 response.append(Message.TPA_IGNORING_FOLLOWING_ITEM.formatted(ignoredName));
             }
 

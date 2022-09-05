@@ -14,13 +14,13 @@ import java.util.HashSet;
 public class TPAAcceptCommand implements CommandExecutor {
     private final @NotNull TPAExtension extension;
 
-    public TPAAcceptCommand(@NotNull TPAExtension extension) {
+    public TPAAcceptCommand(@NotNull final TPAExtension extension) {
         this.extension = extension;
         extension.plugin.registerCommand(this, "tpa-accept");
     }
 
     @Override
-    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+    public boolean onCommand(@NotNull final CommandSender sender, @NotNull final Command command, @NotNull final String label, @NotNull final String[] args) {
         //noinspection DuplicatedCode
         if (!(sender instanceof Player player)) {
             sender.sendRichMessage(Message.ONLY_PLAYERS_CAN_USE_THIS_COMMAND);
@@ -31,25 +31,25 @@ public class TPAAcceptCommand implements CommandExecutor {
             return false;
         }
 
-        String playerName = player.getName();
-        HashSet<String> playerIncomingRequests = extension.tpaRequests.computeIfAbsent(playerName, k -> new HashSet<>());
-        int playerIncomingRequestsSize = playerIncomingRequests.size();
+        final String playerName = player.getName();
+        final HashSet<String> playerIncomingRequests = extension.tpaRequests.computeIfAbsent(playerName, k -> new HashSet<>());
+        final int playerIncomingRequestsSize = playerIncomingRequests.size();
 
         if (playerIncomingRequestsSize == 0) {
             player.sendRichMessage(Message.NO_INCOMING_TPA_REQUESTS);
             return true;
         }
 
-        Player target;
+        final Player target;
         String targetName;
 
         if (args.length == 1) {
             targetName = args[0];
 
         } else if (playerIncomingRequestsSize != 1) {
-            StringBuilder response = new StringBuilder(Message.TPA_ACCEPT_DIALOG);
+            final StringBuilder response = new StringBuilder(Message.TPA_ACCEPT_DIALOG);
 
-            for (String toAccept : playerIncomingRequests) {
+            for (final String toAccept : playerIncomingRequests) {
                 response.append(Message.TPA_ACCEPT_DIALOG_OPTION.formatted(toAccept, toAccept));
             }
 

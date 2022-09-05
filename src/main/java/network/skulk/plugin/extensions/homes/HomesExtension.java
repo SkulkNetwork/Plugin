@@ -13,7 +13,7 @@ public class HomesExtension implements BaseExtension {
     public final NamespacedKey HOMES_KEY;
     public final Plugin plugin;
 
-    public HomesExtension(Plugin plugin) {
+    public HomesExtension(final Plugin plugin) {
         this.plugin = plugin;
         HOMES_KEY = new NamespacedKey(plugin, "homes");
     }

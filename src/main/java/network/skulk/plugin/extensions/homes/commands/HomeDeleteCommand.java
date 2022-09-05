@@ -15,13 +15,13 @@ import java.util.HashSet;
 public final class HomeDeleteCommand implements CommandExecutor {
     private final @NotNull HomesExtension extension;
 
-    public HomeDeleteCommand(@NotNull HomesExtension extension) {
+    public HomeDeleteCommand(@NotNull final HomesExtension extension) {
         this.extension = extension;
         extension.plugin.registerCommand(this, "home-delete");
     }
 
     @Override
-    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+    public boolean onCommand(@NotNull final CommandSender sender, @NotNull final Command command, @NotNull final String label, @NotNull final String[] args) {
         if (!(sender instanceof Player player)) {
             sender.sendRichMessage(Message.ONLY_PLAYERS_CAN_USE_THIS_COMMAND);
             return true;
@@ -31,7 +31,7 @@ public final class HomeDeleteCommand implements CommandExecutor {
             return false;
         }
 
-        String homeName;
+        final String homeName;
 
         if (args.length == 0) {
             homeName = "home";
@@ -39,12 +39,12 @@ public final class HomeDeleteCommand implements CommandExecutor {
             homeName = args[0].toLowerCase();
         }
 
-        PersistentDataContainer playerContainer = player.getPersistentDataContainer();
-        HashSet<String> playerHomes = playerContainer.getOrDefault(extension.HOMES_KEY, Plugin.PersistentDataTypes.STRING_HASH_SET, new HashSet<>());
+        final PersistentDataContainer playerContainer = player.getPersistentDataContainer();
+        final HashSet<String> playerHomes = playerContainer.getOrDefault(extension.HOMES_KEY, Plugin.PersistentDataTypes.STRING_HASH_SET, new HashSet<>());
 
         boolean homeExists = false;
 
-        for (String homeString : playerHomes) {
+        for (final String homeString : playerHomes) {
             if (homeString.split(" ")[0].equals(homeName)) {
                 playerHomes.remove(homeString);
                 homeExists = true;

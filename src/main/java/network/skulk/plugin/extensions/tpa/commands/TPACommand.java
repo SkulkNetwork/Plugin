@@ -15,13 +15,13 @@ import java.util.HashSet;
 public final class TPACommand implements CommandExecutor {
     private final @NotNull TPAExtension extension;
 
-    public TPACommand(@NotNull TPAExtension extension) {
+    public TPACommand(@NotNull final TPAExtension extension) {
         this.extension = extension;
         extension.plugin.registerCommand(this, "tpa");
     }
 
     @Override
-    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+    public boolean onCommand(@NotNull final CommandSender sender, @NotNull final Command command, @NotNull final String label, @NotNull final String[] args) {
         if (!(sender instanceof Player player)) {
             sender.sendRichMessage(Message.ONLY_PLAYERS_CAN_USE_THIS_COMMAND);
             return true;
@@ -31,7 +31,7 @@ public final class TPACommand implements CommandExecutor {
             return false;
         }
 
-        String playerName = player.getName();
+        final String playerName = player.getName();
 
         String targetName = args[0];
 
@@ -40,7 +40,7 @@ public final class TPACommand implements CommandExecutor {
             return true;
         }
 
-        Player target = Bukkit.getPlayerExact(targetName);
+        final Player target = Bukkit.getPlayerExact(targetName);
 
         if (target == null) {
             player.sendRichMessage(Message.PLAYER_NOT_ONLINE);
@@ -49,7 +49,7 @@ public final class TPACommand implements CommandExecutor {
 
         targetName = target.getName();
 
-        int targetIsIgnoring = target.getPersistentDataContainer().getOrDefault(extension.TPA_IGNORES_KEY, new StringListIncludesPDT(playerName), 0);
+        final int targetIsIgnoring = target.getPersistentDataContainer().getOrDefault(extension.TPA_IGNORES_KEY, new StringListIncludesPDT(playerName), 0);
 
         if (targetIsIgnoring == 1) {
             player.sendRichMessage(Message.X_IGNORING_YOU.formatted(targetName));
@@ -61,7 +61,7 @@ public final class TPACommand implements CommandExecutor {
             return true;
         }
 
-        HashSet<String> targetIncomingRequests = extension.tpaRequests.computeIfAbsent(targetName, k -> new HashSet<>());
+        final HashSet<String> targetIncomingRequests = extension.tpaRequests.computeIfAbsent(targetName, k -> new HashSet<>());
 
         if (targetIncomingRequests.contains(playerName)) {
             player.sendRichMessage(Message.TPA_REQUEST_TO_X_ALREADY_EXISTS.formatted(targetName));
@@ -70,7 +70,7 @@ public final class TPACommand implements CommandExecutor {
 
         targetIncomingRequests.add(playerName);
 
-        String targetNameFinal = targetName;
+        final String targetNameFinal = targetName;
 
         // FIXME: Kill this task when the TPA request is cancelled.
         extension.plugin.runLater(1200, () -> {

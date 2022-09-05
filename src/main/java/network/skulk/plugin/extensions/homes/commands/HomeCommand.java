@@ -14,14 +14,14 @@ import org.jetbrains.annotations.Nullable;
 public final class HomeCommand implements CommandExecutor {
     private final @NotNull HomesExtension extension;
 
-    public HomeCommand(@NotNull HomesExtension extension) {
+    public HomeCommand(@NotNull final HomesExtension extension) {
         this.extension = extension;
         extension.plugin.registerCommand(this, "home");
     }
 
     @SuppressWarnings("ConstantConditions")
     @Override
-    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+    public boolean onCommand(@NotNull final CommandSender sender, @NotNull final Command command, @NotNull final String label, @NotNull final String[] args) {
         if (!(sender instanceof Player player)) {
             sender.sendRichMessage(Message.ONLY_PLAYERS_CAN_USE_THIS_COMMAND);
             return true;
@@ -31,7 +31,7 @@ public final class HomeCommand implements CommandExecutor {
             return false;
         }
 
-        String homeName;
+        final String homeName;
 
         if (args.length == 0) {
             homeName = "home";
@@ -39,7 +39,7 @@ public final class HomeCommand implements CommandExecutor {
             homeName = args[0];
         }
 
-        @Nullable Home home = player.getPersistentDataContainer().getOrDefault(extension.HOMES_KEY, new HomePDT(homeName), null);
+        @Nullable final Home home = player.getPersistentDataContainer().getOrDefault(extension.HOMES_KEY, new HomePDT(homeName), null);
 
         if (home == null) {
             player.sendRichMessage(Message.NO_SUCH_HOME.formatted(homeName));

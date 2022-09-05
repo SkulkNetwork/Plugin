@@ -16,7 +16,7 @@ import java.io.IOException;
 public final class HomePDT implements PersistentDataType<byte[], Home> {
     private final String target;
 
-    public HomePDT(String target) {
+    public HomePDT(final String target) {
         this.target = target.toLowerCase();
     }
 
@@ -29,35 +29,35 @@ public final class HomePDT implements PersistentDataType<byte[], Home> {
     }
 
     @DoNotCall
-    public byte @NotNull [] toPrimitive(@NotNull Home complex, @NotNull PersistentDataAdapterContext context) {
+    public byte @NotNull [] toPrimitive(@NotNull final Home complex, @NotNull final PersistentDataAdapterContext context) {
         return new byte[0];
     }
 
     @SuppressWarnings("NullableProblems")
-    public @Nullable Home fromPrimitive(byte @NotNull [] primitive, @NotNull PersistentDataAdapterContext context) {
-        ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(primitive);
-        DataInputStream dataInputStream = new DataInputStream(byteArrayInputStream);
+    public @Nullable Home fromPrimitive(final byte @NotNull [] primitive, @NotNull final PersistentDataAdapterContext context) {
+        final ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(primitive);
+        final DataInputStream dataInputStream = new DataInputStream(byteArrayInputStream);
 
         try {
             while (dataInputStream.available() > 0) {
-                String elem = dataInputStream.readUTF();
+                final String elem = dataInputStream.readUTF();
 
                 if (elem.startsWith(target)) {
                     // Format is supposed to be "homeName worldName x y z"
-                    String[] d = elem.split(" ");
+                    final String[] d = elem.split(" ");
 
-                    double x = Double.parseDouble(d[2]);
-                    double y = Double.parseDouble(d[3]);
-                    double z = Double.parseDouble(d[4]);
-                    float yaw = Float.parseFloat(d[5]);
-                    float pitch = Float.parseFloat(d[6]);
+                    final double x = Double.parseDouble(d[2]);
+                    final double y = Double.parseDouble(d[3]);
+                    final double z = Double.parseDouble(d[4]);
+                    final float yaw = Float.parseFloat(d[5]);
+                    final float pitch = Float.parseFloat(d[6]);
 
-                    Location location = new Location(Bukkit.getWorld(d[1]), x, y, z, yaw, pitch);
+                    final Location location = new Location(Bukkit.getWorld(d[1]), x, y, z, yaw, pitch);
 
                     return new Home(d[0], location);
                 }
             }
-        } catch (IOException error) {
+        } catch (final IOException error) {
             error.printStackTrace();
         }
 

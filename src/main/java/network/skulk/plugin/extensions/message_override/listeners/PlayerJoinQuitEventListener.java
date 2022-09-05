@@ -12,8 +12,8 @@ import org.jetbrains.annotations.NotNull;
 
 public final class PlayerJoinQuitEventListener implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
-    public void onPlayerJoin(@NotNull PlayerJoinEvent event) {
-        Component newMessage = Component.text("[ ", NamedTextColor.GRAY, TextDecoration.BOLD)
+    public void onPlayerJoin(@NotNull final PlayerJoinEvent event) {
+        final Component newMessage = Component.text("[ ", NamedTextColor.GRAY, TextDecoration.BOLD)
                 .append(Component.text("+", NamedTextColor.GREEN, TextDecoration.BOLD))
                 .append(Component.text(" ] ", NamedTextColor.GRAY, TextDecoration.BOLD))
                 .append(Component.text(event.getPlayer().getName(), NamedTextColor.GREEN).decoration(TextDecoration.BOLD, false));
@@ -22,8 +22,8 @@ public final class PlayerJoinQuitEventListener implements Listener {
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public void onPlayerQuit(@NotNull PlayerQuitEvent event) {
-        Component newMessage = Component.text("[ ", NamedTextColor.GRAY, TextDecoration.BOLD)
+    public void onPlayerQuit(@NotNull final PlayerQuitEvent event) {
+        final Component newMessage = Component.text("[ ", NamedTextColor.GRAY, TextDecoration.BOLD)
                 .append(Component.text("-", NamedTextColor.RED, TextDecoration.BOLD))
                 .append(Component.text(" ] ", NamedTextColor.GRAY, TextDecoration.BOLD))
                 .append(Component.text(event.getPlayer().getName(), NamedTextColor.RED).decoration(TextDecoration.BOLD, false));

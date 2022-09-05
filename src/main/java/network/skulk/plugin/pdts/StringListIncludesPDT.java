@@ -13,7 +13,7 @@ import java.io.IOException;
 public final class StringListIncludesPDT implements PersistentDataType<byte[], Integer> {
     private final String target;
 
-    public StringListIncludesPDT(String target) {
+    public StringListIncludesPDT(final String target) {
         this.target = target;
     }
 
@@ -26,17 +26,17 @@ public final class StringListIncludesPDT implements PersistentDataType<byte[], I
     }
 
     @DoNotCall
-    public byte @NotNull [] toPrimitive(@NotNull Integer complex, @NotNull PersistentDataAdapterContext context) {
+    public byte @NotNull [] toPrimitive(@NotNull final Integer complex, @NotNull final PersistentDataAdapterContext context) {
         return new byte[0];
     }
 
-    public @NotNull Integer fromPrimitive(byte @NotNull [] primitive, @NotNull PersistentDataAdapterContext context) {
-        ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(primitive);
-        DataInputStream dataInputStream = new DataInputStream(byteArrayInputStream);
+    public @NotNull Integer fromPrimitive(final byte @NotNull [] primitive, @NotNull final PersistentDataAdapterContext context) {
+        final ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(primitive);
+        final DataInputStream dataInputStream = new DataInputStream(byteArrayInputStream);
 
         try {
             while (dataInputStream.available() > 0) {
-                String elem = dataInputStream.readUTF();
+                final String elem = dataInputStream.readUTF();
                 if (elem.equalsIgnoreCase(target)) {
                     return 1;
                 }
@@ -44,7 +44,7 @@ public final class StringListIncludesPDT implements PersistentDataType<byte[], I
                     return 2;
                 }
             }
-        } catch (IOException error) {
+        } catch (final IOException error) {
             error.printStackTrace();
         }
 

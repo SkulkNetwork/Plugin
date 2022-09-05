@@ -15,11 +15,11 @@ public final class BooleanPDT implements PersistentDataType<Byte, Boolean> {
         return Boolean.class;
     }
 
-    public @NotNull Byte toPrimitive(@NotNull Boolean complex, @NotNull PersistentDataAdapterContext context) {
+    public @NotNull Byte toPrimitive(@NotNull final Boolean complex, @NotNull final PersistentDataAdapterContext context) {
         return complex ? TRUE : FALSE;
     }
 
-    public @NotNull Boolean fromPrimitive(@NotNull Byte primitive, @NotNull PersistentDataAdapterContext context) {
+    public @NotNull Boolean fromPrimitive(@NotNull final Byte primitive, @NotNull final PersistentDataAdapterContext context) {
         return primitive == TRUE;
     }
 }

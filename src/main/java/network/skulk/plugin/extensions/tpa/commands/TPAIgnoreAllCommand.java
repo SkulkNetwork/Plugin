@@ -16,13 +16,13 @@ public final class TPAIgnoreAllCommand implements CommandExecutor {
 
     private final @NotNull TPAExtension extension;
 
-    public TPAIgnoreAllCommand(@NotNull TPAExtension extension) {
+    public TPAIgnoreAllCommand(@NotNull final TPAExtension extension) {
         this.extension = extension;
         extension.plugin.registerCommand(this, "tpa-ignore-all");
     }
 
     @Override
-    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+    public boolean onCommand(@NotNull final CommandSender sender, @NotNull final Command command, @NotNull final String label, @NotNull final String[] args) {
         if (!(sender instanceof Player player)) {
             sender.sendRichMessage(Message.ONLY_PLAYERS_CAN_USE_THIS_COMMAND);
             return true;
@@ -32,11 +32,11 @@ public final class TPAIgnoreAllCommand implements CommandExecutor {
             return false;
         }
 
-        PersistentDataContainer playerContainer = player.getPersistentDataContainer();
+        final PersistentDataContainer playerContainer = player.getPersistentDataContainer();
 
-        HashSet<String> playerIgnores = playerContainer.getOrDefault(extension.TPA_IGNORES_KEY, Plugin.PersistentDataTypes.STRING_HASH_SET, new HashSet<>());
+        final HashSet<String> playerIgnores = playerContainer.getOrDefault(extension.TPA_IGNORES_KEY, Plugin.PersistentDataTypes.STRING_HASH_SET, new HashSet<>());
 
-        String message;
+        final String message;
 
         if (playerIgnores.contains(TPAExtension.IGNORE_ALL_SYMBOL)) {
             playerIgnores.clear(); // I could just do .remove(IGNORE_ALL_SYMBOL); but this is better.

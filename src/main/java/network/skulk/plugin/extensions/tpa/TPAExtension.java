@@ -11,15 +11,14 @@ import java.util.HashSet;
 
 
 public final class TPAExtension implements BaseExtension {
+    public static final String IGNORE_ALL_SYMBOL = "*";
     // K HashSet<V>, V's want to teleport to K.
     public final HashMap<String, @Nullable HashSet<String>> tpaRequests = new HashMap<>();
-
-    public static final String IGNORE_ALL_SYMBOL = "*";
     public final NamespacedKey TPA_IGNORES_KEY;
 
     public final Plugin plugin;
 
-    public TPAExtension(Plugin plugin) {
+    public TPAExtension(final Plugin plugin) {
         this.plugin = plugin;
         TPA_IGNORES_KEY = new NamespacedKey(plugin, "tpaIgnores");
     }

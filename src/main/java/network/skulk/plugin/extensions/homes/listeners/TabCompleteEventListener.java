@@ -15,20 +15,20 @@ import java.util.HashSet;
 public record TabCompleteEventListener(HomesExtension extension) implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
-    public void onTabComplete(TabCompleteEvent event) {
-        String buffer = event.getBuffer();
+    public void onTabComplete(final TabCompleteEvent event) {
+        final String buffer = event.getBuffer();
         if (event.isCommand() && (buffer.equalsIgnoreCase("/home-delete") || buffer.equalsIgnoreCase("/home"))) {
-            CommandSender sender = event.getSender();
+            final CommandSender sender = event.getSender();
 
             if (!(sender instanceof Player player)) {
                 return;
             }
 
-            HashSet<String> playerHomes = player.getPersistentDataContainer().getOrDefault(extension.HOMES_KEY, Plugin.PersistentDataTypes.STRING_HASH_SET, new HashSet<>());
+            final HashSet<String> playerHomes = player.getPersistentDataContainer().getOrDefault(extension.HOMES_KEY, Plugin.PersistentDataTypes.STRING_HASH_SET, new HashSet<>());
 
-            ArrayList<String> completions = new ArrayList<>();
+            final ArrayList<String> completions = new ArrayList<>();
 
-            for (String homeString : playerHomes) {
+            for (final String homeString : playerHomes) {
                 completions.add(homeString.split(" ")[0]);
             }
 

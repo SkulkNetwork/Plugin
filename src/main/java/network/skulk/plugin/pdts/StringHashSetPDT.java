@@ -20,32 +20,32 @@ public final class StringHashSetPDT implements PersistentDataType<byte[], HashSe
         return COMPLEX_TYPE;
     }
 
-    public byte @NotNull [] toPrimitive(@NotNull HashSet<String> complex, @NotNull PersistentDataAdapterContext context) {
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        DataOutputStream dataOutputStream = new DataOutputStream(byteArrayOutputStream);
+    public byte @NotNull [] toPrimitive(@NotNull final HashSet<String> complex, @NotNull final PersistentDataAdapterContext context) {
+        final ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        final DataOutputStream dataOutputStream = new DataOutputStream(byteArrayOutputStream);
 
         try {
-            for (String string : complex) {
+            for (final String string : complex) {
                 dataOutputStream.writeUTF(string);
             }
-        } catch (IOException error) {
+        } catch (final IOException error) {
             error.printStackTrace();
         }
 
         return byteArrayOutputStream.toByteArray();
     }
 
-    public @NotNull HashSet<String> fromPrimitive(byte @NotNull [] primitive, @NotNull PersistentDataAdapterContext context) {
-        ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(primitive);
-        DataInputStream dataInputStream = new DataInputStream(byteArrayInputStream);
+    public @NotNull HashSet<String> fromPrimitive(final byte @NotNull [] primitive, @NotNull final PersistentDataAdapterContext context) {
+        final ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(primitive);
+        final DataInputStream dataInputStream = new DataInputStream(byteArrayInputStream);
 
-        HashSet<String> hashSet = new HashSet<>();
+        final HashSet<String> hashSet = new HashSet<>();
 
         try {
             while (dataInputStream.available() > 0) {
                 hashSet.add(dataInputStream.readUTF());
             }
-        } catch (IOException error) {
+        } catch (final IOException error) {
             error.printStackTrace();
         }
 
