@@ -42,7 +42,9 @@ public final class TPAAcceptCommand extends BaseCommand<TPAExtension> {
             targetName = playerIncomingRequests.iterator().next();
 
         } else {
-            final var component = Component.text().append(makeMessage("blue", '?', "Looks like multiple people want to TPA to you, which one would you like to accept?"));
+            final var component = Component.text().append(
+                    makeMessage("blue", '?', "Looks like multiple people want to TPA to you, which one would you like to accept?")
+            );
 
             for (final String toAccept : playerIncomingRequests) {
                 component.append(fmt("\n<b><gray>-></gray></b> <green><click:run_command:/tpa-accept <0>><0></click></green>", toAccept));

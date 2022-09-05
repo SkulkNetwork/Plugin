@@ -39,7 +39,9 @@ public final class TPARejectCommand extends BaseCommand<TPAExtension> {
             targetName = playerIncomingRequests.iterator().next();
 
         } else {
-            final var component = Component.text().append(makeMessage("blue", '?', "Looks like multiple people want to TPA to you, which one would you like to reject?"));
+            final var component = Component.text().append(
+                    makeMessage("blue", '?', "Looks like multiple people want to TPA to you, which one would you like to reject?")
+            );
 
             for (final String toReject : playerIncomingRequests) {
                 component.append(fmt("\n<b><gray>-></gray></b> <red><click:run_command:/tpa-reject <0>><0></click></red>", toReject));
