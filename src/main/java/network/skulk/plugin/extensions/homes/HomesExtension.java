@@ -9,10 +9,7 @@ import network.skulk.plugin.extensions.homes.commands.HomeSetCommand;
 import network.skulk.plugin.extensions.homes.listeners.PlayerDeathListener;
 import network.skulk.wrapper.BaseExtension;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 
 import static network.skulk.utils.FileHelper.createFile;
 import static network.skulk.utils.Singletons.getYaml;
@@ -51,7 +48,7 @@ public final class HomesExtension extends BaseExtension {
 
         this.runRepeatingAsync(30 * 60 * 20, () -> {
             try {
-                yaml.dump(this.homes, new PrintWriter(this.homesFile));
+                yaml.dump(this.homes, new FileWriter(this.homesFile));
             } catch (final Exception error) {
                 this.reportError("There was an error while trying to save homes.\nHere is the traceback:", error);
             }
