@@ -11,7 +11,7 @@ public final class HomeSetCommand extends BaseCommand<HomesExtension> {
 
     @Override
     protected void init() {
-        this.aliases = new String[]{"home-set"};
+        this.name = "home-set";
         this.playerOnly = true;
         this.maxArgs = 1;
         this.minArgs = 0;

@@ -10,7 +10,7 @@ public final class TPAIgnoreCommand extends BaseCommand<TPAExtension> {
 
     @Override
     protected void init() {
-        this.aliases = new String[]{"tpa-ignore"};
+        this.name = "tpa-ignore";
         this.playerOnly = true;
         this.maxArgs = 1;
         this.minArgs = 1;

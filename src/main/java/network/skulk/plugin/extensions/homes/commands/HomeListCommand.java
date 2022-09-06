@@ -12,7 +12,7 @@ public final class HomeListCommand extends BaseCommand<HomesExtension> {
 
     @Override
     protected void init() {
-        this.aliases = new String[]{"home-list"};
+        this.name = "home-list";
         this.playerOnly = true;
         this.maxArgs = 0;
         this.minArgs = 0;

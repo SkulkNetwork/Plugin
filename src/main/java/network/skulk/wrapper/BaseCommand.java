@@ -15,7 +15,7 @@ import static org.jetbrains.annotations.ApiStatus.OverrideOnly;
 
 public abstract class BaseCommand<E extends BaseExtension> implements CommandExecutor, TabCompleter {
     protected int minArgs;
-    protected String[] aliases;
+    protected String name;
     protected boolean playerOnly;
     protected int maxArgs;
     protected @Nullable String permission = null;

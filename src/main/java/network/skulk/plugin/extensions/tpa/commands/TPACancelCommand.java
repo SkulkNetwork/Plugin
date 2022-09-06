@@ -13,7 +13,7 @@ import static network.skulk.utils.MiniMessageFormat.*;
 public final class TPACancelCommand extends BaseCommand<TPAExtension> {
     @Override
     protected void init() {
-        this.aliases = new String[]{"tpa-cancel"};
+        this.name = "tpa-cancel";
         this.playerOnly = true;
         this.maxArgs = 1;
         this.minArgs = 0;

@@ -10,7 +10,7 @@ import static network.skulk.utils.MiniMessageFormat.sendMessage;
 public final class TPACommand extends BaseCommand<TPAExtension> {
     @Override
     protected void init() {
-        this.aliases = new String[]{"tpa"};
+        this.name = "tpa";
         this.playerOnly = true;
         this.maxArgs = 1;
         this.minArgs = 1;

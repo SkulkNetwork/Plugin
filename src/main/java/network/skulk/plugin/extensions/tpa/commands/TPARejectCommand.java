@@ -12,7 +12,7 @@ public final class TPARejectCommand extends BaseCommand<TPAExtension> {
 
     @Override
     protected void init() {
-        this.aliases = new String[]{"tpa-reject"};
+        this.name = "tpa-reject";
         this.playerOnly = true;
         this.maxArgs = 1;
         this.minArgs = 0;

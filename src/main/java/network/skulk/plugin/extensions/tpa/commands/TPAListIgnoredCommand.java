@@ -10,7 +10,7 @@ import static network.skulk.utils.MiniMessageFormat.*;
 public final class TPAListIgnoredCommand extends BaseCommand<TPAExtension> {
     @Override
     protected void init() {
-        this.aliases = new String[]{"tpa-list-ignored"};
+        this.name = "tpa-list-ignored";
         this.playerOnly = true;
         this.maxArgs = 0;
         this.minArgs = 0;

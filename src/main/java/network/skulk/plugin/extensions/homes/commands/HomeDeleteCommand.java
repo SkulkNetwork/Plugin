@@ -11,7 +11,7 @@ public final class HomeDeleteCommand extends BaseCommand<HomesExtension> {
 
     @Override
     protected void init() {
-        this.aliases = new String[]{"home-delete"};
+        this.name = "home-delete";
         this.playerOnly = true;
         this.maxArgs = 1;
         this.minArgs = 0;

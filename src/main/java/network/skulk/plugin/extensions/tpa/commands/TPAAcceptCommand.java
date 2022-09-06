@@ -13,7 +13,7 @@ public final class TPAAcceptCommand extends BaseCommand<TPAExtension> {
 
     @Override
     protected void init() {
-        this.aliases = new String[]{"tpa-accept"};
+        this.name = "tpa-accept";
         this.playerOnly = true;
         this.maxArgs = 1;
         this.minArgs = 0;
