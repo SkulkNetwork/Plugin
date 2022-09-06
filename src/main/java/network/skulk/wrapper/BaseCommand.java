@@ -14,6 +14,8 @@ public abstract class BaseCommand<E extends BaseExtension> implements CommandExe
     protected String[] aliases;
     protected boolean playerOnly;
     protected int maxArgs;
+    protected String[] neededAnyPermissions = new String[0];
+
     private E extension;
 
     public final void create(final E extension) {
@@ -43,16 +45,23 @@ public abstract class BaseCommand<E extends BaseExtension> implements CommandExe
 
     @Override
     public final boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] args) {
-        if (playerOnly && !(sender instanceof Player)) {
+        if (this.playerOnly && !(sender instanceof Player)) {
             sendMessage(sender, "red", '!', "This command can only be used by players.");
             return true;
         }
 
-        if (args.length > maxArgs || args.length < minArgs) {
+        for (final String perm : this.neededAnyPermissions) {
+            if (!sender.hasPermission(perm)) {
+                sendMessage(sender, "red", '!', "You can't use this command.");
+                return true;
+            }
+        }
+
+        if (args.length > this.maxArgs || args.length < this.minArgs) {
             return false;
         }
 
-        if (playerOnly) {
+        if (this.playerOnly) {
             return execute((Player) sender, args);
         }
 
