@@ -57,7 +57,7 @@ public final class EntityDeathListener extends BaseListener<EntityOverrideExtens
             playerInventory.addItem(elytra);
             sendMessage(player, "light_purple", '!', "An OP elytra has been added to your inventory for beating the dragon.");
 
-        } else if (playerEnderChest.firstEmpty() != 1) {
+        } else if (playerEnderChest.firstEmpty() != -1) {
             playerEnderChest.addItem(elytra);
             sendMessage(player, "light_purple", '!', "An OP elytra has been added to your ender chest for beating the dragon.");
 
