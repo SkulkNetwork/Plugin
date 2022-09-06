@@ -2,6 +2,7 @@ package network.skulk.plugin.extensions.homes;
 
 import com.google.common.collect.Multimap;
 import network.skulk.plugin.extensions.homes.commands.HomeCommand;
+import network.skulk.plugin.extensions.homes.commands.HomeDeleteCommand;
 import network.skulk.plugin.extensions.homes.commands.HomeListCommand;
 import network.skulk.plugin.extensions.homes.commands.HomeSetCommand;
 import network.skulk.wrapper.BaseExtension;
@@ -19,6 +20,7 @@ public final class HomesExtension extends BaseExtension {
     @Override
     protected void initCommands() {
         new HomeCommand().create(this);
+        new HomeDeleteCommand().create(this);
         new HomeListCommand().create(this);
         new HomeSetCommand().create(this);
     }
