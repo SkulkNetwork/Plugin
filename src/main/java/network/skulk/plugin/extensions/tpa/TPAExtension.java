@@ -53,7 +53,7 @@ public final class TPAExtension extends BaseExtension {
 
         this.tpaIgnores = yaml.load(new FileInputStream(this.tpaIgnoresFile));
 
-        if (this.tpaIgnoresFile == null) {
+        if (this.tpaIgnores == null) {
             this.tpaIgnores = HashMultimap.create();
         }
 
