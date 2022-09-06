@@ -20,7 +20,7 @@ public final class TPAIgnoreCommand extends BaseCommand<TPAExtension> {
     protected boolean execute(final Player player, final String[] args) {
         final var targetName = args[0];
 
-        if (!targetName.matches("\\w")) {
+        if (!targetName.matches("\\w+")) {
             sendMessage(player, "red", '!', "Invalid player name: <b><0></b>", targetName);
             return true;
         }
