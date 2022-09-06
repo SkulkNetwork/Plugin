@@ -18,11 +18,9 @@ public final class TPAExtension extends BaseExtension {
     // Vs want to TPA to K.
     private final Multimap<String, String> tpaRequests = HashMultimap.create();
     private final Map<String, HashMap<String, BukkitTask>> tpaRequestCancelTasks = new HashMap<>();
-    //                  X^^^^^^^         Y^^^^^^: X wants to TPA to Y.
-    // Basically outgoing.
 
     private final File tpaIgnoresFile = new File(this.getDataFolder(), "tpaIgnores.yml");
-    // V's must be lowercase.
+
     private Multimap<String, String> tpaIgnores;
 
     @Override

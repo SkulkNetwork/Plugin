@@ -78,9 +78,9 @@ public final class TPACancelCommand extends BaseCommand<TPAExtension> {
             return true;
         }
 
-        final var cancelTasks = this.getExtension().getTpaRequestCancelTasks().get(playerName);
-        cancelTasks.get(targetName).cancel();
-        cancelTasks.remove(targetName);
+        final var cancelTasks = this.getExtension().getTpaRequestCancelTasks().get(targetName);
+        cancelTasks.get(playerName).cancel();
+        cancelTasks.remove(playerName);
 
         targetIncomingRequests.remove(playerName);
 

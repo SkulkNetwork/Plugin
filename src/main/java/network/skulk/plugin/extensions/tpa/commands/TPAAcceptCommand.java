@@ -74,9 +74,9 @@ public final class TPAAcceptCommand extends BaseCommand<TPAExtension> {
         playTeleport(target);
         playTeleport(player);
 
-        final var cancelTasks = extension.getTpaRequestCancelTasks().get(targetName);
-        cancelTasks.get(playerName).cancel();
-        cancelTasks.remove(playerName);
+        final var cancelTasks = extension.getTpaRequestCancelTasks().get(playerName);
+        cancelTasks.get(targetName).cancel();
+        cancelTasks.remove(targetName);
 
         target.teleport(player);
         playerIncomingRequests.remove(targetName);

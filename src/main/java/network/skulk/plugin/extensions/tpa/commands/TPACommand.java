@@ -44,9 +44,11 @@ public final class TPACommand extends BaseCommand<TPAExtension> {
             return true;
         }
 
-        if (targetIgnores.contains(playerName.toLowerCase())) {
-            sendMessage(player, "red", '!', "<b><0></b> isn't accepting TPA requests from you.", targetName);
-            return true;
+        for (final String blockedPlayerName : targetIgnores) {
+            if (blockedPlayerName.equalsIgnoreCase(playerName)) {
+                sendMessage(player, "red", '!', "<b><0></b> isn't accepting TPA requests from you.", targetName);
+                return true;
+            }
         }
 
         final var targetTpaRequests = extension.getTpaRequests().get(targetName);
@@ -61,7 +63,7 @@ public final class TPACommand extends BaseCommand<TPAExtension> {
         final var finalTargetName = targetName;
         // This task will get cancelled when the player cancels their TPA request to this person
         // or the person accepts the request.
-        extension.getTpaRequestCancelTasks().get(playerName).put(targetName, this.runAfter(60 * 20, () -> {
+        extension.getTpaRequestCancelTasks().get(targetName).put(playerName, this.runAfter(60 * 20, () -> {
             if (targetTpaRequests.contains(playerName)) {
                 targetTpaRequests.remove(playerName);
                 sendMessage(player, "orange", '!', "Your TPA request to <b><0></b> has expired.", finalTargetName);

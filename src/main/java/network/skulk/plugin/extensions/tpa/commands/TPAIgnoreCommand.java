@@ -26,19 +26,20 @@ public final class TPAIgnoreCommand extends BaseCommand<TPAExtension> {
         }
 
         final var playerIgnores = this.getExtension().getTpaIgnores().get(player.getName());
-        final var targetNameLower = targetName.toLowerCase();
 
         if (playerIgnores.contains("*")) {
             sendMessage(player, "red", '!', "You are already ignoring TPA requests from everyone.");
             return true;
         }
 
-        if (playerIgnores.contains(targetNameLower)) {
-            sendMessage(player, "red", '!', "You are already ignoring TPA requests from <b><0></b>.", targetName);
-            return true;
+        for (final String blockedPlayerName : playerIgnores) {
+            if (blockedPlayerName.equalsIgnoreCase(targetName)) {
+                sendMessage(player, "red", '!', "You are already ignoring TPA requests from <b><0></b>.", blockedPlayerName);
+                return true;
+            }
         }
 
-        playerIgnores.add(targetNameLower);
+        playerIgnores.add(targetName);
 
         sendMessage(player, "green", '✓', "You are now ignoring TPA requests from <b><0></b>.", targetName);
 
