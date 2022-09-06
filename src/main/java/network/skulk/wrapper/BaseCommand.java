@@ -49,6 +49,16 @@ public abstract class BaseCommand<E extends BaseExtension> implements CommandExe
         return null;
     }
 
+    @Nullable
+    @Override
+    public List<String> onTabComplete(final CommandSender sender, final Command command, final String label, final String[] args) {
+        if (this.playerOnly) {
+            return tabComplete((Player) sender, args);
+        } else {
+            return tabComplete(sender, args);
+        }
+    }
+
     @OverrideOnly
     protected boolean execute(final CommandSender sender, final String[] args) {
         return false;
@@ -67,16 +77,6 @@ public abstract class BaseCommand<E extends BaseExtension> implements CommandExe
     @OverrideOnly
     protected boolean execute(final Player player) {
         return false;
-    }
-
-    @Nullable
-    @Override
-    public List<String> onTabComplete(final CommandSender sender, final Command command, final String label, final String[] args) {
-        if (this.playerOnly) {
-            return tabComplete((Player) sender, args);
-        } else {
-            return tabComplete(sender, args);
-        }
     }
 
     @Override

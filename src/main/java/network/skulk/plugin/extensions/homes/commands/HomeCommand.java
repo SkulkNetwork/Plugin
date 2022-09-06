@@ -6,10 +6,12 @@ import network.skulk.wrapper.BaseCommand;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static network.skulk.utils.MiniMessageFormat.sendMessage;
 import static network.skulk.utils.SoundPlayer.playTeleport;
 
-// TODO: add tab completion.
 public final class HomeCommand extends BaseCommand<HomesExtension> {
 
     @Override
@@ -18,6 +20,32 @@ public final class HomeCommand extends BaseCommand<HomesExtension> {
         this.playerOnly = true;
         this.maxArgs = 1;
         this.minArgs = 0;
+    }
+
+    @Override
+    protected List<String> tabComplete(final Player player, final String[] args) {
+        if (args.length > 1) {
+            return null;
+        }
+
+        final String query;
+
+        if (args.length == 0) {
+            query = "";
+        } else {
+            query = args[0];
+        }
+
+        final var results = new ArrayList<String>();
+
+        for (final Home home : this.getExtension().getHomes().get(player.getName())) {
+            final var homeName = home.name();
+            if (homeName.contains(query.toLowerCase())) {
+                results.add(homeName);
+            }
+        }
+
+        return results;
     }
 
     @Override
