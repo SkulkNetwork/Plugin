@@ -61,7 +61,7 @@ public final class TPACommand extends BaseCommand<TPAExtension> {
         final var finalTargetName = targetName;
         // This task will get cancelled when the player cancels their TPA request to this person
         // or the person accepts the request.
-        extension.getTpaRequestCancelTasks().get(playerName).put(targetName, this.runAfter(1200, () -> {
+        extension.getTpaRequestCancelTasks().get(playerName).put(targetName, this.runAfter(60 * 20, () -> {
             if (tpaRequests.containsEntry(finalTargetName, playerName)) {
                 tpaRequests.remove(finalTargetName, playerName);
                 sendMessage(player, "orange", '!', "Your TPA request to <b><0></b> has expired.", finalTargetName);
