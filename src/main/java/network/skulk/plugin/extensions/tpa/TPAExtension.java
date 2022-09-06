@@ -3,6 +3,7 @@ package network.skulk.plugin.extensions.tpa;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import network.skulk.plugin.extensions.tpa.commands.*;
+import network.skulk.plugin.extensions.tpa.listeners.PlayerQuitListener;
 import network.skulk.wrapper.BaseExtension;
 import org.bukkit.scheduler.BukkitTask;
 import org.yaml.snakeyaml.Yaml;
@@ -32,6 +33,11 @@ public final class TPAExtension extends BaseExtension {
         new TPAIgnoreCommand().create(this);
         new TPAListIgnoredCommand().create(this);
         new TPARejectCommand().create(this);
+    }
+
+    @Override
+    protected void initListeners() {
+        new PlayerQuitListener().create(this);
     }
 
     @Override
