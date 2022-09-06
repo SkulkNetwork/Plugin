@@ -7,7 +7,7 @@ import org.jetbrains.annotations.Nullable;
 public abstract class BaseListener<E extends BaseExtension> implements Listener {
     private E extension;
 
-    public final void create(final E extension) {
+    public final void init(final E extension) {
         this.extension = extension;
         this.extension.registerListener(this);
     }

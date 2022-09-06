@@ -10,7 +10,7 @@ import static org.jetbrains.annotations.ApiStatus.OverrideOnly;
 public abstract class BaseExtension {
     private BasePlugin plugin;
 
-    public final BaseExtension create(final BasePlugin plugin) {
+    public final BaseExtension init(final BasePlugin plugin) {
         this.plugin = plugin;
         return this;
     }

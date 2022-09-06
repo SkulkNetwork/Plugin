@@ -22,7 +22,7 @@ public abstract class BaseCommand<E extends BaseExtension> implements CommandExe
 
     private E extension;
 
-    public final void create(final E extension) {
+    public final void init(final E extension) {
         this.extension = extension;
         this.init();
         this.extension.registerCommand(this);

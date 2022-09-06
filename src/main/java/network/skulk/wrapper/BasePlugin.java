@@ -16,7 +16,7 @@ public abstract class BasePlugin extends JavaPlugin {
     private final List<BaseExtension> extensions = new ArrayList<>();
 
     @OverrideOnly
-    protected BaseExtension[] initExtensions() {
+    protected BaseExtension[] init() {
         return new BaseExtension[0];
     }
 
@@ -50,8 +50,6 @@ public abstract class BasePlugin extends JavaPlugin {
         Bukkit.getScheduler().scheduleAsyncRepeatingTask(this, runnable, interval, interval);
     }
 
-    // Privates.
-
     protected final void reportError(final String message, final @Nullable Throwable error) {
         if (error == null) {
             this.getLogger().severe(message);
@@ -65,12 +63,13 @@ public abstract class BasePlugin extends JavaPlugin {
     }
 
     // Loading mechanic.
+
     @Override
     public final void onEnable() {
         final var logger = this.getLogger();
         logger.info("The plugin is being loaded...");
 
-        for (final BaseExtension extension : this.initExtensions()) {
+        for (final BaseExtension extension : this.init()) {
             try {
                 extension.onEnable();
             } catch (final Exception error) {

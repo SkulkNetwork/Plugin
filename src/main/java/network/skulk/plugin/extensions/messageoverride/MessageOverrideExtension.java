@@ -8,8 +8,8 @@ import network.skulk.wrapper.BaseExtension;
 public final class MessageOverrideExtension extends BaseExtension {
     @Override
     protected void initListeners() {
-        new PlayerDeathListener().create(this);
-        new PlayerJoinQuitListener().create(this);
-        new UnknownCommandListener().create(this);
+        new PlayerDeathListener().init(this);
+        new PlayerJoinQuitListener().init(this);
+        new UnknownCommandListener().init(this);
     }
 }

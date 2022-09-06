@@ -24,15 +24,15 @@ public final class HomesExtension extends BaseExtension {
 
     @Override
     protected void initCommands() {
-        new HomeCommand().create(this);
-        new HomeDeleteCommand().create(this);
-        new HomeListCommand().create(this);
-        new HomeSetCommand().create(this);
+        new HomeCommand().init(this);
+        new HomeDeleteCommand().init(this);
+        new HomeListCommand().init(this);
+        new HomeSetCommand().init(this);
     }
 
     @Override
     protected void initListeners() {
-        new PlayerDeathListener().create(this);
+        new PlayerDeathListener().init(this);
     }
 
     @Override

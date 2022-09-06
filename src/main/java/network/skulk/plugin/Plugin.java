@@ -9,11 +9,11 @@ import network.skulk.wrapper.BasePlugin;
 public final class Plugin extends BasePlugin {
 
     @Override
-    protected BaseExtension[] initExtensions() {
+    protected BaseExtension[] init() {
         return new BaseExtension[]{
-                new HomesExtension().create(this),
-                new MessageOverrideExtension().create(this),
-                new TPAExtension().create(this)
+                new HomesExtension().init(this),
+                new MessageOverrideExtension().init(this),
+                new TPAExtension().init(this)
         };
     }
 }

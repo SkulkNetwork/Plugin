@@ -29,18 +29,18 @@ public final class TPAExtension extends BaseExtension {
 
     @Override
     protected void initCommands() {
-        new TPAAcceptCommand().create(this);
-        new TPACancelCommand().create(this);
-        new TPACommand().create(this);
-        new TPAIgnoreAllCommand().create(this);
-        new TPAIgnoreCommand().create(this);
-        new TPAListIgnoredCommand().create(this);
-        new TPARejectCommand().create(this);
+        new TPAAcceptCommand().init(this);
+        new TPACancelCommand().init(this);
+        new TPACommand().init(this);
+        new TPAIgnoreAllCommand().init(this);
+        new TPAIgnoreCommand().init(this);
+        new TPAListIgnoredCommand().init(this);
+        new TPARejectCommand().init(this);
     }
 
     @Override
     protected void initListeners() {
-        new PlayerQuitListener().create(this);
+        new PlayerQuitListener().init(this);
     }
 
     @Override
