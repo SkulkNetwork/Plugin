@@ -88,7 +88,7 @@ public abstract class BasePlugin extends JavaPlugin {
 
         for (final BaseExtension extension : this.extensions) {
             try {
-                extension.onDisableHook();
+                extension.onDisable();
             } catch (final Exception error) {
                 this.reportError("There was an error while unloading %s.\nHere is the traceback:".formatted(extension.getClass().getName()), error);
             }

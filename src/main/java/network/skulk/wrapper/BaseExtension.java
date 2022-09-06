@@ -28,17 +28,21 @@ public abstract class BaseExtension {
     }
 
     @OverrideOnly
-    public void onEnableHook() throws Exception {
+    protected void onEnableHook() throws Exception {
     }
 
     @OverrideOnly
-    public void onDisableHook() throws Exception {
+    protected void onDisableHook() throws Exception {
     }
 
     public final void onEnable() throws Exception {
         this.initCommands();
         this.initListeners();
         this.onEnableHook();
+    }
+
+    public final void onDisable() throws Exception {
+        this.onDisableHook();
     }
 
     // Utility functions.

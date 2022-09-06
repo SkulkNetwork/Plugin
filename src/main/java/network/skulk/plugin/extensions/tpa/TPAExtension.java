@@ -37,12 +37,12 @@ public final class TPAExtension extends BaseExtension {
     }
 
     @Override
-    public void onEnableHook() throws Exception {
+    protected void onEnableHook() throws Exception {
         this.tpaIgnores = new Yaml().load(new FileInputStream(this.tpaIgnoresFile));
     }
 
     @Override
-    public void onDisableHook() throws Exception {
+    protected void onDisableHook() throws Exception {
         new Yaml().dump(tpaIgnores, new PrintWriter(this.tpaIgnoresFile));
     }
 
