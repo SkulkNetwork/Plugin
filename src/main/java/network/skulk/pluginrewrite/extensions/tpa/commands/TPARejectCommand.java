@@ -66,6 +66,10 @@ public final class TPARejectCommand extends BaseCommand<TPAExtension> {
             return true;
         }
 
+        final var cancelTasks = extension.getTpaRequestCancelTasks().get(targetName);
+        cancelTasks.get(playerName).cancel();
+        cancelTasks.remove(playerName);
+
         playerIncomingRequests.remove(targetName);
 
         sendMessage(player, "green", '✓', "Rejected the TPA request from <b><0></b>.", targetName);
