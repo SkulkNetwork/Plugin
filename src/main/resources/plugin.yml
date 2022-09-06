@@ -36,6 +36,6 @@ commands:
   home-list:
     description: Lists all your homes.
     usage: /home-list
-  home-add:
+  home-set:
     description: Makes the current location a home.
-    usage: /home-add [name]
+    usage: /home-set [name]

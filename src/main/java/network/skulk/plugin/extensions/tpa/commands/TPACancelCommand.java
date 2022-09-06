@@ -54,7 +54,7 @@ public final class TPACancelCommand extends BaseCommand<TPAExtension> {
 
                 // Twitter.
                 for (final String toCancel : playerOutGoingReqs) {
-                    component.append(fmt("<b><gray>-></gray></b> <blue><click:run_command:/tpa-cancel <0>><0></click></blue>", toCancel));
+                    component.append(fmt("\n<b><gray>-></gray></b> <blue><click:run_command:/tpa-cancel <0>><0></click></blue>", toCancel));
                 }
 
                 player.sendMessage(component);

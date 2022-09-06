@@ -23,7 +23,7 @@ public final class HomeListCommand extends BaseCommand<HomesExtension> {
         final var playerHomes = this.getExtension().getHomes().get(player.getName());
 
         if (playerHomes.isEmpty()) {
-            sendMessage(player, "orange", '!', "You don't have any homes! You can set one by doing <b><gray>/home-set myHomeName</gray></b>");
+            sendMessage(player, "orange", '!', "You don't have any homes! You can set one by doing <b>/home-set myHomeName</b>");
             return true;
         }
 

@@ -3,6 +3,7 @@ package network.skulk.plugin.extensions.homes;
 import com.google.common.collect.Multimap;
 import network.skulk.plugin.extensions.homes.commands.HomeCommand;
 import network.skulk.plugin.extensions.homes.commands.HomeListCommand;
+import network.skulk.plugin.extensions.homes.commands.HomeSetCommand;
 import network.skulk.wrapper.BaseExtension;
 import org.yaml.snakeyaml.Yaml;
 
@@ -19,6 +20,7 @@ public final class HomesExtension extends BaseExtension {
     protected void initCommands() {
         new HomeCommand().create(this);
         new HomeListCommand().create(this);
+        new HomeSetCommand().create(this);
     }
 
     @Override

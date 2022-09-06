@@ -57,7 +57,7 @@ public final class HomeCommand extends BaseCommand<HomesExtension> {
         final String homeName;
 
         if (playerHomesSize == 0) {
-            sendMessage(player, "red", '!', "You don't have any homes! You can set one by doing <b><gray>/home-set myHomeName</gray></b>");
+            sendMessage(player, "red", '!', "You don't have any homes! You can set one by doing <b>/home-set myHomeName</b>");
             return true;
 
             // Gets the one and only home.
@@ -75,24 +75,24 @@ public final class HomeCommand extends BaseCommand<HomesExtension> {
 
             // Player does not have home named "home", which is the default
             if (home == null) {
-                sendMessage(player, "red", '!', "Please specify a valid home name. You can also name one of your homes '<b><gray>home</gray></b>' to use it without entering a home name.");
+                sendMessage(player, "red", '!', "Please specify a valid home name. You can also name one of your homes '<b>home</b>' to use it without entering a home name.");
                 return true;
             }
 
             // Player specified a home.
         } else {
-            var homeName1 = args[0];
+            var homeNameSpecified = args[0];
 
             for (final Home pHome : playerHomes) {
-                if (pHome.name().equalsIgnoreCase(homeName1)) {
+                if (pHome.name().equalsIgnoreCase(homeNameSpecified)) {
                     home = pHome;
-                    homeName1 = home.name();
+                    homeNameSpecified = home.name();
                     break;
                 }
             }
 
             if (home == null) {
-                sendMessage(player, "red", '!', "You have no home named <b><0></b>.", homeName1);
+                sendMessage(player, "red", '!', "You have no home named <b><0></b>.", homeNameSpecified);
                 return true;
             }
         }
