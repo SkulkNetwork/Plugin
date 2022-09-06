@@ -5,6 +5,7 @@ import network.skulk.plugin.extensions.homes.commands.HomeCommand;
 import network.skulk.plugin.extensions.homes.commands.HomeDeleteCommand;
 import network.skulk.plugin.extensions.homes.commands.HomeListCommand;
 import network.skulk.plugin.extensions.homes.commands.HomeSetCommand;
+import network.skulk.plugin.extensions.homes.listeners.PlayerDeathListener;
 import network.skulk.wrapper.BaseExtension;
 
 import java.io.File;
@@ -28,7 +29,7 @@ public final class HomesExtension extends BaseExtension {
 
     @Override
     protected void initListeners() {
-
+        new PlayerDeathListener().create(this);
     }
 
     @Override
