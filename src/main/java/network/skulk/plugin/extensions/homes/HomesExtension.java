@@ -16,7 +16,7 @@ import static network.skulk.utils.Singletons.getYaml;
 
 // TODO: MAYBE? check player on death and respawn them in their home.
 public final class HomesExtension extends BaseExtension {
-    private final File homesFile = new File(this.getDataFolder(), "homes.yml");
+    private File homesFile;
     private Multimap<String, Home> homes;
 
     @Override
@@ -34,6 +34,8 @@ public final class HomesExtension extends BaseExtension {
 
     @Override
     protected void onEnableHook() throws Exception {
+        this.homesFile = new File(this.getDataFolder(), "homes.yml");
+
         final var yaml = getYaml();
 
         this.homes = yaml.load(new FileInputStream(this.homesFile));

@@ -21,7 +21,7 @@ public final class TPAExtension extends BaseExtension {
     private final Multimap<String, String> tpaRequests = HashMultimap.create();
     private final Map<String, Map<String, BukkitTask>> tpaRequestCancelTasks = new HashMap<>();
 
-    private final File tpaIgnoresFile = new File(this.getDataFolder(), "tpaIgnores.yml");
+    private File tpaIgnoresFile;
 
     private Multimap<String, String> tpaIgnores;
 
@@ -43,6 +43,8 @@ public final class TPAExtension extends BaseExtension {
 
     @Override
     protected void onEnableHook() throws Exception {
+        this.tpaIgnoresFile = new File(this.getDataFolder(), "tpaIgnores.yml");
+
         final var yaml = getYaml();
 
         this.tpaIgnores = yaml.load(new FileInputStream(this.tpaIgnoresFile));
