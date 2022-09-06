@@ -44,4 +44,14 @@ public abstract class MiniMessageFormat {
 
         return MiniMessage.miniMessage().deserialize(text, tagResolvers);
     }
+
+    public static Component makeMessageWithComponent(String color, final char symbol, final String text, final Component... components) {
+        if (color.equalsIgnoreCase("orange")) {
+            color = "#ffae1a";
+        }
+
+        final var template = "<bold><gray>[ <color:%s>%s</color> ]</gray></bold> <color:%s>%s</color>".formatted(color, symbol, color, text);
+
+        return MiniMessageFormat.mmWithComponent(text, components);
+    }
 }
