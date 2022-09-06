@@ -63,6 +63,7 @@ public final class TPACommand extends BaseCommand<TPAExtension> {
         final var finalTargetName = targetName;
         // This task will get cancelled when the player cancels their TPA request to this person
         // or the person accepts the request.
+        // Also, there is no need to remove this task from the cancel Map since it won't cause any harm (actually IDK how to remove it).
         extension.getTpaRequestCancelTasks().get(targetName).put(playerName, this.runAfter(60 * 20, () -> {
             if (targetTpaRequests.contains(playerName)) {
                 targetTpaRequests.remove(playerName);
