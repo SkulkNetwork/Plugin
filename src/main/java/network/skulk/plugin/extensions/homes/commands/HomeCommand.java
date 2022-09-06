@@ -57,7 +57,7 @@ public final class HomeCommand extends BaseCommand<HomesExtension> {
         final String homeName;
 
         if (playerHomesSize == 0) {
-            sendMessage(player, "red", '!', "You don't have any homes! You can set one by doing <b>/home-set myHomeName</b>");
+            sendMessage(player, "red", '!', "You don't have any homes.");
             return true;
 
             // Gets the one and only home.

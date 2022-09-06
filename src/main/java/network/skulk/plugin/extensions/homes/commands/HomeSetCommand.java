@@ -26,10 +26,9 @@ public final class HomeSetCommand extends BaseCommand<HomesExtension> {
 
         if (args.length == 0) {
             for (final Home home : playerHomes) {
-                final var existingHomeName = home.name();
                 // Player already has a home named 'home'
-                if (existingHomeName.equalsIgnoreCase("home")) {
-                    sendMessage(player, "red", '!', "You already have a default home (name: <b><0></b>). You need to delete this home and set it again.", existingHomeName);
+                if (home.name().equalsIgnoreCase("home")) {
+                    sendMessage(player, "red", '!', "You already have a default home. You need to delete that home and set it again.");
                     return true;
                 }
             }
@@ -39,7 +38,6 @@ public final class HomeSetCommand extends BaseCommand<HomesExtension> {
             homeName = args[0];
         }
 
-
         for (final Home home : playerHomes) {
             final var existingHomeName = home.name();
 
@@ -47,6 +45,11 @@ public final class HomeSetCommand extends BaseCommand<HomesExtension> {
                 sendMessage(player, "red", '!', "You already have a home named <b><0></b>.", existingHomeName);
                 return true;
             }
+        }
+
+        if (homeName.length() >= 16) {
+            sendMessage(player, "red", '!', "Home names can't be longer than 16 characters.");
+            return true;
         }
 
         if (playerHomes.size() >= 16) {

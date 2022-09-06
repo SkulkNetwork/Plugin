@@ -23,7 +23,7 @@ public final class HomeListCommand extends BaseCommand<HomesExtension> {
         final var playerHomes = this.getExtension().getHomes().get(player.getName());
 
         if (playerHomes.isEmpty()) {
-            sendMessage(player, "orange", '!', "You don't have any homes! You can set one by doing <b>/home-set myHomeName</b>");
+            sendMessage(player, "orange", '!', "You don't have any homes.");
             return true;
         }
 
@@ -34,7 +34,7 @@ public final class HomeListCommand extends BaseCommand<HomesExtension> {
         for (final Home home : playerHomes) {
             final var l = home.location();
 
-            component.append(fmt("<b><gray>-></gray></b> <color:#ffae1a><0> (X: %.0f, Y: %.0f, Z: %.0f)</color>".formatted(l.getX(), l.getY(), l.getZ()), home.name()));
+            component.append(fmt("\n<b><gray>-></gray></b> <color:#ffae1a><0> (X: %.0f, Y: %.0f, Z: %.0f)</color>".formatted(l.getX(), l.getY(), l.getZ()), home.name()));
         }
 
         player.sendMessage(component);
