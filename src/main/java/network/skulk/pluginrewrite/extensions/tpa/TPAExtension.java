@@ -31,6 +31,7 @@ public final class TPAExtension extends BaseExtension {
         new TPACancelCommand().create(this);
         new TPACommand().create(this);
         new TPAIgnoreAllCommand().create(this);
+        new TPAIgnoreCommand().create(this);
         new TPAListIgnoredCommand().create(this);
         new TPARejectCommand().create(this);
     }
