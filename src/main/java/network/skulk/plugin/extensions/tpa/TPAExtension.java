@@ -45,7 +45,10 @@ public final class TPAExtension extends BaseExtension {
     @Override
     protected void onEnableHook() throws Exception {
         this.tpaIgnoresFile = new File(this.getDataFolder(), "tpaIgnores.yml");
-        this.tpaIgnoresFile.mkdirs();
+
+        if (!this.tpaIgnoresFile.exists()) {
+            this.tpaIgnoresFile.createNewFile();
+        }
 
         final var yaml = getYaml();
 

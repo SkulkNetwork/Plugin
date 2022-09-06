@@ -36,7 +36,10 @@ public final class HomesExtension extends BaseExtension {
     @Override
     protected void onEnableHook() throws Exception {
         this.homesFile = new File(this.getDataFolder(), "homes.yml");
-        this.homesFile.mkdirs();
+
+        if (!this.homesFile.exists()) {
+            this.homesFile.createNewFile();
+        }
 
         final var yaml = getYaml();
 
