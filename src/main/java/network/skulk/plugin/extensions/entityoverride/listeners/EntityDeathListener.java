@@ -17,6 +17,8 @@ import static network.skulk.utils.MiniMessageFormat.fmt;
 import static network.skulk.utils.MiniMessageFormat.sendMessage;
 
 public final class EntityDeathListener extends BaseListener<EntityOverrideExtension> {
+
+    // FIXME: Entity.getKiller() is always null when its an ender dragon.
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     public void onEntityDeath(final EntityDeathEvent event) {
         if (event.getEntityType() != EntityType.ENDER_DRAGON) {
