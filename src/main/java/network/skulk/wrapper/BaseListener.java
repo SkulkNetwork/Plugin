@@ -2,6 +2,7 @@ package network.skulk.wrapper;
 
 import org.bukkit.event.Listener;
 import org.bukkit.scheduler.BukkitTask;
+import org.jetbrains.annotations.Nullable;
 
 public abstract class BaseListener<E extends BaseExtension> implements Listener {
     private E extension;
@@ -19,6 +20,18 @@ public abstract class BaseListener<E extends BaseExtension> implements Listener 
 
     protected final BukkitTask runAsync(final Runnable runnable) {
         return this.extension.runAsync(runnable);
+    }
+
+    public final void runRepeatingAsync(final long interval, final Runnable runnable) {
+        this.extension.runRepeatingAsync(interval, runnable);
+    }
+
+    protected final void reportError(final String message, @Nullable final Throwable error) {
+        this.getExtension().reportError(message, error);
+    }
+
+    protected final void reportError(final String message) {
+        this.getExtension().reportError(message, null);
     }
 
     // Getters.

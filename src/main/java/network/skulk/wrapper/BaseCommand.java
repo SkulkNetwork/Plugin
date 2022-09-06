@@ -118,4 +118,16 @@ public abstract class BaseCommand<E extends BaseExtension> implements CommandExe
     public final BukkitTask runAsync(final Runnable runnable) {
         return this.extension.runAsync(runnable);
     }
+
+    public final void runRepeatingAsync(final long interval, final Runnable runnable) {
+        this.extension.runRepeatingAsync(interval, runnable);
+    }
+
+    protected final void reportError(final String message, @Nullable final Throwable error) {
+        this.getExtension().reportError(message, error);
+    }
+
+    protected final void reportError(final String message) {
+        this.getExtension().reportError(message, null);
+    }
 }

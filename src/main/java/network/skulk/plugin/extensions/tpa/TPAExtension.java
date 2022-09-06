@@ -6,13 +6,14 @@ import network.skulk.plugin.extensions.tpa.commands.*;
 import network.skulk.plugin.extensions.tpa.listeners.PlayerQuitListener;
 import network.skulk.wrapper.BaseExtension;
 import org.bukkit.scheduler.BukkitTask;
-import org.yaml.snakeyaml.Yaml;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
+
+import static network.skulk.utils.Singletons.getYaml;
 
 // TODO: save the ignores every 30 minutes.
 public final class TPAExtension extends BaseExtension {
@@ -42,12 +43,22 @@ public final class TPAExtension extends BaseExtension {
 
     @Override
     protected void onEnableHook() throws Exception {
-        this.tpaIgnores = new Yaml().load(new FileInputStream(this.tpaIgnoresFile));
+        final var yaml = getYaml();
+
+        this.tpaIgnores = yaml.load(new FileInputStream(this.tpaIgnoresFile));
+
+        this.runRepeatingAsync(30 * 60 * 20, () -> {
+            try {
+                yaml.dump(this.tpaIgnores, new PrintWriter(this.tpaIgnoresFile));
+            } catch (final Exception error) {
+                this.reportError("There was an error while trying to save the TPA ignores.\nHere is the traceback:", error);
+            }
+        });
     }
 
     @Override
     protected void onDisableHook() throws Exception {
-        new Yaml().dump(this.tpaIgnores, new PrintWriter(this.tpaIgnoresFile));
+        getYaml().dump(this.tpaIgnores, new PrintWriter(this.tpaIgnoresFile));
     }
 
     // Getters.

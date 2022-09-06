@@ -45,9 +45,14 @@ public abstract class BasePlugin extends JavaPlugin {
         return Bukkit.getScheduler().runTaskAsynchronously(this, runnable);
     }
 
+    // TODO: don't use deprecated stuff.
+    public final void runRepeatingAsync(final long interval, final Runnable runnable) {
+        Bukkit.getScheduler().scheduleAsyncRepeatingTask(this, runnable, interval, interval);
+    }
+
     // Privates.
 
-    private void reportError(final String message, final @Nullable Throwable error) {
+    protected final void reportError(final String message, final @Nullable Throwable error) {
         if (error == null) {
             this.getLogger().severe(message);
         } else {
@@ -55,7 +60,7 @@ public abstract class BasePlugin extends JavaPlugin {
         }
     }
 
-    private void reportError(final String message) {
+    protected final void reportError(final String message) {
         this.reportError(message, null);
     }
 
@@ -83,6 +88,8 @@ public abstract class BasePlugin extends JavaPlugin {
     public final void onDisable() {
         final var logger = this.getLogger();
         logger.info("The plugin is being unloaded...");
+
+        Bukkit.getScheduler().cancelTasks(this);
 
         for (final BaseExtension extension : this.extensions) {
             try {

@@ -1,6 +1,7 @@
 package network.skulk.wrapper;
 
 import org.bukkit.scheduler.BukkitTask;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 
@@ -65,5 +66,17 @@ public abstract class BaseExtension {
 
     public final BukkitTask runAsync(final Runnable runnable) {
         return this.plugin.runAsync(runnable);
+    }
+
+    public final void runRepeatingAsync(final long interval, final Runnable runnable) {
+        this.plugin.runRepeatingAsync(interval, runnable);
+    }
+
+    protected final void reportError(final String message, @Nullable final Throwable error) {
+        this.getPlugin().reportError(message, error);
+    }
+
+    protected final void reportError(final String message) {
+        this.getPlugin().reportError(message, null);
     }
 }
