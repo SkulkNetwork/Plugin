@@ -4,6 +4,7 @@ import network.skulk.plugin.extensions.homes.Home;
 import network.skulk.plugin.extensions.homes.HomesExtension;
 import network.skulk.wrapper.BaseCommand;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.Nullable;
 
 import static network.skulk.utils.MiniMessageFormat.sendMessage;
 import static network.skulk.utils.SoundPlayer.playTeleport;
@@ -24,7 +25,7 @@ public final class HomeCommand extends BaseCommand<HomesExtension> {
         final var playerHomes = this.getExtension().getHomes().get(player.getName());
         final var playerHomesSize = playerHomes.size();
 
-        Home home = null;
+        @Nullable Home home = null;
         final String homeName;
 
         if (playerHomesSize == 0) {

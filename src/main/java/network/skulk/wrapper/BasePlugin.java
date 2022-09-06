@@ -32,7 +32,6 @@ public abstract class BasePlugin extends JavaPlugin {
             }
 
             cmd.setExecutor(command);
-            cmd.setTabCompleter(command);
         }
     }
 

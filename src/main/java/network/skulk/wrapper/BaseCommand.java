@@ -18,7 +18,7 @@ public abstract class BaseCommand<E extends BaseExtension> implements CommandExe
     protected String[] aliases;
     protected boolean playerOnly;
     protected int maxArgs;
-    protected String[] neededAnyPermissions = new String[0];
+    protected @Nullable String permission = null;
 
     private E extension;
 
@@ -86,11 +86,9 @@ public abstract class BaseCommand<E extends BaseExtension> implements CommandExe
             return true;
         }
 
-        for (final String perm : this.neededAnyPermissions) {
-            if (!sender.hasPermission(perm)) {
-                sendMessage(sender, "red", '!', "You can't use this command.");
-                return true;
-            }
+        if (!sender.hasPermission(this.permission)) {
+            sendMessage(sender, "red", '!', "You can't use this command.");
+            return true;
         }
 
         if (args.length > this.maxArgs || args.length < this.minArgs) {
