@@ -40,7 +40,7 @@ public final class HomeCommand extends BaseCommand<HomesExtension> {
 
         for (final Home home : this.getExtension().getHomes().get(player.getName())) {
             final var homeName = home.name();
-            if (homeName.contains(query.toLowerCase())) {
+            if (homeName.toLowerCase().contains(query.toLowerCase())) {
                 results.add(homeName);
             }
         }
