@@ -24,11 +24,6 @@ public final class TPACommand extends BaseCommand<TPAExtension> {
 
         var targetName = args[0];
 
-        if (targetName.equalsIgnoreCase(playerName)) {
-            sendMessage(player, "red", '!', "You can't TPA to yourself.");
-            return true;
-        }
-
         final var target = Bukkit.getPlayer(targetName);
 
         if (target == null) {
@@ -37,6 +32,11 @@ public final class TPACommand extends BaseCommand<TPAExtension> {
         }
 
         targetName = target.getName();
+
+        if (targetName.equalsIgnoreCase(playerName)) {
+            sendMessage(player, "red", '!', "You can't TPA to yourself.");
+            return true;
+        }
 
         final var extension = this.getExtension();
         final var targetIgnores = extension.getTpaIgnores().get(targetName);
