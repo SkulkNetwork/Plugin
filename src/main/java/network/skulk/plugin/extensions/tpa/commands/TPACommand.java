@@ -20,7 +20,7 @@ public final class TPACommand extends BaseCommand<TPAExtension> {
     protected boolean execute(final Player player, final String[] args) {
         final var playerName = player.getName();
 
-        String targetName = args[0];
+        var targetName = args[0];
 
         if (targetName.equalsIgnoreCase(playerName)) {
             sendMessage(player, "red", '!', "You can't TPA to yourself.");

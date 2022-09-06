@@ -43,7 +43,7 @@ public final class TPAExtension extends BaseExtension {
 
     @Override
     protected void onDisableHook() throws Exception {
-        new Yaml().dump(tpaIgnores, new PrintWriter(this.tpaIgnoresFile));
+        new Yaml().dump(this.tpaIgnores, new PrintWriter(this.tpaIgnoresFile));
     }
 
     // Getters.
