@@ -65,10 +65,13 @@ public abstract class BasePlugin extends JavaPlugin {
     }
 
     // Loading mechanic.
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     @Override
     public final void onEnable() {
         final var logger = this.getLogger();
         logger.info("The plugin is being loaded...");
+
+        this.getDataFolder().mkdirs();
 
         for (final BaseExtension extension : this.initExtensions()) {
             try {
