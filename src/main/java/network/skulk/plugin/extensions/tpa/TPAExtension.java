@@ -9,10 +9,12 @@ import org.bukkit.scheduler.BukkitTask;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
+import static network.skulk.utils.FileHelper.createFile;
 import static network.skulk.utils.Singletons.getYaml;
 
 // TODO: save the ignores every 30 minutes.
@@ -41,18 +43,19 @@ public final class TPAExtension extends BaseExtension {
         new PlayerQuitListener().create(this);
     }
 
-    @SuppressWarnings("ResultOfMethodCallIgnored")
     @Override
-    protected void onEnableHook() throws Exception {
+    protected void onEnableHook() throws IOException {
         this.tpaIgnoresFile = new File(this.getDataFolder(), "tpaIgnores.yml");
 
-        if (!this.tpaIgnoresFile.exists()) {
-            this.tpaIgnoresFile.createNewFile();
-        }
+        createFile(this.tpaIgnoresFile);
 
         final var yaml = getYaml();
 
         this.tpaIgnores = yaml.load(new FileInputStream(this.tpaIgnoresFile));
+
+        if (this.tpaIgnoresFile == null) {
+            this.tpaIgnores = HashMultimap.create();
+        }
 
         this.runRepeatingAsync(30 * 60 * 20, () -> {
             try {

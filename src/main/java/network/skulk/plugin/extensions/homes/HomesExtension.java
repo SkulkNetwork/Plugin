@@ -1,5 +1,6 @@
 package network.skulk.plugin.extensions.homes;
 
+import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import network.skulk.plugin.extensions.homes.commands.HomeCommand;
 import network.skulk.plugin.extensions.homes.commands.HomeDeleteCommand;
@@ -10,8 +11,10 @@ import network.skulk.wrapper.BaseExtension;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.PrintWriter;
 
+import static network.skulk.utils.FileHelper.createFile;
 import static network.skulk.utils.Singletons.getYaml;
 
 // TODO: MAYBE? check player on death and respawn them in their home.
@@ -32,18 +35,19 @@ public final class HomesExtension extends BaseExtension {
         new PlayerDeathListener().create(this);
     }
 
-    @SuppressWarnings("ResultOfMethodCallIgnored")
     @Override
-    protected void onEnableHook() throws Exception {
+    protected void onEnableHook() throws IOException {
         this.homesFile = new File(this.getDataFolder(), "homes.yml");
 
-        if (!this.homesFile.exists()) {
-            this.homesFile.createNewFile();
-        }
+        createFile(this.homesFile);
 
         final var yaml = getYaml();
 
         this.homes = yaml.load(new FileInputStream(this.homesFile));
+
+        if (this.homes == null) {
+            this.homes = HashMultimap.create();
+        }
 
         this.runRepeatingAsync(30 * 60 * 20, () -> {
             try {
