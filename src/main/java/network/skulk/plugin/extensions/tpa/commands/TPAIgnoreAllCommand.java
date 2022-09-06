@@ -25,6 +25,7 @@ public final class TPAIgnoreAllCommand extends BaseCommand<TPAExtension> {
         if (playerIgnores.contains("*")) {
             playerIgnores.remove("*");
             message = "You are now <b>not</b> ignoring everyone's TPA requests.";
+
         } else {
             playerIgnores.add("*");
             message = "You are now ignoring everyone's TPA requests.";

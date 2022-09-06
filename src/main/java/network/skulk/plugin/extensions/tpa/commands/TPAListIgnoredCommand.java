@@ -21,17 +21,17 @@ public final class TPAListIgnoredCommand extends BaseCommand<TPAExtension> {
         final var playerIgnores = this.getExtension().getTpaIgnores().get(player.getName());
 
         if (playerIgnores.isEmpty()) {
-            sendMessage(player, "orange", '!', "You aren't ignoring anyone's TPA requests.");
+            sendMessage(player, "gold", '!', "You aren't ignoring anyone's TPA requests.");
             return true;
         }
 
         if (playerIgnores.contains("*")) {
-            sendMessage(player, "orange", '!', "You are ignoring everyone's TPA requests.");
+            sendMessage(player, "gold", '!', "You are ignoring everyone's TPA requests.");
             return true;
         }
 
         final var component = Component.text().append(
-                makeMessage("orange", '!', "You are ignoring the following people:")
+                makeMessage("gold", '!', "You are ignoring the following people:")
         );
 
         for (final String ignored : playerIgnores) {

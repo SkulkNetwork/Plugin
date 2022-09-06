@@ -53,6 +53,7 @@ public abstract class BasePlugin extends JavaPlugin {
     protected final void reportError(final String message, final @Nullable Throwable error) {
         if (error == null) {
             this.getLogger().severe(message);
+
         } else {
             this.getLogger().log(Level.SEVERE, message, error);
         }

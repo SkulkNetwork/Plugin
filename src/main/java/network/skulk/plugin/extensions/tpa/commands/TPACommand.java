@@ -69,8 +69,8 @@ public final class TPACommand extends BaseCommand<TPAExtension> {
         extension.getTpaRequestCancelTasks().computeIfAbsent(targetName, k -> new HashMap<>()).put(playerName, this.runAfter(60 * 20, () -> {
             if (targetTpaRequests.contains(playerName)) {
                 targetTpaRequests.remove(playerName);
-                sendMessage(player, "orange", '!', "Your TPA request to <b><0></b> has expired.", finalTargetName);
-                sendMessage(target, "orange", '!', "The TPA request <b><0></b> has sent you has expired.", playerName);
+                sendMessage(player, "gold", '!', "Your TPA request to <b><0></b> has expired.", finalTargetName);
+                sendMessage(target, "gold", '!', "The TPA request <b><0></b> has sent you has expired.", playerName);
             }
         }));
 

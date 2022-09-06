@@ -54,6 +54,7 @@ public abstract class BaseCommand<E extends BaseExtension> implements CommandExe
     public List<String> onTabComplete(final CommandSender sender, final Command command, final String label, final String[] args) {
         if (this.playerOnly) {
             return tabComplete((Player) sender, args);
+
         } else {
             return tabComplete(sender, args);
         }

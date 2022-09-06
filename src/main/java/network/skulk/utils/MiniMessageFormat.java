@@ -19,11 +19,7 @@ public abstract class MiniMessageFormat {
         return MiniMessage.miniMessage().deserialize(text, tagResolvers);
     }
 
-    public static Component makeMessage(String color, final char symbol, final String text, final String... placeholders) {
-        if (color.equalsIgnoreCase("orange")) {
-            color = "#ffae1a";
-        }
-
+    public static Component makeMessage(final String color, final char symbol, final String text, final String... placeholders) {
         final var template = "<bold><gray>[ <color:%s>%s</color> ]</gray></bold> <color:%s>%s</color>".formatted(color, symbol, color, text);
 
         return MiniMessageFormat.fmt(template, placeholders);
@@ -45,11 +41,7 @@ public abstract class MiniMessageFormat {
         return MiniMessage.miniMessage().deserialize(text, tagResolvers);
     }
 
-    public static Component makeMessageWithComponent(String color, final char symbol, final String text, final Component... components) {
-        if (color.equalsIgnoreCase("orange")) {
-            color = "#ffae1a";
-        }
-
+    public static Component makeMessageWithComponent(final String color, final char symbol, final String text, final Component... components) {
         final var template = "<bold><gray>[ <color:%s>%s</color> ]</gray></bold> <color:%s>%s</color>".formatted(color, symbol, color, text);
 
         return MiniMessageFormat.mmWithComponent(template, components);

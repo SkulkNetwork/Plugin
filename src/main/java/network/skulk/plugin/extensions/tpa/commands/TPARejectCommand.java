@@ -73,7 +73,7 @@ public final class TPARejectCommand extends BaseCommand<TPAExtension> {
         playerIncomingRequests.remove(targetName);
 
         sendMessage(player, "green", '✓', "Rejected the TPA request from <b><0></b>.", targetName);
-        sendMessage(player, "orange", '!', "<b><0></b> has rejected your TPA request.", playerName);
+        sendMessage(player, "gold", '!', "<b><0></b> has rejected your TPA request.", playerName);
 
         return true;
     }

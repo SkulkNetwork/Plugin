@@ -32,6 +32,7 @@ public final class HomeCommand extends BaseCommand<HomesExtension> {
 
         if (args.length == 0) {
             query = "";
+
         } else {
             query = args[0];
         }

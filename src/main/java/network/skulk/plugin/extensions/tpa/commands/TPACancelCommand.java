@@ -85,7 +85,7 @@ public final class TPACancelCommand extends BaseCommand<TPAExtension> {
         targetIncomingRequests.remove(playerName);
 
         sendMessage(player, "green", '✓', "Cancelled the TPA request going to <b><0></b>.", targetName);
-        sendMessage(target, "orange", '!', "<b><0></b> has cancelled their TPA request to you.", playerName);
+        sendMessage(target, "gold", '!', "<b><0></b> has cancelled their TPA request to you.", playerName);
 
         return true;
     }

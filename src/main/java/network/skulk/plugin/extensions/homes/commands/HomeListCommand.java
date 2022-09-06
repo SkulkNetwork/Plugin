@@ -23,12 +23,12 @@ public final class HomeListCommand extends BaseCommand<HomesExtension> {
         final var playerHomes = this.getExtension().getHomes().get(player.getName());
 
         if (playerHomes.isEmpty()) {
-            sendMessage(player, "orange", '!', "You don't have any homes.");
+            sendMessage(player, "gold", '!', "You don't have any homes.");
             return true;
         }
 
         final var component = Component.text().append(
-                makeMessage("orange", '!', "All homes:")
+                makeMessage("gold", '!', "All homes:")
         );
 
         for (final Home home : playerHomes) {
