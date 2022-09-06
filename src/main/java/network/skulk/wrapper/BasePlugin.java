@@ -25,12 +25,12 @@ public abstract class BasePlugin extends JavaPlugin {
     public final void registerCommand(final BaseCommand<?> command) {
         final var cmd = this.getCommand(command.name);
 
-        if (cmd == null) {
-            this.reportError("The command '%s' could not be registered because it was not included in the plugin.yml.".formatted(command.name));
+        if (cmd != null) {
+            cmd.setExecutor(command);
             return;
         }
 
-        cmd.setExecutor(command);
+        this.reportError("The command '%s' could not be registered because it was not included in the plugin.yml.".formatted(command.name));
     }
 
     public final void registerListener(final BaseListener<?> listener) {
