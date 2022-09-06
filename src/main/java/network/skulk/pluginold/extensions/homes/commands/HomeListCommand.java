@@ -1,8 +1,8 @@
-package network.skulk.plugin.extensions.homes.commands;
+package network.skulk.pluginold.extensions.homes.commands;
 
-import network.skulk.plugin.Plugin;
-import network.skulk.plugin.constants.Message;
-import network.skulk.plugin.extensions.homes.HomesExtension;
+import network.skulk.pluginold.Plugin;
+import network.skulk.pluginold.constants.Message;
+import network.skulk.pluginold.extensions.homes.HomesExtension;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

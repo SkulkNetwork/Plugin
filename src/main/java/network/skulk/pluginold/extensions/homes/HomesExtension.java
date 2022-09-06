@@ -1,12 +1,12 @@
-package network.skulk.plugin.extensions.homes;
+package network.skulk.pluginold.extensions.homes;
 
-import network.skulk.plugin.Plugin;
-import network.skulk.plugin.extensions.BaseExtension;
-import network.skulk.plugin.extensions.homes.commands.HomeAddCommand;
-import network.skulk.plugin.extensions.homes.commands.HomeCommand;
-import network.skulk.plugin.extensions.homes.commands.HomeDeleteCommand;
-import network.skulk.plugin.extensions.homes.commands.HomeListCommand;
-import network.skulk.plugin.extensions.homes.listeners.TabCompleteEventListener;
+import network.skulk.pluginold.Plugin;
+import network.skulk.pluginold.extensions.BaseExtension;
+import network.skulk.pluginold.extensions.homes.commands.HomeAddCommand;
+import network.skulk.pluginold.extensions.homes.commands.HomeCommand;
+import network.skulk.pluginold.extensions.homes.commands.HomeDeleteCommand;
+import network.skulk.pluginold.extensions.homes.commands.HomeListCommand;
+import network.skulk.pluginold.extensions.homes.listeners.TabCompleteEventListener;
 import org.bukkit.NamespacedKey;
 
 public class HomesExtension implements BaseExtension {

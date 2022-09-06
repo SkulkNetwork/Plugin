@@ -1,7 +1,7 @@
-package network.skulk.pluginrewrite;
+package network.skulk.plugin;
 
-import network.skulk.pluginrewrite.extensions.messageoverride.MessageOverrideExtension;
-import network.skulk.pluginrewrite.extensions.tpa.TPAExtension;
+import network.skulk.plugin.extensions.messageoverride.MessageOverrideExtension;
+import network.skulk.plugin.extensions.tpa.TPAExtension;
 import network.skulk.wrapper.BaseExtension;
 import network.skulk.wrapper.BasePlugin;
 

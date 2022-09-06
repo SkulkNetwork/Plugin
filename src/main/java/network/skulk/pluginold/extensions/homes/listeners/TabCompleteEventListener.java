@@ -1,7 +1,7 @@
-package network.skulk.plugin.extensions.homes.listeners;
+package network.skulk.pluginold.extensions.homes.listeners;
 
-import network.skulk.plugin.Plugin;
-import network.skulk.plugin.extensions.homes.HomesExtension;
+import network.skulk.pluginold.Plugin;
+import network.skulk.pluginold.extensions.homes.HomesExtension;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

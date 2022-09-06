@@ -1,6 +1,6 @@
-package network.skulk.pluginrewrite.extensions.messageoverride.listeners;
+package network.skulk.plugin.extensions.messageoverride.listeners;
 
-import network.skulk.pluginrewrite.extensions.messageoverride.MessageOverrideExtension;
+import network.skulk.plugin.extensions.messageoverride.MessageOverrideExtension;
 import network.skulk.wrapper.BaseListener;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;

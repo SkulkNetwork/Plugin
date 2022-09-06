@@ -1,8 +1,8 @@
-package network.skulk.pluginrewrite.extensions.tpa;
+package network.skulk.plugin.extensions.tpa;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
-import network.skulk.pluginrewrite.extensions.tpa.commands.*;
+import network.skulk.plugin.extensions.tpa.commands.*;
 import network.skulk.wrapper.BaseExtension;
 import org.bukkit.scheduler.BukkitTask;
 import org.yaml.snakeyaml.Yaml;

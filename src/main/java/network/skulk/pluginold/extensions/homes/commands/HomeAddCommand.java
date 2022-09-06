@@ -1,8 +1,9 @@
-package network.skulk.plugin.extensions.homes.commands;
+package network.skulk.pluginold.extensions.homes.commands;
 
-import network.skulk.plugin.Plugin;
-import network.skulk.plugin.constants.Message;
-import network.skulk.plugin.extensions.homes.HomesExtension;
+import network.skulk.pluginold.Plugin;
+import network.skulk.pluginold.constants.Message;
+import network.skulk.pluginold.extensions.homes.HomesExtension;
+import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -12,12 +13,12 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.HashSet;
 
-public final class HomeDeleteCommand implements CommandExecutor {
+public final class HomeAddCommand implements CommandExecutor {
     private final @NotNull HomesExtension extension;
 
-    public HomeDeleteCommand(@NotNull final HomesExtension extension) {
+    public HomeAddCommand(@NotNull final HomesExtension extension) {
         this.extension = extension;
-        extension.plugin.registerCommand(this, "home-delete");
+        extension.plugin.registerCommand(this, "home-add");
     }
 
     @Override
@@ -42,23 +43,30 @@ public final class HomeDeleteCommand implements CommandExecutor {
         final PersistentDataContainer playerContainer = player.getPersistentDataContainer();
         final HashSet<String> playerHomes = playerContainer.getOrDefault(extension.HOMES_KEY, Plugin.PersistentDataTypes.STRING_HASH_SET, new HashSet<>());
 
-        boolean homeExists = false;
-
         for (final String homeString : playerHomes) {
             if (homeString.split(" ")[0].equals(homeName)) {
-                playerHomes.remove(homeString);
-                homeExists = true;
-                break;
+                player.sendRichMessage(Message.HOME_ALREADY_EXISTS.formatted(homeName));
+                return true;
             }
         }
 
-        if (!homeExists) {
-            player.sendRichMessage(Message.NO_SUCH_HOME.formatted(homeName));
+        if (playerHomes.size() >= 16) {
+            player.sendRichMessage(Message.HOME_LIMIT_REACHED);
             return true;
         }
 
+        final Location l = player.getLocation();
+        final double x = l.getX();
+        final double y = l.getY();
+        final double z = l.getZ();
+        final float yaw = l.getYaw();
+        final float pitch = l.getPitch();
+
+        playerHomes.add("%s %s %f %f %f %f %f".formatted(homeName, player.getWorld().getName(), x, y, z, yaw, pitch));
+
         playerContainer.set(extension.HOMES_KEY, Plugin.PersistentDataTypes.STRING_HASH_SET, playerHomes);
-        player.sendRichMessage(Message.HOME_DELETED.formatted(homeName));
+
+        player.sendRichMessage(Message.HOME_ADDED.formatted(homeName, x, y, z));
 
         return true;
     }

@@ -1,7 +1,7 @@
-package network.skulk.pluginrewrite.extensions.tpa.commands;
+package network.skulk.plugin.extensions.tpa.commands;
 
 import net.kyori.adventure.text.Component;
-import network.skulk.pluginrewrite.extensions.tpa.TPAExtension;
+import network.skulk.plugin.extensions.tpa.TPAExtension;
 import network.skulk.wrapper.BaseCommand;
 import org.bukkit.entity.Player;
 

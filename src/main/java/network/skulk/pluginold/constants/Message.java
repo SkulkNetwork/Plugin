@@ -1,4 +1,4 @@
-package network.skulk.plugin.constants;
+package network.skulk.pluginold.constants;
 
 public abstract class Message {
     public static final String ONLY_PLAYERS_CAN_USE_THIS_COMMAND = "<bold><gray>[ <red>!</red> ]</gray></bold> <red>This command can only be used by players.</red>";

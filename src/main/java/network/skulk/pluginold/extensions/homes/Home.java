@@ -1,4 +1,4 @@
-package network.skulk.plugin.extensions.homes;
+package network.skulk.pluginold.extensions.homes;
 
 import org.bukkit.Location;
 
