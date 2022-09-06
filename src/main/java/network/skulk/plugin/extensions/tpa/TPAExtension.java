@@ -41,9 +41,11 @@ public final class TPAExtension extends BaseExtension {
         new PlayerQuitListener().create(this);
     }
 
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     @Override
     protected void onEnableHook() throws Exception {
         this.tpaIgnoresFile = new File(this.getDataFolder(), "tpaIgnores.yml");
+        this.tpaIgnoresFile.mkdirs();
 
         final var yaml = getYaml();
 

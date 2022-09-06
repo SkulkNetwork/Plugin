@@ -32,9 +32,11 @@ public final class HomesExtension extends BaseExtension {
         new PlayerDeathListener().create(this);
     }
 
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     @Override
     protected void onEnableHook() throws Exception {
         this.homesFile = new File(this.getDataFolder(), "homes.yml");
+        this.homesFile.mkdirs();
 
         final var yaml = getYaml();
 
