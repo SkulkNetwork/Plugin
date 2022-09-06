@@ -49,21 +49,21 @@ public final class TPACommand extends BaseCommand<TPAExtension> {
             return true;
         }
 
-        final var tpaRequests = extension.getTpaRequests();
+        final var targetTpaRequests = extension.getTpaRequests().get(targetName);
 
-        if (tpaRequests.containsEntry(targetName, playerName)) {
+        if (targetTpaRequests.contains(playerName)) {
             sendMessage(player, "red", '!', "You already have a pending request to <b><0></b>", targetName);
             return true;
         }
 
-        tpaRequests.put(targetName, playerName);
+        targetTpaRequests.add(playerName);
 
         final var finalTargetName = targetName;
         // This task will get cancelled when the player cancels their TPA request to this person
         // or the person accepts the request.
         extension.getTpaRequestCancelTasks().get(playerName).put(targetName, this.runAfter(60 * 20, () -> {
-            if (tpaRequests.containsEntry(finalTargetName, playerName)) {
-                tpaRequests.remove(finalTargetName, playerName);
+            if (targetTpaRequests.contains(playerName)) {
+                targetTpaRequests.remove(playerName);
                 sendMessage(player, "orange", '!', "Your TPA request to <b><0></b> has expired.", finalTargetName);
                 sendMessage(target, "orange", '!', "The TPA request <b><0></b> has sent you has expired.", playerName);
             }
