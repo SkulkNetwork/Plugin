@@ -43,6 +43,16 @@ public abstract class BaseCommand<E extends BaseExtension> implements CommandExe
         return false;
     }
 
+    @OverrideOnly
+    protected boolean execute(final CommandSender sender) {
+        return false;
+    }
+
+    @OverrideOnly
+    protected boolean execute(final Player player) {
+        return false;
+    }
+
     @Override
     public final boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] args) {
         if (this.playerOnly && !(sender instanceof Player)) {
@@ -62,9 +72,16 @@ public abstract class BaseCommand<E extends BaseExtension> implements CommandExe
         }
 
         if (this.playerOnly) {
-            return execute((Player) sender, args);
+            final var player = (Player) sender;
+            if (maxArgs == 0) {
+                return execute(player);
+            }
+            return execute(player, args);
         }
 
+        if (maxArgs == 0) {
+            return execute(sender);
+        }
         return execute(sender, args);
     }
 

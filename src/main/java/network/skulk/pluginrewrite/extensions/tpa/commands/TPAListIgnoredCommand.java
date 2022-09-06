@@ -17,7 +17,7 @@ public final class TPAListIgnoredCommand extends BaseCommand<TPAExtension> {
     }
 
     @Override
-    protected boolean execute(final Player player, final String[] args) {
+    protected boolean execute(final Player player) {
         final var playerIgnores = this.getExtension().getTpaIgnores().get(player.getName());
 
         if (playerIgnores.isEmpty()) {
