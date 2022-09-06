@@ -2,6 +2,7 @@ package network.skulk.plugin.extensions.homes;
 
 import com.google.common.collect.Multimap;
 import network.skulk.plugin.extensions.homes.commands.HomeCommand;
+import network.skulk.plugin.extensions.homes.commands.HomeListCommand;
 import network.skulk.wrapper.BaseExtension;
 import org.yaml.snakeyaml.Yaml;
 
@@ -9,6 +10,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.PrintWriter;
 
+// TODO: MAYBE? check player on death and respawn them in their home.
 public final class HomesExtension extends BaseExtension {
     private final File homesFile = new File(this.getDataFolder(), "homes.yml");
     private Multimap<String, Home> homes;
@@ -16,6 +18,7 @@ public final class HomesExtension extends BaseExtension {
     @Override
     protected void initCommands() {
         new HomeCommand().create(this);
+        new HomeListCommand().create(this);
     }
 
     @Override
