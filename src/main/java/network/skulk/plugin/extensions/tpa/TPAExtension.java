@@ -19,7 +19,7 @@ import static network.skulk.utils.Singletons.getYaml;
 public final class TPAExtension extends BaseExtension {
     // Vs want to TPA to K.
     private final Multimap<String, String> tpaRequests = HashMultimap.create();
-    private final Map<String, HashMap<String, BukkitTask>> tpaRequestCancelTasks = new HashMap<>();
+    private final Map<String, Map<String, BukkitTask>> tpaRequestCancelTasks = new HashMap<>();
 
     private final File tpaIgnoresFile = new File(this.getDataFolder(), "tpaIgnores.yml");
 
@@ -66,7 +66,7 @@ public final class TPAExtension extends BaseExtension {
         return this.tpaRequests;
     }
 
-    public Map<String, HashMap<String, BukkitTask>> getTpaRequestCancelTasks() {
+    public Map<String, Map<String, BukkitTask>> getTpaRequestCancelTasks() {
         return this.tpaRequestCancelTasks;
     }
 

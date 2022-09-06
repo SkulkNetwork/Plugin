@@ -86,7 +86,7 @@ public abstract class BaseCommand<E extends BaseExtension> implements CommandExe
             return true;
         }
 
-        if (!sender.hasPermission(this.permission)) {
+        if (this.permission != null && !sender.hasPermission(this.permission)) {
             sendMessage(sender, "red", '!', "You can't use this command.");
             return true;
         }

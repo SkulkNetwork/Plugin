@@ -52,6 +52,6 @@ public abstract class MiniMessageFormat {
 
         final var template = "<bold><gray>[ <color:%s>%s</color> ]</gray></bold> <color:%s>%s</color>".formatted(color, symbol, color, text);
 
-        return MiniMessageFormat.mmWithComponent(text, components);
+        return MiniMessageFormat.mmWithComponent(template, components);
     }
 }
