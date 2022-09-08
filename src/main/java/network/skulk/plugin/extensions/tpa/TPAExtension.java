@@ -14,7 +14,6 @@ import java.util.Map;
 import static network.skulk.utils.FileHelper.createFile;
 import static network.skulk.utils.Singletons.getYaml;
 
-// TODO: save the ignores every 30 minutes.
 public final class TPAExtension extends BaseExtension {
     // Vs want to TPA to K.
     private final Multimap<String, String> tpaRequests = HashMultimap.create();
