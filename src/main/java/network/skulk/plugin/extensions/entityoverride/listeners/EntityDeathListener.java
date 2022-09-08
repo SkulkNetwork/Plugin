@@ -1,9 +1,12 @@
 package network.skulk.plugin.extensions.entityoverride.listeners;
 
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.TextDecoration;
 import network.skulk.plugin.extensions.entityoverride.EntityOverrideExtension;
 import network.skulk.wrapper.BaseListener;
 import org.bukkit.Material;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -18,6 +21,7 @@ import java.util.ArrayList;
 
 import static network.skulk.utils.MiniMessageFormat.fmt;
 import static network.skulk.utils.MiniMessageFormat.sendMessage;
+import static org.bukkit.attribute.AttributeModifier.Operation.ADD_NUMBER;
 
 // Entity.getKiller() returns null when it's the ender dragon for some reason.
 public final class EntityDeathListener extends BaseListener<EntityOverrideExtension> {
@@ -27,15 +31,21 @@ public final class EntityDeathListener extends BaseListener<EntityOverrideExtens
         elytra = new ItemStack(Material.ELYTRA, 1);
 
         final var meta = elytra.getItemMeta();
-        meta.displayName(fmt("<dark_purple>Dragon Master Wings</dark_purple>"));
+        meta.displayName(fmt("<dark_purple>Dragon Master Wings</dark_purple>").decoration(TextDecoration.ITALIC, false));
 
-        meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 5, true);
+        meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 4, true);
         meta.addEnchant(Enchantment.DURABILITY, 3, true);
         meta.addEnchant(Enchantment.MENDING, 1, true);
         meta.addEnchant(Enchantment.THORNS, 3, true);
 
+        meta.addAttributeModifier(Attribute.GENERIC_ARMOR, new AttributeModifier("generic.armor", 8, ADD_NUMBER));
+        meta.addAttributeModifier(Attribute.GENERIC_ARMOR_TOUGHNESS, new AttributeModifier("generic.armor_toughness", 3, ADD_NUMBER));
+        meta.addAttributeModifier(Attribute.GENERIC_KNOCKBACK_RESISTANCE, new AttributeModifier("generic.knockback_resistance", 1, ADD_NUMBER));
+
         final var lore = new ArrayList<Component>();
-        lore.add(fmt("<light_purple>Only true warriors can use these wings...</light_purple>"));
+        // Newline.
+        lore.add(Component.empty());
+        lore.add(fmt("<dark_purple>Only true warriors can use these wings...</dark_purple>"));
         meta.lore(lore);
 
         elytra.setItemMeta(meta);
