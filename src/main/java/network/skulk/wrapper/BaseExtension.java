@@ -1,31 +1,26 @@
 package network.skulk.wrapper;
 
-import org.bukkit.scheduler.BukkitTask;
-import org.jetbrains.annotations.Nullable;
-
-import java.io.File;
-
 import static org.jetbrains.annotations.ApiStatus.OverrideOnly;
 
 public abstract class BaseExtension {
     private BasePlugin plugin;
 
-    public final BaseExtension init(final BasePlugin plugin) {
+    public final void init(final BasePlugin plugin) {
         this.plugin = plugin;
-        return this;
+        this.plugin.registerExtension(this);
     }
 
-    protected final BasePlugin getPlugin() {
+    public final BasePlugin getPlugin() {
         return this.plugin;
     }
 
 
     @OverrideOnly
-    protected void initCommands() {
+    protected void initCommands() throws Exception {
     }
 
     @OverrideOnly
-    protected void initListeners() {
+    protected void initListeners() throws Exception {
     }
 
     @OverrideOnly
@@ -36,6 +31,7 @@ public abstract class BaseExtension {
     protected void onDisableHook() throws Exception {
     }
 
+    // Loading mechanic.
     public final void onEnable() throws Exception {
         this.initCommands();
         this.initListeners();
@@ -44,39 +40,5 @@ public abstract class BaseExtension {
 
     public final void onDisable() throws Exception {
         this.onDisableHook();
-    }
-
-    // Utility functions.
-
-    public final File getDataFolder() {
-        return this.plugin.getDataFolder();
-    }
-
-    public final void registerCommand(final BaseCommand<?> command) {
-        this.plugin.registerCommand(command);
-    }
-
-    public final void registerListener(final BaseListener<?> listener) {
-        this.plugin.registerListener(listener);
-    }
-
-    public final BukkitTask runAfter(final long delay, final Runnable runnable) {
-        return this.plugin.runAfter(delay, runnable);
-    }
-
-    public final BukkitTask runAsync(final Runnable runnable) {
-        return this.plugin.runAsync(runnable);
-    }
-
-    public final void runRepeatingAsync(final long interval, final Runnable runnable) {
-        this.plugin.runRepeatingAsync(interval, runnable);
-    }
-
-    protected final void reportError(final String message, @Nullable final Throwable error) {
-        this.getPlugin().reportError(message, error);
-    }
-
-    protected final void reportError(final String message) {
-        this.getPlugin().reportError(message, null);
     }
 }

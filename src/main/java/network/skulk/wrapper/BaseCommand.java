@@ -5,7 +5,6 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitTask;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -25,7 +24,7 @@ public abstract class BaseCommand<E extends BaseExtension> implements CommandExe
     public final void init(final E extension) {
         this.extension = extension;
         this.init();
-        this.extension.registerCommand(this);
+        this.extension.getPlugin().registerCommand(this);
     }
 
     protected E getExtension() {
@@ -49,17 +48,6 @@ public abstract class BaseCommand<E extends BaseExtension> implements CommandExe
         return null;
     }
 
-    @Nullable
-    @Override
-    public List<String> onTabComplete(final CommandSender sender, final Command command, final String label, final String[] args) {
-        if (this.playerOnly) {
-            return tabComplete((Player) sender, args);
-
-        } else {
-            return tabComplete(sender, args);
-        }
-    }
-
     @OverrideOnly
     protected boolean execute(final CommandSender sender, final String[] args) {
         return false;
@@ -78,6 +66,17 @@ public abstract class BaseCommand<E extends BaseExtension> implements CommandExe
     @OverrideOnly
     protected boolean execute(final Player player) {
         return false;
+    }
+
+    @Nullable
+    @Override
+    public List<String> onTabComplete(final CommandSender sender, final Command command, final String label, final String[] args) {
+        if (this.playerOnly) {
+            return tabComplete((Player) sender, args);
+
+        } else {
+            return tabComplete(sender, args);
+        }
     }
 
     @Override
@@ -108,27 +107,5 @@ public abstract class BaseCommand<E extends BaseExtension> implements CommandExe
             return execute(sender);
         }
         return execute(sender, args);
-    }
-
-    // Utility functions.
-
-    public final BukkitTask runAfter(final long delay, final Runnable runnable) {
-        return this.extension.runAfter(delay, runnable);
-    }
-
-    public final BukkitTask runAsync(final Runnable runnable) {
-        return this.extension.runAsync(runnable);
-    }
-
-    public final void runRepeatingAsync(final long interval, final Runnable runnable) {
-        this.extension.runRepeatingAsync(interval, runnable);
-    }
-
-    protected final void reportError(final String message, @Nullable final Throwable error) {
-        this.getExtension().reportError(message, error);
-    }
-
-    protected final void reportError(final String message) {
-        this.getExtension().reportError(message, null);
     }
 }

@@ -15,12 +15,63 @@ public abstract class BasePlugin extends JavaPlugin {
     // Must be stored to do onDisable.
     private final List<BaseExtension> extensions = new ArrayList<>();
 
+    /*
+    MUST be overriden, example:
+
+    @Override
+    protected void initExtensions() {
+        new MyExtension().init(this);
+    }
+     */
     @OverrideOnly
-    protected BaseExtension[] init() {
-        return new BaseExtension[0];
+    protected void initExtensions() {
+    }
+
+    // Loading mechanic.
+
+    @Override
+    public final void onEnable() {
+        final var logger = this.getLogger();
+        logger.info("The plugin is being loaded...");
+
+        this.initExtensions();
+
+        for (final BaseExtension extension : this.extensions) {
+            try {
+                extension.onEnable();
+            } catch (final Exception error) {
+                this.reportError("There was an error while loading '%s'.\nHere is the traceback:".formatted(extension.getClass().getName()), error);
+            }
+        }
+
+        logger.info("The plugin has been loaded.");
+    }
+
+    @Override
+    public final void onDisable() {
+        final var logger = this.getLogger();
+        logger.info("The plugin is being unloaded...");
+
+        Bukkit.getScheduler().cancelTasks(this);
+
+        for (final BaseExtension extension : this.extensions) {
+            try {
+                extension.onDisable();
+            } catch (final Exception error) {
+                this.reportError("There was an error while unloading %s.\nHere is the traceback:".formatted(extension.getClass().getName()), error);
+            }
+        }
+
+        this.extensions.clear();
+
+        logger.info("The plugin has been unloaded.");
     }
 
     // Public utilities.
+
+    public final void registerExtension(final BaseExtension extension) {
+        this.extensions.add(extension);
+    }
 
     public final void registerCommand(final BaseCommand<?> command) {
         final var cmd = this.getCommand(command.name);
@@ -50,7 +101,7 @@ public abstract class BasePlugin extends JavaPlugin {
         Bukkit.getScheduler().scheduleAsyncRepeatingTask(this, runnable, interval, interval);
     }
 
-    protected final void reportError(final String message, final @Nullable Throwable error) {
+    public final void reportError(final String message, final @Nullable Throwable error) {
         if (error == null) {
             this.getLogger().severe(message);
 
@@ -59,48 +110,7 @@ public abstract class BasePlugin extends JavaPlugin {
         }
     }
 
-    protected final void reportError(final String message) {
+    public final void reportError(final String message) {
         this.reportError(message, null);
-    }
-
-    // Loading mechanic.
-
-    @Override
-    public final void onEnable() {
-        final var logger = this.getLogger();
-        logger.info("The plugin is being loaded...");
-
-        for (final BaseExtension extension : this.init()) {
-            try {
-                extension.onEnable();
-            } catch (final Exception error) {
-                this.reportError("There was an error while loading '%s'.\nHere is the traceback:".formatted(extension.getClass().getName()), error);
-                continue;
-            }
-
-            this.extensions.add(extension);
-        }
-
-        logger.info("The plugin has been loaded");
-    }
-
-    @Override
-    public final void onDisable() {
-        final var logger = this.getLogger();
-        logger.info("The plugin is being unloaded...");
-
-        Bukkit.getScheduler().cancelTasks(this);
-
-        for (final BaseExtension extension : this.extensions) {
-            try {
-                extension.onDisable();
-            } catch (final Exception error) {
-                this.reportError("There was an error while unloading %s.\nHere is the traceback:".formatted(extension.getClass().getName()), error);
-            }
-        }
-
-        this.extensions.clear();
-
-        logger.info("The plugin has been unloaded.");
     }
 }

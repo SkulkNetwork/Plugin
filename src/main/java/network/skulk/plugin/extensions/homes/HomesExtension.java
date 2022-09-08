@@ -34,7 +34,9 @@ public final class HomesExtension extends BaseExtension {
 
     @Override
     protected void onEnableHook() throws IOException {
-        this.homesFile = new File(this.getDataFolder(), "homes.yml");
+        final var plugin = this.getPlugin();
+
+        this.homesFile = new File(plugin.getDataFolder(), "homes.yml");
 
         createFile(this.homesFile);
 
@@ -46,11 +48,11 @@ public final class HomesExtension extends BaseExtension {
             this.homes = HashMultimap.create();
         }
 
-        this.runRepeatingAsync(30 * 60 * 20, () -> {
+        plugin.runRepeatingAsync(30 * 60 * 20, () -> {
             try {
                 yaml.dump(this.homes, new FileWriter(this.homesFile));
             } catch (final Exception error) {
-                this.reportError("There was an error while trying to save homes.\nHere is the traceback:", error);
+                plugin.reportError("There was an error while trying to save homes.\nHere is the traceback:", error);
             }
         });
     }

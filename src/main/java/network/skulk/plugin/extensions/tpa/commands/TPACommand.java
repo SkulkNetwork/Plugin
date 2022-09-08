@@ -66,7 +66,7 @@ public final class TPACommand extends BaseCommand<TPAExtension> {
         // This task will get cancelled when the player cancels their TPA request to this person
         // or the person accepts the request.
         // Also, there is no need to remove this task from the cancel Map since it won't cause any harm (actually IDK how to remove it).
-        extension.getTpaRequestCancelTasks().computeIfAbsent(targetName, k -> new HashMap<>()).put(playerName, this.runAfter(60 * 20, () -> {
+        extension.getTpaRequestCancelTasks().computeIfAbsent(targetName, k -> new HashMap<>()).put(playerName, this.getExtension().getPlugin().runAfter(60 * 20, () -> {
             if (targetTpaRequests.contains(playerName)) {
                 targetTpaRequests.remove(playerName);
                 sendMessage(player, "gold", '!', "Your TPA request to <b><0></b> has expired.", finalTargetName);

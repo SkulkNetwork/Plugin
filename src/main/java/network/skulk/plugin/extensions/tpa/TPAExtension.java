@@ -42,7 +42,9 @@ public final class TPAExtension extends BaseExtension {
 
     @Override
     protected void onEnableHook() throws IOException {
-        this.tpaIgnoresFile = new File(this.getDataFolder(), "tpaIgnores.yml");
+        final var plugin = this.getPlugin();
+
+        this.tpaIgnoresFile = new File(plugin.getDataFolder(), "tpaIgnores.yml");
 
         createFile(this.tpaIgnoresFile);
 
@@ -54,11 +56,11 @@ public final class TPAExtension extends BaseExtension {
             this.tpaIgnores = HashMultimap.create();
         }
 
-        this.runRepeatingAsync(30 * 60 * 20, () -> {
+        plugin.runRepeatingAsync(30 * 60 * 20, () -> {
             try {
                 yaml.dump(this.tpaIgnores, new FileWriter(this.tpaIgnoresFile));
             } catch (final Exception error) {
-                this.reportError("There was an error while trying to save the TPA ignores.\nHere is the traceback:", error);
+                plugin.reportError("There was an error while trying to save the TPA ignores.\nHere is the traceback:", error);
             }
         });
     }
