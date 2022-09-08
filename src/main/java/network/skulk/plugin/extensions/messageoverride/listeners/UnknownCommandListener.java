@@ -6,7 +6,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.command.UnknownCommandEvent;
 
-import static network.skulk.utils.MiniMessageFormat.makeMessage;
+import static network.skulk.utils.MiniMessageHelper.makeMessage;
 
 public final class UnknownCommandListener extends BaseListener<MessageOverrideExtension> {
     public UnknownCommandListener(final MessageOverrideExtension extension) {

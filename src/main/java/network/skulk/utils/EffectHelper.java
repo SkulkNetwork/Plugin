@@ -4,7 +4,7 @@ import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
 
-public abstract class SoundPlayer {
+public abstract class EffectHelper {
     public static void playTeleport(final Entity entity) {
         final var world = entity.getWorld();
         final var location = entity.getLocation();

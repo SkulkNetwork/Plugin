@@ -7,7 +7,7 @@ import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
 
-public abstract class MiniMessageFormat {
+public abstract class MiniMessageHelper {
     public static Component fmt(final String text, final String... placeholders) {
         final var tagResolvers = new TagResolver[placeholders.length];
 
@@ -22,11 +22,11 @@ public abstract class MiniMessageFormat {
     public static Component makeMessage(final String color, final char symbol, final String text, final String... placeholders) {
         final var template = "<bold><gray>[ <color:%s>%s</color> ]</gray></bold> <color:%s>%s</color>".formatted(color, symbol, color, text);
 
-        return MiniMessageFormat.fmt(template, placeholders);
+        return MiniMessageHelper.fmt(template, placeholders);
     }
 
     public static void sendMessage(final Audience audience, final String color, final char symbol, final String text, final String... placeholders) {
-        audience.sendMessage(MiniMessageFormat.makeMessage(color, symbol, text, placeholders));
+        audience.sendMessage(MiniMessageHelper.makeMessage(color, symbol, text, placeholders));
     }
 
     public static Component mmWithComponent(final String text, final Component... components) {
@@ -44,6 +44,6 @@ public abstract class MiniMessageFormat {
     public static Component makeMessageWithComponent(final String color, final char symbol, final String text, final Component... components) {
         final var template = "<bold><gray>[ <color:%s>%s</color> ]</gray></bold> <color:%s>%s</color>".formatted(color, symbol, color, text);
 
-        return MiniMessageFormat.mmWithComponent(template, components);
+        return MiniMessageHelper.mmWithComponent(template, components);
     }
 }

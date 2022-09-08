@@ -6,7 +6,7 @@ import network.skulk.wrapper.BaseCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-import static network.skulk.utils.MiniMessageFormat.*;
+import static network.skulk.utils.MiniMessageHelper.*;
 
 public final class TPARejectCommand extends BaseCommand<TPAExtension> {
     public TPARejectCommand(final TPAExtension extension) {

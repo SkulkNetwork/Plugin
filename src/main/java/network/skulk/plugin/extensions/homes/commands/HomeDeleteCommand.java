@@ -5,7 +5,7 @@ import network.skulk.plugin.extensions.homes.HomesExtension;
 import network.skulk.wrapper.BaseCommand;
 import org.bukkit.entity.Player;
 
-import static network.skulk.utils.MiniMessageFormat.sendMessage;
+import static network.skulk.utils.MiniMessageHelper.sendMessage;
 
 public final class HomeDeleteCommand extends BaseCommand<HomesExtension> {
     public HomeDeleteCommand(final HomesExtension extension) {

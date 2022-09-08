@@ -8,7 +8,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.jetbrains.annotations.NotNull;
 
-import static network.skulk.utils.MiniMessageFormat.makeMessage;
+import static network.skulk.utils.MiniMessageHelper.makeMessage;
 
 public final class PlayerJoinQuitListener extends BaseListener<MessageOverrideExtension> {
     public PlayerJoinQuitListener(final MessageOverrideExtension extension) {

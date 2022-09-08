@@ -2,12 +2,12 @@ package network.skulk.plugin.extensions.tpa.commands;
 
 import net.kyori.adventure.text.Component;
 import network.skulk.plugin.extensions.tpa.TPAExtension;
-import network.skulk.utils.SoundPlayer;
+import network.skulk.utils.EffectHelper;
 import network.skulk.wrapper.BaseCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-import static network.skulk.utils.MiniMessageFormat.*;
+import static network.skulk.utils.MiniMessageHelper.*;
 
 public final class TPAAcceptCommand extends BaseCommand<TPAExtension> {
     public TPAAcceptCommand(final TPAExtension extension) {
@@ -74,8 +74,8 @@ public final class TPAAcceptCommand extends BaseCommand<TPAExtension> {
         sendMessage(player, "green", '!', "Teleporting <b><0></b> to you...", targetName);
         sendMessage(player, "green", '!', "Teleporting you to <b><0></b>...", playerName);
 
-        SoundPlayer.playTeleport(target);
-        SoundPlayer.playTeleport(player);
+        EffectHelper.playTeleport(target);
+        EffectHelper.playTeleport(player);
 
         final var cancelTasks = extension.getTpaRequestCancelTasks().get(playerName);
         cancelTasks.get(targetName).cancel();
