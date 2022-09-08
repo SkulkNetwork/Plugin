@@ -40,7 +40,7 @@ public final class EntityDeathListener extends BaseListener<EntityOverrideExtens
 
         addAttribute(meta, Attribute.GENERIC_ARMOR, 8, CHEST);
         addAttribute(meta, Attribute.GENERIC_ARMOR_TOUGHNESS, 3, CHEST);
-        addAttribute(meta, Attribute.GENERIC_ARMOR_TOUGHNESS, 1, CHEST);
+        addAttribute(meta, Attribute.GENERIC_KNOCKBACK_RESISTANCE, 1, CHEST);
 
         final var lore = new ArrayList<Component>();
         // Newline.

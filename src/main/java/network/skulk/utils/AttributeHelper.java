@@ -9,6 +9,6 @@ import java.util.UUID;
 
 public abstract class AttributeHelper {
     public static void addAttribute(final ItemMeta meta, final Attribute attribute, final double level, final EquipmentSlot slot) {
-        meta.addAttributeModifier(attribute, new AttributeModifier(UUID.randomUUID(), attribute.name(), level, AttributeModifier.Operation.ADD_SCALAR, slot));
+        meta.addAttributeModifier(attribute, new AttributeModifier(UUID.randomUUID(), attribute.name(), level, AttributeModifier.Operation.ADD_NUMBER, slot));
     }
 }
