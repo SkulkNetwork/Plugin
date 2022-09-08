@@ -9,6 +9,9 @@ import org.bukkit.entity.Player;
 import static network.skulk.utils.MiniMessageFormat.*;
 
 public final class HomeListCommand extends BaseCommand<HomesExtension> {
+    public HomeListCommand(final HomesExtension extension) {
+        super(extension);
+    }
 
     @Override
     protected void init() {

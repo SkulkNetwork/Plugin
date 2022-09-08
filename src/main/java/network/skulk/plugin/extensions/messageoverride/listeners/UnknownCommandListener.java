@@ -9,6 +9,10 @@ import org.bukkit.event.command.UnknownCommandEvent;
 import static network.skulk.utils.MiniMessageFormat.makeMessage;
 
 public final class UnknownCommandListener extends BaseListener<MessageOverrideExtension> {
+    public UnknownCommandListener(final MessageOverrideExtension extension) {
+        super(extension);
+    }
+
     @EventHandler(priority = EventPriority.LOWEST)
     public void onUnknownCommand(final UnknownCommandEvent event) {
         event.message(makeMessage("red", '!', "Unknown command: <0>", event.getCommandLine()));

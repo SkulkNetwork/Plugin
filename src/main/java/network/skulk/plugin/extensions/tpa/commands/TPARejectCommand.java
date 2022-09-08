@@ -9,6 +9,9 @@ import org.bukkit.entity.Player;
 import static network.skulk.utils.MiniMessageFormat.*;
 
 public final class TPARejectCommand extends BaseCommand<TPAExtension> {
+    public TPARejectCommand(final TPAExtension extension) {
+        super(extension);
+    }
 
     @Override
     protected void init() {

@@ -42,6 +42,10 @@ public final class EntityDeathListener extends BaseListener<EntityOverrideExtens
 
     private @Nullable Player lastDragonDamager = null;
 
+    public EntityDeathListener(final EntityOverrideExtension extension) {
+        super(extension);
+    }
+
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     public void onEntityDamageByEntity(final EntityDamageByEntityEvent event) {
         final var damager = event.getDamager();

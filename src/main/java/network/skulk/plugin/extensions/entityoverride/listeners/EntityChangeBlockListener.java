@@ -8,6 +8,10 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityChangeBlockEvent;
 
 public final class EntityChangeBlockListener extends BaseListener<EntityOverrideExtension> {
+    public EntityChangeBlockListener(final EntityOverrideExtension extension) {
+        super(extension);
+    }
+
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     public void onEnderManGrief(final EntityChangeBlockEvent event) {
         if (event.getEntityType() == EntityType.ENDERMAN) {

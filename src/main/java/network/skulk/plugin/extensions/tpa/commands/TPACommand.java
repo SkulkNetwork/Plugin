@@ -10,6 +10,10 @@ import java.util.HashMap;
 import static network.skulk.utils.MiniMessageFormat.sendMessage;
 
 public final class TPACommand extends BaseCommand<TPAExtension> {
+    public TPACommand(final TPAExtension extension) {
+        super(extension);
+    }
+
     @Override
     protected void init() {
         this.name = "tpa";

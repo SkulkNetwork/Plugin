@@ -3,9 +3,9 @@ package network.skulk.wrapper;
 import org.bukkit.event.Listener;
 
 public abstract class BaseListener<E extends BaseExtension> implements Listener {
-    private E extension;
+    private final E extension;
 
-    public final void init(final E extension) {
+    public BaseListener(final E extension) {
         this.extension = extension;
         this.extension.getPlugin().registerListener(this);
     }

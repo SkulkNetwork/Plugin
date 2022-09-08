@@ -8,6 +8,10 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityExplodeEvent;
 
 public final class EntityExplodeListener extends BaseListener<EntityOverrideExtension> {
+    public EntityExplodeListener(final EntityOverrideExtension extension) {
+        super(extension);
+    }
+
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     public void onEntityExplode(final EntityExplodeEvent event) {
         if (event.getEntityType() == EntityType.CREEPER) {

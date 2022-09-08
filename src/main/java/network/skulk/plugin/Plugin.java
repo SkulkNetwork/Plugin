@@ -10,9 +10,9 @@ public final class Plugin extends BasePlugin {
 
     @Override
     protected void initExtensions() {
-        new EntityOverrideExtension().init(this);
-        new HomesExtension().init(this);
-        new MessageOverrideExtension().init(this);
-        new TPAExtension().init(this);
+        new EntityOverrideExtension(this);
+        new HomesExtension(this);
+        new MessageOverrideExtension(this);
+        new TPAExtension(this);
     }
 }

@@ -2,55 +2,55 @@ package network.skulk.plugin.extensions.tpa;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
+import network.skulk.plugin.Plugin;
 import network.skulk.plugin.extensions.tpa.commands.*;
 import network.skulk.plugin.extensions.tpa.listeners.PlayerQuitListener;
+import network.skulk.utils.FileHelper;
+import network.skulk.utils.Singletons;
 import network.skulk.wrapper.BaseExtension;
 import org.bukkit.scheduler.BukkitTask;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
-import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
-
-import static network.skulk.utils.FileHelper.createFile;
-import static network.skulk.utils.Singletons.getYaml;
 
 public final class TPAExtension extends BaseExtension {
     // Vs want to TPA to K.
     private final Multimap<String, String> tpaRequests = HashMultimap.create();
     private final Map<String, Map<String, BukkitTask>> tpaRequestCancelTasks = new HashMap<>();
 
-    private File tpaIgnoresFile;
+    private final File tpaIgnoresFile = new File(this.getPlugin().getDataFolder(), "tpaIgnores.yml");
 
     private Multimap<String, String> tpaIgnores;
 
+    public TPAExtension(final Plugin extension) {
+        super(extension);
+    }
+
     @Override
     protected void initCommands() {
-        new TPAAcceptCommand().init(this);
-        new TPACancelCommand().init(this);
-        new TPACommand().init(this);
-        new TPAIgnoreAllCommand().init(this);
-        new TPAIgnoreCommand().init(this);
-        new TPAListIgnoredCommand().init(this);
-        new TPARejectCommand().init(this);
+        new TPAAcceptCommand(this);
+        new TPACancelCommand(this);
+        new TPACommand(this);
+        new TPAIgnoreAllCommand(this);
+        new TPAIgnoreCommand(this);
+        new TPAListIgnoredCommand(this);
+        new TPARejectCommand(this);
     }
 
     @Override
     protected void initListeners() {
-        new PlayerQuitListener().init(this);
+        new PlayerQuitListener(this);
     }
 
     @Override
     protected void onEnableHook() throws Exception {
         final var plugin = this.getPlugin();
+        final var yaml = Singletons.getYaml();
 
-        this.tpaIgnoresFile = new File(plugin.getDataFolder(), "tpaIgnores.yml");
-
-        createFile(this.tpaIgnoresFile);
-
-        final var yaml = getYaml();
+        FileHelper.createFile(this.tpaIgnoresFile);
 
         this.tpaIgnores = yaml.load(new FileInputStream(this.tpaIgnoresFile));
 
@@ -69,7 +69,7 @@ public final class TPAExtension extends BaseExtension {
 
     @Override
     protected void onDisableHook() throws Exception {
-        getYaml().dump(this.tpaIgnores, new PrintWriter(this.tpaIgnoresFile));
+        Singletons.getYaml().dump(this.tpaIgnores, new FileWriter(this.tpaIgnoresFile));
     }
 
     // Getters.

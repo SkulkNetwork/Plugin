@@ -8,6 +8,9 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerRespawnEvent;
 
 public final class PlayerDeathListener extends BaseListener<HomesExtension> {
+    public PlayerDeathListener(final HomesExtension extension) {
+        super(extension);
+    }
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerDeath(final PlayerRespawnEvent event) {

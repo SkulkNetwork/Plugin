@@ -11,6 +11,10 @@ import java.util.ArrayList;
 import static network.skulk.utils.MiniMessageFormat.*;
 
 public final class TPACancelCommand extends BaseCommand<TPAExtension> {
+    public TPACancelCommand(final TPAExtension extension) {
+        super(extension);
+    }
+
     @Override
     protected void init() {
         this.name = "tpa-cancel";

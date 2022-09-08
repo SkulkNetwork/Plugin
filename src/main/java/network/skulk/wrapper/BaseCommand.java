@@ -13,15 +13,14 @@ import static network.skulk.utils.MiniMessageFormat.sendMessage;
 import static org.jetbrains.annotations.ApiStatus.OverrideOnly;
 
 public abstract class BaseCommand<E extends BaseExtension> implements CommandExecutor, TabCompleter {
+    private final E extension;
     protected int minArgs;
     protected String name;
     protected boolean playerOnly;
     protected int maxArgs;
     protected @Nullable String permission = null;
 
-    private E extension;
-
-    public final void init(final E extension) {
+    public BaseCommand(final E extension) {
         this.extension = extension;
         this.init();
         this.extension.getPlugin().registerCommand(this);

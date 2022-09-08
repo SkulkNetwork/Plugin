@@ -2,6 +2,7 @@ package network.skulk.plugin.extensions.homes.commands;
 
 import network.skulk.plugin.extensions.homes.Home;
 import network.skulk.plugin.extensions.homes.HomesExtension;
+import network.skulk.utils.SoundPlayer;
 import network.skulk.wrapper.BaseCommand;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.Nullable;
@@ -10,9 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static network.skulk.utils.MiniMessageFormat.sendMessage;
-import static network.skulk.utils.SoundPlayer.playTeleport;
 
 public final class HomeCommand extends BaseCommand<HomesExtension> {
+    public HomeCommand(final HomesExtension extension) {
+        super(extension);
+    }
 
     @Override
     public void init() {
@@ -100,7 +103,7 @@ public final class HomeCommand extends BaseCommand<HomesExtension> {
         homeName = home.name();
 
         sendMessage(player, "green", '✓', "Teleporting you to <b><0></b>...", homeName);
-        playTeleport(player);
+        SoundPlayer.playTeleport(player);
         player.teleport(home.location());
 
         return true;

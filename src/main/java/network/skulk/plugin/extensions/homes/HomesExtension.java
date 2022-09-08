@@ -2,37 +2,40 @@ package network.skulk.plugin.extensions.homes;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
+import network.skulk.plugin.Plugin;
 import network.skulk.plugin.extensions.homes.commands.HomeCommand;
 import network.skulk.plugin.extensions.homes.commands.HomeDeleteCommand;
 import network.skulk.plugin.extensions.homes.commands.HomeListCommand;
 import network.skulk.plugin.extensions.homes.commands.HomeSetCommand;
 import network.skulk.plugin.extensions.homes.listeners.PlayerDeathListener;
+import network.skulk.utils.FileHelper;
+import network.skulk.utils.Singletons;
 import network.skulk.wrapper.BaseExtension;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
-import java.io.PrintWriter;
-
-import static network.skulk.utils.FileHelper.createFile;
-import static network.skulk.utils.Singletons.getYaml;
 
 // TODO: MAYBE? check player on death and respawn them in their home.
 public final class HomesExtension extends BaseExtension {
     private File homesFile;
     private Multimap<String, Home> homes;
 
+    public HomesExtension(final Plugin plugin) {
+        super(plugin);
+    }
+
     @Override
     protected void initCommands() {
-        new HomeCommand().init(this);
-        new HomeDeleteCommand().init(this);
-        new HomeListCommand().init(this);
-        new HomeSetCommand().init(this);
+        new HomeCommand(this);
+        new HomeDeleteCommand(this);
+        new HomeListCommand(this);
+        new HomeSetCommand(this);
     }
 
     @Override
     protected void initListeners() {
-        new PlayerDeathListener().init(this);
+        new PlayerDeathListener(this);
     }
 
     @Override
@@ -41,9 +44,9 @@ public final class HomesExtension extends BaseExtension {
 
         this.homesFile = new File(plugin.getDataFolder(), "homes.yml");
 
-        createFile(this.homesFile);
+        FileHelper.createFile(this.homesFile);
 
-        final var yaml = getYaml();
+        final var yaml = Singletons.getYaml();
 
         this.homes = yaml.load(new FileInputStream(this.homesFile));
 
@@ -62,7 +65,7 @@ public final class HomesExtension extends BaseExtension {
 
     @Override
     protected void onDisableHook() throws Exception {
-        getYaml().dump(this.homes, new PrintWriter(this.homesFile));
+        Singletons.getYaml().dump(this.homes, new FileWriter(this.homesFile));
     }
 
     // Getters.

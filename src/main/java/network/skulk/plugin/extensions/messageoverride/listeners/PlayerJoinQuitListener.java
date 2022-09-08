@@ -11,6 +11,10 @@ import org.jetbrains.annotations.NotNull;
 import static network.skulk.utils.MiniMessageFormat.makeMessage;
 
 public final class PlayerJoinQuitListener extends BaseListener<MessageOverrideExtension> {
+    public PlayerJoinQuitListener(final MessageOverrideExtension extension) {
+        super(extension);
+    }
+
     @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerJoin(@NotNull final PlayerJoinEvent event) {
         event.joinMessage(makeMessage("green", '+', "<0>", event.getPlayer().getName()));

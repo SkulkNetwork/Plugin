@@ -8,6 +8,10 @@ import org.bukkit.entity.Player;
 import static network.skulk.utils.MiniMessageFormat.*;
 
 public final class TPAListIgnoredCommand extends BaseCommand<TPAExtension> {
+    public TPAListIgnoredCommand(final TPAExtension extension) {
+        super(extension);
+    }
+
     @Override
     protected void init() {
         this.name = "tpa-list-ignored";

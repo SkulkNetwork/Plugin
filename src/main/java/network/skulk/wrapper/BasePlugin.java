@@ -20,7 +20,7 @@ public abstract class BasePlugin extends JavaPlugin {
 
     @Override
     protected void initExtensions() {
-        new MyExtension().init(this);
+        new MyExtension(this);
     }
      */
     @OverrideOnly
@@ -90,10 +90,6 @@ public abstract class BasePlugin extends JavaPlugin {
 
     public final BukkitTask runAfter(final long delay, final Runnable runnable) {
         return Bukkit.getScheduler().runTaskLater(this, runnable, delay);
-    }
-
-    public final BukkitTask runAsync(final Runnable runnable) {
-        return Bukkit.getScheduler().runTaskAsynchronously(this, runnable);
     }
 
     // TODO: don't use deprecated stuff.

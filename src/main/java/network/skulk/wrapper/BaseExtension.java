@@ -3,9 +3,9 @@ package network.skulk.wrapper;
 import static org.jetbrains.annotations.ApiStatus.OverrideOnly;
 
 public abstract class BaseExtension {
-    private BasePlugin plugin;
+    private final BasePlugin plugin;
 
-    public final void init(final BasePlugin plugin) {
+    public BaseExtension(final BasePlugin plugin) {
         this.plugin = plugin;
         this.plugin.registerExtension(this);
     }
