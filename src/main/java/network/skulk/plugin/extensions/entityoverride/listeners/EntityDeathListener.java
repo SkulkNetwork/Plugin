@@ -26,18 +26,19 @@ public final class EntityDeathListener extends BaseListener<EntityOverrideExtens
     static {
         elytra = new ItemStack(Material.ELYTRA, 1);
 
-        final var elytraMeta = elytra.getItemMeta();
-        elytraMeta.displayName(fmt("<dark_purple>Dragon Master Wings</dark_purple>"));
+        final var meta = elytra.getItemMeta();
+        meta.displayName(fmt("<dark_purple>Dragon Master Wings</dark_purple>"));
 
-        elytraMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 5, true);
-        elytraMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 5, true);
-        elytraMeta.addEnchant(Enchantment.DURABILITY, 3, true);
-        elytraMeta.addEnchant(Enchantment.MENDING, 1, true);
-        elytraMeta.addEnchant(Enchantment.THORNS, 3, true);
+        meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 5, true);
+        meta.addEnchant(Enchantment.DURABILITY, 3, true);
+        meta.addEnchant(Enchantment.MENDING, 1, true);
+        meta.addEnchant(Enchantment.THORNS, 3, true);
 
         final var lore = new ArrayList<Component>();
         lore.add(fmt("<light_purple>Only true warriors can use these wings...</light_purple>"));
-        elytraMeta.lore(lore);
+        meta.lore(lore);
+
+        elytra.setItemMeta(meta);
     }
 
     private @Nullable Player lastDragonDamager = null;
