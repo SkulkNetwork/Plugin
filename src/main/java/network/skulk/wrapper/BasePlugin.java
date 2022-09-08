@@ -41,6 +41,7 @@ public abstract class BasePlugin extends JavaPlugin {
                 extension.onEnable();
             } catch (final Exception error) {
                 this.reportError("There was an error while loading '%s'. Here is the traceback:".formatted(extension.getClass().getName()), error);
+                this.extensions.remove(extension);
             }
         }
 
