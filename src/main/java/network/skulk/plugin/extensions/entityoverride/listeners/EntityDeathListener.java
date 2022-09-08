@@ -21,7 +21,7 @@ import java.util.ArrayList;
 
 import static network.skulk.utils.MiniMessageFormat.fmt;
 import static network.skulk.utils.MiniMessageFormat.sendMessage;
-import static org.bukkit.attribute.AttributeModifier.Operation.ADD_NUMBER;
+import static org.bukkit.attribute.AttributeModifier.Operation.ADD_SCALAR;
 
 // Entity.getKiller() returns null when it's the ender dragon for some reason.
 public final class EntityDeathListener extends BaseListener<EntityOverrideExtension> {
@@ -38,9 +38,9 @@ public final class EntityDeathListener extends BaseListener<EntityOverrideExtens
         meta.addEnchant(Enchantment.MENDING, 1, true);
         meta.addEnchant(Enchantment.THORNS, 3, true);
 
-        meta.addAttributeModifier(Attribute.GENERIC_ARMOR, new AttributeModifier("generic.armor", 8, ADD_NUMBER));
-        meta.addAttributeModifier(Attribute.GENERIC_ARMOR_TOUGHNESS, new AttributeModifier("generic.armor_toughness", 3, ADD_NUMBER));
-        meta.addAttributeModifier(Attribute.GENERIC_KNOCKBACK_RESISTANCE, new AttributeModifier("generic.knockback_resistance", 1, ADD_NUMBER));
+        meta.addAttributeModifier(Attribute.GENERIC_ARMOR, new AttributeModifier("generic.armor", 8, ADD_SCALAR));
+        meta.addAttributeModifier(Attribute.GENERIC_ARMOR_TOUGHNESS, new AttributeModifier("generic.armor_toughness", 3, ADD_SCALAR));
+        meta.addAttributeModifier(Attribute.GENERIC_KNOCKBACK_RESISTANCE, new AttributeModifier("generic.knockback_resistance", 1, ADD_SCALAR));
 
         final var lore = new ArrayList<Component>();
         // Newline.
