@@ -6,7 +6,6 @@ import network.skulk.plugin.extensions.entityoverride.EntityOverrideExtension;
 import network.skulk.wrapper.BaseListener;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
-import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -19,9 +18,10 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 
-import static network.skulk.utils.MiniMessageFormat.fmt;
-import static network.skulk.utils.MiniMessageFormat.sendMessage;
-import static org.bukkit.attribute.AttributeModifier.Operation.ADD_SCALAR;
+import static network.skulk.utils.AttributeHelper.addAttribute;
+import static network.skulk.utils.MiniMessageHelper.fmt;
+import static network.skulk.utils.MiniMessageHelper.sendMessage;
+import static org.bukkit.inventory.EquipmentSlot.CHEST;
 
 // Entity.getKiller() returns null when it's the ender dragon for some reason.
 public final class EntityDeathListener extends BaseListener<EntityOverrideExtension> {
@@ -38,10 +38,9 @@ public final class EntityDeathListener extends BaseListener<EntityOverrideExtens
         meta.addEnchant(Enchantment.MENDING, 1, true);
         meta.addEnchant(Enchantment.THORNS, 3, true);
 
-        // FIXME: https://media.discordapp.net/attachments/555462289851940864/1017404069679206430/unknown.png?width=882&height=496
-        meta.addAttributeModifier(Attribute.GENERIC_ARMOR, new AttributeModifier("generic.armor", 8, ADD_SCALAR));
-        meta.addAttributeModifier(Attribute.GENERIC_ARMOR_TOUGHNESS, new AttributeModifier("generic.armor_toughness", 3, ADD_SCALAR));
-        meta.addAttributeModifier(Attribute.GENERIC_KNOCKBACK_RESISTANCE, new AttributeModifier("generic.knockback_resistance", 1, ADD_SCALAR));
+        addAttribute(meta, Attribute.GENERIC_ARMOR, 8, CHEST);
+        addAttribute(meta, Attribute.GENERIC_ARMOR_TOUGHNESS, 3, CHEST);
+        addAttribute(meta, Attribute.GENERIC_ARMOR_TOUGHNESS, 1, CHEST);
 
         final var lore = new ArrayList<Component>();
         // Newline.
