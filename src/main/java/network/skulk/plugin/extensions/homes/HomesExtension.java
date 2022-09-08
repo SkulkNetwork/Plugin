@@ -18,7 +18,7 @@ import java.io.FileWriter;
 
 // TODO: MAYBE? check player on death and respawn them in their home.
 public final class HomesExtension extends BaseExtension {
-    private File homesFile;
+    private final File homesFile = new File(this.getPlugin().getDataFolder(), "homes.yml");
     private Multimap<String, Home> homes;
 
     public HomesExtension(final Plugin plugin) {
@@ -41,12 +41,9 @@ public final class HomesExtension extends BaseExtension {
     @Override
     protected void onEnableHook() throws Exception {
         final var plugin = this.getPlugin();
-
-        this.homesFile = new File(plugin.getDataFolder(), "homes.yml");
+        final var yaml = Singletons.getYaml();
 
         FileHelper.createFile(this.homesFile);
-
-        final var yaml = Singletons.getYaml();
 
         this.homes = yaml.load(new FileInputStream(this.homesFile));
 
