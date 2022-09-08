@@ -60,8 +60,7 @@ public final class EntityDeathListener extends BaseListener<EntityOverrideExtens
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     public void onEntityDamageByEntity(final EntityDamageByEntityEvent event) {
         final var damager = event.getDamager();
-        System.out.println(damager.getType());
-        System.out.println(event.getEntityType());
+
         if (damager instanceof Player player) {
             this.lastDragonDamager = player;
         }
