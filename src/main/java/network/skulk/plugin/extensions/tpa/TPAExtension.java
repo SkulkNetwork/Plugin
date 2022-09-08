@@ -7,7 +7,10 @@ import network.skulk.plugin.extensions.tpa.listeners.PlayerQuitListener;
 import network.skulk.wrapper.BaseExtension;
 import org.bukkit.scheduler.BukkitTask;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,7 +43,7 @@ public final class TPAExtension extends BaseExtension {
     }
 
     @Override
-    protected void onEnableHook() throws IOException {
+    protected void onEnableHook() throws Exception {
         final var plugin = this.getPlugin();
 
         this.tpaIgnoresFile = new File(plugin.getDataFolder(), "tpaIgnores.yml");
@@ -59,7 +62,7 @@ public final class TPAExtension extends BaseExtension {
             try {
                 yaml.dump(this.tpaIgnores, new FileWriter(this.tpaIgnoresFile));
             } catch (final Exception error) {
-                plugin.reportError("There was an error while trying to save the TPA ignores.\nHere is the traceback:", error);
+                plugin.reportError("There was an error while trying to save the TPA ignores. Here is the traceback:", error);
             }
         });
     }

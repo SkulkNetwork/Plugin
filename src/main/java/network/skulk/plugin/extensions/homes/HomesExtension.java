@@ -9,7 +9,10 @@ import network.skulk.plugin.extensions.homes.commands.HomeSetCommand;
 import network.skulk.plugin.extensions.homes.listeners.PlayerDeathListener;
 import network.skulk.wrapper.BaseExtension;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 
 import static network.skulk.utils.FileHelper.createFile;
 import static network.skulk.utils.Singletons.getYaml;
@@ -33,7 +36,7 @@ public final class HomesExtension extends BaseExtension {
     }
 
     @Override
-    protected void onEnableHook() throws IOException {
+    protected void onEnableHook() throws Exception {
         final var plugin = this.getPlugin();
 
         this.homesFile = new File(plugin.getDataFolder(), "homes.yml");
@@ -52,7 +55,7 @@ public final class HomesExtension extends BaseExtension {
             try {
                 yaml.dump(this.homes, new FileWriter(this.homesFile));
             } catch (final Exception error) {
-                plugin.reportError("There was an error while trying to save homes.\nHere is the traceback:", error);
+                plugin.reportError("There was an error while trying to save homes. Here is the traceback:", error);
             }
         });
     }
