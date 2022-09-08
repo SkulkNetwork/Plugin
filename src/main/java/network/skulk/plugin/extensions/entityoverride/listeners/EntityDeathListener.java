@@ -38,6 +38,7 @@ public final class EntityDeathListener extends BaseListener<EntityOverrideExtens
         meta.addEnchant(Enchantment.MENDING, 1, true);
         meta.addEnchant(Enchantment.THORNS, 3, true);
 
+        // FIXME: https://media.discordapp.net/attachments/555462289851940864/1017404069679206430/unknown.png?width=882&height=496
         meta.addAttributeModifier(Attribute.GENERIC_ARMOR, new AttributeModifier("generic.armor", 8, ADD_SCALAR));
         meta.addAttributeModifier(Attribute.GENERIC_ARMOR_TOUGHNESS, new AttributeModifier("generic.armor_toughness", 3, ADD_SCALAR));
         meta.addAttributeModifier(Attribute.GENERIC_KNOCKBACK_RESISTANCE, new AttributeModifier("generic.knockback_resistance", 1, ADD_SCALAR));
