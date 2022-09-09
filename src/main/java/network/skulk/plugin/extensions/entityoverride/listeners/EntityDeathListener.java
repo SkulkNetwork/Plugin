@@ -84,8 +84,8 @@ public final class EntityDeathListener extends BaseListener<EntityOverrideExtens
 
         final var playerPdc = player.getPersistentDataContainer();
         final var booleanPdt = Singletons.getBooleanPdt();
+
         if (playerPdc.getOrDefault(this.hasGottenElytraKey, booleanPdt, false)) {
-            System.out.println("Player ahs already gotten elytra.");
             return;
         }
 
@@ -110,7 +110,6 @@ public final class EntityDeathListener extends BaseListener<EntityOverrideExtens
             sendMessage(player, "light_purple", '!', "An OP elytra has been dropped at x: %.0f, y: %.0f, z: %.0f since your inventory is full and you have beat the Ender dragon.".formatted(l.getX(), l.getY(), l.getZ()));
         }
 
-        System.out.println("Player got elytra.");
         playerPdc.set(this.hasGottenElytraKey, booleanPdt, true);
     }
 }
