@@ -3,8 +3,11 @@ package network.skulk.plugin.extensions.entityoverride.listeners;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
 import network.skulk.plugin.extensions.entityoverride.EntityOverrideExtension;
+import network.skulk.utils.AttributeHelper;
+import network.skulk.utils.Singletons;
 import network.skulk.wrapper.BaseListener;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.EntityType;
@@ -13,20 +16,17 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 
-import static network.skulk.utils.AttributeHelper.addAttribute;
 import static network.skulk.utils.MiniMessageHelper.fmt;
 import static network.skulk.utils.MiniMessageHelper.sendMessage;
-import static org.bukkit.inventory.EquipmentSlot.CHEST;
 
 // Entity.getKiller() returns null when it's the ender dragon for some reason.
 public final class EntityDeathListener extends BaseListener<EntityOverrideExtension> {
-    private static final ItemStack elytra;
-
     static {
         elytra = new ItemStack(Material.ELYTRA, 1);
 
@@ -38,9 +38,9 @@ public final class EntityDeathListener extends BaseListener<EntityOverrideExtens
         meta.addEnchant(Enchantment.MENDING, 1, true);
         meta.addEnchant(Enchantment.THORNS, 3, true);
 
-        addAttribute(meta, Attribute.GENERIC_ARMOR, 8, CHEST);
-        addAttribute(meta, Attribute.GENERIC_ARMOR_TOUGHNESS, 3, CHEST);
-        addAttribute(meta, Attribute.GENERIC_KNOCKBACK_RESISTANCE, 1, CHEST);
+        AttributeHelper.addAttribute(meta, Attribute.GENERIC_ARMOR, 8, EquipmentSlot.CHEST);
+        AttributeHelper.addAttribute(meta, Attribute.GENERIC_ARMOR_TOUGHNESS, 3, EquipmentSlot.CHEST);
+        AttributeHelper.addAttribute(meta, Attribute.GENERIC_KNOCKBACK_RESISTANCE, 1, EquipmentSlot.CHEST);
 
         final var lore = new ArrayList<Component>();
         // Newline.
@@ -50,6 +50,10 @@ public final class EntityDeathListener extends BaseListener<EntityOverrideExtens
 
         elytra.setItemMeta(meta);
     }
+
+    private static final ItemStack elytra;
+
+    private final NamespacedKey hasGottenElytraKey = new NamespacedKey(this.getExtension().getPlugin(), "hasGottenElytra");
 
     private @Nullable Player lastDragonDamager = null;
 
@@ -79,6 +83,13 @@ public final class EntityDeathListener extends BaseListener<EntityOverrideExtens
             return;
         }
 
+        final var playerPdc = player.getPersistentDataContainer();
+        final var booleanPdt = Singletons.getBooleanPdt();
+        if (playerPdc.getOrDefault(this.hasGottenElytraKey, booleanPdt, false)) {
+            System.out.println("Player ahs already gotten elytra.");
+            return;
+        }
+
         final var playerInventory = player.getInventory();
         final var playerEnderChest = player.getEnderChest();
 
@@ -99,5 +110,8 @@ public final class EntityDeathListener extends BaseListener<EntityOverrideExtens
             player.getWorld().dropItem(l, elytra);
             sendMessage(player, "light_purple", '!', "An OP elytra has been dropped at x: %.0f, y: %.0f, z: %.0f since your inventory is full and you have beat the Ender dragon.".formatted(l.getX(), l.getY(), l.getZ()));
         }
+
+        System.out.println("Player got elytra.");
+        playerPdc.set(this.hasGottenElytraKey, booleanPdt, true);
     }
 }
