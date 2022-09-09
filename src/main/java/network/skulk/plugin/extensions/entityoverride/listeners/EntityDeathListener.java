@@ -27,6 +27,9 @@ import static network.skulk.utils.MiniMessageHelper.sendMessage;
 
 // Entity.getKiller() returns null when it's the ender dragon for some reason.
 public final class EntityDeathListener extends BaseListener<EntityOverrideExtension> {
+    private static final ItemStack elytra;
+    private final NamespacedKey hasGottenElytraKey = new NamespacedKey(this.getExtension().getPlugin(), "hasGottenElytra");
+
     static {
         elytra = new ItemStack(Material.ELYTRA, 1);
 
@@ -50,10 +53,6 @@ public final class EntityDeathListener extends BaseListener<EntityOverrideExtens
 
         elytra.setItemMeta(meta);
     }
-
-    private static final ItemStack elytra;
-
-    private final NamespacedKey hasGottenElytraKey = new NamespacedKey(this.getExtension().getPlugin(), "hasGottenElytra");
 
     private @Nullable Player lastDragonDamager = null;
 
