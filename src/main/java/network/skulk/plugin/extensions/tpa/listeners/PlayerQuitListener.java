@@ -11,7 +11,6 @@ public final class PlayerQuitListener extends BaseListener<TPAExtension> {
         super(extension);
     }
 
-    // LOWEST is at messageoverride.listeners.PlayerJoinQuitListener
     @EventHandler(priority = EventPriority.LOW)
     public void onPlayerQuit(final PlayerQuitEvent event) {
         final var extension = this.getExtension();

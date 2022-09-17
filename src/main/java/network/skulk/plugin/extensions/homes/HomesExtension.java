@@ -7,7 +7,7 @@ import network.skulk.plugin.extensions.homes.commands.HomeCommand;
 import network.skulk.plugin.extensions.homes.commands.HomeDeleteCommand;
 import network.skulk.plugin.extensions.homes.commands.HomeListCommand;
 import network.skulk.plugin.extensions.homes.commands.HomeSetCommand;
-import network.skulk.plugin.extensions.homes.listeners.PlayerDeathListener;
+import network.skulk.plugin.extensions.homes.listeners.RespawnOnHomeListener;
 import network.skulk.utils.FileHelper;
 import network.skulk.utils.Singletons;
 import network.skulk.wrapper.BaseExtension;
@@ -35,7 +35,7 @@ public final class HomesExtension extends BaseExtension {
 
     @Override
     protected void initListeners() {
-        new PlayerDeathListener(this);
+        new RespawnOnHomeListener(this);
     }
 
     @Override

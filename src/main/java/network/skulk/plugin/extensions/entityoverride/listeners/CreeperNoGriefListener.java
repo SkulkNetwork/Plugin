@@ -5,16 +5,16 @@ import network.skulk.wrapper.BaseListener;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
-import org.bukkit.event.entity.EntityChangeBlockEvent;
+import org.bukkit.event.entity.EntityExplodeEvent;
 
-public final class EntityChangeBlockListener extends BaseListener<EntityOverrideExtension> {
-    public EntityChangeBlockListener(final EntityOverrideExtension extension) {
+public final class CreeperNoGriefListener extends BaseListener<EntityOverrideExtension> {
+    public CreeperNoGriefListener(final EntityOverrideExtension extension) {
         super(extension);
     }
 
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
-    public void onEnderManGrief(final EntityChangeBlockEvent event) {
-        if (event.getEntityType() == EntityType.ENDERMAN) {
+    public void onEntityExplode(final EntityExplodeEvent event) {
+        if (event.getEntityType() == EntityType.CREEPER) {
             event.setCancelled(true);
         }
     }
