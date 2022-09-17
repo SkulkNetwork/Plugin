@@ -64,7 +64,7 @@ public final class TPAExtension extends BaseExtension {
             try {
                 yaml.dump(this.tpaIgnores, this.tpaIgnoresFileWriter);
             } catch (final Exception error) {
-                plugin.reportError("There was an error while trying to save the TPA ignores. Here is the traceback:", error);
+                plugin.reportError("There was an error while trying to save the TPA ignores:", error);
             }
         });
     }

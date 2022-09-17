@@ -57,7 +57,7 @@ public final class HomesExtension extends BaseExtension {
             try {
                 yaml.dump(this.homes, this.homesFileWriter);
             } catch (final Exception error) {
-                plugin.reportError("There was an error while trying to save homes. Here is the traceback:", error);
+                plugin.reportError("There was an error while trying to save homes:", error);
             }
         });
     }

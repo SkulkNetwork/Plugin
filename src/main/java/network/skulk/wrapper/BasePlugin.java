@@ -40,7 +40,7 @@ public abstract class BasePlugin extends JavaPlugin {
             try {
                 extension.onEnable();
             } catch (final Exception error) {
-                this.reportError("There was an error while loading '%s'. Here is the traceback:".formatted(extension.getClass().getName()), error);
+                this.reportError("There was an error while loading '%s':".formatted(extension.getClass().getName()), error);
                 this.extensions.remove(extension);
             }
         }
@@ -59,7 +59,7 @@ public abstract class BasePlugin extends JavaPlugin {
             try {
                 extension.onDisable();
             } catch (final Exception error) {
-                this.reportError("There was an error while unloading %s. Here is the traceback:".formatted(extension.getClass().getName()), error);
+                this.reportError("There was an error while unloading %s:".formatted(extension.getClass().getName()), error);
             }
         }
 
