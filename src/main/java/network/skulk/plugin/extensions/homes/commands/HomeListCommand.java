@@ -1,10 +1,12 @@
 package network.skulk.plugin.extensions.homes.commands;
 
 import net.kyori.adventure.text.Component;
-import network.skulk.plugin.extensions.homes.Home;
 import network.skulk.plugin.extensions.homes.HomesExtension;
 import network.skulk.wrapper.BaseCommand;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
+
+import java.util.Map;
 
 import static network.skulk.helpers.MiniMessageHelper.*;
 
@@ -23,7 +25,7 @@ public final class HomeListCommand extends BaseCommand<HomesExtension> {
 
     @Override
     protected boolean execute(final Player player) {
-        final var playerHomes = this.getExtension().getHomes().get(player.getName());
+        final var playerHomes = this.getExtension().getHomes().get(player.getUniqueId());
 
         if (playerHomes.isEmpty()) {
             sendMessage(player, "gold", '!', "You don't have any homes.");
@@ -34,10 +36,12 @@ public final class HomeListCommand extends BaseCommand<HomesExtension> {
                 makeMessage("gold", '!', "All homes:")
         );
 
-        for (final Home home : playerHomes) {
-            final var l = home.location();
+        for (final Map.Entry<String, Location> entry : playerHomes.entrySet()) {
+            final var l = entry.getValue();
 
-            component.append(fmt("\n<b><gray>-></gray></b> <color:#ffae1a><0> (X: %.0f, Y: %.0f, Z: %.0f)</color>".formatted(l.getX(), l.getY(), l.getZ()), home.name()));
+            component.append(fmt("\n<b><gray>-></gray></b> <color:#ffae1a><0> (X: %.0f, Y: %.0f, Z: %.0f)</color>".formatted(
+                    l.getX(), l.getY(), l.getZ()), entry.getKey()
+            ));
         }
 
         player.sendMessage(component);

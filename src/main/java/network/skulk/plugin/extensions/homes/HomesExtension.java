@@ -8,6 +8,7 @@ import network.skulk.plugin.extensions.homes.commands.HomeListCommand;
 import network.skulk.plugin.extensions.homes.commands.HomeSetCommand;
 import network.skulk.plugin.extensions.homes.listeners.RespawnOnHomeListener;
 import network.skulk.singletons.Singletons;
+import network.skulk.utils.UUID2CaseInsensitiveMap;
 import network.skulk.wrapper.BaseExtension;
 import org.bukkit.Location;
 
@@ -15,17 +16,13 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.TreeMap;
+import java.util.UUID;
 
 public final class HomesExtension extends BaseExtension {
     private final File homesFile = new File(this.getPlugin().getDataFolder(), "homes.yml");
-    public FileWriter homesFileWriter;
-    private Map<String, TreeMap<String, Location>> homes;
-
-    public HomesExtension(final Plugin plugin) {
-        super(plugin);
-    }
+    private FileWriter homesFileWriter;
+    private UUID2CaseInsensitiveMap<Location> homes;
 
     @Override
     protected void initCommands() {
@@ -40,6 +37,10 @@ public final class HomesExtension extends BaseExtension {
         new RespawnOnHomeListener(this);
     }
 
+    public HomesExtension(final Plugin plugin) {
+        super(plugin);
+    }
+
     @Override
     protected void onEnableHook() throws Exception {
         final var plugin = this.getPlugin();
@@ -50,7 +51,7 @@ public final class HomesExtension extends BaseExtension {
         this.homes = yaml.load(new FileInputStream(this.homesFile));
 
         if (this.homes == null) {
-            this.homes = new HashMap<>();
+            this.homes = new UUID2CaseInsensitiveMap<>();
         }
 
         this.homesFileWriter = new FileWriter(homesFile);
@@ -69,7 +70,7 @@ public final class HomesExtension extends BaseExtension {
     }
 
     // Getters.
-    public Map<String, TreeMap<String, Location>> getHomes() {
+    public HashMap<UUID, TreeMap<String, Location>> getHomes() {
         return this.homes;
     }
 }

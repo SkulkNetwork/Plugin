@@ -1,6 +1,5 @@
 package network.skulk.plugin.extensions.homes.commands;
 
-import network.skulk.plugin.extensions.homes.Home;
 import network.skulk.plugin.extensions.homes.HomesExtension;
 import network.skulk.wrapper.BaseCommand;
 import org.bukkit.entity.Player;
@@ -22,32 +21,27 @@ public final class HomeSetCommand extends BaseCommand<HomesExtension> {
 
     @Override
     protected boolean execute(final Player player, final String[] args) {
-        final var playerHomes = this.getExtension().getHomes().get(player.getName());
-        final var playerLocation = player.getLocation();
+        final var playerHomes = this.getExtension().getHomes().get(player.getUniqueId());
 
         final String homeName;
 
         if (args.length == 0) {
-            for (final Home home : playerHomes) {
+            if (playerHomes.get("home") != null) {
                 // Player already has a home named 'home'
-                if (home.name().equalsIgnoreCase("home")) {
-                    sendMessage(player, "red", '!', "You already have a default home. You need to delete that home and set it again.");
-                    return true;
-                }
+                sendMessage(player, "red", '!', "You already have a default home. You need to delete that home and set it again.");
+                return true;
             }
 
             homeName = "home";
+
         } else {
             homeName = args[0];
         }
 
-        for (final Home home : playerHomes) {
-            final var existingHomeName = home.name();
 
-            if (existingHomeName.equalsIgnoreCase(homeName)) {
-                sendMessage(player, "red", '!', "You already have a home named <b><0></b>.", existingHomeName);
-                return true;
-            }
+        if (playerHomes.get(homeName) != null) {
+            sendMessage(player, "red", '!', "You already have a home named <b><0></b>.", homeName);
+            return true;
         }
 
         if (homeName.length() >= 16) {
@@ -60,7 +54,7 @@ public final class HomeSetCommand extends BaseCommand<HomesExtension> {
             return true;
         }
 
-        playerHomes.add(new Home(homeName, playerLocation));
+        playerHomes.put(homeName, player.getLocation());
 
         sendMessage(player, "green", '✓', "Successfully created a home named <b><0></b>.", homeName);
 
