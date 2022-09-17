@@ -38,33 +38,37 @@ public abstract class BaseCommand<E extends BaseExtension> implements CommandExe
     }
 
     @OverrideOnly
-    protected @Nullable ArrayList<String> tabComplete(final @NotNull CommandSender player, final String @NotNull [] args) {
+    protected @Nullable ArrayList<String> tabComplete(final @NotNull CommandSender player, final @NotNull String[] args) {
         return null;
     }
 
     @OverrideOnly
-    protected @Nullable ArrayList<String> tabComplete(final @NotNull Player player, final String @NotNull [] args) {
+    protected @Nullable ArrayList<String> tabComplete(final @NotNull Player player, final @NotNull String[] args) {
         return null;
     }
 
     @OverrideOnly
-    protected boolean execute(final @NotNull CommandSender sender, final String @NotNull [] args) {
-        return false;
+    protected boolean execute(final @NotNull CommandSender sender, final @NotNull String[] args) {
+        sendMessage(sender, "red", '!', "You might have overriden the wrong method... <gold>(sender, args[])</gold>");
+        return true;
     }
 
     @OverrideOnly
-    protected boolean execute(final @NotNull Player player, final String @NotNull [] args) {
-        return false;
+    protected boolean execute(final @NotNull Player player, final @NotNull String[] args) {
+        sendMessage(player, "red", '!', "You might have overriden the wrong method... <gold>(player, args[])</gold>");
+        return true;
     }
 
     @OverrideOnly
     protected boolean execute(final @NotNull CommandSender sender) {
-        return false;
+        sendMessage(sender, "red", '!', "You might have overriden the wrong method... <gold>(sender)</gold>");
+        return true;
     }
 
     @OverrideOnly
     protected boolean execute(final @NotNull Player player) {
-        return false;
+        sendMessage(player, "red", '!', "You might have overriden the wrong method... <gold>(player)</gold>");
+        return true;
     }
 
     @Override public @Nullable List<String> onTabComplete(final @NotNull CommandSender sender, final @NotNull Command command, final @NotNull String label, final @NotNull String[] args) {
