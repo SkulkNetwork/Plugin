@@ -19,6 +19,12 @@ import java.util.HashMap;
 import java.util.UUID;
 
 public final class TPAExtension extends BaseExtension {
+    // Vs want to TPA to K.
+    private final NestedPlayerMap<BukkitTask> tpaRequests = new NestedPlayerMap<>();
+    private final File tpaIgnoresFile = new File(this.getPlugin().getDataFolder(), "tpaIgnores.yml");
+    private Multimap<UUID, String> tpaIgnores;
+    private FileWriter tpaIgnoresFileWriter;
+
     @Override
     protected void initCommands() {
         new TPAAcceptCommand(this);
@@ -35,18 +41,8 @@ public final class TPAExtension extends BaseExtension {
         new PlayerQuitListener(this);
     }
 
-    // Vs want to TPA to K.
-    private final NestedPlayerMap<BukkitTask> tpaRequests = new NestedPlayerMap<>();
-    private final File tpaIgnoresFile = new File(this.getPlugin().getDataFolder(), "tpaIgnores.yml");
-    private Multimap<UUID, String> tpaIgnores;
-    private FileWriter tpaIgnoresFileWriter;
-
     public TPAExtension(final Plugin extension) {
         super(extension);
-    }
-
-    public HashMap<Player, HashMap<Player, BukkitTask>> getTpaRequests() {
-        return this.tpaRequests;
     }
 
     @Override
@@ -75,6 +71,10 @@ public final class TPAExtension extends BaseExtension {
     @Override
     protected void onDisableHook() {
         Singletons.getYaml().dump(this.tpaIgnores, this.tpaIgnoresFileWriter);
+    }
+
+    public HashMap<Player, HashMap<Player, BukkitTask>> getTpaRequests() {
+        return this.tpaRequests;
     }
 
     public Multimap<UUID, String> getTpaIgnores() {

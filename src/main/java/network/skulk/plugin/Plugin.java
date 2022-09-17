@@ -7,7 +7,6 @@ import network.skulk.plugin.extensions.tpa.TPAExtension;
 import network.skulk.wrapper.BasePlugin;
 
 public final class Plugin extends BasePlugin {
-
     @Override
     protected void initExtensions() {
         new EntityOverrideExtension(this);

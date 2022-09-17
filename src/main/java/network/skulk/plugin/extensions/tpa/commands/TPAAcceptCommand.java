@@ -22,7 +22,6 @@ public final class TPAAcceptCommand extends BaseCommand<TPAExtension> {
         this.minArgs = 0;
     }
 
-
     @Override
     protected boolean execute(final Player player, final String[] args) {
         final var playerIncomingRequests = this.getExtension().getTpaRequests().get(player);

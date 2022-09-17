@@ -14,16 +14,16 @@ import java.util.Map;
 import static network.skulk.helpers.MiniMessageHelper.*;
 
 public final class TPACancelCommand extends BaseCommand<TPAExtension> {
+    public TPACancelCommand(final TPAExtension extension) {
+        super(extension);
+    }
+
     @Override
     protected void init() {
         this.name = "tpa-cancel";
         this.playerOnly = true;
         this.maxArgs = 1;
         this.minArgs = 0;
-    }
-
-    public TPACancelCommand(final TPAExtension extension) {
-        super(extension);
     }
 
     @Override

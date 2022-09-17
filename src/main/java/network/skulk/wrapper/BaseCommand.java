@@ -20,14 +20,14 @@ public abstract class BaseCommand<E extends BaseExtension> implements CommandExe
     protected int maxArgs;
     protected @Nullable String permission = null;
 
+    protected E getExtension() {
+        return this.extension;
+    }
+
     public BaseCommand(final E extension) {
         this.extension = extension;
         this.init();
         this.extension.getPlugin().registerCommand(this);
-    }
-
-    protected E getExtension() {
-        return this.extension;
     }
 
     // aliases, playerOnly, marArgs and minArgs will be set here.

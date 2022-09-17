@@ -7,16 +7,16 @@ import org.bukkit.entity.Player;
 import static network.skulk.helpers.MiniMessageHelper.sendMessage;
 
 public final class TPAIgnoreAllCommand extends BaseCommand<TPAExtension> {
+    public TPAIgnoreAllCommand(final TPAExtension extension) {
+        super(extension);
+    }
+
     @Override
     protected void init() {
         this.name = "tpa-ignore-all";
         this.playerOnly = true;
         this.maxArgs = 0;
         this.minArgs = 0;
-    }
-
-    public TPAIgnoreAllCommand(final TPAExtension extension) {
-        super(extension);
     }
 
     @Override

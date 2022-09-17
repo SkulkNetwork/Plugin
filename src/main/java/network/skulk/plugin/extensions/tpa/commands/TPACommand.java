@@ -8,16 +8,16 @@ import org.bukkit.entity.Player;
 import static network.skulk.helpers.MiniMessageHelper.sendMessage;
 
 public final class TPACommand extends BaseCommand<TPAExtension> {
+    public TPACommand(final TPAExtension extension) {
+        super(extension);
+    }
+
     @Override
     protected void init() {
         this.name = "tpa";
         this.playerOnly = true;
         this.maxArgs = 1;
         this.minArgs = 1;
-    }
-
-    public TPACommand(final TPAExtension extension) {
-        super(extension);
     }
 
     @Override

@@ -9,16 +9,16 @@ import org.bukkit.entity.Player;
 import static network.skulk.helpers.MiniMessageHelper.*;
 
 public final class TPARejectCommand extends BaseCommand<TPAExtension> {
+    public TPARejectCommand(final TPAExtension extension) {
+        super(extension);
+    }
+
     @Override
     protected void init() {
         this.name = "tpa-reject";
         this.playerOnly = true;
         this.maxArgs = 1;
         this.minArgs = 0;
-    }
-
-    public TPARejectCommand(final TPAExtension extension) {
-        super(extension);
     }
 
     @Override
