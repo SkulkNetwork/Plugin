@@ -22,6 +22,7 @@ public final class TPAExtension extends BaseExtension {
     private final Map<String, Map<String, BukkitTask>> tpaRequestCancelTasks = new HashMap<>();
 
     private final File tpaIgnoresFile = new File(this.getPlugin().getDataFolder(), "tpaIgnores.yml");
+    private FileWriter tpaIgnoresFileWriter;
 
     private Multimap<String, String> tpaIgnores;
 
@@ -58,9 +59,10 @@ public final class TPAExtension extends BaseExtension {
             this.tpaIgnores = HashMultimap.create();
         }
 
+        this.tpaIgnoresFileWriter = new FileWriter(this.tpaIgnoresFile);
         plugin.runRepeatingAsync(30 * 60 * 20, () -> {
             try {
-                yaml.dump(this.tpaIgnores, new FileWriter(this.tpaIgnoresFile));
+                yaml.dump(this.tpaIgnores, this.tpaIgnoresFileWriter);
             } catch (final Exception error) {
                 plugin.reportError("There was an error while trying to save the TPA ignores. Here is the traceback:", error);
             }
@@ -69,7 +71,7 @@ public final class TPAExtension extends BaseExtension {
 
     @Override
     protected void onDisableHook() throws Exception {
-        Singletons.getYaml().dump(this.tpaIgnores, new FileWriter(this.tpaIgnoresFile));
+        Singletons.getYaml().dump(this.tpaIgnores, this.tpaIgnoresFileWriter);
     }
 
     // Getters.

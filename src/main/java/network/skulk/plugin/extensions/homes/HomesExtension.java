@@ -19,6 +19,7 @@ import java.io.FileWriter;
 // TODO: MAYBE? check player on death and respawn them in their home.
 public final class HomesExtension extends BaseExtension {
     private final File homesFile = new File(this.getPlugin().getDataFolder(), "homes.yml");
+    public FileWriter homesFileWriter;
     private Multimap<String, Home> homes;
 
     public HomesExtension(final Plugin plugin) {
@@ -51,9 +52,10 @@ public final class HomesExtension extends BaseExtension {
             this.homes = HashMultimap.create();
         }
 
+        this.homesFileWriter = new FileWriter(homesFile);
         plugin.runRepeatingAsync(30 * 60 * 20, () -> {
             try {
-                yaml.dump(this.homes, new FileWriter(this.homesFile));
+                yaml.dump(this.homes, this.homesFileWriter);
             } catch (final Exception error) {
                 plugin.reportError("There was an error while trying to save homes. Here is the traceback:", error);
             }
@@ -62,7 +64,7 @@ public final class HomesExtension extends BaseExtension {
 
     @Override
     protected void onDisableHook() throws Exception {
-        Singletons.getYaml().dump(this.homes, new FileWriter(this.homesFile));
+        Singletons.getYaml().dump(this.homes, this.homesFileWriter);
     }
 
     // Getters.
