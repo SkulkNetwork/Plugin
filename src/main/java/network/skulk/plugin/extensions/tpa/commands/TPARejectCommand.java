@@ -5,11 +5,12 @@ import network.skulk.plugin.extensions.tpa.TPAExtension;
 import network.skulk.wrapper.BaseCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 import static network.skulk.helpers.MiniMessageHelper.*;
 
 public final class TPARejectCommand extends BaseCommand<TPAExtension> {
-    public TPARejectCommand(final TPAExtension extension) {
+    public TPARejectCommand(final @NotNull TPAExtension extension) {
         super(extension);
     }
 
@@ -20,7 +21,7 @@ public final class TPARejectCommand extends BaseCommand<TPAExtension> {
         this.minArgs = 0;
     }
 
-    @Override protected boolean execute(final Player player, final String[] args) {
+    @Override protected boolean execute(final @NotNull Player player, final @NotNull String[] args) {
         final var extension = this.getExtension();
         final var playerIncomingRequests = extension.getTpaRequests().get(player);
 

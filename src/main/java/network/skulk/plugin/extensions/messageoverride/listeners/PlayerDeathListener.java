@@ -5,16 +5,18 @@ import network.skulk.wrapper.BaseListener;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.jetbrains.annotations.NotNull;
 
 import static network.skulk.helpers.MiniMessageHelper.makeMessageWithComponent;
 
 public final class PlayerDeathListener extends BaseListener<MessageOverrideExtension> {
-    public PlayerDeathListener(final MessageOverrideExtension extension) {
+    public PlayerDeathListener(final @NotNull MessageOverrideExtension extension) {
         super(extension);
     }
 
+    @SuppressWarnings("ConstantConditions")
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
-    public void onPlayerDeath(final PlayerDeathEvent event) {
+    public void onPlayerDeath(final @NotNull PlayerDeathEvent event) {
         event.deathMessage(makeMessageWithComponent("red", '☠', "<0>.", event.deathMessage()));
     }
 }

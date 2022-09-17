@@ -11,6 +11,7 @@ import network.skulk.utils.NestedPlayerMap;
 import network.skulk.wrapper.BaseExtension;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -22,7 +23,7 @@ public final class TPAExtension extends BaseExtension {
     // Vs want to TPA to K.
     private final NestedPlayerMap<BukkitTask> tpaRequests = new NestedPlayerMap<>();
     private final File tpaIgnoresFile = new File(this.getPlugin().getDataFolder(), "tpaIgnores.yml");
-    private Multimap<UUID, String> tpaIgnores;
+    private Multimap<@NotNull UUID, @NotNull String> tpaIgnores;
     private FileWriter tpaIgnoresFileWriter;
 
     @Override protected void initCommands() {
@@ -39,7 +40,7 @@ public final class TPAExtension extends BaseExtension {
         new PlayerQuitListener(this);
     }
 
-    public TPAExtension(final Plugin extension) {
+    public TPAExtension(final @NotNull Plugin extension) {
         super(extension);
     }
 
@@ -69,11 +70,11 @@ public final class TPAExtension extends BaseExtension {
         Singletons.getYaml().dump(this.tpaIgnores, this.tpaIgnoresFileWriter);
     }
 
-    public HashMap<Player, HashMap<Player, BukkitTask>> getTpaRequests() {
+    public @NotNull HashMap<@NotNull Player, HashMap<@NotNull Player, BukkitTask>> getTpaRequests() {
         return this.tpaRequests;
     }
 
-    public Multimap<UUID, String> getTpaIgnores() {
+    public @NotNull Multimap<@NotNull UUID, @NotNull String> getTpaIgnores() {
         return this.tpaIgnores;
     }
 }

@@ -11,17 +11,17 @@ import org.jetbrains.annotations.NotNull;
 import static network.skulk.helpers.MiniMessageHelper.makeMessage;
 
 public final class PlayerJoinQuitListener extends BaseListener<MessageOverrideExtension> {
-    public PlayerJoinQuitListener(final MessageOverrideExtension extension) {
+    public PlayerJoinQuitListener(final @NotNull MessageOverrideExtension extension) {
         super(extension);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public void onPlayerJoin(@NotNull final PlayerJoinEvent event) {
+    public void onPlayerJoin(final @NotNull PlayerJoinEvent event) {
         event.joinMessage(makeMessage("green", '+', "<0>", event.getPlayer().getName()));
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public void onPlayerQuit(@NotNull final PlayerQuitEvent event) {
+    public void onPlayerQuit(final @NotNull PlayerQuitEvent event) {
         event.quitMessage(makeMessage("red", '-', "<0>", event.getPlayer().getName()));
     }
 }

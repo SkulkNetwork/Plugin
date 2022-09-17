@@ -5,9 +5,10 @@ import network.skulk.plugin.extensions.messageoverride.listeners.PlayerDeathList
 import network.skulk.plugin.extensions.messageoverride.listeners.PlayerJoinQuitListener;
 import network.skulk.plugin.extensions.messageoverride.listeners.UnknownCommandListener;
 import network.skulk.wrapper.BaseExtension;
+import org.jetbrains.annotations.NotNull;
 
 public final class MessageOverrideExtension extends BaseExtension {
-    public MessageOverrideExtension(final Plugin plugin) {
+    public MessageOverrideExtension(final @NotNull Plugin plugin) {
         super(plugin);
     }
 

@@ -6,6 +6,7 @@ import network.skulk.wrapper.BaseCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,7 +15,7 @@ import java.util.Map;
 import static network.skulk.helpers.MiniMessageHelper.*;
 
 public final class TPACancelCommand extends BaseCommand<TPAExtension> {
-    public TPACancelCommand(final TPAExtension extension) {
+    public TPACancelCommand(final @NotNull TPAExtension extension) {
         super(extension);
     }
 
@@ -25,7 +26,7 @@ public final class TPACancelCommand extends BaseCommand<TPAExtension> {
         this.minArgs = 0;
     }
 
-    @Override protected boolean execute(final Player player, final String[] args) {
+    @Override protected boolean execute(final @NotNull Player player, final @NotNull String[] args) {
         final var playerName = player.getName();
         final Player target;
 

@@ -6,14 +6,15 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityExplodeEvent;
+import org.jetbrains.annotations.NotNull;
 
 public final class CreeperNoGriefListener extends BaseListener<EntityOverrideExtension> {
-    public CreeperNoGriefListener(final EntityOverrideExtension extension) {
+    public CreeperNoGriefListener(final @NotNull EntityOverrideExtension extension) {
         super(extension);
     }
 
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
-    public void onEntityExplode(final EntityExplodeEvent event) {
+    public void onEntityExplode(final @NotNull EntityExplodeEvent event) {
         if (event.getEntityType() == EntityType.CREEPER) {
             event.setCancelled(true);
         }

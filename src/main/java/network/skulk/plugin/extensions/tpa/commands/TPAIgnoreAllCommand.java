@@ -3,11 +3,12 @@ package network.skulk.plugin.extensions.tpa.commands;
 import network.skulk.plugin.extensions.tpa.TPAExtension;
 import network.skulk.wrapper.BaseCommand;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 import static network.skulk.helpers.MiniMessageHelper.sendMessage;
 
 public final class TPAIgnoreAllCommand extends BaseCommand<TPAExtension> {
-    public TPAIgnoreAllCommand(final TPAExtension extension) {
+    public TPAIgnoreAllCommand(final @NotNull TPAExtension extension) {
         super(extension);
     }
 
@@ -18,7 +19,7 @@ public final class TPAIgnoreAllCommand extends BaseCommand<TPAExtension> {
         this.minArgs = 0;
     }
 
-    @Override protected boolean execute(final Player player) {
+    @Override protected boolean execute(final @NotNull Player player) {
         final var playerIgnores = this.getExtension().getTpaIgnores().get(player.getUniqueId());
 
         final String message;

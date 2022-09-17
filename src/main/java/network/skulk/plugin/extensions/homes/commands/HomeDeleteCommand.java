@@ -3,11 +3,12 @@ package network.skulk.plugin.extensions.homes.commands;
 import network.skulk.plugin.extensions.homes.HomesExtension;
 import network.skulk.wrapper.BaseCommand;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 import static network.skulk.helpers.MiniMessageHelper.sendMessage;
 
 public final class HomeDeleteCommand extends BaseCommand<HomesExtension> {
-    public HomeDeleteCommand(final HomesExtension extension) {
+    public HomeDeleteCommand(final @NotNull HomesExtension extension) {
         super(extension);
     }
 
@@ -18,7 +19,7 @@ public final class HomeDeleteCommand extends BaseCommand<HomesExtension> {
         this.minArgs = 0;
     }
 
-    @Override protected boolean execute(final Player player, final String[] args) {
+    @Override protected boolean execute(final @NotNull Player player, final @NotNull String[] args) {
         final var playerHomes = this.getExtension().getHomes().get(player.getUniqueId());
 
         if (args.length == 0) {

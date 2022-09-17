@@ -5,13 +5,14 @@ import network.skulk.plugin.extensions.homes.HomesExtension;
 import network.skulk.wrapper.BaseCommand;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
 import static network.skulk.helpers.MiniMessageHelper.*;
 
 public final class HomeListCommand extends BaseCommand<HomesExtension> {
-    public HomeListCommand(final HomesExtension extension) {
+    public HomeListCommand(final @NotNull HomesExtension extension) {
         super(extension);
     }
 
@@ -22,7 +23,7 @@ public final class HomeListCommand extends BaseCommand<HomesExtension> {
         this.minArgs = 0;
     }
 
-    @Override protected boolean execute(final Player player) {
+    @Override protected boolean execute(final @NotNull Player player) {
         final var playerHomes = this.getExtension().getHomes().get(player.getUniqueId());
 
         if (playerHomes.isEmpty()) {

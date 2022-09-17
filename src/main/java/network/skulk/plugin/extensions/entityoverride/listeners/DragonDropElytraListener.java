@@ -18,6 +18,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -56,12 +57,12 @@ public final class DragonDropElytraListener extends BaseListener<EntityOverrideE
 
     private @Nullable Player lastDragonDamager = null;
 
-    public DragonDropElytraListener(final EntityOverrideExtension extension) {
+    public DragonDropElytraListener(final @NotNull EntityOverrideExtension extension) {
         super(extension);
     }
 
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
-    public void onEntityDamageByEntity(final EntityDamageByEntityEvent event) {
+    public void onEntityDamageByEntity(final @NotNull EntityDamageByEntityEvent event) {
         final var damager = event.getDamager();
 
         if (damager instanceof Player player) {
@@ -70,7 +71,7 @@ public final class DragonDropElytraListener extends BaseListener<EntityOverrideE
     }
 
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
-    public void onEntityDeath(final EntityDeathEvent event) {
+    public void onEntityDeath(final @NotNull EntityDeathEvent event) {
         if (event.getEntityType() != EntityType.ENDER_DRAGON) {
             return;
         }

@@ -6,9 +6,10 @@ import network.skulk.plugin.extensions.entityoverride.listeners.DragonDropElytra
 import network.skulk.plugin.extensions.entityoverride.listeners.EndermanNoGriefListener;
 import network.skulk.plugin.extensions.entityoverride.listeners.ExplosionDropAllListener;
 import network.skulk.wrapper.BaseExtension;
+import org.jetbrains.annotations.NotNull;
 
 public final class EntityOverrideExtension extends BaseExtension {
-    public EntityOverrideExtension(final Plugin plugin) {
+    public EntityOverrideExtension(final @NotNull Plugin plugin) {
         super(plugin);
     }
 

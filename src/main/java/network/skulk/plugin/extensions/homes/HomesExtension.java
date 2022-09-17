@@ -11,6 +11,7 @@ import network.skulk.singletons.Singletons;
 import network.skulk.utils.UUID2CaseInsensitiveMap;
 import network.skulk.wrapper.BaseExtension;
 import org.bukkit.Location;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -66,7 +67,7 @@ public final class HomesExtension extends BaseExtension {
     }
 
     // Getters.
-    public HashMap<UUID, TreeMap<String, Location>> getHomes() {
+    public @NotNull HashMap<@NotNull UUID, TreeMap<@NotNull String, Location>> getHomes() {
         return this.homes;
     }
 }
