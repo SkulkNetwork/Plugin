@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 
-import static network.skulk.utils.MiniMessageHelper.*;
+import static network.skulk.helpers.MiniMessageHelper.*;
 
 public final class TPACancelCommand extends BaseCommand<TPAExtension> {
     public TPACancelCommand(final TPAExtension extension) {

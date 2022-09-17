@@ -2,9 +2,9 @@ package network.skulk.plugin.extensions.entityoverride.listeners;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
+import network.skulk.helpers.AttributeHelper;
 import network.skulk.plugin.extensions.entityoverride.EntityOverrideExtension;
-import network.skulk.utils.AttributeHelper;
-import network.skulk.utils.Singletons;
+import network.skulk.singletons.Singletons;
 import network.skulk.wrapper.BaseListener;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -22,8 +22,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 
-import static network.skulk.utils.MiniMessageHelper.fmt;
-import static network.skulk.utils.MiniMessageHelper.sendMessage;
+import static network.skulk.helpers.MiniMessageHelper.fmt;
+import static network.skulk.helpers.MiniMessageHelper.sendMessage;
 
 // Entity.getKiller() returns null when it's the ender dragon for some reason.
 public final class DragonDropElytraListener extends BaseListener<EntityOverrideExtension> {

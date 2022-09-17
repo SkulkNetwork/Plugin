@@ -1,8 +1,8 @@
 package network.skulk.plugin.extensions.homes.commands;
 
+import network.skulk.helpers.EffectHelper;
 import network.skulk.plugin.extensions.homes.Home;
 import network.skulk.plugin.extensions.homes.HomesExtension;
-import network.skulk.utils.EffectHelper;
 import network.skulk.wrapper.BaseCommand;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.Nullable;
@@ -10,7 +10,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-import static network.skulk.utils.MiniMessageHelper.sendMessage;
+import static network.skulk.helpers.MiniMessageHelper.sendMessage;
 
 public final class HomeCommand extends BaseCommand<HomesExtension> {
     public HomeCommand(final HomesExtension extension) {

@@ -1,4 +1,4 @@
-package network.skulk.utils;
+package network.skulk.helpers;
 
 import java.io.File;
 

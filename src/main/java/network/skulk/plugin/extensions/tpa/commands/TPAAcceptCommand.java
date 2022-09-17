@@ -1,13 +1,13 @@
 package network.skulk.plugin.extensions.tpa.commands;
 
 import net.kyori.adventure.text.Component;
+import network.skulk.helpers.EffectHelper;
 import network.skulk.plugin.extensions.tpa.TPAExtension;
-import network.skulk.utils.EffectHelper;
 import network.skulk.wrapper.BaseCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-import static network.skulk.utils.MiniMessageHelper.*;
+import static network.skulk.helpers.MiniMessageHelper.*;
 
 public final class TPAAcceptCommand extends BaseCommand<TPAExtension> {
     public TPAAcceptCommand(final TPAExtension extension) {

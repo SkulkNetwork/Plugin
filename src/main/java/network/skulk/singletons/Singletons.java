@@ -1,4 +1,4 @@
-package network.skulk.utils;
+package network.skulk.singletons;
 
 import network.skulk.pdts.BooleanPDT;
 import org.yaml.snakeyaml.Yaml;

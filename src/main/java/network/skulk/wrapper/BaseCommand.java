@@ -9,7 +9,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-import static network.skulk.utils.MiniMessageHelper.sendMessage;
+import static network.skulk.helpers.MiniMessageHelper.sendMessage;
 import static org.jetbrains.annotations.ApiStatus.OverrideOnly;
 
 public abstract class BaseCommand<E extends BaseExtension> implements CommandExecutor, TabCompleter {

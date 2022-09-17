@@ -1,4 +1,4 @@
-package network.skulk.utils;
+package network.skulk.helpers;
 
 import org.bukkit.Particle;
 import org.bukkit.Sound;

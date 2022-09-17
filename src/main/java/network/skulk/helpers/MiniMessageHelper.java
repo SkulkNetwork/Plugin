@@ -1,4 +1,4 @@
-package network.skulk.utils;
+package network.skulk.helpers;
 
 import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.text.Component;

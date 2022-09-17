@@ -6,7 +6,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.PlayerDeathEvent;
 
-import static network.skulk.utils.MiniMessageHelper.makeMessageWithComponent;
+import static network.skulk.helpers.MiniMessageHelper.makeMessageWithComponent;
 
 public final class PlayerDeathListener extends BaseListener<MessageOverrideExtension> {
     public PlayerDeathListener(final MessageOverrideExtension extension) {

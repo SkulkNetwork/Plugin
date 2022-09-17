@@ -2,14 +2,14 @@ package network.skulk.plugin.extensions.homes;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
+import network.skulk.helpers.FileHelper;
 import network.skulk.plugin.Plugin;
 import network.skulk.plugin.extensions.homes.commands.HomeCommand;
 import network.skulk.plugin.extensions.homes.commands.HomeDeleteCommand;
 import network.skulk.plugin.extensions.homes.commands.HomeListCommand;
 import network.skulk.plugin.extensions.homes.commands.HomeSetCommand;
 import network.skulk.plugin.extensions.homes.listeners.RespawnOnHomeListener;
-import network.skulk.utils.FileHelper;
-import network.skulk.utils.Singletons;
+import network.skulk.singletons.Singletons;
 import network.skulk.wrapper.BaseExtension;
 
 import java.io.File;

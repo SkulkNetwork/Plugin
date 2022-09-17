@@ -4,7 +4,7 @@ import network.skulk.plugin.extensions.tpa.TPAExtension;
 import network.skulk.wrapper.BaseCommand;
 import org.bukkit.entity.Player;
 
-import static network.skulk.utils.MiniMessageHelper.sendMessage;
+import static network.skulk.helpers.MiniMessageHelper.sendMessage;
 
 public final class TPAIgnoreCommand extends BaseCommand<TPAExtension> {
     public TPAIgnoreCommand(final TPAExtension extension) {

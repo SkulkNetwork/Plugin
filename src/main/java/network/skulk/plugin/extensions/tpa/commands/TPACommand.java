@@ -7,7 +7,7 @@ import org.bukkit.entity.Player;
 
 import java.util.HashMap;
 
-import static network.skulk.utils.MiniMessageHelper.sendMessage;
+import static network.skulk.helpers.MiniMessageHelper.sendMessage;
 
 public final class TPACommand extends BaseCommand<TPAExtension> {
     public TPACommand(final TPAExtension extension) {

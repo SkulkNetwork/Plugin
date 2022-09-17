@@ -2,11 +2,11 @@ package network.skulk.plugin.extensions.tpa;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
+import network.skulk.helpers.FileHelper;
 import network.skulk.plugin.Plugin;
 import network.skulk.plugin.extensions.tpa.commands.*;
 import network.skulk.plugin.extensions.tpa.listeners.PlayerQuitListener;
-import network.skulk.utils.FileHelper;
-import network.skulk.utils.Singletons;
+import network.skulk.singletons.Singletons;
 import network.skulk.wrapper.BaseExtension;
 import org.bukkit.scheduler.BukkitTask;
 
