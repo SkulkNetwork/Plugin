@@ -18,8 +18,7 @@ public abstract class BasePlugin extends JavaPlugin {
     /*
     MUST be overriden, example:
 
-    @Override
-    protected void initExtensions() {
+    @Override protected void initExtensions() {
         new MyExtension(this);
     }
      */
