@@ -5,7 +5,7 @@ import network.skulk.wrapper.BaseCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-import java.util.HashMap;
+import java.util.TreeMap;
 
 import static network.skulk.helpers.MiniMessageHelper.sendMessage;
 
@@ -57,21 +57,19 @@ public final class TPACommand extends BaseCommand<TPAExtension> {
             }
         }
 
-        final var targetTpaRequests = extension.getTpaRequests().get(targetName);
+        final var targetTpaRequests = extension.getTpaRequests().computeIfAbsent(targetName, k -> new TreeMap<>(String.CASE_INSENSITIVE_ORDER));
 
-        if (targetTpaRequests.contains(playerName)) {
+        if (targetTpaRequests.containsKey(playerName)) {
             sendMessage(player, "red", '!', "You already have a pending request to <b><0></b>", targetName);
             return true;
         }
 
-        targetTpaRequests.add(playerName);
 
         final var finalTargetName = targetName;
         // This task will get cancelled when the player cancels their TPA request to this person
         // or the person accepts the request.
-        // Also, there is no need to remove this task from the cancel Map since it won't cause any harm (actually IDK how to remove it).
-        extension.getTpaRequestCancelTasks().computeIfAbsent(targetName, k -> new HashMap<>()).put(playerName, this.getExtension().getPlugin().runAfter(60 * 20, () -> {
-            if (targetTpaRequests.contains(playerName)) {
+        targetTpaRequests.put(playerName, this.getExtension().getPlugin().runAfter(60 * 20, () -> {
+            if (targetTpaRequests.containsKey(playerName)) {
                 targetTpaRequests.remove(playerName);
                 sendMessage(player, "gold", '!', "Your TPA request to <b><0></b> has expired.", finalTargetName);
                 sendMessage(target, "gold", '!', "The TPA request <b><0></b> has sent you has expired.", playerName);

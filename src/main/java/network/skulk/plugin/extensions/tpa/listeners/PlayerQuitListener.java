@@ -13,10 +13,10 @@ public final class PlayerQuitListener extends BaseListener<TPAExtension> {
 
     @EventHandler(priority = EventPriority.LOW)
     public void onPlayerQuit(final PlayerQuitEvent event) {
-        final var extension = this.getExtension();
         final var playerName = event.getPlayer().getName();
+        final var playerIncomingRequests = this.getExtension().getTpaRequests().get(playerName);
 
-        extension.getTpaRequests().removeAll(playerName);
-        extension.getTpaRequestCancelTasks().remove(playerName);
+        playerIncomingRequests.get(playerName).cancel();
+        playerIncomingRequests.remove(playerName);
     }
 }

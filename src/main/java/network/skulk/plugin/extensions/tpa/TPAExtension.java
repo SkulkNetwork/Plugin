@@ -15,11 +15,11 @@ import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 public final class TPAExtension extends BaseExtension {
-    // Vs want to TPA to K.
-    private final Multimap<String, String> tpaRequests = HashMultimap.create();
-    private final Map<String, Map<String, BukkitTask>> tpaRequestCancelTasks = new HashMap<>();
+    // Vs want to TPA to K. The task is the cancel request.
+    private final Map<String, TreeMap<String, BukkitTask>> tpaRequests = new HashMap<>();
 
     private final File tpaIgnoresFile = new File(this.getPlugin().getDataFolder(), "tpaIgnores.yml");
     private FileWriter tpaIgnoresFileWriter;
@@ -70,17 +70,13 @@ public final class TPAExtension extends BaseExtension {
     }
 
     @Override
-    protected void onDisableHook() throws Exception {
+    protected void onDisableHook() {
         Singletons.getYaml().dump(this.tpaIgnores, this.tpaIgnoresFileWriter);
     }
 
     // Getters.
-    public Multimap<String, String> getTpaRequests() {
+    public Map<String, TreeMap<String, BukkitTask>> getTpaRequests() {
         return this.tpaRequests;
-    }
-
-    public Map<String, Map<String, BukkitTask>> getTpaRequestCancelTasks() {
-        return this.tpaRequestCancelTasks;
     }
 
     public Multimap<String, String> getTpaIgnores() {

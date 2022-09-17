@@ -7,6 +7,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
+import java.util.TreeMap;
 
 import static network.skulk.helpers.MiniMessageHelper.*;
 
@@ -34,18 +35,18 @@ public final class TPACancelCommand extends BaseCommand<TPAExtension> {
             targetName = args[0];
 
         } else {
-            final var playerOutGoingReqs = new ArrayList<String>();
+            final var playerOutGoingRequests = new ArrayList<String>();
 
-            for (final String target : tpaRequests.keys()) {
-                if (tpaRequests.containsEntry(target, playerName)) {
-                    playerOutGoingReqs.add(target);
+            for (final String target : tpaRequests.keySet()) {
+                if (tpaRequests.get(target).containsKey(playerName)) {
+                    playerOutGoingRequests.add(target);
                 }
             }
 
-            final int prs = playerOutGoingReqs.size();
+            final int prs = playerOutGoingRequests.size();
 
             if (prs == 1) {
-                targetName = playerOutGoingReqs.get(0);
+                targetName = playerOutGoingRequests.get(0);
 
             } else if (prs == 0) {
                 sendMessage(player, "red", '!', "You have no outgoing TPA requests.");
@@ -57,7 +58,7 @@ public final class TPACancelCommand extends BaseCommand<TPAExtension> {
                 );
 
                 // Twitter.
-                for (final String toCancel : playerOutGoingReqs) {
+                for (final String toCancel : playerOutGoingRequests) {
                     component.append(fmt("\n<b><gray>-></gray></b> <blue><click:run_command:/tpa-cancel <0>><0></click></blue>", toCancel));
                 }
 
@@ -75,16 +76,15 @@ public final class TPACancelCommand extends BaseCommand<TPAExtension> {
 
         targetName = target.getName();
 
-        final var targetIncomingRequests = tpaRequests.get(targetName);
+        final var targetIncomingRequests = tpaRequests.computeIfAbsent(targetName, k -> new TreeMap<>(String.CASE_INSENSITIVE_ORDER));
 
-        if (!targetIncomingRequests.contains(playerName)) {
+        if (!targetIncomingRequests.containsKey(playerName)) {
             sendMessage(player, "red", '!', "You don't have an outgoing request to <b><0></b>.", targetName);
             return true;
         }
 
-        final var cancelTasks = this.getExtension().getTpaRequestCancelTasks().get(targetName);
-        cancelTasks.get(playerName).cancel();
-        cancelTasks.remove(playerName);
+        targetIncomingRequests.get(playerName).cancel();
+        targetIncomingRequests.remove(playerName);
 
         targetIncomingRequests.remove(playerName);
 

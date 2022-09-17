@@ -39,14 +39,14 @@ public final class TPARejectCommand extends BaseCommand<TPAExtension> {
             targetName = args[0];
 
         } else if (playerIncomingRequests.size() == 1) {
-            targetName = playerIncomingRequests.iterator().next();
+            targetName = playerIncomingRequests.firstKey();
 
         } else {
             final var component = Component.text().append(
                     makeMessage("blue", '?', "Looks like multiple people want to TPA to you, which one would you like to reject?")
             );
 
-            for (final String toReject : playerIncomingRequests) {
+            for (final String toReject : playerIncomingRequests.keySet()) {
                 component.append(fmt("\n<b><gray>-></gray></b> <red><click:run_command:/tpa-reject <0>><0></click></red>", toReject));
             }
 
@@ -64,14 +64,13 @@ public final class TPARejectCommand extends BaseCommand<TPAExtension> {
 
         targetName = target.getName();
 
-        if (!playerIncomingRequests.contains(targetName)) {
+        if (!playerIncomingRequests.containsKey(targetName)) {
             sendMessage(player, "red", '!', "<b><0></b> doesn't want to TPA to you.", targetName);
             return true;
         }
 
-        final var cancelTasks = extension.getTpaRequestCancelTasks().get(playerName);
-        cancelTasks.get(targetName).cancel();
-        cancelTasks.remove(targetName);
+        playerIncomingRequests.get(targetName).cancel();
+        playerIncomingRequests.remove(targetName);
 
         playerIncomingRequests.remove(targetName);
 
