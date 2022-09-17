@@ -7,8 +7,6 @@ import network.skulk.wrapper.BaseCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-import java.util.TreeMap;
-
 import static network.skulk.helpers.MiniMessageHelper.*;
 
 public final class TPAAcceptCommand extends BaseCommand<TPAExtension> {
@@ -27,9 +25,7 @@ public final class TPAAcceptCommand extends BaseCommand<TPAExtension> {
 
     @Override
     protected boolean execute(final Player player, final String[] args) {
-        final var playerName = player.getName();
-        final var extension = this.getExtension();
-        final var playerIncomingRequests = extension.getTpaRequests().computeIfAbsent(playerName, k -> new TreeMap<>(String.CASE_INSENSITIVE_ORDER));
+        final var playerIncomingRequests = this.getExtension().getTpaRequests().get(player);
 
         if (playerIncomingRequests.isEmpty()) {
             sendMessage(player, "red", '!', "You have no incoming TPA requests.");
@@ -37,21 +33,25 @@ public final class TPAAcceptCommand extends BaseCommand<TPAExtension> {
         }
 
         final Player target;
-        String targetName;
 
         if (args.length == 1) {
-            targetName = args[0];
+            target = Bukkit.getPlayer(args[0]);
+
+            if (target == null) {
+                sendMessage(player, "red", '!', "This player is offline.");
+                return true;
+            }
 
         } else if (playerIncomingRequests.size() == 1) {
-            targetName = playerIncomingRequests.firstKey();
+            target = playerIncomingRequests.keySet().iterator().next();
 
         } else {
             final var component = Component.text().append(
                     makeMessage("blue", '?', "Looks like multiple people want to TPA to you, which one would you like to accept?")
             );
 
-            for (final String toAccept : playerIncomingRequests.keySet()) {
-                component.append(fmt("\n<b><gray>-></gray></b> <green><click:run_command:/tpa-accept <0>><0></click></green>", toAccept));
+            for (final Player toAccept : playerIncomingRequests.keySet()) {
+                component.append(fmt("\n<b><gray>-></gray></b> <green><click:run_command:/tpa-accept <0>><0></click></green>", toAccept.getName()));
             }
 
             player.sendMessage(component);
@@ -59,30 +59,23 @@ public final class TPAAcceptCommand extends BaseCommand<TPAExtension> {
             return true;
         }
 
-        target = Bukkit.getPlayer(targetName);
+        final var targetName = target.getName();
 
-        if (target == null) {
-            sendMessage(player, "red", '!', "This player is offline.");
-            return true;
-        }
-
-        targetName = target.getName();
-
-        if (!playerIncomingRequests.containsKey(targetName)) {
+        if (!playerIncomingRequests.containsKey(target)) {
             sendMessage(player, "red", '!', "<b><0></b> doesn't want to TPA to you.", targetName);
             return true;
         }
 
         sendMessage(player, "green", '!', "Teleporting <b><0></b> to you...", targetName);
-        sendMessage(player, "green", '!', "Teleporting you to <b><0></b>...", playerName);
+        sendMessage(player, "green", '!', "Teleporting you to <b><0></b>...", player.getName());
 
         EffectHelper.playTeleport(target);
         EffectHelper.playTeleport(player);
 
-        playerIncomingRequests.get(targetName).cancel();
+        playerIncomingRequests.get(target).cancel();
+        playerIncomingRequests.remove(target);
 
         target.teleport(player);
-        playerIncomingRequests.remove(targetName);
 
         return true;
     }

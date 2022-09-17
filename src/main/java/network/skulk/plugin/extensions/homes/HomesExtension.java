@@ -1,7 +1,5 @@
 package network.skulk.plugin.extensions.homes;
 
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Multimap;
 import network.skulk.helpers.FileHelper;
 import network.skulk.plugin.Plugin;
 import network.skulk.plugin.extensions.homes.commands.HomeCommand;
@@ -11,16 +9,19 @@ import network.skulk.plugin.extensions.homes.commands.HomeSetCommand;
 import network.skulk.plugin.extensions.homes.listeners.RespawnOnHomeListener;
 import network.skulk.singletons.Singletons;
 import network.skulk.wrapper.BaseExtension;
+import org.bukkit.Location;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
 
-// TODO: MAYBE? check player on death and respawn them in their home.
 public final class HomesExtension extends BaseExtension {
     private final File homesFile = new File(this.getPlugin().getDataFolder(), "homes.yml");
     public FileWriter homesFileWriter;
-    private Multimap<String, Home> homes;
+    private Map<String, TreeMap<String, Location>> homes;
 
     public HomesExtension(final Plugin plugin) {
         super(plugin);
@@ -49,7 +50,7 @@ public final class HomesExtension extends BaseExtension {
         this.homes = yaml.load(new FileInputStream(this.homesFile));
 
         if (this.homes == null) {
-            this.homes = HashMultimap.create();
+            this.homes = new HashMap<>();
         }
 
         this.homesFileWriter = new FileWriter(homesFile);
@@ -63,12 +64,12 @@ public final class HomesExtension extends BaseExtension {
     }
 
     @Override
-    protected void onDisableHook() throws Exception {
+    protected void onDisableHook() {
         Singletons.getYaml().dump(this.homes, this.homesFileWriter);
     }
 
     // Getters.
-    public Multimap<String, Home> getHomes() {
+    public Map<String, TreeMap<String, Location>> getHomes() {
         return this.homes;
     }
 }

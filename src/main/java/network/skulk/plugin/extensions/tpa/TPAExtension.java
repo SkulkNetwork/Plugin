@@ -7,29 +7,18 @@ import network.skulk.plugin.Plugin;
 import network.skulk.plugin.extensions.tpa.commands.*;
 import network.skulk.plugin.extensions.tpa.listeners.PlayerQuitListener;
 import network.skulk.singletons.Singletons;
+import network.skulk.utils.NestedPlayerMap;
 import network.skulk.wrapper.BaseExtension;
+import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.util.HashMap;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.UUID;
 
 public final class TPAExtension extends BaseExtension {
-    // Vs want to TPA to K. The task is the cancel request.
-    private final Map<String, TreeMap<String, BukkitTask>> tpaRequests = new HashMap<>();
-
-    private final File tpaIgnoresFile = new File(this.getPlugin().getDataFolder(), "tpaIgnores.yml");
-    private FileWriter tpaIgnoresFileWriter;
-
-    private Multimap<String, String> tpaIgnores;
-
-    public TPAExtension(final Plugin extension) {
-        super(extension);
-    }
-
     @Override
     protected void initCommands() {
         new TPAAcceptCommand(this);
@@ -44,6 +33,20 @@ public final class TPAExtension extends BaseExtension {
     @Override
     protected void initListeners() {
         new PlayerQuitListener(this);
+    }
+
+    // Vs want to TPA to K.
+    private final NestedPlayerMap<BukkitTask> tpaRequests = new NestedPlayerMap<>();
+    private final File tpaIgnoresFile = new File(this.getPlugin().getDataFolder(), "tpaIgnores.yml");
+    private Multimap<UUID, String> tpaIgnores;
+    private FileWriter tpaIgnoresFileWriter;
+
+    public TPAExtension(final Plugin extension) {
+        super(extension);
+    }
+
+    public HashMap<Player, HashMap<Player, BukkitTask>> getTpaRequests() {
+        return this.tpaRequests;
     }
 
     @Override
@@ -74,12 +77,7 @@ public final class TPAExtension extends BaseExtension {
         Singletons.getYaml().dump(this.tpaIgnores, this.tpaIgnoresFileWriter);
     }
 
-    // Getters.
-    public Map<String, TreeMap<String, BukkitTask>> getTpaRequests() {
-        return this.tpaRequests;
-    }
-
-    public Multimap<String, String> getTpaIgnores() {
+    public Multimap<UUID, String> getTpaIgnores() {
         return this.tpaIgnores;
     }
 }

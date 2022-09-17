@@ -5,21 +5,19 @@ import network.skulk.wrapper.BaseCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-import java.util.TreeMap;
-
 import static network.skulk.helpers.MiniMessageHelper.sendMessage;
 
 public final class TPACommand extends BaseCommand<TPAExtension> {
-    public TPACommand(final TPAExtension extension) {
-        super(extension);
-    }
-
     @Override
     protected void init() {
         this.name = "tpa";
         this.playerOnly = true;
         this.maxArgs = 1;
         this.minArgs = 1;
+    }
+
+    public TPACommand(final TPAExtension extension) {
+        super(extension);
     }
 
     @Override
@@ -43,7 +41,7 @@ public final class TPACommand extends BaseCommand<TPAExtension> {
         }
 
         final var extension = this.getExtension();
-        final var targetIgnores = extension.getTpaIgnores().get(targetName);
+        final var targetIgnores = extension.getTpaIgnores().get(target.getUniqueId());
 
         if (targetIgnores.contains("*")) {
             sendMessage(player, "red", '!', "<b><0></b> isn't accepting TPA requests from anyone.", targetName);
@@ -57,9 +55,9 @@ public final class TPACommand extends BaseCommand<TPAExtension> {
             }
         }
 
-        final var targetTpaRequests = extension.getTpaRequests().computeIfAbsent(targetName, k -> new TreeMap<>(String.CASE_INSENSITIVE_ORDER));
+        final var targetTpaRequests = extension.getTpaRequests().get(target);
 
-        if (targetTpaRequests.containsKey(playerName)) {
+        if (targetTpaRequests.containsKey(player)) {
             sendMessage(player, "red", '!', "You already have a pending request to <b><0></b>", targetName);
             return true;
         }
@@ -68,9 +66,9 @@ public final class TPACommand extends BaseCommand<TPAExtension> {
         final var finalTargetName = targetName;
         // This task will get cancelled when the player cancels their TPA request to this person
         // or the person accepts the request.
-        targetTpaRequests.put(playerName, this.getExtension().getPlugin().runAfter(60 * 20, () -> {
-            if (targetTpaRequests.containsKey(playerName)) {
-                targetTpaRequests.remove(playerName);
+        targetTpaRequests.put(player, extension.getPlugin().runAfter(60 * 20, () -> {
+            if (targetTpaRequests.containsKey(player)) {
+                targetTpaRequests.remove(player);
                 sendMessage(player, "gold", '!', "Your TPA request to <b><0></b> has expired.", finalTargetName);
                 sendMessage(target, "gold", '!', "The TPA request <b><0></b> has sent you has expired.", playerName);
             }

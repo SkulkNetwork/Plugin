@@ -7,16 +7,16 @@ import org.bukkit.entity.Player;
 import static network.skulk.helpers.MiniMessageHelper.sendMessage;
 
 public final class TPAIgnoreCommand extends BaseCommand<TPAExtension> {
-    public TPAIgnoreCommand(final TPAExtension extension) {
-        super(extension);
-    }
-
     @Override
     protected void init() {
         this.name = "tpa-ignore";
         this.playerOnly = true;
         this.maxArgs = 1;
         this.minArgs = 1;
+    }
+
+    public TPAIgnoreCommand(final TPAExtension extension) {
+        super(extension);
     }
 
     @Override
@@ -28,23 +28,21 @@ public final class TPAIgnoreCommand extends BaseCommand<TPAExtension> {
             return true;
         }
 
-        final var playerName = player.getName();
-
-        if (targetName.equalsIgnoreCase(playerName)) {
+        if (targetName.equalsIgnoreCase(player.getName())) {
             sendMessage(player, "red", '!', "You can't ignore yourself.");
             return true;
         }
 
-        final var playerIgnores = this.getExtension().getTpaIgnores().get(playerName);
+        final var playerIgnores = this.getExtension().getTpaIgnores().get(player.getUniqueId());
 
         if (playerIgnores.contains("*")) {
             sendMessage(player, "red", '!', "You are already ignoring TPA requests from everyone.");
             return true;
         }
 
-        for (final String blockedPlayerName : playerIgnores) {
-            if (blockedPlayerName.equalsIgnoreCase(targetName)) {
-                sendMessage(player, "red", '!', "You are already ignoring TPA requests from <b><0></b>.", blockedPlayerName);
+        for (final String ignoredName : playerIgnores) {
+            if (ignoredName.equalsIgnoreCase(targetName)) {
+                sendMessage(player, "red", '!', "You are already ignoring TPA requests from <b><0></b>.", ignoredName);
                 return true;
             }
         }

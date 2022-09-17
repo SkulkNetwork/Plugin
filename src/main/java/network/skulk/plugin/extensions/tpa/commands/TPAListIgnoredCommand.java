@@ -8,10 +8,6 @@ import org.bukkit.entity.Player;
 import static network.skulk.helpers.MiniMessageHelper.*;
 
 public final class TPAListIgnoredCommand extends BaseCommand<TPAExtension> {
-    public TPAListIgnoredCommand(final TPAExtension extension) {
-        super(extension);
-    }
-
     @Override
     protected void init() {
         this.name = "tpa-list-ignored";
@@ -20,9 +16,13 @@ public final class TPAListIgnoredCommand extends BaseCommand<TPAExtension> {
         this.minArgs = 0;
     }
 
+    public TPAListIgnoredCommand(final TPAExtension extension) {
+        super(extension);
+    }
+
     @Override
     protected boolean execute(final Player player) {
-        final var playerIgnores = this.getExtension().getTpaIgnores().get(player.getName());
+        final var playerIgnores = this.getExtension().getTpaIgnores().get(player.getUniqueId());
 
         if (playerIgnores.isEmpty()) {
             sendMessage(player, "gold", '!', "You aren't ignoring anyone's TPA requests.");
