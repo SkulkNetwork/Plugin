@@ -1,17 +1,19 @@
 package network.skulk.wrapper;
 
+import org.jetbrains.annotations.NotNull;
+
 import static org.jetbrains.annotations.ApiStatus.OverrideOnly;
 
 public abstract class BaseExtension {
     private final BasePlugin plugin;
 
-    public final BasePlugin getPlugin() {
-        return this.plugin;
-    }
-
-    public BaseExtension(final BasePlugin plugin) {
+    public BaseExtension(final @NotNull BasePlugin plugin) {
         this.plugin = plugin;
         this.plugin.registerExtension(this);
+    }
+
+    public final @NotNull BasePlugin getPlugin() {
+        return this.plugin;
     }
 
     @OverrideOnly

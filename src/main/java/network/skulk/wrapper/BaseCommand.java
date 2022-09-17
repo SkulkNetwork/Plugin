@@ -5,8 +5,10 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static network.skulk.helpers.MiniMessageHelper.sendMessage;
@@ -20,14 +22,14 @@ public abstract class BaseCommand<E extends BaseExtension> implements CommandExe
     protected int maxArgs;
     protected @Nullable String permission = null;
 
-    protected E getExtension() {
-        return this.extension;
-    }
-
-    public BaseCommand(final E extension) {
+    public BaseCommand(final @NotNull E extension) {
         this.extension = extension;
         this.init();
         this.extension.getPlugin().registerCommand(this);
+    }
+
+    protected @NotNull E getExtension() {
+        return this.extension;
     }
 
     // aliases, playerOnly, marArgs and minArgs will be set here.
@@ -35,41 +37,38 @@ public abstract class BaseCommand<E extends BaseExtension> implements CommandExe
     protected void init() {
     }
 
-    @Nullable
     @OverrideOnly
-    protected List<String> tabComplete(final CommandSender player, final String[] args) {
-        return null;
-    }
-
-    @Nullable
-    @OverrideOnly
-    protected List<String> tabComplete(final Player player, final String[] args) {
+    protected @Nullable ArrayList<String> tabComplete(final @NotNull CommandSender player, final String @NotNull [] args) {
         return null;
     }
 
     @OverrideOnly
-    protected boolean execute(final CommandSender sender, final String[] args) {
+    protected @Nullable ArrayList<String> tabComplete(final @NotNull Player player, final String @NotNull [] args) {
+        return null;
+    }
+
+    @OverrideOnly
+    protected boolean execute(final @NotNull CommandSender sender, final String @NotNull [] args) {
         return false;
     }
 
     @OverrideOnly
-    protected boolean execute(final Player player, final String[] args) {
+    protected boolean execute(final @NotNull Player player, final String @NotNull [] args) {
         return false;
     }
 
     @OverrideOnly
-    protected boolean execute(final CommandSender sender) {
+    protected boolean execute(final @NotNull CommandSender sender) {
         return false;
     }
 
     @OverrideOnly
-    protected boolean execute(final Player player) {
+    protected boolean execute(final @NotNull Player player) {
         return false;
     }
 
-    @Nullable
     @Override
-    public List<String> onTabComplete(final CommandSender sender, final Command command, final String label, final String[] args) {
+    public @Nullable List<String> onTabComplete(final @NotNull CommandSender sender, final @NotNull Command command, final @NotNull String label, final @NotNull String[] args) {
         if (this.playerOnly) {
             return tabComplete((Player) sender, args);
 
@@ -79,7 +78,7 @@ public abstract class BaseCommand<E extends BaseExtension> implements CommandExe
     }
 
     @Override
-    public final boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] args) {
+    public final boolean onCommand(final @NotNull CommandSender sender, final @NotNull Command command, final @NotNull String label, final @NotNull String[] args) {
         if (this.playerOnly && !(sender instanceof Player)) {
             sendMessage(sender, "red", '!', "This command can only be used by players.");
             return true;

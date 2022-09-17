@@ -7,7 +7,6 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static network.skulk.helpers.MiniMessageHelper.sendMessage;
 
@@ -25,7 +24,7 @@ public final class HomeCommand extends BaseCommand<HomesExtension> {
     }
 
     @Override
-    protected List<String> tabComplete(final Player player, final String[] args) {
+    protected ArrayList<String> tabComplete(final Player player, final String[] args) {
         if (args.length > 1) {
             return null;
         }

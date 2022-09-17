@@ -3,6 +3,7 @@ package network.skulk.wrapper;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -69,11 +70,11 @@ public abstract class BasePlugin extends JavaPlugin {
 
     // Public utilities.
 
-    public final void registerExtension(final BaseExtension extension) {
+    public final void registerExtension(final @NotNull BaseExtension extension) {
         this.extensions.add(extension);
     }
 
-    public final void registerCommand(final BaseCommand<?> command) {
+    public final void registerCommand(final @NotNull BaseCommand<?> command) {
         final var cmd = this.getCommand(command.name);
 
         if (cmd != null) {
@@ -84,20 +85,20 @@ public abstract class BasePlugin extends JavaPlugin {
         this.reportError("The command '%s' could not be registered because it was not included in the plugin.yml.".formatted(command.name));
     }
 
-    public final void registerListener(final BaseListener<?> listener) {
+    public final void registerListener(final @NotNull BaseListener<?> listener) {
         Bukkit.getPluginManager().registerEvents(listener, this);
     }
 
-    public final BukkitTask runAfter(final long delay, final Runnable runnable) {
+    public final @NotNull BukkitTask runAfter(final long delay, final @NotNull Runnable runnable) {
         return Bukkit.getScheduler().runTaskLater(this, runnable, delay);
     }
 
     // TODO: don't use deprecated stuff.
-    public final void runRepeatingAsync(final long interval, final Runnable runnable) {
+    public final void runRepeatingAsync(final long interval, final @NotNull Runnable runnable) {
         Bukkit.getScheduler().scheduleAsyncRepeatingTask(this, runnable, interval, interval);
     }
 
-    public final void reportError(final String message, final @Nullable Throwable error) {
+    public final void reportError(final @NotNull String message, final @Nullable Throwable error) {
         if (error == null) {
             this.getLogger().severe(message);
 
@@ -106,7 +107,7 @@ public abstract class BasePlugin extends JavaPlugin {
         }
     }
 
-    public final void reportError(final String message) {
+    public final void reportError(final @NotNull String message) {
         this.reportError(message, null);
     }
 }

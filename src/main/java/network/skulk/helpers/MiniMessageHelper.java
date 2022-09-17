@@ -6,9 +6,10 @@ import net.kyori.adventure.text.format.Style;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
+import org.jetbrains.annotations.NotNull;
 
 public abstract class MiniMessageHelper {
-    public static Component fmt(final String text, final String... placeholders) {
+    public static @NotNull Component fmt(final @NotNull String text, final @NotNull String... placeholders) {
         final var tagResolvers = new TagResolver[placeholders.length];
 
         // Example: sendMessage(player, "red", '!', "Unparsed Input: <0>", "<red>hello");
@@ -19,17 +20,17 @@ public abstract class MiniMessageHelper {
         return MiniMessage.miniMessage().deserialize(text, tagResolvers);
     }
 
-    public static Component makeMessage(final String color, final char symbol, final String text, final String... placeholders) {
+    public static @NotNull Component makeMessage(final @NotNull String color, final char symbol, final @NotNull String text, final @NotNull String... placeholders) {
         final var template = "<bold><gray>[ <color:%s>%s</color> ]</gray></bold> <color:%s>%s</color>".formatted(color, symbol, color, text);
 
         return MiniMessageHelper.fmt(template, placeholders);
     }
 
-    public static void sendMessage(final Audience audience, final String color, final char symbol, final String text, final String... placeholders) {
+    public static void sendMessage(final @NotNull Audience audience, final @NotNull String color, final char symbol, final @NotNull String text, final @NotNull String... placeholders) {
         audience.sendMessage(MiniMessageHelper.makeMessage(color, symbol, text, placeholders));
     }
 
-    public static Component mmWithComponent(final String text, final Component... components) {
+    public static @NotNull Component mmWithComponent(final @NotNull String text, final @NotNull Component @NotNull ... components) {
         final var tagResolvers = new TagResolver[components.length];
 
         // Example: fmt("My Component: <0>", event.getMessage());
@@ -41,7 +42,7 @@ public abstract class MiniMessageHelper {
         return MiniMessage.miniMessage().deserialize(text, tagResolvers);
     }
 
-    public static Component makeMessageWithComponent(final String color, final char symbol, final String text, final Component... components) {
+    public static @NotNull Component makeMessageWithComponent(final @NotNull String color, final char symbol, final @NotNull String text, final @NotNull Component... components) {
         final var template = "<bold><gray>[ <color:%s>%s</color> ]</gray></bold> <color:%s>%s</color>".formatted(color, symbol, color, text);
 
         return MiniMessageHelper.mmWithComponent(template, components);
