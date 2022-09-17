@@ -13,16 +13,14 @@ public final class TPARejectCommand extends BaseCommand<TPAExtension> {
         super(extension);
     }
 
-    @Override
-    protected void init() {
+    @Override protected void init() {
         this.name = "tpa-reject";
         this.playerOnly = true;
         this.maxArgs = 1;
         this.minArgs = 0;
     }
 
-    @Override
-    protected boolean execute(final Player player, final String[] args) {
+    @Override protected boolean execute(final Player player, final String[] args) {
         final var extension = this.getExtension();
         final var playerIncomingRequests = extension.getTpaRequests().get(player);
 

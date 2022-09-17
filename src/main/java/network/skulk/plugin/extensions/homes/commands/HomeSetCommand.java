@@ -11,16 +11,14 @@ public final class HomeSetCommand extends BaseCommand<HomesExtension> {
         super(extension);
     }
 
-    @Override
-    protected void init() {
+    @Override protected void init() {
         this.name = "home-set";
         this.playerOnly = true;
         this.maxArgs = 1;
         this.minArgs = 0;
     }
 
-    @Override
-    protected boolean execute(final Player player, final String[] args) {
+    @Override protected boolean execute(final Player player, final String[] args) {
         final var playerHomes = this.getExtension().getHomes().get(player.getUniqueId());
 
         final String homeName;

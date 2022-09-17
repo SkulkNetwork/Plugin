@@ -25,8 +25,7 @@ public final class TPAExtension extends BaseExtension {
     private Multimap<UUID, String> tpaIgnores;
     private FileWriter tpaIgnoresFileWriter;
 
-    @Override
-    protected void initCommands() {
+    @Override protected void initCommands() {
         new TPAAcceptCommand(this);
         new TPACancelCommand(this);
         new TPACommand(this);
@@ -36,8 +35,7 @@ public final class TPAExtension extends BaseExtension {
         new TPARejectCommand(this);
     }
 
-    @Override
-    protected void initListeners() {
+    @Override protected void initListeners() {
         new PlayerQuitListener(this);
     }
 
@@ -45,8 +43,7 @@ public final class TPAExtension extends BaseExtension {
         super(extension);
     }
 
-    @Override
-    protected void onEnableHook() throws Exception {
+    @Override protected void onEnableHook() throws Exception {
         final var plugin = this.getPlugin();
         final var yaml = Singletons.getYaml();
 
@@ -68,8 +65,7 @@ public final class TPAExtension extends BaseExtension {
         });
     }
 
-    @Override
-    protected void onDisableHook() {
+    @Override protected void onDisableHook() {
         Singletons.getYaml().dump(this.tpaIgnores, this.tpaIgnoresFileWriter);
     }
 

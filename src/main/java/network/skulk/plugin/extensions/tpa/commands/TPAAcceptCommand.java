@@ -14,16 +14,14 @@ public final class TPAAcceptCommand extends BaseCommand<TPAExtension> {
         super(extension);
     }
 
-    @Override
-    protected void init() {
+    @Override protected void init() {
         this.name = "tpa-accept";
         this.playerOnly = true;
         this.maxArgs = 1;
         this.minArgs = 0;
     }
 
-    @Override
-    protected boolean execute(final Player player, final String[] args) {
+    @Override protected boolean execute(final Player player, final String[] args) {
         final var playerIncomingRequests = this.getExtension().getTpaRequests().get(player);
 
         if (playerIncomingRequests.isEmpty()) {

@@ -15,16 +15,14 @@ public final class HomeCommand extends BaseCommand<HomesExtension> {
         super(extension);
     }
 
-    @Override
-    public void init() {
+    @Override public void init() {
         this.name = "home";
         this.playerOnly = true;
         this.maxArgs = 1;
         this.minArgs = 0;
     }
 
-    @Override
-    protected ArrayList<String> tabComplete(final Player player, final String[] args) {
+    @Override protected ArrayList<String> tabComplete(final Player player, final String[] args) {
         if (args.length > 1) {
             return null;
         }
@@ -34,7 +32,8 @@ public final class HomeCommand extends BaseCommand<HomesExtension> {
         if (args.length == 0) {
             query = "";
 
-        } else {
+        }
+        else {
             query = args[0];
         }
 
@@ -49,8 +48,7 @@ public final class HomeCommand extends BaseCommand<HomesExtension> {
         return results;
     }
 
-    @Override
-    protected boolean execute(final Player player, final String[] args) {
+    @Override protected boolean execute(final Player player, final String[] args) {
         final var playerHomes = this.getExtension().getHomes().get(player.getUniqueId());
         final var playerHomesSize = playerHomes.size();
 

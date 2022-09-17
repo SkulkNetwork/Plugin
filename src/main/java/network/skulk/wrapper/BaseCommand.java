@@ -67,18 +67,17 @@ public abstract class BaseCommand<E extends BaseExtension> implements CommandExe
         return false;
     }
 
-    @Override
-    public @Nullable List<String> onTabComplete(final @NotNull CommandSender sender, final @NotNull Command command, final @NotNull String label, final @NotNull String[] args) {
+    @Override public @Nullable List<String> onTabComplete(final @NotNull CommandSender sender, final @NotNull Command command, final @NotNull String label, final @NotNull String[] args) {
         if (this.playerOnly) {
             return tabComplete((Player) sender, args);
 
-        } else {
+        }
+        else {
             return tabComplete(sender, args);
         }
     }
 
-    @Override
-    public final boolean onCommand(final @NotNull CommandSender sender, final @NotNull Command command, final @NotNull String label, final @NotNull String[] args) {
+    @Override public final boolean onCommand(final @NotNull CommandSender sender, final @NotNull Command command, final @NotNull String label, final @NotNull String[] args) {
         if (this.playerOnly && !(sender instanceof Player)) {
             sendMessage(sender, "red", '!', "This command can only be used by players.");
             return true;

@@ -11,16 +11,14 @@ public final class TPAIgnoreAllCommand extends BaseCommand<TPAExtension> {
         super(extension);
     }
 
-    @Override
-    protected void init() {
+    @Override protected void init() {
         this.name = "tpa-ignore-all";
         this.playerOnly = true;
         this.maxArgs = 0;
         this.minArgs = 0;
     }
 
-    @Override
-    protected boolean execute(final Player player) {
+    @Override protected boolean execute(final Player player) {
         final var playerIgnores = this.getExtension().getTpaIgnores().get(player.getUniqueId());
 
         final String message;
@@ -29,7 +27,8 @@ public final class TPAIgnoreAllCommand extends BaseCommand<TPAExtension> {
             playerIgnores.remove("*");
             message = "You are now <b>not</b> ignoring everyone's TPA requests.";
 
-        } else {
+        }
+        else {
             playerIgnores.add("*");
             message = "You are now ignoring everyone's TPA requests.";
         }

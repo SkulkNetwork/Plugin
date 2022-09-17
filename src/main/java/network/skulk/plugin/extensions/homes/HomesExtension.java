@@ -24,16 +24,14 @@ public final class HomesExtension extends BaseExtension {
     private FileWriter homesFileWriter;
     private UUID2CaseInsensitiveMap<Location> homes;
 
-    @Override
-    protected void initCommands() {
+    @Override protected void initCommands() {
         new HomeCommand(this);
         new HomeDeleteCommand(this);
         new HomeListCommand(this);
         new HomeSetCommand(this);
     }
 
-    @Override
-    protected void initListeners() {
+    @Override protected void initListeners() {
         new RespawnOnHomeListener(this);
     }
 
@@ -41,8 +39,7 @@ public final class HomesExtension extends BaseExtension {
         super(plugin);
     }
 
-    @Override
-    protected void onEnableHook() throws Exception {
+    @Override protected void onEnableHook() throws Exception {
         final var plugin = this.getPlugin();
         final var yaml = Singletons.getYaml();
 
@@ -64,8 +61,7 @@ public final class HomesExtension extends BaseExtension {
         });
     }
 
-    @Override
-    protected void onDisableHook() {
+    @Override protected void onDisableHook() {
         Singletons.getYaml().dump(this.homes, this.homesFileWriter);
     }
 

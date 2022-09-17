@@ -12,16 +12,14 @@ public final class TPAListIgnoredCommand extends BaseCommand<TPAExtension> {
         super(extension);
     }
 
-    @Override
-    protected void init() {
+    @Override protected void init() {
         this.name = "tpa-list-ignored";
         this.playerOnly = true;
         this.maxArgs = 0;
         this.minArgs = 0;
     }
 
-    @Override
-    protected boolean execute(final Player player) {
+    @Override protected boolean execute(final Player player) {
         final var playerIgnores = this.getExtension().getTpaIgnores().get(player.getUniqueId());
 
         if (playerIgnores.isEmpty()) {

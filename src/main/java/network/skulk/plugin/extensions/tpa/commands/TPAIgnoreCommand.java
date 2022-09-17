@@ -11,16 +11,14 @@ public final class TPAIgnoreCommand extends BaseCommand<TPAExtension> {
         super(extension);
     }
 
-    @Override
-    protected void init() {
+    @Override protected void init() {
         this.name = "tpa-ignore";
         this.playerOnly = true;
         this.maxArgs = 1;
         this.minArgs = 1;
     }
 
-    @Override
-    protected boolean execute(final Player player, final String[] args) {
+    @Override protected boolean execute(final Player player, final String[] args) {
         final var targetName = args[0];
 
         if (!targetName.matches("\\w+")) {

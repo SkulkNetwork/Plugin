@@ -15,16 +15,14 @@ public final class HomeListCommand extends BaseCommand<HomesExtension> {
         super(extension);
     }
 
-    @Override
-    protected void init() {
+    @Override protected void init() {
         this.name = "home-list";
         this.playerOnly = true;
         this.maxArgs = 0;
         this.minArgs = 0;
     }
 
-    @Override
-    protected boolean execute(final Player player) {
+    @Override protected boolean execute(final Player player) {
         final var playerHomes = this.getExtension().getHomes().get(player.getUniqueId());
 
         if (playerHomes.isEmpty()) {
