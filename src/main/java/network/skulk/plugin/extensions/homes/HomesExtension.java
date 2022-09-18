@@ -16,14 +16,11 @@ import org.jetbrains.annotations.NotNull;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
-import java.util.HashMap;
-import java.util.TreeMap;
-import java.util.UUID;
 
 public final class HomesExtension extends BaseExtension {
     private final File homesFile = new File(this.getPlugin().getDataFolder(), "homes.yml");
     private FileWriter homesFileWriter;
-    private UUID2CaseInsensitiveMap<Location> homes;
+    private UUID2CaseInsensitiveMap<Location> homes = new UUID2CaseInsensitiveMap<>();
 
     @Override protected void initCommands() {
         new HomeCommand(this);
@@ -45,13 +42,6 @@ public final class HomesExtension extends BaseExtension {
         final var yaml = Singletons.getYaml();
 
         FileHelper.createFile(this.homesFile);
-
-        this.homes = yaml.load(new FileInputStream(this.homesFile));
-
-        if (this.homes == null) {
-            this.homes = new UUID2CaseInsensitiveMap<>();
-        }
-
         this.homesFileWriter = new FileWriter(homesFile);
         plugin.runRepeatingAsync(30 * 60 * 20, () -> {
             try {
@@ -60,6 +50,12 @@ public final class HomesExtension extends BaseExtension {
                 plugin.reportError("There was an error while trying to save homes:", error);
             }
         });
+
+        this.homes = yaml.load(new FileInputStream(this.homesFile));
+
+        if (this.homes == null) {
+            this.homes = new UUID2CaseInsensitiveMap<>();
+        }
     }
 
     @Override protected void onDisableHook() {
@@ -67,7 +63,7 @@ public final class HomesExtension extends BaseExtension {
     }
 
     // Getters.
-    public @NotNull HashMap<@NotNull UUID, TreeMap<@NotNull String, Location>> getHomes() {
+    public @NotNull UUID2CaseInsensitiveMap<Location> getHomes() {
         return this.homes;
     }
 }

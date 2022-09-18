@@ -15,25 +15,6 @@ public abstract class BasePlugin extends JavaPlugin {
     // Must be stored to do onDisable.
     private final ArrayList<BaseExtension> extensions = new ArrayList<>();
 
-    @Override public final void onDisable() {
-        final var logger = this.getLogger();
-        logger.info("The plugin is being unloaded...");
-
-        Bukkit.getScheduler().cancelTasks(this);
-
-        for (final BaseExtension extension : this.extensions) {
-            try {
-                extension.onDisable();
-            } catch (final Exception error) {
-                this.reportError("There was an error while unloading %s:".formatted(extension.getClass().getName()), error);
-            }
-        }
-
-        this.extensions.clear();
-
-        logger.info("The plugin has been unloaded.");
-    }
-
     // Loading mechanic.
 
     @Override public final void onEnable() {
@@ -52,6 +33,25 @@ public abstract class BasePlugin extends JavaPlugin {
         }
 
         logger.info("The plugin has been loaded.");
+    }
+
+    @Override public final void onDisable() {
+        final var logger = this.getLogger();
+        logger.info("The plugin is being unloaded...");
+
+        Bukkit.getScheduler().cancelTasks(this);
+
+        for (final BaseExtension extension : this.extensions) {
+            try {
+                extension.onDisable();
+            } catch (final Exception error) {
+                this.reportError("There was an error while unloading %s:".formatted(extension.getClass().getName()), error);
+            }
+        }
+
+        this.extensions.clear();
+
+        logger.info("The plugin has been unloaded.");
     }
 
     /*

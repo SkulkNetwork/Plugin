@@ -9,7 +9,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static network.skulk.helpers.MiniMessageHelper.sendMessage;
 import static org.jetbrains.annotations.ApiStatus.OverrideOnly;
@@ -71,7 +70,7 @@ public abstract class BaseCommand<E extends BaseExtension> implements CommandExe
         return true;
     }
 
-    @Override public @Nullable List<String> onTabComplete(final @NotNull CommandSender sender, final @NotNull Command command, final @NotNull String label, final @NotNull String[] args) {
+    @Override public @Nullable ArrayList<String> onTabComplete(final @NotNull CommandSender sender, final @NotNull Command command, final @NotNull String label, final @NotNull String[] args) {
         if (this.playerOnly) {
             return tabComplete((Player) sender, args);
 
