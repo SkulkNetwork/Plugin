@@ -2,13 +2,12 @@ package network.skulk.plugin.extensions.homes.commands;
 
 import net.kyori.adventure.text.Component;
 import network.skulk.plugin.extensions.homes.HomesExtension;
+import network.skulk.utils.ShortLocation;
 import network.skulk.wrapper.BaseCommand;
-import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Map;
-
+import static java.util.Map.Entry;
 import static network.skulk.helpers.MiniMessageHelper.*;
 
 public final class HomeListCommand extends BaseCommand<HomesExtension> {
@@ -35,11 +34,12 @@ public final class HomeListCommand extends BaseCommand<HomesExtension> {
                 makeMessage("gold", '!', "All homes:")
         );
 
-        for (final Map.Entry<String, Location> entry : playerHomes.entrySet()) {
+        for (final Entry<String, ShortLocation> entry : playerHomes.entrySet()) {
             final var l = entry.getValue();
 
-            component.append(fmt("\n<b><gray>-></gray></b> <color:#ffae1a><0> (X: %.0f, Y: %.0f, Z: %.0f)</color>".formatted(
-                    l.getX(), l.getY(), l.getZ()), entry.getKey()
+            component.append(fmt("\n<b><gray>-></gray></b> <color:#ffae1a><0> (X: %.0f, Y: %.0f, Z: %.0f)</color>"
+                            .formatted(l.getX(), l.getY(), l.getZ()),
+                    entry.getKey()
             ));
         }
 

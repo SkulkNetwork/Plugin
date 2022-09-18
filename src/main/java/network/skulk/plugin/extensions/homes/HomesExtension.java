@@ -8,9 +8,9 @@ import network.skulk.plugin.extensions.homes.commands.HomeListCommand;
 import network.skulk.plugin.extensions.homes.commands.HomeSetCommand;
 import network.skulk.plugin.extensions.homes.listeners.RespawnOnHomeListener;
 import network.skulk.singletons.Singletons;
+import network.skulk.utils.ShortLocation;
 import network.skulk.utils.UUID2CaseInsensitiveMap;
 import network.skulk.wrapper.BaseExtension;
-import org.bukkit.Location;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
@@ -20,7 +20,7 @@ import java.io.FileWriter;
 public final class HomesExtension extends BaseExtension {
     private final File homesFile = new File(this.getPlugin().getDataFolder(), "homes.yml");
     private FileWriter homesFileWriter;
-    private UUID2CaseInsensitiveMap<Location> homes = new UUID2CaseInsensitiveMap<>();
+    private UUID2CaseInsensitiveMap<ShortLocation> homes = new UUID2CaseInsensitiveMap<>();
 
     @Override protected void initCommands() {
         new HomeCommand(this);
@@ -63,7 +63,7 @@ public final class HomesExtension extends BaseExtension {
     }
 
     // Getters.
-    public @NotNull UUID2CaseInsensitiveMap<Location> getHomes() {
+    public @NotNull UUID2CaseInsensitiveMap<ShortLocation> getHomes() {
         return this.homes;
     }
 }

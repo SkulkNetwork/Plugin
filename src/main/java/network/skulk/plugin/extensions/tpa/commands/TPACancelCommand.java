@@ -10,8 +10,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
+import static java.util.Map.Entry;
 import static network.skulk.helpers.MiniMessageHelper.*;
 
 public final class TPACancelCommand extends BaseCommand<TPAExtension> {
@@ -43,7 +43,7 @@ public final class TPACancelCommand extends BaseCommand<TPAExtension> {
         } else {
             final var playerOutGoingRequests = new ArrayList<Player>();
 
-            for (final Map.Entry<Player, HashMap<Player, BukkitTask>> entry : tpaRequests.entrySet()) {
+            for (final Entry<Player, HashMap<Player, BukkitTask>> entry : tpaRequests.entrySet()) {
                 if (entry.getValue().containsKey(player)) {
                     playerOutGoingRequests.add(entry.getKey());
                 }

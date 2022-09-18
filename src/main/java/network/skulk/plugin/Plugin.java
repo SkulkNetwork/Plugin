@@ -22,7 +22,6 @@ import network.skulk.plugin.extensions.messageoverride.MessageOverrideExtension;
 import network.skulk.plugin.extensions.tpa.TPAExtension;
 import network.skulk.wrapper.BasePlugin;
 
-// TODO: Add @NotNull and @Nullable
 // TODO: Make custom maps and solve "for \(final \w+ \w+ : [\w. \(\)]+ \{\n[ ]+if"
 public final class Plugin extends BasePlugin {
     @Override protected void initExtensions() {
