@@ -39,11 +39,11 @@ public final class TPARejectCommand extends BaseCommand<TPAExtension> {
                 sendMessage(player, "red", '!', "This player is offline.");
                 return true;
             }
-
-        } else if (playerIncomingRequests.size() == 1) {
+        }
+        else if (playerIncomingRequests.size() == 1) {
             target = playerIncomingRequests.keySet().iterator().next();
-
-        } else {
+        }
+        else {
             final var component = Component.text().append(
                     makeMessage("blue", '?', "Looks like multiple people want to TPA to you, which one would you like to reject?")
             );
@@ -69,7 +69,6 @@ public final class TPARejectCommand extends BaseCommand<TPAExtension> {
 
         sendMessage(player, "green", '✓', "Rejected the TPA request from <b><0></b>.", targetName);
         sendMessage(player, "gold", '!', "<b><0></b> has rejected your TPA request.", player.getName());
-
         return true;
     }
 }

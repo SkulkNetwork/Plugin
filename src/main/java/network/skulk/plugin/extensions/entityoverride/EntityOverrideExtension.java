@@ -15,8 +15,8 @@ public final class EntityOverrideExtension extends BaseExtension {
 
     @Override protected void initListeners() {
         new CreeperNoGriefListener(this);
-        new EndermanNoGriefListener(this);
         new DragonDropElytraListener(this);
+        new EndermanNoGriefListener(this);
         new ExplosionDropAllListener(this);
     }
 }

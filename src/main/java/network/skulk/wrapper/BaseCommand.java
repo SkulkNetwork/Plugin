@@ -24,7 +24,16 @@ public abstract class BaseCommand<E extends BaseExtension> implements CommandExe
     public BaseCommand(final @NotNull E extension) {
         this.extension = extension;
         this.init();
-        this.extension.getPlugin().registerCommand(this);
+
+        final var plugin = extension.getPlugin();
+        final var command = plugin.getCommand(this.name);
+
+        if (command == null) {
+            plugin.reportError("The command '%s' could not be registered because it was not included in the plugin.yml.".formatted(this.name));
+            return;
+        }
+
+        command.setExecutor(this);
     }
 
     protected @NotNull E getExtension() {
@@ -73,7 +82,6 @@ public abstract class BaseCommand<E extends BaseExtension> implements CommandExe
     @Override public @Nullable ArrayList<String> onTabComplete(final @NotNull CommandSender sender, final @NotNull Command command, final @NotNull String label, final @NotNull String[] args) {
         if (this.playerOnly) {
             return tabComplete((Player) sender, args);
-
         }
         else {
             return tabComplete(sender, args);
@@ -106,6 +114,7 @@ public abstract class BaseCommand<E extends BaseExtension> implements CommandExe
         if (maxArgs == 0) {
             return execute(sender);
         }
+
         return execute(sender, args);
     }
 }

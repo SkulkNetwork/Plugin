@@ -23,18 +23,16 @@ public final class TPACommand extends BaseCommand<TPAExtension> {
     @Override protected boolean execute(final @NotNull Player player, final @NotNull String[] args) {
         final var playerName = player.getName();
 
-        var targetName = args[0];
-
-        final var target = Bukkit.getPlayer(targetName);
+        final var target = Bukkit.getPlayer(args[0]);
 
         if (target == null) {
             sendMessage(player, "red", '!', "This player is offline.");
             return true;
         }
 
-        targetName = target.getName();
+        final var targetName = target.getName();
 
-        if (targetName.equalsIgnoreCase(playerName)) {
+        if (target.equals(player)) {
             sendMessage(player, "red", '!', "You can't TPA to yourself.");
             return true;
         }
@@ -61,21 +59,18 @@ public final class TPACommand extends BaseCommand<TPAExtension> {
             return true;
         }
 
-
-        final var finalTargetName = targetName;
         // This task will get cancelled when the player cancels their TPA request to this person
         // or the person accepts the request.
         targetTpaRequests.put(player, extension.getPlugin().runAfter(60 * 20, () -> {
             if (targetTpaRequests.containsKey(player)) {
                 targetTpaRequests.remove(player);
-                sendMessage(player, "gold", '!', "Your TPA request to <b><0></b> has expired.", finalTargetName);
+                sendMessage(player, "gold", '!', "Your TPA request to <b><0></b> has expired.", targetName);
                 sendMessage(target, "gold", '!', "The TPA request <b><0></b> has sent you has expired.", playerName);
             }
         }));
 
         sendMessage(player, "green", '✓', "Sent a TPA request to <b><0></b>", targetName);
         sendMessage(target, "blue", '?', "<b><0></b> wants to TPA to you. Do you accept? <b><green><click:run_command:/tpa-accept %s>[✓]</click></green> <red><click:run_command:/tpa-reject %s>[✗]</click></red></b>", playerName);
-
         return true;
     }
 }

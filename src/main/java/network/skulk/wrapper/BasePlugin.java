@@ -12,10 +12,7 @@ import java.util.logging.Level;
 import static org.jetbrains.annotations.ApiStatus.OverrideOnly;
 
 public abstract class BasePlugin extends JavaPlugin {
-    // Must be stored to do onDisable.
-    private final ArrayList<BaseExtension> extensions = new ArrayList<>();
-
-    // Loading mechanic.
+    public final ArrayList<BaseExtension> extensions = new ArrayList<>();
 
     @Override public final void onEnable() {
         final var logger = this.getLogger();
@@ -65,25 +62,8 @@ public abstract class BasePlugin extends JavaPlugin {
     protected void initExtensions() {
     }
 
-    // Public utilities.
-
-    public final void registerExtension(final @NotNull BaseExtension extension) {
-        this.extensions.add(extension);
-    }
-
-    public final void registerCommand(final @NotNull BaseCommand<?> command) {
-        final var cmd = this.getCommand(command.name);
-
-        if (cmd != null) {
-            cmd.setExecutor(command);
-            return;
-        }
-
-        this.reportError("The command '%s' could not be registered because it was not included in the plugin.yml.".formatted(command.name));
-    }
-
-    public final void registerListener(final @NotNull BaseListener<?> listener) {
-        Bukkit.getPluginManager().registerEvents(listener, this);
+    public ArrayList<BaseExtension> getExtensions() {
+        return this.extensions;
     }
 
     public final @NotNull BukkitTask runAfter(final long delay, final @NotNull Runnable runnable) {
@@ -98,8 +78,8 @@ public abstract class BasePlugin extends JavaPlugin {
     public final void reportError(final @NotNull String message, final @Nullable Throwable error) {
         if (error == null) {
             this.getLogger().severe(message);
-
-        } else {
+        }
+        else {
             this.getLogger().log(Level.SEVERE, message, error);
         }
     }

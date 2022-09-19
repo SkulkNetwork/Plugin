@@ -35,12 +35,16 @@ public final class HomeListCommand extends BaseCommand<HomesExtension> {
         );
 
         for (final Entry<String, ShortLocation> entry : playerHomes.entrySet()) {
-            final var l = entry.getValue();
+            final var location = entry.getValue();
 
-            component.append(fmt("\n<b><gray>-></gray></b> <color:#ffae1a><0> (X: %.0f, Y: %.0f, Z: %.0f)</color>"
-                            .formatted(l.getX(), l.getY(), l.getZ()),
-                    entry.getKey()
-            ));
+            component.append(
+                    fmt(
+                            "\n<b><gray>-></gray></b> <color:#ffae1a><0> (X: %.0f, Y: %.0f, Z: %.0f)</color>".formatted(
+                                    location.getX(), location.getY(), location.getZ()
+                            ),
+                            entry.getKey()
+                    )
+            );
         }
 
         player.sendMessage(component);

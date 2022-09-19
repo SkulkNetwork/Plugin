@@ -26,19 +26,20 @@ public final class HomeSetCommand extends BaseCommand<HomesExtension> {
         final String homeName;
 
         if (args.length == 0) {
-            if (playerHomes.get("home") != null) {
+            if (playerHomes.containsKey("home")) {
                 // Player already has a home named 'home'
                 sendMessage(player, "red", '!', "You already have a default home. You need to delete that home and set it again.");
                 return true;
             }
 
             homeName = "home";
-        } else {
+        }
+        else {
             homeName = args[0];
         }
 
 
-        if (playerHomes.get(homeName) != null) {
+        if (playerHomes.containsKey(homeName)) {
             sendMessage(player, "red", '!', "You already have a home named <b><0></b>.", homeName);
             return true;
         }

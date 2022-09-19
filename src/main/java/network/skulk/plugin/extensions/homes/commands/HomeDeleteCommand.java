@@ -25,25 +25,23 @@ public final class HomeDeleteCommand extends BaseCommand<HomesExtension> {
         if (args.length == 0) {
             if (playerHomes.containsKey("home")) {
                 playerHomes.remove("home");
-
                 sendMessage(player, "green", '✓', "Successfully deleted your default home (default homes are named 'home').");
-
                 return true;
             }
 
             sendMessage(player, "red", '!', "Can't delete your default home because you don't have a default home (default homes are named 'home').");
             return true;
-
         }
 
         final var homeName = args[0];
 
-        if (playerHomes.containsKey(homeName)) {
-            playerHomes.remove(homeName);
-            sendMessage(player, "green", '✓', "Successfully deleted the home named <b><0></b>.", homeName);
+        if (!playerHomes.containsKey(homeName)) {
+            sendMessage(player, "red", '!', "You don't have a home named <b><0></b>.", homeName);
+            return true;
         }
 
-        sendMessage(player, "red", '!', "You don't have a home named <b><0></b>.", homeName);
+        playerHomes.remove(homeName);
+        sendMessage(player, "green", '✓', "Successfully deleted the home named <b><0></b>.", homeName);
 
         return true;
     }

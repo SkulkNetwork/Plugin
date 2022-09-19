@@ -33,16 +33,15 @@ public final class HomeCommand extends BaseCommand<HomesExtension> {
 
         if (args.length == 0) {
             query = "";
-
         }
         else {
-            query = args[0];
+            query = args[0].toLowerCase();
         }
 
         final var results = new ArrayList<String>();
 
         for (final String homeName : this.getExtension().getHomes().get(player.getUniqueId()).keySet()) {
-            if (homeName.toLowerCase().contains(query.toLowerCase())) {
+            if (homeName.toLowerCase().contains(query)) {
                 results.add(homeName);
             }
         }
@@ -60,17 +59,17 @@ public final class HomeCommand extends BaseCommand<HomesExtension> {
         if (playerHomesSize == 0) {
             sendMessage(player, "red", '!', "You don't have any homes.");
             return true;
-
-        } else if (playerHomesSize == 1 && args.length == 0) {
+        }
+        else if (args.length == 0 && playerHomesSize == 1) {
             // Gets the one and only home.
             final var home = playerHomes.firstEntry();
+
             homeLocation = home.getValue();
             homeName = home.getKey();
-
-        } else if (args.length == 0) {
+        }
+        else if (args.length == 0) {
             // There are multiple homes and player didn't specify.
             homeLocation = playerHomes.get("home");
-            homeName = "home";
 
             // Player does not have home named "home", which is the default
             if (homeLocation == null) {
@@ -78,10 +77,11 @@ public final class HomeCommand extends BaseCommand<HomesExtension> {
                 return true;
             }
 
-        } else {
+            homeName = "home";
+        }
+        else {
             // Player specified a home.
             homeName = args[0];
-
             homeLocation = playerHomes.get(homeName);
 
             if (homeLocation == null) {

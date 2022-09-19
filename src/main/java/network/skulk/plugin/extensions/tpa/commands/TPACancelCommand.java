@@ -39,8 +39,8 @@ public final class TPACancelCommand extends BaseCommand<TPAExtension> {
                 sendMessage(player, "red", '!', "This player is offline.");
                 return true;
             }
-
-        } else {
+        }
+        else {
             final var playerOutGoingRequests = new ArrayList<Player>();
 
             for (final Entry<Player, HashMap<Player, BukkitTask>> entry : tpaRequests.entrySet()) {
@@ -53,12 +53,12 @@ public final class TPACancelCommand extends BaseCommand<TPAExtension> {
 
             if (playerOutGoingRequestsSize == 1) {
                 target = playerOutGoingRequests.get(0);
-
-            } else if (playerOutGoingRequestsSize == 0) {
+            }
+            else if (playerOutGoingRequestsSize == 0) {
                 sendMessage(player, "red", '!', "You have no outgoing TPA requests.");
                 return true;
-
-            } else {
+            }
+            else {
                 final var component = Component.text().append(
                         makeMessage("blue", '!', "Looks like you have multiple incoming TPA requests. Which one would you like to cancel?")
                 );
@@ -74,7 +74,6 @@ public final class TPACancelCommand extends BaseCommand<TPAExtension> {
         }
 
         final var targetName = target.getName();
-
         final var targetIncomingRequests = tpaRequests.get(target);
 
         if (!targetIncomingRequests.containsKey(player)) {
@@ -87,7 +86,6 @@ public final class TPACancelCommand extends BaseCommand<TPAExtension> {
 
         sendMessage(player, "green", '✓', "Cancelled the TPA request going to <b><0></b>.", targetName);
         sendMessage(target, "gold", '!', "<b><0></b> has cancelled their TPA request to you.", playerName);
-
         return true;
     }
 }

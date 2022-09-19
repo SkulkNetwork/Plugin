@@ -31,6 +31,7 @@ public final class ShortLocation implements Serializable {
         if (this.location == null) {
             this.location = new Location(Objects.requireNonNull(Bukkit.getWorld(this.world)), this.x, this.y, this.z, this.yaw, this.pitch);
         }
+
         return this.location;
     }
 

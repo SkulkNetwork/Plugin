@@ -39,21 +39,22 @@ public final class TPAAcceptCommand extends BaseCommand<TPAExtension> {
                 sendMessage(player, "red", '!', "This player is offline.");
                 return true;
             }
-
-        } else if (playerIncomingRequests.size() == 1) {
+        }
+        else if (playerIncomingRequests.size() == 1) {
             target = playerIncomingRequests.keySet().iterator().next();
-
-        } else {
+        }
+        else {
             final var component = Component.text().append(
                     makeMessage("blue", '?', "Looks like multiple people want to TPA to you, which one would you like to accept?")
             );
 
             for (final Player toAccept : playerIncomingRequests.keySet()) {
-                component.append(fmt("\n<b><gray>-></gray></b> <green><click:run_command:/tpa-accept <0>><0></click></green>", toAccept.getName()));
+                component.append(
+                        fmt("\n<b><gray>-></gray></b> <green><click:run_command:/tpa-accept <0>><0></click></green>", toAccept.getName())
+                );
             }
 
             player.sendMessage(component);
-
             return true;
         }
 
@@ -74,7 +75,6 @@ public final class TPAAcceptCommand extends BaseCommand<TPAExtension> {
         playerIncomingRequests.remove(target);
 
         target.teleport(player);
-
         return true;
     }
 }

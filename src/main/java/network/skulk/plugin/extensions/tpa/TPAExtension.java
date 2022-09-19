@@ -47,6 +47,7 @@ public final class TPAExtension extends BaseExtension {
 
         FileHelper.createFile(this.tpaIgnoresFile);
         this.tpaIgnoresFileWriter = new FileWriter(this.tpaIgnoresFile);
+
         plugin.runRepeatingAsync(30 * 60 * 20, () -> {
             try {
                 yaml.dump(this.tpaIgnores, this.tpaIgnoresFileWriter);

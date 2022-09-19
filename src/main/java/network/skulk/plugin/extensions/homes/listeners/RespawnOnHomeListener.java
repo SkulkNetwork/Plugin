@@ -21,13 +21,14 @@ public final class RespawnOnHomeListener extends BaseListener<HomesExtension> {
         }
 
         if (playerHomes.size() == 1) {
-            event.setRespawnLocation(playerHomes.firstEntry().getValue());
+            event.setRespawnLocation(playerHomes.firstEntry().getValue().toLocation());
             return;
         }
 
         final var defaultHome = playerHomes.get("home");
+
         if (defaultHome != null) {
-            event.setRespawnLocation(defaultHome);
+            event.setRespawnLocation(defaultHome.toLocation());
         }
     }
 }

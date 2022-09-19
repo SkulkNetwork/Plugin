@@ -42,7 +42,6 @@ public final class TPAListIgnoredCommand extends BaseCommand<TPAExtension> {
         }
 
         player.sendMessage(component);
-
         return true;
     }
 }

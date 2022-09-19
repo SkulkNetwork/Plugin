@@ -43,6 +43,7 @@ public final class HomesExtension extends BaseExtension {
 
         FileHelper.createFile(this.homesFile);
         this.homesFileWriter = new FileWriter(homesFile);
+
         plugin.runRepeatingAsync(30 * 60 * 20, () -> {
             try {
                 yaml.dump(this.homes, this.homesFileWriter);

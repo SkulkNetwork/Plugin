@@ -28,33 +28,35 @@ import static network.skulk.helpers.MiniMessageHelper.sendMessage;
 
 // Entity.getKiller() returns null when it's the ender dragon for some reason.
 public final class DragonDropElytraListener extends BaseListener<EntityOverrideExtension> {
-    private static final ItemStack elytra;
-    private final NamespacedKey hasGottenElytraKey = new NamespacedKey(this.getExtension().getPlugin(), "hasGottenElytra");
+    private static final ItemStack OP_ELYTRA;
 
     static {
-        elytra = new ItemStack(Material.ELYTRA, 1);
+        OP_ELYTRA = new ItemStack(Material.ELYTRA, 1);
 
-        final var meta = elytra.getItemMeta();
-        meta.displayName(fmt("<dark_purple>Dragon Master Wings</dark_purple>").decoration(TextDecoration.ITALIC, false));
+        final var elytraItemMeta = OP_ELYTRA.getItemMeta();
 
-        meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 4, true);
-        meta.addEnchant(Enchantment.DURABILITY, 3, true);
-        meta.addEnchant(Enchantment.MENDING, 1, true);
-        meta.addEnchant(Enchantment.THORNS, 3, true);
+        elytraItemMeta.displayName(fmt("<dark_purple>Dragon Master Wings</dark_purple>").decoration(TextDecoration.ITALIC, false));
 
-        AttributeHelper.addAttribute(meta, Attribute.GENERIC_ARMOR, 8, EquipmentSlot.CHEST);
-        AttributeHelper.addAttribute(meta, Attribute.GENERIC_ARMOR_TOUGHNESS, 3, EquipmentSlot.CHEST);
-        AttributeHelper.addAttribute(meta, Attribute.GENERIC_KNOCKBACK_RESISTANCE, 1, EquipmentSlot.CHEST);
+        elytraItemMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 4, true);
+        elytraItemMeta.addEnchant(Enchantment.DURABILITY, 3, true);
+        elytraItemMeta.addEnchant(Enchantment.MENDING, 1, true);
+        elytraItemMeta.addEnchant(Enchantment.THORNS, 3, true);
 
-        final var lore = new ArrayList<Component>();
+        AttributeHelper.addAttribute(elytraItemMeta, Attribute.GENERIC_ARMOR, 8, EquipmentSlot.CHEST);
+        AttributeHelper.addAttribute(elytraItemMeta, Attribute.GENERIC_ARMOR_TOUGHNESS, 3, EquipmentSlot.CHEST);
+        AttributeHelper.addAttribute(elytraItemMeta, Attribute.GENERIC_KNOCKBACK_RESISTANCE, 1, EquipmentSlot.CHEST);
+
+        final var elytraLore = new ArrayList<Component>();
         // Newline.
-        lore.add(Component.empty());
-        lore.add(fmt("<dark_purple>Only true warriors can use these wings...</dark_purple>"));
-        meta.lore(lore);
+        elytraLore.add(Component.empty());
+        elytraLore.add(fmt("<dark_purple>Only true warriors can use these wings...</dark_purple>"));
 
-        elytra.setItemMeta(meta);
+        elytraItemMeta.lore(elytraLore);
+
+        OP_ELYTRA.setItemMeta(elytraItemMeta);
     }
 
+    private final NamespacedKey hasGottenElytraKey = new NamespacedKey(this.getExtension().getPlugin(), "hasGottenElytra");
     private @Nullable Player lastDragonDamager = null;
 
     public DragonDropElytraListener(final @NotNull EntityOverrideExtension extension) {
@@ -63,54 +65,49 @@ public final class DragonDropElytraListener extends BaseListener<EntityOverrideE
 
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     public void onEntityDamageByEntity(final @NotNull EntityDamageByEntityEvent event) {
-        final var damager = event.getDamager();
-
-        if (damager instanceof Player player) {
+        if (event.getDamager() instanceof Player player) {
             this.lastDragonDamager = player;
         }
     }
 
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     public void onEntityDeath(final @NotNull EntityDeathEvent event) {
-        if (event.getEntityType() != EntityType.ENDER_DRAGON) {
+        if (event.getEntityType() != EntityType.ENDER_DRAGON || this.lastDragonDamager == null) {
             return;
         }
 
         final var player = this.lastDragonDamager;
+        final var playerPersistentDataContainer = player.getPersistentDataContainer();
+        final var booleanPersistentDataType = Singletons.getBooleanPersistentDataType();
 
-        if (player == null) {
-            event.getDrops().add(elytra);
-            return;
-        }
-
-        final var playerPdc = player.getPersistentDataContainer();
-        final var booleanPdt = Singletons.getBooleanPdt();
-
-        if (playerPdc.getOrDefault(this.hasGottenElytraKey, booleanPdt, false)) {
+        if (playerPersistentDataContainer.getOrDefault(this.hasGottenElytraKey, booleanPersistentDataType, false)) {
             return;
         }
 
         final var playerInventory = player.getInventory();
-        final var playerEnderChest = player.getEnderChest();
 
         if (playerInventory.getChestplate() == null) {
-            playerInventory.setChestplate(elytra);
+            playerInventory.setChestplate(OP_ELYTRA);
             sendMessage(player, "light_purple", '!', "You have been equipped with an OP elytra for beating the Ender dragon.");
-
-        } else if (playerInventory.firstEmpty() != -1) {
-            playerInventory.addItem(elytra);
+        }
+        else if (playerInventory.firstEmpty() != -1) {
+            playerInventory.addItem(OP_ELYTRA);
             sendMessage(player, "light_purple", '!', "An OP elytra has been added to your inventory for beating the Ender dragon.");
-
-        } else if (playerEnderChest.firstEmpty() != -1) {
-            playerEnderChest.addItem(elytra);
+        }
+        else if (player.getEnderChest().firstEmpty() != -1) {
+            player.getEnderChest().addItem(OP_ELYTRA);
             sendMessage(player, "light_purple", '!', "An OP elytra has been added to your ender chest for beating the Ender dragon.");
-
-        } else {
-            final var l = player.getLocation();
-            player.getWorld().dropItem(l, elytra);
-            sendMessage(player, "light_purple", '!', "An OP elytra has been dropped at x: %.0f, y: %.0f, z: %.0f since your inventory is full and you have beat the Ender dragon.".formatted(l.getX(), l.getY(), l.getZ()));
+        }
+        else {
+            final var playerLocation = player.getLocation();
+            player.getWorld().dropItem(playerLocation, OP_ELYTRA);
+            sendMessage(
+                    player,
+                    "light_purple", '!', "An OP elytra has been dropped at x: %.0f, y: %.0f, z: %.0f since your inventory is full and you have beat the Ender dragon."
+                            .formatted(playerLocation.getX(), playerLocation.getY(), playerLocation.getZ())
+            );
         }
 
-        playerPdc.set(this.hasGottenElytraKey, booleanPdt, true);
+        playerPersistentDataContainer.set(this.hasGottenElytraKey, booleanPersistentDataType, true);
     }
 }

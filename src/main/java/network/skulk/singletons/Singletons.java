@@ -1,18 +1,18 @@
 package network.skulk.singletons;
 
-import network.skulk.pdts.BooleanPDT;
+import network.skulk.pdts.BooleanPersistentDataType;
 import org.jetbrains.annotations.NotNull;
 import org.yaml.snakeyaml.Yaml;
 
 public abstract class Singletons {
     private static final Yaml yaml = new Yaml();
-    private static final BooleanPDT booleanPdt = new BooleanPDT();
+    private static final BooleanPersistentDataType booleanPersistentDataType = new BooleanPersistentDataType();
 
     public static @NotNull Yaml getYaml() {
         return yaml;
     }
 
-    public static @NotNull BooleanPDT getBooleanPdt() {
-        return booleanPdt;
+    public static @NotNull BooleanPersistentDataType getBooleanPersistentDataType() {
+        return booleanPersistentDataType;
     }
 }

@@ -9,7 +9,8 @@ public abstract class BaseExtension {
 
     public BaseExtension(final @NotNull BasePlugin plugin) {
         this.plugin = plugin;
-        this.plugin.registerExtension(this);
+
+        this.plugin.getExtensions().add(this);
     }
 
     public final @NotNull BasePlugin getPlugin() {

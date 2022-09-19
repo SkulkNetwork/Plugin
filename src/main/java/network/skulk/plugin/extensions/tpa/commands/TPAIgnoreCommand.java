@@ -49,7 +49,6 @@ public final class TPAIgnoreCommand extends BaseCommand<TPAExtension> {
         playerIgnores.add(targetName);
 
         sendMessage(player, "green", '✓', "You are now ignoring TPA requests from <b><0></b>.", targetName);
-
         return true;
     }
 }
