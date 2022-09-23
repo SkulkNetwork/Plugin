@@ -9,10 +9,10 @@ public abstract class Singletons {
     private static final BooleanPersistentDataType booleanPersistentDataType = new BooleanPersistentDataType();
 
     public static @NotNull Yaml getYaml() {
-        return yaml;
+        return Singletons.yaml;
     }
 
     public static @NotNull BooleanPersistentDataType getBooleanPersistentDataType() {
-        return booleanPersistentDataType;
+        return Singletons.booleanPersistentDataType;
     }
 }

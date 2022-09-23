@@ -28,12 +28,11 @@ import static network.skulk.helpers.MiniMessageHelper.sendMessage;
 
 // Entity.getKiller() returns null when it's the ender dragon for some reason.
 public final class DragonDropElytraListener extends BaseListener<EntityOverrideExtension> {
-    private static final ItemStack OP_ELYTRA;
+    private static final ItemStack OP_ELYTRA = new ItemStack(Material.ELYTRA, 1);
 
     static {
-        OP_ELYTRA = new ItemStack(Material.ELYTRA, 1);
 
-        final var elytraItemMeta = OP_ELYTRA.getItemMeta();
+        final var elytraItemMeta = DragonDropElytraListener.OP_ELYTRA.getItemMeta();
 
         elytraItemMeta.displayName(fmt("<dark_purple>Dragon Master Wings</dark_purple>").decoration(TextDecoration.ITALIC, false));
 
@@ -53,7 +52,7 @@ public final class DragonDropElytraListener extends BaseListener<EntityOverrideE
 
         elytraItemMeta.lore(elytraLore);
 
-        OP_ELYTRA.setItemMeta(elytraItemMeta);
+        DragonDropElytraListener.OP_ELYTRA.setItemMeta(elytraItemMeta);
     }
 
     private final NamespacedKey hasGottenElytraKey = new NamespacedKey(this.getExtension().getPlugin(), "hasGottenElytra");
