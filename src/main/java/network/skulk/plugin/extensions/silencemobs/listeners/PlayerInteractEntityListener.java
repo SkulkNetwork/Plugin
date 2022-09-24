@@ -3,6 +3,7 @@ package network.skulk.plugin.extensions.silencemobs.listeners;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import network.skulk.plugin.extensions.silencemobs.SilenceMobsExtension;
 import network.skulk.wrapper.BaseListener;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -53,11 +54,13 @@ public final class PlayerInteractEntityListener extends BaseListener<SilenceMobs
             return;
         }
 
-        nameTags.setAmount(nameTags.getAmount() - 1);
-
         final var entity = event.getRightClicked();
         entity.setSilent(true);
         entity.customName(fmt("<i><gray>Silenced</gray></i>"));
+
+        if (player.getGameMode() != GameMode.CREATIVE) {
+            nameTags.setAmount(nameTags.getAmount() - 1);
+        }
 
         sendMessage(player, "green", '✓', "The entity '<0>' has been silenced.", entity.getType().toString());
 
