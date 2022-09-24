@@ -32,7 +32,7 @@ public final class TPACommand extends BaseCommand<TPAExtension> {
 
         final var targetName = target.getName();
 
-        if (target.equals(player)) {
+        if (target == player) {
             sendMessage(player, "red", '!', "You can't TPA to yourself.");
             return true;
         }
