@@ -1,6 +1,7 @@
 package network.skulk.plugin.extensions.messageoverride;
 
 import network.skulk.plugin.Plugin;
+import network.skulk.plugin.extensions.messageoverride.listeners.PlayerAdvancementDoneListener;
 import network.skulk.plugin.extensions.messageoverride.listeners.PlayerDeathListener;
 import network.skulk.plugin.extensions.messageoverride.listeners.PlayerJoinQuitListener;
 import network.skulk.plugin.extensions.messageoverride.listeners.UnknownCommandListener;
@@ -13,6 +14,7 @@ public final class MessageOverrideExtension extends BaseExtension {
     }
 
     @Override protected void initListeners() {
+        new PlayerAdvancementDoneListener(this);
         new PlayerDeathListener(this);
         new PlayerJoinQuitListener(this);
         new UnknownCommandListener(this);
