@@ -2,7 +2,6 @@ package network.skulk.helpers;
 
 import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.Style;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
@@ -52,7 +51,7 @@ public abstract class MiniMessageHelper {
         for (int i = 0; i < components.length; i++) {
             tagResolvers[i] = Placeholder.component(
                     Integer.toString(i),
-                    components[i].style(Style.style().build())
+                    components[i]
             );
         }
 
