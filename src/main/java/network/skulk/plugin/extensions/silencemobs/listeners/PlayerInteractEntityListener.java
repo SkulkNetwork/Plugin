@@ -5,6 +5,7 @@ import network.skulk.plugin.extensions.silencemobs.SilenceMobsExtension;
 import network.skulk.wrapper.BaseListener;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
+import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
@@ -55,6 +56,11 @@ public final class PlayerInteractEntityListener extends BaseListener<SilenceMobs
         }
 
         final var entity = event.getRightClicked();
+
+        if (entity.getType() == EntityType.UNKNOWN) {
+            return;
+        }
+
         entity.setSilent(true);
         entity.customName(fmt("<i><gray>Silenced</gray></i>"));
 
@@ -62,7 +68,7 @@ public final class PlayerInteractEntityListener extends BaseListener<SilenceMobs
             nameTags.setAmount(nameTags.getAmount() - 1);
         }
 
-        sendMessage(player, "green", '✓', "The entity '<0>' has been silenced.", entity.getType().toString());
+        sendMessage(player, "green", '✓', "The entity '<0>' has been silenced.", entity.getType().toString().toLowerCase());
 
         event.setCancelled(true);
     }
