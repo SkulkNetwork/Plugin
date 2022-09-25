@@ -12,10 +12,12 @@ public final class HomeDeleteCommand extends BaseCommand<HomesExtension> {
     }
 
     @Override protected void init() {
-        this.name = "home-delete";
-        this.playerOnly = true;
-        this.maxArgs = 1;
-        this.minArgs = 0;
+        this.setName("home-delete");
+        this.setDescription("Deletes a home.");
+        this.setUsage("/home-delete [name]");
+        this.setPlayerOnly(true);
+        this.setMaxArgs(1);
+        this.setMinArgs(0);
     }
 
     @Override protected boolean execute(final @NotNull Player player, final @NotNull String[] args) {

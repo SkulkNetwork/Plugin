@@ -12,10 +12,12 @@ public final class TPAIgnoreAllCommand extends BaseCommand<TPAExtension> {
     }
 
     @Override protected void init() {
-        this.name = "tpa-ignore-all";
-        this.playerOnly = true;
-        this.maxArgs = 0;
-        this.minArgs = 0;
+        this.setName("tpa-ignore-all");
+        this.setDescription("Ignores all TPA requests sent to you until the command is ran again.");
+        this.setUsage("/tpa-ignore-all");
+        this.setPlayerOnly(true);
+        this.setMaxArgs(0);
+        this.setMinArgs(0);
     }
 
     @Override protected boolean execute(final @NotNull Player player) {

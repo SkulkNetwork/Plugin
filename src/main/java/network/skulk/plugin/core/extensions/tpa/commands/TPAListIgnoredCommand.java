@@ -13,10 +13,12 @@ public final class TPAListIgnoredCommand extends BaseCommand<TPAExtension> {
     }
 
     @Override protected void init() {
-        this.name = "tpa-list-ignored";
-        this.playerOnly = true;
-        this.maxArgs = 0;
-        this.minArgs = 0;
+        this.setName("tpa-list-ignored");
+        this.setDescription("Tells you all the people you have ignored.");
+        this.setUsage("/tpa-list-ignored");
+        this.setPlayerOnly(true);
+        this.setMaxArgs(0);
+        this.setMinArgs(0);
     }
 
     @Override protected boolean execute(final @NotNull Player player) {

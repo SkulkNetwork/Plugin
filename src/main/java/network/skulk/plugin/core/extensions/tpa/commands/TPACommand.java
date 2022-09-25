@@ -14,10 +14,12 @@ public final class TPACommand extends BaseCommand<TPAExtension> {
     }
 
     @Override protected void init() {
-        this.name = "tpa";
-        this.playerOnly = true;
-        this.maxArgs = 1;
-        this.minArgs = 1;
+        this.setName("tpa");
+        this.setDescription("Sends a TPA request to a player.");
+        this.setUsage("/tpa <player>");
+        this.setPlayerOnly(true);
+        this.setMaxArgs(1);
+        this.setMinArgs(1);
     }
 
     @Override protected boolean execute(final @NotNull Player player, final @NotNull String[] args) {

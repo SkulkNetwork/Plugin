@@ -16,10 +16,12 @@ public final class HomeListCommand extends BaseCommand<HomesExtension> {
     }
 
     @Override protected void init() {
-        this.name = "home-list";
-        this.playerOnly = true;
-        this.maxArgs = 0;
-        this.minArgs = 0;
+        this.setName("home-list");
+        this.setDescription("Lists all your homes.");
+        this.setUsage("/home-list");
+        this.setPlayerOnly(true);
+        this.setMaxArgs(0);
+        this.setMinArgs(0);
     }
 
     @Override protected boolean execute(final @NotNull Player player) {

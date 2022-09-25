@@ -15,11 +15,14 @@ import static org.jetbrains.annotations.ApiStatus.OverrideOnly;
 
 public abstract class BaseCommand<E extends BaseExtension> implements CommandExecutor, TabCompleter {
     private final E extension;
-    protected int minArgs;
-    protected String name;
-    protected boolean playerOnly;
-    protected int maxArgs;
-    protected @Nullable String permission = null;
+
+    private String name;
+    private String description;
+    private String usage;
+    private boolean playerOnly;
+    private int minArgs;
+    private int maxArgs;
+    private @Nullable String permission = null;
 
     public BaseCommand(final @NotNull E extension) {
         this.extension = extension;
@@ -34,6 +37,37 @@ public abstract class BaseCommand<E extends BaseExtension> implements CommandExe
         }
 
         command.setExecutor(this);
+        command.setDescription(this.description);
+        command.setUsage(this.usage);
+        command.setPermission(this.permission);
+    }
+
+    protected void setName(final @NotNull String name) {
+        this.name = name;
+    }
+
+    protected void setDescription(final @NotNull String description) {
+        this.description = description;
+    }
+
+    protected void setUsage(final @NotNull String usage) {
+        this.usage = usage;
+    }
+
+    protected void setPlayerOnly(final boolean playerOnly) {
+        this.playerOnly = playerOnly;
+    }
+
+    protected void setMinArgs(final int minArgs) {
+        this.minArgs = minArgs;
+    }
+
+    protected void setMaxArgs(final int maxArgs) {
+        this.maxArgs = maxArgs;
+    }
+
+    protected void setPermission(final @Nullable String permission) {
+        this.permission = permission;
     }
 
     protected @NotNull E getExtension() {
@@ -58,11 +92,6 @@ public abstract class BaseCommand<E extends BaseExtension> implements CommandExe
     @Override public final boolean onCommand(final @NotNull CommandSender sender, final @NotNull Command command, final @NotNull String label, final @NotNull String[] args) {
         if (this.playerOnly && !(sender instanceof Player)) {
             MiniMessageHelper.sendMessage(sender, "red", '!', "This command can only be used by players.");
-            return true;
-        }
-
-        if (this.permission != null && !sender.hasPermission(this.permission)) {
-            MiniMessageHelper.sendMessage(sender, "red", '!', "You can't use this command.");
             return true;
         }
 
