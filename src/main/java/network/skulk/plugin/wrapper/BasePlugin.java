@@ -12,7 +12,22 @@ import java.util.logging.Level;
 import static org.jetbrains.annotations.ApiStatus.OverrideOnly;
 
 public abstract class BasePlugin extends JavaPlugin {
-    public final ArrayList<BaseExtension> extensions = new ArrayList<>();
+    private final ArrayList<BaseExtension> extensions = new ArrayList<>();
+
+    public ArrayList<BaseExtension> getExtensions() {
+        return this.extensions;
+    }
+
+    /*
+     * MUST be overriden, example:
+     *
+     * @Override protected void initExtensions() {
+     *     new MyExtension(this);
+     * }
+     */
+    @OverrideOnly
+    protected void initExtensions() {
+    }
 
     @Override public final void onEnable() {
         final var logger = this.getLogger();
@@ -49,21 +64,6 @@ public abstract class BasePlugin extends JavaPlugin {
         this.extensions.clear();
 
         logger.info("The plugin has been unloaded.");
-    }
-
-    /*
-     * MUST be overriden, example:
-     *
-     * @Override protected void initExtensions() {
-     *     new MyExtension(this);
-     * }
-     */
-    @OverrideOnly
-    protected void initExtensions() {
-    }
-
-    public ArrayList<BaseExtension> getExtensions() {
-        return this.extensions;
     }
 
     public final @NotNull BukkitTask runAfter(final long delay, final @NotNull Runnable runnable) {
