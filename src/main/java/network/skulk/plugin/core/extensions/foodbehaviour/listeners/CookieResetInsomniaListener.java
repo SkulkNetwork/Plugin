@@ -16,7 +16,7 @@ public final class CookieResetInsomniaListener extends BaseListener<FoodBehaviou
 
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     public void onPlayerItemConsume(final PlayerItemConsumeEvent event) {
-        if (!(event.getItem().getType() == Material.COOKIE)) {
+        if (event.getItem().getType() != Material.COOKIE) {
             return;
         }
 
