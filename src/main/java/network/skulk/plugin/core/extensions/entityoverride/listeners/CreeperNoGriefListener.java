@@ -15,8 +15,10 @@ public final class CreeperNoGriefListener extends BaseListener<EntityOverrideExt
 
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     public void onEntityExplode(final @NotNull EntityExplodeEvent event) {
-        if (event.getEntityType() == EntityType.CREEPER) {
-            event.setCancelled(true);
+        if (event.getEntityType() != EntityType.CREEPER) {
+            return;
         }
+
+        event.setCancelled(true);
     }
 }

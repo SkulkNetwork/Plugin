@@ -15,8 +15,10 @@ public final class EndermanNoGriefListener extends BaseListener<EntityOverrideEx
 
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     public void onEntityChangeBlockEvent(final @NotNull EntityChangeBlockEvent event) {
-        if (event.getEntityType() == EntityType.ENDERMAN) {
-            event.setCancelled(true);
+        if (event.getEntityType() != EntityType.ENDERMAN) {
+            return;
         }
+
+        event.setCancelled(true);
     }
 }
