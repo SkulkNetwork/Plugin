@@ -1,6 +1,6 @@
-package network.skulk.plugin.extensions.entityoverride.listeners;
+package network.skulk.plugin.extensions.foodbehaviour.listeners;
 
-import network.skulk.plugin.extensions.entityoverride.EntityOverrideExtension;
+import network.skulk.plugin.extensions.foodbehaviour.FoodBehaviourExtension;
 import network.skulk.wrapper.BaseListener;
 import org.bukkit.Material;
 import org.bukkit.Statistic;
@@ -10,8 +10,8 @@ import org.bukkit.event.player.PlayerItemConsumeEvent;
 
 import static network.skulk.helpers.MiniMessageHelper.sendMessage;
 
-public final class CookieResetInsomniaListener extends BaseListener<EntityOverrideExtension> {
-    public CookieResetInsomniaListener(final EntityOverrideExtension extension) {
+public final class CookieResetInsomniaListener extends BaseListener<FoodBehaviourExtension> {
+    public CookieResetInsomniaListener(final FoodBehaviourExtension extension) {
         super(extension);
     }
 

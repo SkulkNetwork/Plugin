@@ -1,7 +1,10 @@
 package network.skulk.plugin.extensions.entityoverride;
 
 import network.skulk.plugin.Plugin;
-import network.skulk.plugin.extensions.entityoverride.listeners.*;
+import network.skulk.plugin.extensions.entityoverride.listeners.CreeperNoGriefListener;
+import network.skulk.plugin.extensions.entityoverride.listeners.DragonDropElytraListener;
+import network.skulk.plugin.extensions.entityoverride.listeners.EndermanNoGriefListener;
+import network.skulk.plugin.extensions.entityoverride.listeners.ExplosionDropAllListener;
 import network.skulk.wrapper.BaseExtension;
 import org.jetbrains.annotations.NotNull;
 
@@ -11,7 +14,6 @@ public final class EntityOverrideExtension extends BaseExtension {
     }
 
     @Override protected void initListeners() {
-        new CookieResetInsomniaListener(this);
         new CreeperNoGriefListener(this);
         new DragonDropElytraListener(this);
         new EndermanNoGriefListener(this);
