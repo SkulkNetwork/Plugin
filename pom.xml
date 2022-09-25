@@ -15,7 +15,7 @@
         <java.version>18</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-    <url>network.skulk</url>
+    <url>skulk.network</url>
 
     <build>
         <plugins>
