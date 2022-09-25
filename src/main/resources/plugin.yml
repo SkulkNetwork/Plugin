@@ -1,6 +1,6 @@
 name: SNP
 version: "${project.version}"
-main: network.skulk.plugin.Plugin
+main: network.skulk.plugin.core.Plugin
 api-version: "1.19"
 authors: [ RGBCube ]
 description: The main plugin used for the Skulk Network Minecraft server.
