@@ -45,7 +45,7 @@ public final class HomeSetCommand extends BaseCommand<HomesExtension> {
             return true;
         }
 
-        if (homeName.length() >= 16) {
+        if (homeName.length() > 16) {
             MiniMessageHelper.sendMessage(player, "red", '!', "Home names can't be longer than 16 characters.");
             return true;
         }
