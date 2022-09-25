@@ -3,7 +3,7 @@ package network.skulk.plugin.core.extensions.homes.commands;
 import net.kyori.adventure.text.Component;
 import network.skulk.plugin.core.extensions.homes.HomesExtension;
 import network.skulk.plugin.helpers.MiniMessageHelper;
-import network.skulk.plugin.utils.ShortLocation;
+import network.skulk.plugin.utils.Location;
 import network.skulk.plugin.wrapper.BaseCommand;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -36,7 +36,7 @@ public final class HomeListCommand extends BaseCommand<HomesExtension> {
                 MiniMessageHelper.makeMessage("gold", '!', "All homes:")
         );
 
-        for (final Entry<String, ShortLocation> entry : playerHomes.entrySet()) {
+        for (final Entry<String, Location> entry : playerHomes.entrySet()) {
             final var location = entry.getValue();
 
             component.append(

@@ -3,7 +3,7 @@ package network.skulk.plugin.core.extensions.homes.commands;
 import network.skulk.plugin.core.extensions.homes.HomesExtension;
 import network.skulk.plugin.helpers.EffectHelper;
 import network.skulk.plugin.helpers.MiniMessageHelper;
-import network.skulk.plugin.utils.ShortLocation;
+import network.skulk.plugin.utils.Location;
 import network.skulk.plugin.wrapper.BaseCommand;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -54,7 +54,7 @@ public final class HomeCommand extends BaseCommand<HomesExtension> {
         final var playerHomes = this.getExtension().getHomes().get(player.getUniqueId());
         final var playerHomesSize = playerHomes.size();
 
-        final ShortLocation homeLocation;
+        final Location homeLocation;
         final String homeName;
 
         if (playerHomesSize == 0) {
@@ -93,7 +93,7 @@ public final class HomeCommand extends BaseCommand<HomesExtension> {
 
         MiniMessageHelper.sendMessage(player, "green", '✓', "Teleporting you to <b><0></b>...", homeName);
         EffectHelper.playTeleport(player);
-        player.teleport(homeLocation.toLocation());
+        player.teleport(homeLocation);
 
         return true;
     }

@@ -2,7 +2,7 @@ package network.skulk.plugin.core.extensions.homes.commands;
 
 import network.skulk.plugin.core.extensions.homes.HomesExtension;
 import network.skulk.plugin.helpers.MiniMessageHelper;
-import network.skulk.plugin.utils.ShortLocation;
+import network.skulk.plugin.utils.Location;
 import network.skulk.plugin.wrapper.BaseCommand;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -55,7 +55,7 @@ public final class HomeSetCommand extends BaseCommand<HomesExtension> {
             return true;
         }
 
-        playerHomes.put(homeName, new ShortLocation(player.getLocation()));
+        playerHomes.put(homeName, new Location(player.getLocation()));
 
         MiniMessageHelper.sendMessage(player, "green", '✓', "Successfully created a home named <b><0></b>.", homeName);
 
