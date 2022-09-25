@@ -1,6 +1,7 @@
 package network.skulk.plugin.core.extensions.homes.listeners;
 
 import network.skulk.plugin.core.extensions.homes.HomesExtension;
+import network.skulk.plugin.utils.Location;
 import network.skulk.plugin.wrapper.BaseListener;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -20,15 +21,19 @@ public final class RespawnOnHomeListener extends BaseListener<HomesExtension> {
             return;
         }
 
+        final Location defaultHome;
+
         if (playerHomes.size() == 1) {
-            event.setRespawnLocation(playerHomes.firstEntry().getValue().toLocation());
-            return;
+            defaultHome = playerHomes.firstEntry().getValue();
+        }
+        else {
+            defaultHome = playerHomes.get("default");
+
+            if (defaultHome == null) {
+                return;
+            }
         }
 
-        final var defaultHome = playerHomes.get("home");
-
-        if (defaultHome != null) {
-            event.setRespawnLocation(defaultHome.toLocation());
-        }
+        event.setRespawnLocation(defaultHome);
     }
 }
