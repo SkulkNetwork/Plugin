@@ -15,15 +15,15 @@ import org.bukkit.inventory.ItemStack;
 import java.util.HashSet;
 
 public final class PlayerInteractEntityListener extends BaseListener<SilenceMobsExtension> {
-    private static final HashSet<String> silencingNames = new HashSet<>();
+    private static final HashSet<String> SILENCING_NAMES = new HashSet<>();
 
     static {
-        PlayerInteractEntityListener.silencingNames.add("[silenced]");
-        PlayerInteractEntityListener.silencingNames.add("[silenceme]");
-        PlayerInteractEntityListener.silencingNames.add("[silence me]");
-        PlayerInteractEntityListener.silencingNames.add("[stfu]");
-        PlayerInteractEntityListener.silencingNames.add("[shutup]");
-        PlayerInteractEntityListener.silencingNames.add("[shut up]");
+        PlayerInteractEntityListener.SILENCING_NAMES.add("[silenced]");
+        PlayerInteractEntityListener.SILENCING_NAMES.add("[silenceme]");
+        PlayerInteractEntityListener.SILENCING_NAMES.add("[silence me]");
+        PlayerInteractEntityListener.SILENCING_NAMES.add("[stfu]");
+        PlayerInteractEntityListener.SILENCING_NAMES.add("[shutup]");
+        PlayerInteractEntityListener.SILENCING_NAMES.add("[shut up]");
     }
 
     public PlayerInteractEntityListener(final SilenceMobsExtension extension) {
@@ -49,7 +49,7 @@ public final class PlayerInteractEntityListener extends BaseListener<SilenceMobs
             return;
         }
 
-        if (!PlayerInteractEntityListener.silencingNames.contains(PlainTextComponentSerializer.plainText().serialize(nameTags.displayName()).toLowerCase())) {
+        if (!PlayerInteractEntityListener.SILENCING_NAMES.contains(PlainTextComponentSerializer.plainText().serialize(nameTags.displayName()).toLowerCase())) {
             return;
         }
 
