@@ -1,5 +1,6 @@
 package network.skulk.plugin.utils;
 
+import org.bukkit.Bukkit;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -25,6 +26,7 @@ public final class Location extends org.bukkit.Location {
 
     @SuppressWarnings("unused")
     public static @NotNull Location deserialize(final @NotNull Map<String, Object> map) {
+        map.put("world", Bukkit.getWorld((String) map.get("world")));
         return new Location(org.bukkit.Location.deserialize(map));
     }
 }
