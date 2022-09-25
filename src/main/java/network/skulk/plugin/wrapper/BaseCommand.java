@@ -79,15 +79,6 @@ public abstract class BaseCommand<E extends BaseExtension> implements CommandExe
     protected void init() {
     }
 
-    @Override public @Nullable ArrayList<String> onTabComplete(final @NotNull CommandSender sender, final @NotNull Command command, final @NotNull String label, final @NotNull String[] args) {
-        if (this.playerOnly) {
-            return tabComplete((Player) sender, args);
-        }
-        else {
-            return tabComplete(sender, args);
-        }
-    }
-
     @OverrideOnly
     protected @Nullable ArrayList<String> tabComplete(final @NotNull Player player, final @NotNull String[] args) {
         return null;
@@ -120,6 +111,15 @@ public abstract class BaseCommand<E extends BaseExtension> implements CommandExe
     @OverrideOnly
     protected @Nullable ArrayList<String> tabComplete(final @NotNull CommandSender sender, final @NotNull String[] args) {
         return null;
+    }
+
+    @Override public @Nullable ArrayList<String> onTabComplete(final @NotNull CommandSender sender, final @NotNull Command command, final @NotNull String label, final @NotNull String[] args) {
+        if (this.playerOnly) {
+            return tabComplete((Player) sender, args);
+        }
+        else {
+            return tabComplete(sender, args);
+        }
     }
 
     @Override public final boolean onCommand(final @NotNull CommandSender sender, final @NotNull Command command, final @NotNull String label, final @NotNull String[] args) {
