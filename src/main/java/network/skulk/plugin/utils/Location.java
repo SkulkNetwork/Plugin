@@ -10,6 +10,7 @@ public final class Location extends org.bukkit.Location {
         super(location.getWorld(), location.getX(), location.getY(), location.getZ(), location.getYaw(), location.getPitch());
     }
 
+    @SuppressWarnings("unused")
     public Location(final @NotNull String world, final double x, final double y, final double z, final float yaw, final float pitch) {
         super(Bukkit.getWorld(world), x, y, z, yaw, pitch);
     }
