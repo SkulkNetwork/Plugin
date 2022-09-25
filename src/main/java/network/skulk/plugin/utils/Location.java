@@ -1,18 +1,13 @@
 package network.skulk.plugin.utils;
 
-import org.bukkit.Bukkit;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public final class Location extends org.bukkit.Location {
     public Location(final @NotNull org.bukkit.Location location) {
         super(location.getWorld(), location.getX(), location.getY(), location.getZ(), location.getYaw(), location.getPitch());
-    }
-
-    @SuppressWarnings("unused")
-    public Location(final @NotNull String world, final double x, final double y, final double z, final float yaw, final float pitch) {
-        super(Bukkit.getWorld(world), x, y, z, yaw, pitch);
     }
 
     @Override public @NotNull HashMap<String, Object> serialize() {
@@ -26,5 +21,10 @@ public final class Location extends org.bukkit.Location {
         map.put("pitch", this.getPitch());
 
         return map;
+    }
+
+    @SuppressWarnings("unused")
+    public static @NotNull Location deserialize(final @NotNull Map<String, Object> map) {
+        return new Location(org.bukkit.Location.deserialize(map));
     }
 }
