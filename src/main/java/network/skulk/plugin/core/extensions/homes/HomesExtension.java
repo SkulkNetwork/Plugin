@@ -22,6 +22,10 @@ public final class HomesExtension extends BaseExtension {
     private FileWriter homesFileWriter;
     private UUID2CaseInsensitiveMap<Location> homes = new UUID2CaseInsensitiveMap<>();
 
+    public HomesExtension(final Plugin plugin) {
+        super(plugin);
+    }
+
     @Override protected void initCommands() {
         new HomeCommand(this);
         new HomeDeleteCommand(this);
@@ -31,10 +35,6 @@ public final class HomesExtension extends BaseExtension {
 
     @Override protected void initListeners() {
         new RespawnOnHomeListener(this);
-    }
-
-    public HomesExtension(final Plugin plugin) {
-        super(plugin);
     }
 
     @Override protected void onEnableHook() throws Exception {

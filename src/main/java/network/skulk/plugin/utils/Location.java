@@ -11,6 +11,12 @@ public final class Location extends org.bukkit.Location {
         super(location.getWorld(), location.getX(), location.getY(), location.getZ(), location.getYaw(), location.getPitch());
     }
 
+    @SuppressWarnings("unused")
+    public static @NotNull Location deserialize(final @NotNull Map<String, Object> map) {
+        map.put("world", Bukkit.getWorld((String) map.get("world")));
+        return new Location(org.bukkit.Location.deserialize(map));
+    }
+
     @Override public @NotNull HashMap<String, Object> serialize() {
         final var map = new HashMap<String, Object>();
 
@@ -22,11 +28,5 @@ public final class Location extends org.bukkit.Location {
         map.put("pitch", this.getPitch());
 
         return map;
-    }
-
-    @SuppressWarnings("unused")
-    public static @NotNull Location deserialize(final @NotNull Map<String, Object> map) {
-        map.put("world", Bukkit.getWorld((String) map.get("world")));
-        return new Location(org.bukkit.Location.deserialize(map));
     }
 }

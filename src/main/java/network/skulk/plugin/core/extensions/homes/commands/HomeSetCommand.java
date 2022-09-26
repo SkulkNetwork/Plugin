@@ -1,11 +1,12 @@
 package network.skulk.plugin.core.extensions.homes.commands;
 
 import network.skulk.plugin.core.extensions.homes.HomesExtension;
-import network.skulk.plugin.helpers.MiniMessageHelper;
 import network.skulk.plugin.utils.Location;
 import network.skulk.plugin.wrapper.BaseCommand;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+
+import static network.skulk.plugin.helpers.MiniMessageHelper.sendMessage;
 
 public final class HomeSetCommand extends BaseCommand<HomesExtension> {
     public HomeSetCommand(final @NotNull HomesExtension extension) {
@@ -29,7 +30,7 @@ public final class HomeSetCommand extends BaseCommand<HomesExtension> {
         if (args.length == 0) {
             if (playerHomes.containsKey("home")) {
                 // Player already has a home named 'home'
-                MiniMessageHelper.sendMessage(player, "red", '!', "You already have a default home. You need to delete that home and set it again.");
+                sendMessage(player, "red", '!', "You already have a default home. You need to delete that home and set it again.");
                 return true;
             }
 
@@ -41,23 +42,23 @@ public final class HomeSetCommand extends BaseCommand<HomesExtension> {
 
 
         if (playerHomes.containsKey(homeName)) {
-            MiniMessageHelper.sendMessage(player, "red", '!', "You already have a home named <b><0></b>.", homeName);
+            sendMessage(player, "red", '!', "You already have a home named <b><0></b>.", homeName);
             return true;
         }
 
         if (homeName.length() > 16) {
-            MiniMessageHelper.sendMessage(player, "red", '!', "Home names can't be longer than 16 characters.");
+            sendMessage(player, "red", '!', "Home names can't be longer than 16 characters.");
             return true;
         }
 
         if (playerHomes.size() >= 16) {
-            MiniMessageHelper.sendMessage(player, "red", '!', "You have the maximum amount of homes allowed (16).");
+            sendMessage(player, "red", '!', "You have the maximum amount of homes allowed (16).");
             return true;
         }
 
         playerHomes.put(homeName, new Location(player.getLocation()));
 
-        MiniMessageHelper.sendMessage(player, "green", '✓', "Successfully created a home named <b><0></b>.", homeName);
+        sendMessage(player, "green", '✓', "Successfully created a home named <b><0></b>.", homeName);
 
         return true;
     }

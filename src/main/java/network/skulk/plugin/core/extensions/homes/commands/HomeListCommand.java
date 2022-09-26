@@ -2,13 +2,15 @@ package network.skulk.plugin.core.extensions.homes.commands;
 
 import net.kyori.adventure.text.Component;
 import network.skulk.plugin.core.extensions.homes.HomesExtension;
-import network.skulk.plugin.helpers.MiniMessageHelper;
 import network.skulk.plugin.utils.Location;
 import network.skulk.plugin.wrapper.BaseCommand;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import static java.util.Map.Entry;
+import static network.skulk.plugin.helpers.MiniMessageHelper.fmt;
+import static network.skulk.plugin.helpers.MiniMessageHelper.makeMessage;
+import static network.skulk.plugin.helpers.MiniMessageHelper.sendMessage;
 
 public final class HomeListCommand extends BaseCommand<HomesExtension> {
     public HomeListCommand(final @NotNull HomesExtension extension) {
@@ -28,19 +30,19 @@ public final class HomeListCommand extends BaseCommand<HomesExtension> {
         final var playerHomes = this.getExtension().getHomes().get(player.getUniqueId());
 
         if (playerHomes.isEmpty()) {
-            MiniMessageHelper.sendMessage(player, "gold", '!', "You don't have any homes.");
+            sendMessage(player, "gold", '!', "You don't have any homes.");
             return true;
         }
 
         final var component = Component.text().append(
-                MiniMessageHelper.makeMessage("gold", '!', "All homes:")
+                makeMessage("gold", '!', "All homes:")
         );
 
         for (final Entry<String, Location> entry : playerHomes.entrySet()) {
             final var location = entry.getValue();
 
             component.append(
-                    MiniMessageHelper.fmt(
+                    fmt(
                             "\n<b><gray>-></gray></b> <color:#ffae1a><0> (X: %.0f, Y: %.0f, Z: %.0f)</color>".formatted(
                                     location.getX(), location.getY(), location.getZ()
                             ),

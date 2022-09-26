@@ -8,7 +8,9 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-import static network.skulk.plugin.helpers.MiniMessageHelper.*;
+import static network.skulk.plugin.helpers.MiniMessageHelper.fmt;
+import static network.skulk.plugin.helpers.MiniMessageHelper.makeMessage;
+import static network.skulk.plugin.helpers.MiniMessageHelper.sendMessage;
 
 public final class TPAAcceptCommand extends BaseCommand<TPAExtension> {
     public TPAAcceptCommand(final @NotNull TPAExtension extension) {

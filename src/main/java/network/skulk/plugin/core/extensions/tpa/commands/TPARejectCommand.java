@@ -2,11 +2,14 @@ package network.skulk.plugin.core.extensions.tpa.commands;
 
 import net.kyori.adventure.text.Component;
 import network.skulk.plugin.core.extensions.tpa.TPAExtension;
-import network.skulk.plugin.helpers.MiniMessageHelper;
 import network.skulk.plugin.wrapper.BaseCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+
+import static network.skulk.plugin.helpers.MiniMessageHelper.fmt;
+import static network.skulk.plugin.helpers.MiniMessageHelper.makeMessage;
+import static network.skulk.plugin.helpers.MiniMessageHelper.sendMessage;
 
 public final class TPARejectCommand extends BaseCommand<TPAExtension> {
     public TPARejectCommand(final @NotNull TPAExtension extension) {
@@ -27,7 +30,7 @@ public final class TPARejectCommand extends BaseCommand<TPAExtension> {
         final var playerIncomingRequests = extension.getTpaRequests().get(player);
 
         if (playerIncomingRequests.isEmpty()) {
-            MiniMessageHelper.sendMessage(player, "red", '!', "You have no incoming TPA requests.");
+            sendMessage(player, "red", '!', "You have no incoming TPA requests.");
             return true;
         }
 
@@ -37,7 +40,7 @@ public final class TPARejectCommand extends BaseCommand<TPAExtension> {
             target = Bukkit.getPlayer(args[0]);
 
             if (target == null) {
-                MiniMessageHelper.sendMessage(player, "red", '!', "This player is offline.");
+                sendMessage(player, "red", '!', "This player is offline.");
                 return true;
             }
         }
@@ -46,11 +49,11 @@ public final class TPARejectCommand extends BaseCommand<TPAExtension> {
         }
         else {
             final var component = Component.text().append(
-                    MiniMessageHelper.makeMessage("blue", '?', "Looks like multiple people want to TPA to you, which one would you like to reject?")
+                    makeMessage("blue", '?', "Looks like multiple people want to TPA to you, which one would you like to reject?")
             );
 
             for (final Player toReject : playerIncomingRequests.keySet()) {
-                component.append(MiniMessageHelper.fmt("\n<b><gray>-></gray></b> <red><click:run_command:/tpa-reject <0>><0></click></red>", toReject.getName()));
+                component.append(fmt("\n<b><gray>-></gray></b> <red><click:run_command:/tpa-reject <0>><0></click></red>", toReject.getName()));
             }
 
             player.sendMessage(component);
@@ -61,15 +64,15 @@ public final class TPARejectCommand extends BaseCommand<TPAExtension> {
         final var targetName = target.getName();
 
         if (!playerIncomingRequests.containsKey(target)) {
-            MiniMessageHelper.sendMessage(player, "red", '!', "<b><0></b> doesn't want to TPA to you.", targetName);
+            sendMessage(player, "red", '!', "<b><0></b> doesn't want to TPA to you.", targetName);
             return true;
         }
 
         playerIncomingRequests.get(target).cancel();
         playerIncomingRequests.remove(target);
 
-        MiniMessageHelper.sendMessage(player, "green", '✓', "Rejected the TPA request from <b><0></b>.", targetName);
-        MiniMessageHelper.sendMessage(player, "gold", '!', "<b><0></b> has rejected your TPA request.", player.getName());
+        sendMessage(player, "green", '✓', "Rejected the TPA request from <b><0></b>.", targetName);
+        sendMessage(player, "gold", '!', "<b><0></b> has rejected your TPA request.", player.getName());
         return true;
     }
 }

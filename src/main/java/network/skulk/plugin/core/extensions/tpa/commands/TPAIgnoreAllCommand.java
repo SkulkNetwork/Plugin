@@ -1,10 +1,11 @@
 package network.skulk.plugin.core.extensions.tpa.commands;
 
 import network.skulk.plugin.core.extensions.tpa.TPAExtension;
-import network.skulk.plugin.helpers.MiniMessageHelper;
 import network.skulk.plugin.wrapper.BaseCommand;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+
+import static network.skulk.plugin.helpers.MiniMessageHelper.sendMessage;
 
 public final class TPAIgnoreAllCommand extends BaseCommand<TPAExtension> {
     public TPAIgnoreAllCommand(final @NotNull TPAExtension extension) {
@@ -34,7 +35,7 @@ public final class TPAIgnoreAllCommand extends BaseCommand<TPAExtension> {
             message = "You are now ignoring everyone's TPA requests.";
         }
 
-        MiniMessageHelper.sendMessage(player, "green", '✓', message);
+        sendMessage(player, "green", '✓', message);
         return true;
     }
 }

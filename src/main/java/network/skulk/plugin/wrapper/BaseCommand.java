@@ -1,6 +1,5 @@
 package network.skulk.plugin.wrapper;
 
-import network.skulk.plugin.helpers.MiniMessageHelper;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -11,6 +10,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 
+import static network.skulk.plugin.helpers.MiniMessageHelper.sendMessage;
 import static org.jetbrains.annotations.ApiStatus.OverrideOnly;
 
 public abstract class BaseCommand<E extends BaseExtension> implements CommandExecutor, TabCompleter {
@@ -86,25 +86,25 @@ public abstract class BaseCommand<E extends BaseExtension> implements CommandExe
 
     @OverrideOnly
     protected boolean execute(final @NotNull Player player) {
-        MiniMessageHelper.sendMessage(player, "red", '!', "You might have overriden the wrong method... <gold>(player)</gold>");
+        sendMessage(player, "red", '!', "You might have overriden the wrong method... <gold>(player)</gold>");
         return true;
     }
 
     @OverrideOnly
     protected boolean execute(final @NotNull Player player, final @NotNull String[] args) {
-        MiniMessageHelper.sendMessage(player, "red", '!', "You might have overriden the wrong method... <gold>(player, args[])</gold>");
+        sendMessage(player, "red", '!', "You might have overriden the wrong method... <gold>(player, args[])</gold>");
         return true;
     }
 
     @OverrideOnly
     protected boolean execute(final @NotNull CommandSender sender) {
-        MiniMessageHelper.sendMessage(sender, "red", '!', "You might have overriden the wrong method... <gold>(sender)</gold>");
+        sendMessage(sender, "red", '!', "You might have overriden the wrong method... <gold>(sender)</gold>");
         return true;
     }
 
     @OverrideOnly
     protected boolean execute(final @NotNull CommandSender sender, final @NotNull String[] args) {
-        MiniMessageHelper.sendMessage(sender, "red", '!', "You might have overriden the wrong method... <gold>(sender, args[])</gold>");
+        sendMessage(sender, "red", '!', "You might have overriden the wrong method... <gold>(sender, args[])</gold>");
         return true;
     }
 
@@ -124,7 +124,7 @@ public abstract class BaseCommand<E extends BaseExtension> implements CommandExe
 
     @Override public final boolean onCommand(final @NotNull CommandSender sender, final @NotNull Command command, final @NotNull String label, final @NotNull String[] args) {
         if (this.playerOnly && !(sender instanceof Player)) {
-            MiniMessageHelper.sendMessage(sender, "red", '!', "This command can only be used by players.");
+            sendMessage(sender, "red", '!', "This command can only be used by players.");
             return true;
         }
 

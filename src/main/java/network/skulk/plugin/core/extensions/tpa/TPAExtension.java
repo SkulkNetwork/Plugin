@@ -2,7 +2,13 @@ package network.skulk.plugin.core.extensions.tpa;
 
 import com.google.common.collect.HashMultimap;
 import network.skulk.plugin.core.Plugin;
-import network.skulk.plugin.core.extensions.tpa.commands.*;
+import network.skulk.plugin.core.extensions.tpa.commands.TPAAcceptCommand;
+import network.skulk.plugin.core.extensions.tpa.commands.TPACancelCommand;
+import network.skulk.plugin.core.extensions.tpa.commands.TPACommand;
+import network.skulk.plugin.core.extensions.tpa.commands.TPAIgnoreAllCommand;
+import network.skulk.plugin.core.extensions.tpa.commands.TPAIgnoreCommand;
+import network.skulk.plugin.core.extensions.tpa.commands.TPAListIgnoredCommand;
+import network.skulk.plugin.core.extensions.tpa.commands.TPARejectCommand;
 import network.skulk.plugin.core.extensions.tpa.listeners.PlayerQuitListener;
 import network.skulk.plugin.helpers.FileHelper;
 import network.skulk.plugin.singletons.Singletons;
@@ -23,6 +29,10 @@ public final class TPAExtension extends BaseExtension {
     private HashMultimap<@NotNull UUID, @NotNull String> tpaIgnores = HashMultimap.create();
     private FileWriter tpaIgnoresFileWriter;
 
+    public TPAExtension(final @NotNull Plugin extension) {
+        super(extension);
+    }
+
     @Override protected void initCommands() {
         new TPAAcceptCommand(this);
         new TPACancelCommand(this);
@@ -35,10 +45,6 @@ public final class TPAExtension extends BaseExtension {
 
     @Override protected void initListeners() {
         new PlayerQuitListener(this);
-    }
-
-    public TPAExtension(final @NotNull Plugin extension) {
-        super(extension);
     }
 
     @Override protected void onEnableHook() throws Exception {

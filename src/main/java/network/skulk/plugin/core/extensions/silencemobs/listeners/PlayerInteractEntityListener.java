@@ -2,7 +2,6 @@ package network.skulk.plugin.core.extensions.silencemobs.listeners;
 
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import network.skulk.plugin.core.extensions.silencemobs.SilenceMobsExtension;
-import network.skulk.plugin.helpers.MiniMessageHelper;
 import network.skulk.plugin.wrapper.BaseListener;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -13,6 +12,9 @@ import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.HashSet;
+
+import static network.skulk.plugin.helpers.MiniMessageHelper.fmt;
+import static network.skulk.plugin.helpers.MiniMessageHelper.sendMessage;
 
 public final class PlayerInteractEntityListener extends BaseListener<SilenceMobsExtension> {
     private static final HashSet<String> SILENCING_NAMES = new HashSet<>();
@@ -60,13 +62,13 @@ public final class PlayerInteractEntityListener extends BaseListener<SilenceMobs
         }
 
         entity.setSilent(true);
-        entity.customName(MiniMessageHelper.fmt("<i><gray>Silenced</gray></i>"));
+        entity.customName(fmt("<i><gray>Silenced</gray></i>"));
 
         if (player.getGameMode() != GameMode.CREATIVE) {
             nameTags.setAmount(nameTags.getAmount() - 1);
         }
 
-        MiniMessageHelper.sendMessage(player, "green", '✓', "The entity '<0>' has been silenced.", entity.getType().toString().toLowerCase());
+        sendMessage(player, "green", '✓', "The entity '<0>' has been silenced.", entity.getType().toString().toLowerCase());
 
         event.setCancelled(true);
     }

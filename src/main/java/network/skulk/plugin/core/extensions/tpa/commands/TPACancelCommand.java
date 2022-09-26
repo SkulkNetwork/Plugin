@@ -2,7 +2,6 @@ package network.skulk.plugin.core.extensions.tpa.commands;
 
 import net.kyori.adventure.text.Component;
 import network.skulk.plugin.core.extensions.tpa.TPAExtension;
-import network.skulk.plugin.helpers.MiniMessageHelper;
 import network.skulk.plugin.wrapper.BaseCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -13,6 +12,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import static java.util.Map.Entry;
+import static network.skulk.plugin.helpers.MiniMessageHelper.fmt;
+import static network.skulk.plugin.helpers.MiniMessageHelper.makeMessage;
+import static network.skulk.plugin.helpers.MiniMessageHelper.sendMessage;
 
 public final class TPACancelCommand extends BaseCommand<TPAExtension> {
     public TPACancelCommand(final @NotNull TPAExtension extension) {
@@ -38,7 +40,7 @@ public final class TPACancelCommand extends BaseCommand<TPAExtension> {
             target = Bukkit.getPlayer(args[0]);
 
             if (target == null) {
-                MiniMessageHelper.sendMessage(player, "red", '!', "This player is offline.");
+                sendMessage(player, "red", '!', "This player is offline.");
                 return true;
             }
         }
@@ -57,17 +59,17 @@ public final class TPACancelCommand extends BaseCommand<TPAExtension> {
                 target = playerOutGoingRequests.get(0);
             }
             else if (playerOutGoingRequestsSize == 0) {
-                MiniMessageHelper.sendMessage(player, "red", '!', "You have no outgoing TPA requests.");
+                sendMessage(player, "red", '!', "You have no outgoing TPA requests.");
                 return true;
             }
             else {
                 final var component = Component.text().append(
-                        MiniMessageHelper.makeMessage("blue", '!', "Looks like you have multiple incoming TPA requests. Which one would you like to cancel?")
+                        makeMessage("blue", '!', "Looks like you have multiple incoming TPA requests. Which one would you like to cancel?")
                 );
 
                 // Twitter.
                 for (final Player toCancel : playerOutGoingRequests) {
-                    component.append(MiniMessageHelper.fmt("\n<b><gray>-></gray></b> <blue><click:run_command:/tpa-cancel <0>><0></click></blue>", toCancel.getName()));
+                    component.append(fmt("\n<b><gray>-></gray></b> <blue><click:run_command:/tpa-cancel <0>><0></click></blue>", toCancel.getName()));
                 }
 
                 player.sendMessage(component);
@@ -79,15 +81,15 @@ public final class TPACancelCommand extends BaseCommand<TPAExtension> {
         final var targetIncomingRequests = tpaRequests.get(target);
 
         if (!targetIncomingRequests.containsKey(player)) {
-            MiniMessageHelper.sendMessage(player, "red", '!', "You don't have an outgoing request to <b><0></b>.", targetName);
+            sendMessage(player, "red", '!', "You don't have an outgoing request to <b><0></b>.", targetName);
             return true;
         }
 
         targetIncomingRequests.get(player).cancel();
         targetIncomingRequests.remove(player);
 
-        MiniMessageHelper.sendMessage(player, "green", '✓', "Cancelled the TPA request going to <b><0></b>.", targetName);
-        MiniMessageHelper.sendMessage(target, "gold", '!', "<b><0></b> has cancelled their TPA request to you.", playerName);
+        sendMessage(player, "green", '✓', "Cancelled the TPA request going to <b><0></b>.", targetName);
+        sendMessage(target, "gold", '!', "<b><0></b> has cancelled their TPA request to you.", playerName);
         return true;
     }
 }
