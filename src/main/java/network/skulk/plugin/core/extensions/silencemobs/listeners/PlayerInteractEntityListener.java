@@ -11,23 +11,10 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.HashSet;
-
 import static network.skulk.plugin.helpers.MiniMessageHelper.fmt;
 import static network.skulk.plugin.helpers.MiniMessageHelper.sendMessage;
 
 public final class PlayerInteractEntityListener extends BaseListener<SilenceMobsExtension> {
-    private static final HashSet<String> SILENCING_NAMES = new HashSet<>();
-
-    static {
-        PlayerInteractEntityListener.SILENCING_NAMES.add("[silenced]");
-        PlayerInteractEntityListener.SILENCING_NAMES.add("[silenceme]");
-        PlayerInteractEntityListener.SILENCING_NAMES.add("[silence me]");
-        PlayerInteractEntityListener.SILENCING_NAMES.add("[stfu]");
-        PlayerInteractEntityListener.SILENCING_NAMES.add("[shutup]");
-        PlayerInteractEntityListener.SILENCING_NAMES.add("[shut up]");
-    }
-
     public PlayerInteractEntityListener(final SilenceMobsExtension extension) {
         super(extension);
     }
@@ -51,7 +38,7 @@ public final class PlayerInteractEntityListener extends BaseListener<SilenceMobs
             return;
         }
 
-        if (!PlayerInteractEntityListener.SILENCING_NAMES.contains(PlainTextComponentSerializer.plainText().serialize(nameTags.displayName()).toLowerCase())) {
+        if (!PlainTextComponentSerializer.plainText().serialize(nameTags.displayName()).equalsIgnoreCase("[silenced]")) {
             return;
         }
 
