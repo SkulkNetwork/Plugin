@@ -1,35 +1,40 @@
-# Plugin
+# Skulk Network Plugin (SNP)
 
-The main plugin used for the Skulk Network Minecraft server.
+The main plugin used for the Skulk Network Minecraft server (Soon™).
 
-## Features
+You are free to use this plugin for your own server, but keep in mind that I am not responsible for any issues that may
+arise from using this plugin.
+And I am not obligated to provide support for this plugin. But I will try to help you if I can (Add me on
+Discord: `RGBCube#4777`).
 
-### Entity Behavioural Changes
+## 📦 Features
+
+### 🐮 Entity Behavioural Changes
 
 * Creepers don't break blocks.
 * The Ender dragon drops and OP Elytra when you kill it (Only once per person).
 * Endermen don't pick up blocks.
 * Explosions drop all blocks they destroy.
 
-### Additional Food Features
+### 🧀 Additional Food Features
 
-* Cookies reset insomnia, so phantoms won't attack you.
+* Cookies reset insomnia, so phantoms won't attack you. (BROKEN)
 
-### Default Broadcast Message Changes
+### 📣 Default Broadcast Message Changes
 
 All the following have been changed to fit this message format: `[ <symbol> ] <message>`
 
 * Player death messages.
-* Advancement get messages.
+* Advancement get messages. (BROKEN)
 * Player join messages.
 * Player quit messages.
 * Unknown command messages.
 
-### Silencing Mobs
+### 🔇 Silencing Mobs
 
 You can silence any mob by naming it `Silenced`.
 
-### Homes
+### 🏠 Homes
 
 *You respawn on your default home when you die (Default homes are named 'home').*
 
@@ -41,7 +46,7 @@ You can silence any mob by naming it `Silenced`.
 
 `/home-list` - Tells you all your homes.
 
-### TPA
+### 📍 TPA (TelePort Ask)
 
 `/tpa <player>` - Sends a TPA request to a player.
 
@@ -57,7 +62,7 @@ You can silence any mob by naming it `Silenced`.
 
 `/tpa-list-ignored` - Tells you all the people you have ignored.
 
-## Building
+## 🔨 Building
 
 You need to have [Apache Maven](https://maven.apache.org/) installed to build the plugin.
 If you do, run the following command in the root directory of the project:
@@ -69,7 +74,7 @@ mvn clean package
 The JAR file will be in the `target` directory named `SNP-X.X.X.jar`.
 You can use this file like any other plugin JAR.
 
-## License
+## 📄 License
 
 Copyright (C) 2022-present RGBCube
 
