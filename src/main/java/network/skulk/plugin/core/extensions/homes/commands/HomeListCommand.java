@@ -19,7 +19,7 @@ public final class HomeListCommand extends BaseCommand<HomesExtension> {
 
     @Override protected void init() {
         this.setName("home-list");
-        this.setDescription("Lists all your homes.");
+        this.setDescription("Tells you all your homes.");
         this.setUsage("/home-list");
         this.setPlayerOnly(true);
         this.setMaxArgs(0);
