@@ -38,29 +38,24 @@ You can silence any mob by naming it `Silenced`.
 
 *You respawn on your default home when you die (Default homes are named 'home').*
 
-`/home [name]` - Teleports you to one of your homes.
+#### 🗃️ Commands
 
-`/home-set [name]` - Makes the current location a home.
-
-`/home-delete [name]` - Deletes a home.
-
-`/home-list` - Tells you all your homes.
+* `/home [name]` - Teleports you to one of your homes.
+* `/home-set [name]` - Makes the current location a home.
+* `/home-delete [name]` - Deletes a home.
+* `/home-list` - Tells you all your homes.
 
 ### 📍 TPA (TelePort Ask)
 
-`/tpa <player>` - Sends a TPA request to a player.
+#### 🗃️ Commands
 
-`/tpa-accept [player]` - Accepts a TPA request sent to you.
-
-`/tpa-reject [player]` - Rejects a TPA request sent to you.
-
-`/tpa-cancel [player]` - Cancels the TPA request you sent to a player.
-
-`/tpa-ignore <player>` - Ignores a player's TPA requests until the command is ran again for the player.
-
-`/tpa-ignore-all` - Ignores all TPA requests sent to you until the command is ran again.
-
-`/tpa-list-ignored` - Tells you all the people you have ignored.
+* `/tpa <player>` - Sends a TPA request to a player.
+* `/tpa-accept [player]` - Accepts a TPA request sent to you.
+* `/tpa-reject [player]` - Rejects a TPA request sent to you.
+* `/tpa-cancel [player]` - Cancels the TPA request you sent to a player.
+* `/tpa-ignore <player>` - Ignores a player's TPA requests until the command is ran again for the player.
+* `/tpa-ignore-all` - Ignores all TPA requests sent to you until the command is ran again.
+* `/tpa-list-ignored` - Tells you all the people you have ignored.
 
 ## 🔨 Building
 
