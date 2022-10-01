@@ -1,0 +1,41 @@
+name: Build
+
+on:
+  [ push, pull_request ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        maven-version: [ 3.8.4 ]
+        plugin-name: [ SNP ]
+    steps:
+
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set Up Maven ${{ matrix.maven-version }}
+        uses: stCarolas/setup-maven@v4.4
+        with:
+          maven-version: ${{ matrix.maven-version }}
+
+      - name: Build
+        run: mvn clean package
+
+      - name: Copy Built Files
+        run: cp ./target/${{ matrix.plugin-name }}*.jar .
+
+      - name: Update LATEST.txt
+        run: echo ${{ matrix.plugin-name }}*.jar > LATEST.txt
+
+      - name: Set Up Git
+        run: git config user.name "Automatic Builder"
+
+      - name: Commit and Push
+        continue-on-error: true
+        run: |
+          git switch --orphan build
+          git add SNP*.jar LATEST.txt
+          git commit -m "Build JAR"
+          git push origin build
