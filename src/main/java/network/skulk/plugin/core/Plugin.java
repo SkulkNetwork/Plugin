@@ -17,6 +17,7 @@
 package network.skulk.plugin.core;
 
 import network.skulk.plugin.core.extensions.entityoverride.EntityOverrideExtension;
+import network.skulk.plugin.core.extensions.foodbehaviour.FoodBehaviourExtension;
 import network.skulk.plugin.core.extensions.homes.HomesExtension;
 import network.skulk.plugin.core.extensions.messageoverride.MessageOverrideExtension;
 import network.skulk.plugin.core.extensions.silencemobs.SilenceMobsExtension;
@@ -27,6 +28,7 @@ import network.skulk.plugin.wrapper.BasePlugin;
 public final class Plugin extends BasePlugin {
     @Override protected void initExtensions() {
         new EntityOverrideExtension(this);
+        new FoodBehaviourExtension(this);
         new HomesExtension(this);
         new MessageOverrideExtension(this);
         new SilenceMobsExtension(this);

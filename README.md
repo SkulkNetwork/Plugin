@@ -18,7 +18,7 @@ Discord: `RGBCube#4777`).
 
 ### 🧀 Additional Food Features
 
-* Cookies reset insomnia, so phantoms won't attack you. (BROKEN)
+* Cookies reset insomnia, so phantoms won't attack you.
 
 ### 📣 Default Broadcast Message Changes
 

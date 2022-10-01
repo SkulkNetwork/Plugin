@@ -10,7 +10,6 @@ import org.bukkit.event.player.PlayerItemConsumeEvent;
 
 import static network.skulk.plugin.helpers.MiniMessageHelper.sendMessage;
 
-// FIXME
 public final class CookieResetInsomniaListener extends BaseListener<FoodBehaviourExtension> {
     public CookieResetInsomniaListener(final FoodBehaviourExtension extension) {
         super(extension);
