@@ -57,7 +57,7 @@ You can silence any mob by naming it `Silenced`.
 * `/tpa-ignore-all` - Ignores all TPA requests sent to you until the command is ran again.
 * `/tpa-list-ignored` - Tells you all the people you have ignored.
 
-## 🔨 Building
+## 🧱 Building Manually
 
 You need to have [Apache Maven](https://maven.apache.org/) installed to build the plugin.
 If you do, run the following command in the root directory of the project:
