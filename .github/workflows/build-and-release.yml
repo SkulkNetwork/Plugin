@@ -1,13 +1,12 @@
 name: Build & Release
 
 env:
+  # CONFIGURATION START
   master_branch: master
-  builds_branch: build
-
   java_distribution: temurin
   java_version: 17
-
   artifact_name: plugin-jar
+  # CONFIGURATION END
 
 on:
   - push
@@ -31,12 +30,15 @@ jobs:
 
       - name: Build Project
         run: mvn -B clean package
+      
+      - name: Set JAR File Name Environment Variable
+        run: echo "jar=$(ls target | grep -E "original.*\.jar" | cut -c10-)" >> $GITHUB_ENV
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
           name: ${{ env.artifact_name }}
-          path: ./target/$(ls target | grep -E "original.*\.jar" | cut -c10-)
+          path: ./target/${{ env.jar }}
 
   release:
     name: Release
@@ -56,9 +58,10 @@ jobs:
 
       - name: Parse Artifact Name And Set Environment Variables
         run: |
-          echo "jar=$(ls artifacts)" >> $GITHUB_ENV
-          echo "jar_version=$(echo $jar_name | cut -d '-' -f2 | cut -d '.' -f1-3)" >> $GITHUB_ENV
-          echo "jar_name=$(echo $jar_name | cut -d '-' -f1)" >> $GITHUB_ENV
+          JAR=$(ls artifacts)
+          echo "jar=$JAR" >> $GITHUB_ENV
+          echo "jar_version=$(echo $JAR | cut -d '-' -f2 | cut -d '.' -f1-3)" >> $GITHUB_ENV
+          echo "jar_name=$(echo $JAR | cut -d '-' -f1)" >> $GITHUB_ENV
 
       - name: Create Release
         uses: softprops/action-gh-release@v1
@@ -66,6 +69,7 @@ jobs:
           tag_name: ${{ env.jar_version }}
           name: ${{ env.jar_name }} ${{ env.jar_version }}
           files: ./artifacts/${{ env.jar }}
+          body: |
             Version ${{ env.jar_version }} of ${{ env.jar_name }} has been released.
             
             You can download the plugin (Named `${{ env.jar }}`) from the dropdown menu below.
