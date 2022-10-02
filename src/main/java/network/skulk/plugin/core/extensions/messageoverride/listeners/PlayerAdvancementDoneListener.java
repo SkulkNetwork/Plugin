@@ -17,7 +17,7 @@ public final class PlayerAdvancementDoneListener extends BaseListener<MessageOve
 
     @SuppressWarnings("ConstantConditions")
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
-    void onPlayerAdvancementDone(final PlayerAdvancementDoneEvent event) {
+    public void onPlayerAdvancementDone(final PlayerAdvancementDoneEvent event) {
         event.message(makeMessageWithComponent("blue", '✓', "<0>.", event.message()));
     }
 }

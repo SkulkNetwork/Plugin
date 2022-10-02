@@ -17,7 +17,7 @@ public final class HomeCommand extends BaseCommand<HomesExtension> {
         super(extension);
     }
 
-    @Override public void init() {
+    @Override protected void init() {
         this.setName("home");
         this.setDescription("Teleports you to one of your homes.");
         this.setUsage("/home [name]");

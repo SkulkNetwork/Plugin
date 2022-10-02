@@ -113,7 +113,7 @@ public abstract class BaseCommand<E extends BaseExtension> implements CommandExe
         return null;
     }
 
-    @Override public @Nullable ArrayList<String> onTabComplete(final @NotNull CommandSender sender, final @NotNull Command command, final @NotNull String label, final @NotNull String[] args) {
+    @Override public final @Nullable ArrayList<String> onTabComplete(final @NotNull CommandSender sender, final @NotNull Command command, final @NotNull String label, final @NotNull String[] args) {
         if (this.playerOnly) {
             return tabComplete((Player) sender, args);
         }

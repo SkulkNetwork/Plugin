@@ -70,9 +70,16 @@ public abstract class BasePlugin extends JavaPlugin {
         return Bukkit.getScheduler().runTaskLater(this, runnable, delay);
     }
 
-    // TODO: don't use deprecated stuff.
+    public final void runAsync(final @NotNull Runnable runnable) {
+        Bukkit.getScheduler().runTaskAsynchronously(this, runnable);
+    }
+
+    public final void runSync(final @NotNull Runnable runnable) {
+        Bukkit.getScheduler().runTask(this, runnable);
+    }
+
     public final void runRepeatingAsync(final long interval, final @NotNull Runnable runnable) {
-        Bukkit.getScheduler().scheduleAsyncRepeatingTask(this, runnable, interval, interval);
+        Bukkit.getScheduler().runTaskTimer(this, runnable, interval, interval);
     }
 
     public final void reportError(final @NotNull String message, final @Nullable Throwable error) {

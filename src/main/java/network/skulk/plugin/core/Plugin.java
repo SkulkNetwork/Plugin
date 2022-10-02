@@ -22,6 +22,7 @@ import network.skulk.plugin.core.extensions.homes.HomesExtension;
 import network.skulk.plugin.core.extensions.messageoverride.MessageOverrideExtension;
 import network.skulk.plugin.core.extensions.silencemobs.SilenceMobsExtension;
 import network.skulk.plugin.core.extensions.tpa.TPAExtension;
+import network.skulk.plugin.core.extensions.updatechecker.UpdateCheckerExtension;
 import network.skulk.plugin.wrapper.BasePlugin;
 
 // TODO: Make custom maps and solve "for \(final \w+ \w+ : [\w. \(\)]+ \{\n[ ]+if"
@@ -33,6 +34,6 @@ public final class Plugin extends BasePlugin {
         new MessageOverrideExtension(this);
         new SilenceMobsExtension(this);
         new TPAExtension(this);
-        // new UpdateCheckerExtension(this);
+        new UpdateCheckerExtension(this);
     }
 }

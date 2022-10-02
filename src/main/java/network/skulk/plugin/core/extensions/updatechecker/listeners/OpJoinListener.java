@@ -24,14 +24,21 @@ public final class OpJoinListener extends BaseListener<UpdateCheckerExtension> {
         }
 
         final var extension = this.getExtension();
+        final var plugin = extension.getPlugin();
 
-        final var currentVersion = extension.getPlugin().getDescription().getVersion();
-        final var latestVersion = extension.getLatestVersion();
+        final var currentVersion = plugin.getDescription().getVersion();
 
-        if (currentVersion.equalsIgnoreCase(latestVersion)) {
-            return;
-        }
+        plugin.runAsync(() -> {
+            // Blocking HTTP request.
+            final var latestVersion = extension.getLatestVersion();
 
-        sendMessage(player, "orange", '!', "There is a new version available for the plugin: <0>", latestVersion);
+            if (currentVersion.equalsIgnoreCase(latestVersion)) {
+                return;
+            }
+
+            plugin.runSync(() ->
+                    sendMessage(player, "orange", '!', "There is a new version available for the plugin: <0>", latestVersion)
+            );
+        });
     }
 }

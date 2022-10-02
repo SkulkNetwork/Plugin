@@ -9,7 +9,7 @@ public final class FoodBehaviourExtension extends BaseExtension {
         super(plugin);
     }
 
-    @Override public void initListeners() {
+    @Override protected void initListeners() {
         new CookieResetInsomniaListener(this);
     }
 }
