@@ -1,4 +1,4 @@
-name: SNP
+name: "${project.name}"
 version: "${project.version}"
 main: network.skulk.plugin.core.Plugin
 api-version: "1.19"
@@ -17,3 +17,4 @@ commands:
   home-delete: { }
   home-list: { }
   home-set: { }
+  update-snp: { }

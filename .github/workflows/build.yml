@@ -7,19 +7,34 @@ jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: true
       matrix:
+        java-distribution: [ temurin ]
+        java-version: [ 17 ]
         maven-version: [ 3.8.4 ]
-        plugin-name: [ SNP ]
+        python-version: [ "3.10" ]
     steps:
 
       - name: Checkout Repository
         uses: actions/checkout@v3
 
+      - name: Set Up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+        run: pip install -U pip xmltodict
+
+      - name: Switch To Builds Branch
+        run: git switch --orphan builds
+
+      - name: Check If New Release
+        if: ./.github/workflows/should_release.py
+
       - name: Set Up Java 17
         uses: actions/setup-java@v3
         with:
-          distribution: "temurin"
-          java-version: "17"
+          distribution: ${{ matrix.java-distribution }}
+          java-version: ${{ matrix.java-version }}
 
       - name: Set Up Maven ${{ matrix.maven-version }}
         uses: stCarolas/setup-maven@v4.4
@@ -29,19 +44,24 @@ jobs:
       - name: Build Project
         run: mvn clean package
 
-      - name: Copy Built Files
-        run: cp ./target/${{ matrix.plugin-name }}*.jar .
+      - name: Get Project Metadata
+        run: |
+          ARTIFACT_NAME=$(./.github/workflows/project_info.py artifactId)
+          PROJECT_VERSION=$(./.github/workflows/project_info.py version)
 
-      - name: Update LATEST.txt
-        run: echo ${{ matrix.plugin-name }}*.jar > LATEST.txt
+      - name: Copy Built Files
+        run: cp ./target/$ARTIFACT_NAME-$PROJECT_VERSION.jar .
+
+      - name: Update Project Metadata Files
+        run: |
+          echo $PROJECT_VERSION > LATEST.txt
+          echo $ARTIFACT_NAME > NAME.txt
 
       - name: Set Up Git
         run: git config user.name "Automatic Builder"
 
-      - name: Commit and Push
-        continue-on-error: true
+      - name: Commit And Push
         run: |
-          git switch --orphan build
-          git add SNP*.jar LATEST.txt
+          git add $ARTIFACT_NAME-$PROJECT_VERSION.jar LATEST.txt NAME.txt
           git commit -m "Build JAR"
           git push origin build
