@@ -7,7 +7,6 @@ import org.jetbrains.annotations.NotNull;
 
 import static network.skulk.plugin.helpers.MiniMessageHelper.sendMessage;
 
-// TODO
 public final class UpdateCommand extends BaseCommand<UpdateCheckerExtension> {
     public UpdateCommand(final @NotNull UpdateCheckerExtension extension) {
         super(extension);
