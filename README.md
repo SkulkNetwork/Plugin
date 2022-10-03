@@ -7,6 +7,11 @@ arise from using this plugin.
 And I am not obligated to provide support for this plugin. But I will try to help you if I can (Add me on
 Discord: `RGBCube#4777`).
 
+## 📥 Downloading
+
+You can download the latest version of the plugin from
+the [latest release](https://github.com/Skulk-Network/Plugin/releases/latest).
+
 ## 📦 Features
 
 ### 🐮 Entity Behavioural Changes
