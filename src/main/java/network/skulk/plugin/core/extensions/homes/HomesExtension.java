@@ -18,11 +18,11 @@ import java.io.FileInputStream;
 import java.io.FileWriter;
 
 public final class HomesExtension extends BaseExtension {
-    private final File homesFile = new File(this.getPlugin().getDataFolder(), "homes.yml");
+    private final @NotNull File homesFile = new File(this.getPlugin().getDataFolder(), "homes.yml");
     private FileWriter homesFileWriter;
-    private UUID2CaseInsensitiveMap<Location> homes = new UUID2CaseInsensitiveMap<>();
+    private @NotNull UUID2CaseInsensitiveMap<@NotNull Location> homes = new UUID2CaseInsensitiveMap<>();
 
-    public HomesExtension(final Plugin plugin) {
+    public HomesExtension(final @NotNull Plugin plugin) {
         super(plugin);
     }
 
@@ -39,20 +39,19 @@ public final class HomesExtension extends BaseExtension {
 
     @Override protected void onEnableHook() throws Exception {
         final var plugin = this.getPlugin();
-        final var yaml = Singletons.getYaml();
 
         FileHelper.createFile(this.homesFile);
         this.homesFileWriter = new FileWriter(homesFile);
 
         plugin.runRepeatingAsync(30 * 60 * 20, () -> {
             try {
-                yaml.dump(this.homes, this.homesFileWriter);
+                Singletons.YAML.dump(this.homes, this.homesFileWriter);
             } catch (final Exception error) {
                 plugin.reportError("There was an error while trying to save homes:", error);
             }
         });
 
-        this.homes = yaml.load(new FileInputStream(this.homesFile));
+        this.homes = Singletons.YAML.load(new FileInputStream(this.homesFile));
 
         if (this.homes == null) {
             this.homes = new UUID2CaseInsensitiveMap<>();
@@ -60,11 +59,11 @@ public final class HomesExtension extends BaseExtension {
     }
 
     @Override protected void onDisableHook() {
-        Singletons.getYaml().dump(this.homes, this.homesFileWriter);
+        Singletons.YAML.dump(this.homes, this.homesFileWriter);
     }
 
     // Getters.
-    public @NotNull UUID2CaseInsensitiveMap<Location> getHomes() {
+    public @NotNull UUID2CaseInsensitiveMap<@NotNull Location> getHomes() {
         return this.homes;
     }
 }

@@ -17,9 +17,7 @@ public final class HomeSetCommand extends BaseCommand<HomesExtension> {
         this.setName("home-set");
         this.setDescription("Makes the current location a home.");
         this.setUsage("/home-set [name]");
-        this.setPlayerOnly(true);
         this.setMaxArgs(1);
-        this.setMinArgs(0);
     }
 
     @Override protected boolean execute(final @NotNull Player player, final @NotNull String[] args) {

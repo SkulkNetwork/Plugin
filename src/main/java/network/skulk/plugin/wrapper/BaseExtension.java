@@ -5,7 +5,7 @@ import org.jetbrains.annotations.NotNull;
 import static org.jetbrains.annotations.ApiStatus.OverrideOnly;
 
 public abstract class BaseExtension {
-    private final BasePlugin plugin;
+    private final @NotNull BasePlugin plugin;
 
     public BaseExtension(final @NotNull BasePlugin plugin) {
         this.plugin = plugin;

@@ -14,14 +14,14 @@ import static network.skulk.plugin.helpers.MiniMessageHelper.sendMessage;
 import static org.jetbrains.annotations.ApiStatus.OverrideOnly;
 
 public abstract class BaseCommand<E extends BaseExtension> implements CommandExecutor, TabCompleter {
-    private final E extension;
+    private final @NotNull E extension;
 
     private String name;
     private String description;
     private String usage;
-    private boolean playerOnly;
-    private int minArgs;
-    private int maxArgs;
+    private boolean playerOnly = true;
+    private int minArgs = 0;
+    private int maxArgs = 0;
     private @Nullable String permission = null;
 
     public BaseCommand(final @NotNull E extension) {
@@ -58,18 +58,22 @@ public abstract class BaseCommand<E extends BaseExtension> implements CommandExe
         this.usage = usage;
     }
 
+    @SuppressWarnings("SameParameterValue")
     protected void setPlayerOnly(final boolean playerOnly) {
         this.playerOnly = playerOnly;
     }
 
+    @SuppressWarnings("SameParameterValue")
     protected void setMinArgs(final int minArgs) {
         this.minArgs = minArgs;
     }
 
+    @SuppressWarnings("SameParameterValue")
     protected void setMaxArgs(final int maxArgs) {
         this.maxArgs = maxArgs;
     }
 
+    @SuppressWarnings("SameParameterValue")
     protected void setPermission(final @Nullable String permission) {
         this.permission = permission;
     }

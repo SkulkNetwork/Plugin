@@ -21,9 +21,7 @@ public final class HomeCommand extends BaseCommand<HomesExtension> {
         this.setName("home");
         this.setDescription("Teleports you to one of your homes.");
         this.setUsage("/home [name]");
-        this.setPlayerOnly(true);
         this.setMaxArgs(1);
-        this.setMinArgs(0);
     }
 
     @Override protected @Nullable ArrayList<String> tabComplete(final @NotNull Player player, final @NotNull String[] args) {

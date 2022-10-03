@@ -25,9 +25,7 @@ public final class TPACancelCommand extends BaseCommand<TPAExtension> {
         this.setName("tpa-cancel");
         this.setDescription("Cancels the TPA request you sent to a player.");
         this.setUsage("/tpa-cancel [player]");
-        this.setPlayerOnly(true);
         this.setMaxArgs(1);
-        this.setMinArgs(0);
     }
 
     @Override protected boolean execute(final @NotNull Player player, final @NotNull String[] args) {

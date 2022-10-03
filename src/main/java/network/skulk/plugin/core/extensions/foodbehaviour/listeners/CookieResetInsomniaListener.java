@@ -7,16 +7,17 @@ import org.bukkit.Statistic;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
+import org.jetbrains.annotations.NotNull;
 
 import static network.skulk.plugin.helpers.MiniMessageHelper.sendMessage;
 
 public final class CookieResetInsomniaListener extends BaseListener<FoodBehaviourExtension> {
-    public CookieResetInsomniaListener(final FoodBehaviourExtension extension) {
+    public CookieResetInsomniaListener(final @NotNull FoodBehaviourExtension extension) {
         super(extension);
     }
 
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
-    public void onPlayerItemConsume(final PlayerItemConsumeEvent event) {
+    public void onPlayerItemConsume(final @NotNull PlayerItemConsumeEvent event) {
         if (event.getItem().getType() != Material.COOKIE) {
             return;
         }

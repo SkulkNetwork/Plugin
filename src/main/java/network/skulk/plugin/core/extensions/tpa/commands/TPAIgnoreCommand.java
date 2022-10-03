@@ -16,7 +16,6 @@ public final class TPAIgnoreCommand extends BaseCommand<TPAExtension> {
         this.setName("tpa-ignore");
         this.setDescription("Ignores a player's TPA requests until the command is ran again for the player.");
         this.setUsage("/tpa-ignore <player>");
-        this.setPlayerOnly(true);
         this.setMaxArgs(1);
         this.setMinArgs(1);
     }

@@ -28,7 +28,7 @@ import static network.skulk.plugin.helpers.MiniMessageHelper.sendMessage;
 
 // Entity.getKiller() returns null when it's the ender dragon for some reason.
 public final class DragonDropElytraListener extends BaseListener<EntityOverrideExtension> {
-    private static final ItemStack OP_ELYTRA = new ItemStack(Material.ELYTRA, 1);
+    private static final @NotNull ItemStack OP_ELYTRA = new ItemStack(Material.ELYTRA, 1);
 
     static {
 
@@ -55,7 +55,7 @@ public final class DragonDropElytraListener extends BaseListener<EntityOverrideE
         DragonDropElytraListener.OP_ELYTRA.setItemMeta(elytraItemMeta);
     }
 
-    private final NamespacedKey hasGottenElytraKey = new NamespacedKey(this.getExtension().getPlugin(), "hasGottenElytra");
+    private final @NotNull NamespacedKey hasGottenElytraKey = new NamespacedKey(this.getExtension().getPlugin(), "hasGottenElytra");
     private @Nullable Player lastDragonDamager = null;
 
     public DragonDropElytraListener(final @NotNull EntityOverrideExtension extension) {
@@ -77,7 +77,7 @@ public final class DragonDropElytraListener extends BaseListener<EntityOverrideE
 
         final var player = this.lastDragonDamager;
         final var playerPersistentDataContainer = player.getPersistentDataContainer();
-        final var booleanPersistentDataType = Singletons.getBooleanPersistentDataType();
+        final var booleanPersistentDataType = Singletons.BOOLEAN_PERSISTENT_DATA_TYPE;
 
         if (playerPersistentDataContainer.getOrDefault(this.hasGottenElytraKey, booleanPersistentDataType, false)) {
             return;

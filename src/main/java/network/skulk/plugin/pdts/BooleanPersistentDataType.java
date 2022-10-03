@@ -7,11 +7,11 @@ import org.jetbrains.annotations.NotNull;
 public final class BooleanPersistentDataType implements PersistentDataType<Byte, Boolean> {
     private static final byte TRUE = 1, FALSE = 0;
 
-    @Override public @NotNull Class<Byte> getPrimitiveType() {
+    @Override public @NotNull Class<@NotNull Byte> getPrimitiveType() {
         return Byte.class;
     }
 
-    @Override public @NotNull Class<Boolean> getComplexType() {
+    @Override public @NotNull Class<@NotNull Boolean> getComplexType() {
         return Boolean.class;
     }
 

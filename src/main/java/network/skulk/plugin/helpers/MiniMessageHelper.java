@@ -8,7 +8,7 @@ import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
 import org.jetbrains.annotations.NotNull;
 
 public abstract class MiniMessageHelper {
-    private static final String MESSAGE_TEMPLATE = "<b><gray>[ <color:%s>%s</color> ]</gray></b> <color:%s>%s</color>";
+    private static final @NotNull String MESSAGE_TEMPLATE = "<b><gray>[ <color:%s>%s</color> ]</gray></b> <color:%s>%s</color>";
 
     public static void sendMessage(final @NotNull Audience audience, final @NotNull String color, final char symbol, final @NotNull String text, final @NotNull String... placeholders) {
         audience.sendMessage(

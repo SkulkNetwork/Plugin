@@ -10,17 +10,18 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 import static network.skulk.plugin.helpers.MiniMessageHelper.fmt;
 import static network.skulk.plugin.helpers.MiniMessageHelper.sendMessage;
 
 public final class PlayerInteractEntityListener extends BaseListener<SilenceMobsExtension> {
-    public PlayerInteractEntityListener(final SilenceMobsExtension extension) {
+    public PlayerInteractEntityListener(final @NotNull SilenceMobsExtension extension) {
         super(extension);
     }
 
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
-    public void onPlayerInteractEntity(final PlayerInteractEntityEvent event) {
+    public void onPlayerInteractEntity(final @NotNull PlayerInteractEntityEvent event) {
         final var player = event.getPlayer();
         final var playerInventory = player.getInventory();
         final var mainHandItem = playerInventory.getItemInMainHand();

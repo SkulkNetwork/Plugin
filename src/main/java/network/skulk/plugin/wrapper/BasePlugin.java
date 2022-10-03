@@ -12,9 +12,9 @@ import java.util.logging.Level;
 import static org.jetbrains.annotations.ApiStatus.OverrideOnly;
 
 public abstract class BasePlugin extends JavaPlugin {
-    private final ArrayList<BaseExtension> extensions = new ArrayList<>();
+    private final @NotNull ArrayList<@NotNull BaseExtension> extensions = new ArrayList<>();
 
-    public ArrayList<BaseExtension> getExtensions() {
+    public @NotNull ArrayList<@NotNull BaseExtension> getExtensions() {
         return this.extensions;
     }
 
@@ -66,8 +66,8 @@ public abstract class BasePlugin extends JavaPlugin {
         logger.info("The plugin has been unloaded.");
     }
 
-    public final @NotNull BukkitTask runAfter(final long delay, final @NotNull Runnable runnable) {
-        return Bukkit.getScheduler().runTaskLater(this, runnable, delay);
+    public final @NotNull BukkitTask runAfter(final long seconds, final @NotNull Runnable runnable) {
+        return Bukkit.getScheduler().runTaskLater(this, runnable, seconds * 20);
     }
 
     public final void runAsync(final @NotNull Runnable runnable) {

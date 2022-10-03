@@ -14,11 +14,9 @@ public final class UpdateCommand extends BaseCommand<UpdateCheckerExtension> {
 
     @Override protected void init() {
         this.setName("update-snp");
-        this.setDescription("Updates the plugin");
+        this.setDescription("Updates the plugin.");
         this.setUsage("/update-snp");
         this.setPlayerOnly(false);
-        this.setMaxArgs(0);
-        this.setMinArgs(0);
         this.setPermission("op");
     }
 

@@ -17,7 +17,6 @@ public final class TPACommand extends BaseCommand<TPAExtension> {
         this.setName("tpa");
         this.setDescription("Sends a TPA request to a player.");
         this.setUsage("/tpa <player>");
-        this.setPlayerOnly(true);
         this.setMaxArgs(1);
         this.setMinArgs(1);
     }
@@ -63,7 +62,7 @@ public final class TPACommand extends BaseCommand<TPAExtension> {
 
         // This task will get cancelled when the player cancels their TPA request to this person
         // or the person accepts the request.
-        targetTpaRequests.put(player, extension.getPlugin().runAfter(60 * 20, () -> {
+        targetTpaRequests.put(player, extension.getPlugin().runAfter(60, () -> {
             if (targetTpaRequests.containsKey(player)) {
                 targetTpaRequests.remove(player);
                 sendMessage(player, "gold", '!', "Your TPA request to <b><0></b> has expired.", targetName);
