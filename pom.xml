@@ -3,7 +3,7 @@
     <url>skulk.network</url>
     <artifactId>SNP</artifactId>
     <name>SNP</name>
-    <version>2.6.0</version>
+    <version>2.6.0a1</version>
     <description>The main plugin used for the Skulk Network Minecraft server.</description>
 
     <packaging>jar</packaging>

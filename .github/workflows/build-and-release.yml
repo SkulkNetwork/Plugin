@@ -66,6 +66,7 @@ jobs:
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
+          prerelease: ${{ contains(${{ env.jar_version }}, 'b') || contains(${{ env.jar_version }}, 'a') }}
           tag_name: ${{ env.jar_version }}
           name: ${{ env.jar_name }} ${{ env.jar_version }}
           files: ./artifacts/${{ env.jar }}
