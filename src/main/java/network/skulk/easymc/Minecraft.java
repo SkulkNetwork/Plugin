@@ -5,6 +5,7 @@ import net.kyori.adventure.text.ComponentLike;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.Server;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.SpawnCategory;
 import org.bukkit.plugin.PluginManager;
@@ -27,6 +28,7 @@ public final class Minecraft {
     private Minecraft() {
     }
 
+    // TODO: Custom class, or remove this
     @Contract(pure = true)
     public static @NotNull Server getServer() {
         return Minecraft.server;
@@ -112,10 +114,15 @@ public final class Minecraft {
         return Minecraft.server.getSimulationDistance();
     }
 
-    // World Info
+    // Worlds
 
     @Contract(pure = true)
-    public static @NotNull String getWorldType() {
+    public static @NotNull List<World> getWorlds() {
+        return Minecraft.server.getWorlds();
+    }
+
+    @Contract(pure = true)
+    public static @NotNull String getDefaultWorldType() {
         return Minecraft.server.getWorldType();
     }
 
