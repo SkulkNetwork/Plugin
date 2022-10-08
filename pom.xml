@@ -1,6 +1,6 @@
 <project>
-    <groupId>network.skulk.plugin</groupId>
-    <url>skulk.network</url>
+    <groupId>tk.skulk.plugin</groupId>
+    <url>plugin.skulk.tk</url>
     <artifactId>SNP</artifactId>
     <name>SNP</name>
     <version>2.6.0a1</version>
