@@ -39,13 +39,6 @@
                 </executions>
                 <configuration>
                     <createDependencyReducedPom>false</createDependencyReducedPom>
-                    <!--                    <artifactSet>-->
-                    <!--                        <includes>-->
-                    <!--                            <include>org.jetbrains.kotlin:kotlin-stdlib</include>-->
-                    <!--                            <include>com.squareup.okio:okio-jvm</include>-->
-                    <!--                            <include>com.squareup.okhttp3:okhttp</include>-->
-                    <!--                        </includes>-->
-                    <!--                    </artifactSet>-->
                 </configuration>
             </plugin>
         </plugins>
@@ -68,7 +61,6 @@
             <id>okhttp-repo</id>
             <url>https://okhttp3.squareup.com/</url>
         </repository>
-
     </repositories>
 
     <dependencies>
