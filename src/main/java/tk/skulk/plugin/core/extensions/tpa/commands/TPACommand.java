@@ -13,7 +13,8 @@ public final class TPACommand extends BaseCommand<TPAExtension> {
         super(extension);
     }
 
-    @Override protected void init() {
+    @Override
+    protected void init() {
         this.setName("tpa");
         this.setDescription("Sends a TPA request to a player.");
         this.setUsage("/tpa <player>");
@@ -21,7 +22,8 @@ public final class TPACommand extends BaseCommand<TPAExtension> {
         this.setMinArgs(1);
     }
 
-    @Override protected boolean execute(final @NotNull Player player, final @NotNull String[] args) {
+    @Override
+    protected boolean execute(final @NotNull Player player, final @NotNull String[] args) {
         final var playerName = player.getName();
 
         final var target = Bukkit.getPlayer(args[0]);
@@ -42,13 +44,25 @@ public final class TPACommand extends BaseCommand<TPAExtension> {
         final var targetIgnores = extension.getTpaIgnores().get(target.getUniqueId());
 
         if (targetIgnores.contains("*")) {
-            sendMessage(player, "red", '!', "<b><0></b> isn't accepting TPA requests from anyone.", targetName);
+            sendMessage(
+                player,
+                "red",
+                '!',
+                "<b><0></b> isn't accepting TPA requests from anyone.",
+                targetName
+            );
             return true;
         }
 
         for (final String blockedPlayerName : targetIgnores) {
             if (blockedPlayerName.equalsIgnoreCase(playerName)) {
-                sendMessage(player, "red", '!', "<b><0></b> isn't accepting TPA requests from you.", targetName);
+                sendMessage(
+                    player,
+                    "red",
+                    '!',
+                    "<b><0></b> isn't accepting TPA requests from you.",
+                    targetName
+                );
                 return true;
             }
         }
@@ -56,7 +70,13 @@ public final class TPACommand extends BaseCommand<TPAExtension> {
         final var targetTpaRequests = extension.getTpaRequests().get(target);
 
         if (targetTpaRequests.containsKey(player)) {
-            sendMessage(player, "red", '!', "You already have a pending request to <b><0></b>", targetName);
+            sendMessage(
+                player,
+                "red",
+                '!',
+                "You already have a pending request to <b><0></b>",
+                targetName
+            );
             return true;
         }
 
@@ -65,13 +85,31 @@ public final class TPACommand extends BaseCommand<TPAExtension> {
         targetTpaRequests.put(player, extension.getPlugin().runAfter(60, () -> {
             if (targetTpaRequests.containsKey(player)) {
                 targetTpaRequests.remove(player);
-                sendMessage(player, "gold", '!', "Your TPA request to <b><0></b> has expired.", targetName);
-                sendMessage(target, "gold", '!', "The TPA request <b><0></b> has sent you has expired.", playerName);
+                sendMessage(
+                    player,
+                    "gold",
+                    '!',
+                    "Your TPA request to <b><0></b> has expired.",
+                    targetName
+                );
+                sendMessage(
+                    target,
+                    "gold",
+                    '!',
+                    "The TPA request <b><0></b> has sent you has expired.",
+                    playerName
+                );
             }
         }));
 
         sendMessage(player, "green", '✓', "Sent a TPA request to <b><0></b>", targetName);
-        sendMessage(target, "blue", '?', "<b><0></b> wants to TPA to you. Do you accept? <b><green><click:run_command:/tpa-accept %s>[✓]</click></green> <red><click:run_command:/tpa-reject %s>[✗]</click></red></b>", playerName);
+        sendMessage(
+            target,
+            "blue",
+            '?',
+            "<b><0></b> wants to TPA to you. Do you accept? <b><green><click:run_command:/tpa-accept %s>[✓]</click></green> <red><click:run_command:/tpa-reject %s>[✗]</click></red></b>",
+            playerName
+        );
         return true;
     }
 }

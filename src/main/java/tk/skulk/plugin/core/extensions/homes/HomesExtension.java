@@ -26,18 +26,21 @@ public final class HomesExtension extends BaseExtension {
         super(plugin);
     }
 
-    @Override protected void initCommands() {
+    @Override
+    protected void initCommands() {
         new HomeCommand(this);
         new HomeDeleteCommand(this);
         new HomeListCommand(this);
         new HomeSetCommand(this);
     }
 
-    @Override protected void initListeners() {
+    @Override
+    protected void initListeners() {
         new RespawnOnHomeListener(this);
     }
 
-    @Override protected void onEnableHook() throws Exception {
+    @Override
+    protected void onEnableHook() throws Exception {
         final var plugin = this.getPlugin();
 
         FileHelper.createFile(this.homesFile);
@@ -46,7 +49,8 @@ public final class HomesExtension extends BaseExtension {
         plugin.runRepeatingAsync(30 * 60 * 20, () -> {
             try {
                 Singletons.YAML.dump(this.homes, this.homesFileWriter);
-            } catch (final Exception error) {
+            }
+            catch (final Exception error) {
                 plugin.reportError("There was an error while trying to save homes:", error);
             }
         });
@@ -58,7 +62,8 @@ public final class HomesExtension extends BaseExtension {
         }
     }
 
-    @Override protected void onDisableHook() {
+    @Override
+    protected void onDisableHook() {
         Singletons.YAML.dump(this.homes, this.homesFileWriter);
     }
 

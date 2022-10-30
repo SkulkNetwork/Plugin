@@ -17,13 +17,15 @@ public final class HomeListCommand extends BaseCommand<HomesExtension> {
         super(extension);
     }
 
-    @Override protected void init() {
+    @Override
+    protected void init() {
         this.setName("home-list");
         this.setDescription("Tells you all your homes.");
         this.setUsage("/home-list");
     }
 
-    @Override protected boolean execute(final @NotNull Player player) {
+    @Override
+    protected boolean execute(final @NotNull Player player) {
         final var playerHomes = this.getExtension().getHomes().get(player.getUniqueId());
 
         if (playerHomes.isEmpty()) {
@@ -31,21 +33,19 @@ public final class HomeListCommand extends BaseCommand<HomesExtension> {
             return true;
         }
 
-        final var component = Component.text().append(
-                makeMessage("gold", '!', "All homes:")
-        );
+        final var component = Component.text().append(makeMessage("gold", '!', "All homes:"));
 
         for (final Entry<String, Location> entry : playerHomes.entrySet()) {
             final var location = entry.getValue();
 
-            component.append(
-                    fmt(
-                            "\n<b><gray>-></gray></b> <color:#ffae1a><0> (X: %.0f, Y: %.0f, Z: %.0f)</color>".formatted(
-                                    location.getX(), location.getY(), location.getZ()
-                            ),
-                            entry.getKey()
-                    )
-            );
+            component.append(fmt(
+                "\n<b><gray>-></gray></b> <color:#ffae1a><0> (X: %.0f, Y: %.0f, Z: %.0f)</color>".formatted(
+                    location.getX(),
+                    location.getY(),
+                    location.getZ()
+                ),
+                entry.getKey()
+            ));
         }
 
         player.sendMessage(component);

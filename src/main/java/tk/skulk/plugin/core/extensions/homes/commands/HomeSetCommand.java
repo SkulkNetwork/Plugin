@@ -13,14 +13,16 @@ public final class HomeSetCommand extends BaseCommand<HomesExtension> {
         super(extension);
     }
 
-    @Override protected void init() {
+    @Override
+    protected void init() {
         this.setName("home-set");
         this.setDescription("Makes the current location a home.");
         this.setUsage("/home-set [name]");
         this.setMaxArgs(1);
     }
 
-    @Override protected boolean execute(final @NotNull Player player, final @NotNull String[] args) {
+    @Override
+    protected boolean execute(final @NotNull Player player, final @NotNull String[] args) {
         final var playerHomes = this.getExtension().getHomes().get(player.getUniqueId());
 
         final String homeName;
@@ -28,7 +30,12 @@ public final class HomeSetCommand extends BaseCommand<HomesExtension> {
         if (args.length == 0) {
             if (playerHomes.containsKey("home")) {
                 // Player already has a home named 'home'
-                sendMessage(player, "red", '!', "You already have a default home. You need to delete that home and set it again.");
+                sendMessage(
+                    player,
+                    "red",
+                    '!',
+                    "You already have a default home. You need to delete that home and set it again."
+                );
                 return true;
             }
 
@@ -56,7 +63,13 @@ public final class HomeSetCommand extends BaseCommand<HomesExtension> {
 
         playerHomes.put(homeName, new Location(player.getLocation()));
 
-        sendMessage(player, "green", '✓', "Successfully created a home named <b><0></b>.", homeName);
+        sendMessage(
+            player,
+            "green",
+            '✓',
+            "Successfully created a home named <b><0></b>.",
+            homeName
+        );
 
         return true;
     }

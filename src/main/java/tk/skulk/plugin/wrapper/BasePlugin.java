@@ -29,7 +29,8 @@ public abstract class BasePlugin extends JavaPlugin {
     protected void initExtensions() {
     }
 
-    @Override public final void onEnable() {
+    @Override
+    public final void onEnable() {
         final var logger = this.getLogger();
         logger.info("The plugin is being loaded...");
 
@@ -38,8 +39,12 @@ public abstract class BasePlugin extends JavaPlugin {
         for (final BaseExtension extension : this.extensions) {
             try {
                 extension.onEnable();
-            } catch (final Exception error) {
-                this.reportError("There was an error while loading '%s':".formatted(extension.getClass().getName()), error);
+            }
+            catch (final Exception error) {
+                this.reportError(
+                    "There was an error while loading '%s':".formatted(extension.getClass().getName()),
+                    error
+                );
                 this.extensions.remove(extension);
             }
         }
@@ -47,7 +52,8 @@ public abstract class BasePlugin extends JavaPlugin {
         logger.info("The plugin has been loaded.");
     }
 
-    @Override public final void onDisable() {
+    @Override
+    public final void onDisable() {
         final var logger = this.getLogger();
         logger.info("The plugin is being unloaded...");
 
@@ -56,8 +62,12 @@ public abstract class BasePlugin extends JavaPlugin {
         for (final BaseExtension extension : this.extensions) {
             try {
                 extension.onDisable();
-            } catch (final Exception error) {
-                this.reportError("There was an error while unloading %s:".formatted(extension.getClass().getName()), error);
+            }
+            catch (final Exception error) {
+                this.reportError(
+                    "There was an error while unloading %s:".formatted(extension.getClass().getName()),
+                    error
+                );
             }
         }
 
@@ -66,7 +76,10 @@ public abstract class BasePlugin extends JavaPlugin {
         logger.info("The plugin has been unloaded.");
     }
 
-    public final @NotNull BukkitTask runAfter(final long seconds, final @NotNull Runnable runnable) {
+    public final @NotNull BukkitTask runAfter(
+        final long seconds,
+        final @NotNull Runnable runnable
+    ) {
         return Bukkit.getScheduler().runTaskLater(this, runnable, seconds * 20);
     }
 

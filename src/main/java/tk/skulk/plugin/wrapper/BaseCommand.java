@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import static org.jetbrains.annotations.ApiStatus.OverrideOnly;
 import static tk.skulk.plugin.helpers.MiniMessageHelper.sendMessage;
 
-public abstract class BaseCommand<E extends BaseExtension> implements CommandExecutor, TabCompleter {
+public abstract class BaseCommand <E extends BaseExtension> implements CommandExecutor, TabCompleter {
     private final @NotNull E extension;
 
     private String name;
@@ -32,7 +32,9 @@ public abstract class BaseCommand<E extends BaseExtension> implements CommandExe
         final var command = plugin.getCommand(this.name);
 
         if (command == null) {
-            plugin.reportError("The command '%s' could not be registered because it was not included in the plugin.yml.".formatted(this.name));
+            plugin.reportError(
+                "The command '%s' could not be registered because it was not included in the plugin.yml.".formatted(
+                    this.name));
             return;
         }
 
@@ -84,40 +86,72 @@ public abstract class BaseCommand<E extends BaseExtension> implements CommandExe
     }
 
     @OverrideOnly
-    protected @Nullable ArrayList<String> tabComplete(final @NotNull Player player, final @NotNull String[] args) {
+    protected @Nullable ArrayList<String> tabComplete(
+        final @NotNull Player player,
+        final @NotNull String[] args
+    ) {
         return null;
     }
 
     @OverrideOnly
     protected boolean execute(final @NotNull Player player) {
-        sendMessage(player, "red", '!', "You might have overriden the wrong method... <gold>(player)</gold>");
+        sendMessage(
+            player,
+            "red",
+            '!',
+            "You might have overriden the wrong method... <gold>(player)</gold>"
+        );
         return true;
     }
 
     @OverrideOnly
     protected boolean execute(final @NotNull Player player, final @NotNull String[] args) {
-        sendMessage(player, "red", '!', "You might have overriden the wrong method... <gold>(player, args[])</gold>");
+        sendMessage(
+            player,
+            "red",
+            '!',
+            "You might have overriden the wrong method... <gold>(player, args[])</gold>"
+        );
         return true;
     }
 
     @OverrideOnly
     protected boolean execute(final @NotNull CommandSender sender) {
-        sendMessage(sender, "red", '!', "You might have overriden the wrong method... <gold>(sender)</gold>");
+        sendMessage(
+            sender,
+            "red",
+            '!',
+            "You might have overriden the wrong method... <gold>(sender)</gold>"
+        );
         return true;
     }
 
     @OverrideOnly
     protected boolean execute(final @NotNull CommandSender sender, final @NotNull String[] args) {
-        sendMessage(sender, "red", '!', "You might have overriden the wrong method... <gold>(sender, args[])</gold>");
+        sendMessage(
+            sender,
+            "red",
+            '!',
+            "You might have overriden the wrong method... <gold>(sender, args[])</gold>"
+        );
         return true;
     }
 
     @OverrideOnly
-    protected @Nullable ArrayList<String> tabComplete(final @NotNull CommandSender sender, final @NotNull String[] args) {
+    protected @Nullable ArrayList<String> tabComplete(
+        final @NotNull CommandSender sender,
+        final @NotNull String[] args
+    ) {
         return null;
     }
 
-    @Override public final @Nullable ArrayList<String> onTabComplete(final @NotNull CommandSender sender, final @NotNull Command command, final @NotNull String label, final @NotNull String[] args) {
+    @Override
+    public final @Nullable ArrayList<String> onTabComplete(
+        final @NotNull CommandSender sender,
+        final @NotNull Command command,
+        final @NotNull String label,
+        final @NotNull String[] args
+    ) {
         if (this.playerOnly) {
             return tabComplete((Player) sender, args);
         }
@@ -126,7 +160,13 @@ public abstract class BaseCommand<E extends BaseExtension> implements CommandExe
         }
     }
 
-    @Override public final boolean onCommand(final @NotNull CommandSender sender, final @NotNull Command command, final @NotNull String label, final @NotNull String[] args) {
+    @Override
+    public final boolean onCommand(
+        final @NotNull CommandSender sender,
+        final @NotNull Command command,
+        final @NotNull String label,
+        final @NotNull String[] args
+    ) {
         if (this.playerOnly && !(sender instanceof Player)) {
             sendMessage(sender, "red", '!', "This command can only be used by players.");
             return true;

@@ -10,29 +10,33 @@ import tk.skulk.plugin.singletons.Singletons;
 import tk.skulk.plugin.wrapper.BaseExtension;
 
 public final class UpdateCheckerExtension extends BaseExtension {
-    private static final @NotNull Request REQUEST = new Request.Builder()
-            .url("https://api.github.com/repos/Skulk-Network/Plugin/releases/latest")
-            .get()
-            .build();
-
-    @SuppressWarnings("ConstantConditions")
-    public @Nullable String getLatestVersion() {
-        try (final var response = Singletons.OKHTTP.newCall(UpdateCheckerExtension.REQUEST).execute()) {
-            return Singletons.GSON.fromJson(response.body().string(), UpdateCheckerExtension.ReleaseTagNameResponse.class).tag_name;
-        } catch (final Exception error) {
-            return null;
-        }
-    }
+    private static final @NotNull Request REQUEST = new Request.Builder().url(
+        "https://api.github.com/repos/Skulk-Network/Plugin/releases/latest").get().build();
 
     public UpdateCheckerExtension(final @NotNull Plugin plugin) {
         super(plugin);
     }
 
-    @Override protected void initCommands() {
+    @SuppressWarnings("ConstantConditions")
+    public @Nullable String getLatestVersion() {
+        try (final var response = Singletons.OKHTTP.newCall(UpdateCheckerExtension.REQUEST).execute()) {
+            return Singletons.GSON.fromJson(
+                response.body().string(),
+                UpdateCheckerExtension.ReleaseTagNameResponse.class
+            ).tag_name;
+        }
+        catch (final Exception error) {
+            return null;
+        }
+    }
+
+    @Override
+    protected void initCommands() {
         new UpdateCommand(this);
     }
 
-    @Override protected void initListeners() {
+    @Override
+    protected void initListeners() {
         new OpJoinListener(this);
     }
 

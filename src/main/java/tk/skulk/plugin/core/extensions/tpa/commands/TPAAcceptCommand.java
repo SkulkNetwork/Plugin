@@ -17,14 +17,16 @@ public final class TPAAcceptCommand extends BaseCommand<TPAExtension> {
         super(extension);
     }
 
-    @Override protected void init() {
+    @Override
+    protected void init() {
         this.setName("tpa-accept");
         this.setDescription("Accepts a TPA request sent to you.");
         this.setUsage("/tpa-accept [player]");
         this.setMaxArgs(1);
     }
 
-    @Override protected boolean execute(final @NotNull Player player, final @NotNull String[] args) {
+    @Override
+    protected boolean execute(final @NotNull Player player, final @NotNull String[] args) {
         final var playerIncomingRequests = this.getExtension().getTpaRequests().get(player);
 
         if (playerIncomingRequests.isEmpty()) {
@@ -46,14 +48,17 @@ public final class TPAAcceptCommand extends BaseCommand<TPAExtension> {
             target = playerIncomingRequests.keySet().iterator().next();
         }
         else {
-            final var component = Component.text().append(
-                    makeMessage("blue", '?', "Looks like multiple people want to TPA to you, which one would you like to accept?")
-            );
+            final var component = Component.text().append(makeMessage(
+                "blue",
+                '?',
+                "Looks like multiple people want to TPA to you, which one would you like to accept?"
+            ));
 
             for (final Player toAccept : playerIncomingRequests.keySet()) {
-                component.append(
-                        fmt("\n<b><gray>-></gray></b> <green><click:run_command:/tpa-accept <0>><0></click></green>", toAccept.getName())
-                );
+                component.append(fmt(
+                    "\n<b><gray>-></gray></b> <green><click:run_command:/tpa-accept <0>><0></click></green>",
+                    toAccept.getName()
+                ));
             }
 
             player.sendMessage(component);

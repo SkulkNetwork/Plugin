@@ -8,7 +8,14 @@ import java.util.Map;
 
 public final class Location extends org.bukkit.Location {
     public Location(final @NotNull org.bukkit.Location location) {
-        super(location.getWorld(), location.getX(), location.getY(), location.getZ(), location.getYaw(), location.getPitch());
+        super(
+            location.getWorld(),
+            location.getX(),
+            location.getY(),
+            location.getZ(),
+            location.getYaw(),
+            location.getPitch()
+        );
     }
 
     @SuppressWarnings("unused")
@@ -17,7 +24,8 @@ public final class Location extends org.bukkit.Location {
         return new Location(org.bukkit.Location.deserialize(map));
     }
 
-    @Override public @NotNull HashMap<String, Object> serialize() {
+    @Override
+    public @NotNull HashMap<String, Object> serialize() {
         final var map = new HashMap<String, Object>();
 
         map.put("world", this.getWorld().getName());

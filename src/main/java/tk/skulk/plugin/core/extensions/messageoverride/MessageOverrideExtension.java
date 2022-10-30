@@ -13,7 +13,8 @@ public final class MessageOverrideExtension extends BaseExtension {
         super(plugin);
     }
 
-    @Override protected void initListeners() {
+    @Override
+    protected void initListeners() {
         new PlayerAdvancementDoneListener(this);
         new PlayerDeathListener(this);
         new PlayerJoinQuitListener(this);

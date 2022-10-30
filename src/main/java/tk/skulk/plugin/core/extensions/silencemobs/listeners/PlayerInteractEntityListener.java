@@ -39,7 +39,8 @@ public final class PlayerInteractEntityListener extends BaseListener<SilenceMobs
             return;
         }
 
-        if (!PlainTextComponentSerializer.plainText().serialize(nameTags.displayName()).equalsIgnoreCase("[silenced]")) {
+        if (!PlainTextComponentSerializer.plainText().serialize(nameTags.displayName()).equalsIgnoreCase(
+            "[silenced]")) {
             return;
         }
 
@@ -56,7 +57,13 @@ public final class PlayerInteractEntityListener extends BaseListener<SilenceMobs
             nameTags.setAmount(nameTags.getAmount() - 1);
         }
 
-        sendMessage(player, "green", '✓', "The entity '<0>' has been silenced.", entity.getType().toString().toLowerCase());
+        sendMessage(
+            player,
+            "green",
+            '✓',
+            "The entity '<0>' has been silenced.",
+            entity.getType().toString().toLowerCase()
+        );
 
         event.setCancelled(true);
     }

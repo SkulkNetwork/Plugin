@@ -17,14 +17,19 @@ public final class HomeCommand extends BaseCommand<HomesExtension> {
         super(extension);
     }
 
-    @Override protected void init() {
+    @Override
+    protected void init() {
         this.setName("home");
         this.setDescription("Teleports you to one of your homes.");
         this.setUsage("/home [name]");
         this.setMaxArgs(1);
     }
 
-    @Override protected @Nullable ArrayList<String> tabComplete(final @NotNull Player player, final @NotNull String[] args) {
+    @Override
+    protected @Nullable ArrayList<String> tabComplete(
+        final @NotNull Player player,
+        final @NotNull String[] args
+    ) {
         if (args.length > 1) {
             return null;
         }
@@ -49,7 +54,8 @@ public final class HomeCommand extends BaseCommand<HomesExtension> {
         return results;
     }
 
-    @Override protected boolean execute(final @NotNull Player player, final @NotNull String[] args) {
+    @Override
+    protected boolean execute(final @NotNull Player player, final @NotNull String[] args) {
         final var playerHomes = this.getExtension().getHomes().get(player.getUniqueId());
         final var playerHomesSize = playerHomes.size();
 
@@ -73,7 +79,12 @@ public final class HomeCommand extends BaseCommand<HomesExtension> {
 
             // Player does not have home named "home", which is the default
             if (homeLocation == null) {
-                sendMessage(player, "red", '!', "Please specify a valid home name. You can also name one of your homes '<b>home</b>' to use it without entering a home name.");
+                sendMessage(
+                    player,
+                    "red",
+                    '!',
+                    "Please specify a valid home name. You can also name one of your homes '<b>home</b>' to use it without entering a home name."
+                );
                 return true;
             }
 

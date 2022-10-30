@@ -10,7 +10,8 @@ public final class SilenceMobsExtension extends BaseExtension {
         super(plugin);
     }
 
-    @Override protected void initListeners() {
+    @Override
+    protected void initListeners() {
         new PlayerInteractEntityListener(this);
     }
 }

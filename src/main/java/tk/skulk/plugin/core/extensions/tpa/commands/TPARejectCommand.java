@@ -16,14 +16,16 @@ public final class TPARejectCommand extends BaseCommand<TPAExtension> {
         super(extension);
     }
 
-    @Override protected void init() {
+    @Override
+    protected void init() {
         this.setName("tpa-reject");
         this.setDescription("Rejects a TPA request sent to you.");
         this.setUsage("/tpa-reject [player]");
         this.setMaxArgs(1);
     }
 
-    @Override protected boolean execute(final @NotNull Player player, final @NotNull String[] args) {
+    @Override
+    protected boolean execute(final @NotNull Player player, final @NotNull String[] args) {
         final var extension = this.getExtension();
         final var playerIncomingRequests = extension.getTpaRequests().get(player);
 
@@ -46,12 +48,17 @@ public final class TPARejectCommand extends BaseCommand<TPAExtension> {
             target = playerIncomingRequests.keySet().iterator().next();
         }
         else {
-            final var component = Component.text().append(
-                    makeMessage("blue", '?', "Looks like multiple people want to TPA to you, which one would you like to reject?")
-            );
+            final var component = Component.text().append(makeMessage(
+                "blue",
+                '?',
+                "Looks like multiple people want to TPA to you, which one would you like to reject?"
+            ));
 
             for (final Player toReject : playerIncomingRequests.keySet()) {
-                component.append(fmt("\n<b><gray>-></gray></b> <red><click:run_command:/tpa-reject <0>><0></click></red>", toReject.getName()));
+                component.append(fmt(
+                    "\n<b><gray>-></gray></b> <red><click:run_command:/tpa-reject <0>><0></click></red>",
+                    toReject.getName()
+                ));
             }
 
             player.sendMessage(component);
@@ -70,7 +77,13 @@ public final class TPARejectCommand extends BaseCommand<TPAExtension> {
         playerIncomingRequests.remove(target);
 
         sendMessage(player, "green", '✓', "Rejected the TPA request from <b><0></b>.", targetName);
-        sendMessage(player, "gold", '!', "<b><0></b> has rejected your TPA request.", player.getName());
+        sendMessage(
+            player,
+            "gold",
+            '!',
+            "<b><0></b> has rejected your TPA request.",
+            player.getName()
+        );
         return true;
     }
 }

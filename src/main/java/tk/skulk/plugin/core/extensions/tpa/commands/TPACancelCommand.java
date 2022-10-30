@@ -21,14 +21,16 @@ public final class TPACancelCommand extends BaseCommand<TPAExtension> {
         super(extension);
     }
 
-    @Override protected void init() {
+    @Override
+    protected void init() {
         this.setName("tpa-cancel");
         this.setDescription("Cancels the TPA request you sent to a player.");
         this.setUsage("/tpa-cancel [player]");
         this.setMaxArgs(1);
     }
 
-    @Override protected boolean execute(final @NotNull Player player, final @NotNull String[] args) {
+    @Override
+    protected boolean execute(final @NotNull Player player, final @NotNull String[] args) {
         final var playerName = player.getName();
         final Player target;
 
@@ -61,13 +63,18 @@ public final class TPACancelCommand extends BaseCommand<TPAExtension> {
                 return true;
             }
             else {
-                final var component = Component.text().append(
-                        makeMessage("blue", '!', "Looks like you have multiple incoming TPA requests. Which one would you like to cancel?")
-                );
+                final var component = Component.text().append(makeMessage(
+                    "blue",
+                    '!',
+                    "Looks like you have multiple incoming TPA requests. Which one would you like to cancel?"
+                ));
 
                 // Twitter.
                 for (final Player toCancel : playerOutGoingRequests) {
-                    component.append(fmt("\n<b><gray>-></gray></b> <blue><click:run_command:/tpa-cancel <0>><0></click></blue>", toCancel.getName()));
+                    component.append(fmt(
+                        "\n<b><gray>-></gray></b> <blue><click:run_command:/tpa-cancel <0>><0></click></blue>",
+                        toCancel.getName()
+                    ));
                 }
 
                 player.sendMessage(component);
@@ -79,15 +86,33 @@ public final class TPACancelCommand extends BaseCommand<TPAExtension> {
         final var targetIncomingRequests = tpaRequests.get(target);
 
         if (!targetIncomingRequests.containsKey(player)) {
-            sendMessage(player, "red", '!', "You don't have an outgoing request to <b><0></b>.", targetName);
+            sendMessage(
+                player,
+                "red",
+                '!',
+                "You don't have an outgoing request to <b><0></b>.",
+                targetName
+            );
             return true;
         }
 
         targetIncomingRequests.get(player).cancel();
         targetIncomingRequests.remove(player);
 
-        sendMessage(player, "green", '✓', "Cancelled the TPA request going to <b><0></b>.", targetName);
-        sendMessage(target, "gold", '!', "<b><0></b> has cancelled their TPA request to you.", playerName);
+        sendMessage(
+            player,
+            "green",
+            '✓',
+            "Cancelled the TPA request going to <b><0></b>.",
+            targetName
+        );
+        sendMessage(
+            target,
+            "gold",
+            '!',
+            "<b><0></b> has cancelled their TPA request to you.",
+            playerName
+        );
         return true;
     }
 }

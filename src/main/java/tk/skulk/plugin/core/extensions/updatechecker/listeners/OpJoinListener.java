@@ -36,9 +36,13 @@ public final class OpJoinListener extends BaseListener<UpdateCheckerExtension> {
                 return;
             }
 
-            plugin.runSync(() ->
-                    sendMessage(player, "orange", '!', "There is a new version available for the plugin: <0>", latestVersion)
-            );
+            plugin.runSync(() -> sendMessage(
+                player,
+                "orange",
+                '!',
+                "There is a new version available for the plugin: <0>",
+                latestVersion
+            ));
         });
     }
 }

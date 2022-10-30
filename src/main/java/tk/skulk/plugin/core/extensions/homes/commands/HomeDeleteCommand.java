@@ -12,24 +12,36 @@ public final class HomeDeleteCommand extends BaseCommand<HomesExtension> {
         super(extension);
     }
 
-    @Override protected void init() {
+    @Override
+    protected void init() {
         this.setName("home-delete");
         this.setDescription("Deletes a home.");
         this.setUsage("/home-delete [name]");
         this.setMaxArgs(1);
     }
 
-    @Override protected boolean execute(final @NotNull Player player, final @NotNull String[] args) {
+    @Override
+    protected boolean execute(final @NotNull Player player, final @NotNull String[] args) {
         final var playerHomes = this.getExtension().getHomes().get(player.getUniqueId());
 
         if (args.length == 0) {
             if (playerHomes.containsKey("home")) {
                 playerHomes.remove("home");
-                sendMessage(player, "green", '✓', "Successfully deleted your default home (Default homes are named 'home').");
+                sendMessage(
+                    player,
+                    "green",
+                    '✓',
+                    "Successfully deleted your default home (Default homes are named 'home')."
+                );
                 return true;
             }
 
-            sendMessage(player, "red", '!', "Can't delete your default home because you don't have a default home (Default homes are named 'home').");
+            sendMessage(
+                player,
+                "red",
+                '!',
+                "Can't delete your default home because you don't have a default home (Default homes are named 'home')."
+            );
             return true;
         }
 
@@ -41,7 +53,13 @@ public final class HomeDeleteCommand extends BaseCommand<HomesExtension> {
         }
 
         playerHomes.remove(homeName);
-        sendMessage(player, "green", '✓', "Successfully deleted the home named <b><0></b>.", homeName);
+        sendMessage(
+            player,
+            "green",
+            '✓',
+            "Successfully deleted the home named <b><0></b>.",
+            homeName
+        );
 
         return true;
     }

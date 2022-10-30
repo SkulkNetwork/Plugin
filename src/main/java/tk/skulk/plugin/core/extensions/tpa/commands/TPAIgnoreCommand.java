@@ -12,15 +12,18 @@ public final class TPAIgnoreCommand extends BaseCommand<TPAExtension> {
         super(extension);
     }
 
-    @Override protected void init() {
+    @Override
+    protected void init() {
         this.setName("tpa-ignore");
-        this.setDescription("Ignores a player's TPA requests until the command is ran again for the player.");
+        this.setDescription(
+            "Ignores a player's TPA requests until the command is ran again for the player.");
         this.setUsage("/tpa-ignore <player>");
         this.setMaxArgs(1);
         this.setMinArgs(1);
     }
 
-    @Override protected boolean execute(final @NotNull Player player, final @NotNull String[] args) {
+    @Override
+    protected boolean execute(final @NotNull Player player, final @NotNull String[] args) {
         final var targetName = args[0];
 
         if (!targetName.matches("\\w+")) {
@@ -42,14 +45,26 @@ public final class TPAIgnoreCommand extends BaseCommand<TPAExtension> {
 
         for (final String ignoredName : playerIgnores) {
             if (ignoredName.equalsIgnoreCase(targetName)) {
-                sendMessage(player, "red", '!', "You are already ignoring TPA requests from <b><0></b>.", ignoredName);
+                sendMessage(
+                    player,
+                    "red",
+                    '!',
+                    "You are already ignoring TPA requests from <b><0></b>.",
+                    ignoredName
+                );
                 return true;
             }
         }
 
         playerIgnores.add(targetName);
 
-        sendMessage(player, "green", '✓', "You are now ignoring TPA requests from <b><0></b>.", targetName);
+        sendMessage(
+            player,
+            "green",
+            '✓',
+            "You are now ignoring TPA requests from <b><0></b>.",
+            targetName
+        );
         return true;
     }
 }

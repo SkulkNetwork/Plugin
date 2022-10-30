@@ -12,7 +12,8 @@ public final class UpdateCommand extends BaseCommand<UpdateCheckerExtension> {
         super(extension);
     }
 
-    @Override protected void init() {
+    @Override
+    protected void init() {
         this.setName("update-snp");
         this.setDescription("Updates the plugin.");
         this.setUsage("/update-snp");
@@ -21,7 +22,8 @@ public final class UpdateCommand extends BaseCommand<UpdateCheckerExtension> {
     }
 
     // TODO
-    @Override protected boolean execute(final @NotNull CommandSender sender) {
+    @Override
+    protected boolean execute(final @NotNull CommandSender sender) {
         sendMessage(sender, "orange", '!', "This command is not implemented yet.");
         return true;
     }

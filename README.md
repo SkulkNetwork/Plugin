@@ -2,9 +2,11 @@
 
 The main plugin used for the Skulk Network Minecraft server (Soon™).
 
-You are free to use this plugin for your own server, but keep in mind that I am not responsible for any issues that may
+You are free to use this plugin for your own server, but keep in mind that I am not responsible for
+any issues that may
 arise from using this plugin.
-And I am not obligated to provide support for this plugin. But I will try to help you if I can (Add me on
+And I am not obligated to provide support for this plugin. But I will try to help you if I can (Add
+me on
 Discord: `RGBCube#4777`).
 
 ## 📥 Downloading
@@ -58,7 +60,8 @@ You can silence any mob by naming it `Silenced`.
 * `/tpa-accept [player]` - Accepts a TPA request sent to you.
 * `/tpa-reject [player]` - Rejects a TPA request sent to you.
 * `/tpa-cancel [player]` - Cancels the TPA request you sent to a player.
-* `/tpa-ignore <player>` - Ignores a player's TPA requests until the command is ran again for the player.
+* `/tpa-ignore <player>` - Ignores a player's TPA requests until the command is ran again for the
+  player.
 * `/tpa-ignore-all` - Ignores all TPA requests sent to you until the command is ran again.
 * `/tpa-list-ignored` - Tells you all the people you have ignored.
 

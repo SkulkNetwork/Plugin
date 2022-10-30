@@ -30,7 +30,7 @@ jobs:
 
       - name: Build Project
         run: mvn -B clean package
-      
+
       - name: Set JAR File Name Environment Variable
         run: echo "jar=$(ls target | grep -E "original.*\.jar" | cut -c10-)" >> $GITHUB_ENV
 
