@@ -4,7 +4,7 @@ main: tk.skulk.plugin.core.Plugin
 api-version: "1.19"
 authors: [ RGBCube ]
 description: The main plugin used for the Skulk Network Minecraft server.
-website: skulk.tk
+website: "${project.url}"
 commands:
   tpa-accept: { }
   tpa-cancel: { }
