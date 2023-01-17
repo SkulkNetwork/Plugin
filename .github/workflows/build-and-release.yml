@@ -1,12 +1,10 @@
 name: Build & Release
 
 env:
-  # CONFIGURATION START
   master_branch: master
   java_distribution: temurin
   java_version: 17
   artifact_name: plugin-jar
-  # CONFIGURATION END
 
 on:
   - push
