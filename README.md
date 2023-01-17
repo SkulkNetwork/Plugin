@@ -3,11 +3,8 @@
 The main plugin used for the Skulk Network Minecraft server (Soon™).
 
 You are free to use this plugin for your own server, but keep in mind that I am not responsible for
-any issues that may
-arise from using this plugin.
-And I am not obligated to provide support for this plugin. But I will try to help you if I can (Add
-me on
-Discord: `RGBCube#4777`).
+any issues that may arise from using this plugin. And I am not obligated to provide support for
+this plugin. But I will try to help you if I can (Add me on Discord: `RGBCube#4777`).
 
 ## 📥 Downloading
 
