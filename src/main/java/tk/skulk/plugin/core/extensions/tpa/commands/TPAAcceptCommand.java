@@ -73,7 +73,7 @@ public final class TPAAcceptCommand extends BaseCommand<TPAExtension> {
         }
 
         sendMessage(player, "green", '!', "Teleporting <b><0></b> to you...", targetName);
-        sendMessage(player, "green", '!', "Teleporting you to <b><0></b>...", player.getName());
+        sendMessage(target, "green", '!', "Teleporting you to <b><0></b>...", player.getName());
 
         EffectHelper.playTeleport(target);
         EffectHelper.playTeleport(player);
