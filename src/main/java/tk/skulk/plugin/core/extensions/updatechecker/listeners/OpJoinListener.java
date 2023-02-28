@@ -38,7 +38,7 @@ public final class OpJoinListener extends BaseListener<UpdateCheckerExtension> {
 
             plugin.runSync(() -> sendMessage(
                 player,
-                "orange",
+                "gold",
                 '!',
                 "There is a new version available for the plugin: <0>",
                 latestVersion

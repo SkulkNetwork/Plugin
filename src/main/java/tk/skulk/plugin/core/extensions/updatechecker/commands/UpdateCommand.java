@@ -24,7 +24,7 @@ public final class UpdateCommand extends BaseCommand<UpdateCheckerExtension> {
     // TODO
     @Override
     protected boolean execute(final @NotNull CommandSender sender) {
-        sendMessage(sender, "orange", '!', "This command is not implemented yet.");
+        sendMessage(sender, "gold", '!', "This command is not implemented yet.");
         return true;
     }
 }
