@@ -1,4 +1,4 @@
-name: "${project.name}"
+name: "SNP"
 version: "${project.version}"
 main: tk.skulk.plugin.core.Plugin
 api-version: "1.19"
