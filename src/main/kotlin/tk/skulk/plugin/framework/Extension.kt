@@ -29,7 +29,7 @@ import com.google.errorprone.annotations.DoNotCall
  */
 abstract class Extension<P : Plugin>(
     /** The [Plugin] that owns the extension. **/
-    val plugin: P
+    val plugin: P,
 ) {
     /**
      * The commands owned by the extension.

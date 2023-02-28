@@ -15,7 +15,7 @@ import org.bukkit.event.HandlerList
  */
 abstract class Listener<P : Plugin, E : Extension<P>>(
     /** The [Extension] that owns the listener. **/
-    protected val extension: E
+    protected val extension: E,
 ) : org.bukkit.event.Listener {
     /**
      * The method that gets called every time the listener is unloaded. Must be overriden.

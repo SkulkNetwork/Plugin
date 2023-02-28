@@ -42,7 +42,8 @@ abstract class Plugin : JavaPlugin() {
             try {
                 loadedExtensions += it()
                 // Registration failure.
-            } catch (_: Throwable) {}
+            } catch (_: Throwable) {
+            }
         }
     }
 

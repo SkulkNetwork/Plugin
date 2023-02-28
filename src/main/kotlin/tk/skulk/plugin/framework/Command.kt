@@ -1,7 +1,6 @@
 package tk.skulk.plugin.framework
 
 import com.google.errorprone.annotations.DoNotCall
-import org.bukkit.Bukkit
 import org.bukkit.command.CommandExecutor
 
 /**
@@ -11,7 +10,7 @@ import org.bukkit.command.CommandExecutor
  */
 abstract class Command<P : Plugin, E : Extension<P>>(
     /** The [Extension] that owns the command. **/
-    protected val extension: E
+    protected val extension: E,
 ) : CommandExecutor {
     /** The name of the command. Must be overriden. **/
     protected abstract val name: String
