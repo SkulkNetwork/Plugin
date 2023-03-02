@@ -6,13 +6,12 @@ import org.bukkit.inventory.EquipmentSlot
 import org.bukkit.inventory.meta.ItemMeta
 import java.util.UUID
 
-fun addAttribute(
-    itemMeta: ItemMeta,
+fun ItemMeta.addAttribute(
     attribute: Attribute,
     level: Double,
     equipmentSlot: EquipmentSlot,
 ) {
-    itemMeta.addAttributeModifier(
+    addAttributeModifier(
         attribute, AttributeModifier(
         UUID.randomUUID(),
         attribute.name,
