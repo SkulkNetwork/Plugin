@@ -40,9 +40,9 @@ abstract class Plugin : JavaPlugin() {
     override fun onEnable() {
         extensions.forEach {
             try {
-                loadedExtensions += it()
-                // Registration failure.
-            } catch (_: Throwable) {
+                loadedExtensions += it() // Registration failure.
+            }
+            catch (_: Throwable) {
             }
         }
     }

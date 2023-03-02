@@ -35,7 +35,8 @@ abstract class Command<P : Plugin, E : Extension<P>>(
     fun unload() {
         try {
             disable()
-        } catch (error: Throwable) {
+        }
+        catch (error: Throwable) {
             extension.plugin.logger.severe("An error occurred while unloading command '$name':\n${error.stackTraceToString()}")
         }
 
@@ -47,8 +48,7 @@ abstract class Command<P : Plugin, E : Extension<P>>(
     }
 
     init {
-        @Suppress("LeakingThis")
-        extension.plugin.getCommand(name)?.let {
+        @Suppress("LeakingThis") extension.plugin.getCommand(name)?.let {
             it.setExecutor(this)
             it.description = description
             it.usage = usage

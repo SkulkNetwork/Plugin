@@ -82,7 +82,8 @@ abstract class Extension<P : Plugin>(
 
         try {
             disable()
-        } catch (error: Throwable) {
+        }
+        catch (error: Throwable) {
             plugin.logger.severe("An error occurred while unloading extension '${this::class.simpleName}':\n${error.stackTraceToString()}")
         }
     }
@@ -91,20 +92,18 @@ abstract class Extension<P : Plugin>(
     private val loadedListeners = mutableListOf<Listener<P, *>>()
 
     init {
-        @Suppress("LeakingThis")
-        commands.forEach {
+        @Suppress("LeakingThis") commands.forEach {
             try {
                 loadedCommands += it()
-            } catch (_: Throwable) {
-                // Registration failure.
+            }
+            catch (_: Throwable) { // Registration failure.
             }
         }
-        @Suppress("LeakingThis")
-        listeners.forEach {
+        @Suppress("LeakingThis") listeners.forEach {
             try {
                 loadedListeners += it()
-            } catch (_: Throwable) {
-                // Registration failure.
+            }
+            catch (_: Throwable) { // Registration failure.
             }
         }
     }

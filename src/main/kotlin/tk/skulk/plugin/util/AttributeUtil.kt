@@ -1,4 +1,4 @@
-package tk.skulk.plugin.core
+package tk.skulk.plugin.util
 
 import org.bukkit.attribute.Attribute
 import org.bukkit.attribute.AttributeModifier
@@ -13,13 +13,12 @@ fun addAttribute(
     equipmentSlot: EquipmentSlot,
 ) {
     itemMeta.addAttributeModifier(
-        attribute,
-        AttributeModifier(
-            UUID.randomUUID(),
-            attribute.name,
-            level,
-            AttributeModifier.Operation.ADD_NUMBER,
-            equipmentSlot
-        )
+        attribute, AttributeModifier(
+        UUID.randomUUID(),
+        attribute.name,
+        level,
+        AttributeModifier.Operation.ADD_NUMBER,
+        equipmentSlot
+    )
     )
 }

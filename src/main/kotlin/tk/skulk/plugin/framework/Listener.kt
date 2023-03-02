@@ -31,7 +31,8 @@ abstract class Listener<P : Plugin, E : Extension<P>>(
     fun unload() {
         try {
             disable()
-        } catch (error: Throwable) {
+        }
+        catch (error: Throwable) {
             extension.plugin.logger.severe("An error occurred while unloading listener '${this::class.simpleName}':\n${error.stackTraceToString()}")
         }
 
@@ -39,7 +40,6 @@ abstract class Listener<P : Plugin, E : Extension<P>>(
     }
 
     init {
-        @Suppress("LeakingThis")
-        Bukkit.getPluginManager().registerEvents(this, extension.plugin)
+        @Suppress("LeakingThis") Bukkit.getPluginManager().registerEvents(this, extension.plugin)
     }
 }

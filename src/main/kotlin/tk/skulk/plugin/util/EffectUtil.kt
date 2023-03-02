@@ -1,4 +1,4 @@
-package tk.skulk.plugin.core
+package tk.skulk.plugin.util
 
 import org.bukkit.Sound
 import org.bukkit.entity.Entity
