@@ -45,7 +45,7 @@ abstract class Extension<P : Plugin>(
      * )
      * ```
      */
-    protected abstract val commands: List<() -> Command<P, *>>
+    protected open val commands: List<() -> Command<P, *>> = listOf()
 
     /**
      * The listeners owned by the extension.
@@ -60,17 +60,17 @@ abstract class Extension<P : Plugin>(
      * )
      * ```
      */
-    protected abstract val listeners: List<() -> Listener<P, *>>
+    protected open val listeners: List<() -> Listener<P, *>> = listOf()
 
     /**
-     * The method that gets called when the extension is getting unloaded. Must be overriden.
+     * The method that gets called when the extension is getting unloaded.
      *
      * When the extension is unloaded, the extension will be unregistered
      * and cleaned up by the garbage collector. One extension instance
      * does not live longer than one load. Every time /reload is
      * executed, the extension class will be initialized again.
      */
-    protected abstract fun disable()
+    protected open fun disable() {}
 
     @DoNotCall
     fun unload() {

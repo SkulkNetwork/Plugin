@@ -22,14 +22,14 @@ abstract class Command<P : Plugin, E : Extension<P>>(
     protected abstract val usage: String
 
     /**
-     * The method that gets called every time the command is unloaded. Must be overriden.
+     * The method that gets called every time the command is unloaded.
      *
      * When the command is unloaded, the command will be unregistered
      * and cleaned up by the garbage collector. One command instance
      * does not live longer than one load. Every time /reload is
      * executed, the command class will be initialized again.
      */
-    protected abstract fun disable()
+    protected open fun disable() {}
 
     @DoNotCall
     fun unload() {

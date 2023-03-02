@@ -18,14 +18,14 @@ abstract class Listener<P : Plugin, E : Extension<P>>(
     protected val extension: E,
 ) : org.bukkit.event.Listener {
     /**
-     * The method that gets called every time the listener is unloaded. Must be overriden.
+     * The method that gets called every time the listener is unloaded.
      *
      * When the listener is unloaded, the listener will be unregistered
      * and cleaned up by the garbage collector. One listener instance
      * does not live longer than one load. Every time /reload is
      * executed, the listener class will be initialized again.
      */
-    protected abstract fun disable()
+    protected open fun disable() {}
 
     @DoNotCall
     fun unload() {
