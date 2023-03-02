@@ -32,9 +32,8 @@ class DragonDropElytraListener(extension: EntityOverrideExtension) : Listener<SN
 
         meta.displayName(
             format("<dark_purple>Dragon Master Wings</dark_purple>").decoration(
-                    TextDecoration.ITALIC,
-                    false
-                )
+                TextDecoration.ITALIC, false
+            )
         )
 
         meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 4, true)
@@ -107,16 +106,19 @@ class DragonDropElytraListener(extension: EntityOverrideExtension) : Listener<SN
 
                 "You have been equipped with an OP elytra for beating the Ender dragon."
             }
+
             player.inventory.firstEmpty() != -1 -> {
                 player.inventory.addItem(opElytra)
 
                 "An OP elytra has been added to your inventory for beating the Ender dragon."
             }
+
             player.enderChest.firstEmpty() != -1 -> {
                 player.enderChest.addItem(opElytra)
 
                 "An OP elytra has been added to your ender chest for beating the Ender " + "dragon."
             }
+
             else -> {
                 val l = player.location
                 player.world.dropItem(l, opElytra)
