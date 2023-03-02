@@ -124,9 +124,7 @@ class DragonDropElytraListener(extension: EntityOverrideExtension) : Listener<SN
                 "An OP elytra has been dropped at x: ${l.x.roundToInt()}, y: ${l.y.roundToInt()}, z:" + " ${l.z.roundToInt()} since your inventory is full and you have beaten the " + "Ender dragon."
         }
 
-        player.sendMessage(
-            "light_purple", '!', message
-        )
+        player.sendMessage("light_purple", '!', message)
 
         player.persistentDataContainer.set(hasGottenElytraKey, booleanPersistentDataType, true)
     }
