@@ -103,25 +103,25 @@ class DragonDropElytraListener(extension: EntityOverrideExtension) : Listener<SN
 
         val message: String
 
-        if (player.inventory.chestplate == null) {
-            player.inventory.chestplate = opElytra
-            message = "You have been equipped with an OP elytra for beating the Ender dragon."
-        }
-        else if (player.inventory.firstEmpty() != -1) {
-            player.inventory.addItem(opElytra)
-            message = "An OP elytra has been added to your inventory for beating the Ender dragon."
-        }
-        else if (player.enderChest.firstEmpty() != -1) {
-            player.enderChest.addItem(opElytra)
-            message =
-                "An OP elytra has been added to your ender chest for beating the Ender " + "dragon."
-        }
-        else {
-            val l = player.location
+        when {
+            player.inventory.chestplate == null -> {
+                player.inventory.chestplate = opElytra
+                message = "You have been equipped with an OP elytra for beating the Ender dragon."
+            }
+            player.inventory.firstEmpty() != -1 -> {
+                player.inventory.addItem(opElytra)
+                message = "An OP elytra has been added to your inventory for beating the Ender dragon."
+            }
+            player.enderChest.firstEmpty() != -1 -> {
+                player.enderChest.addItem(opElytra)
+                message = "An OP elytra has been added to your ender chest for beating the Ender " + "dragon."
+            }
+            else -> {
+                val l = player.location
 
-            player.world.dropItem(l, opElytra)
-            message =
-                "An OP elytra has been dropped at x: ${l.x.roundToInt()}, y: ${l.y.roundToInt()}, z:" + " ${l.z.roundToInt()} since your inventory is full and you have beaten the " + "Ender dragon."
+                player.world.dropItem(l, opElytra)
+                message = "An OP elytra has been dropped at x: ${l.x.roundToInt()}, y: ${l.y.roundToInt()}, z:" + " ${l.z.roundToInt()} since your inventory is full and you have beaten the " + "Ender dragon."
+            }
         }
 
         player.sendMessage("light_purple", '!', message)
