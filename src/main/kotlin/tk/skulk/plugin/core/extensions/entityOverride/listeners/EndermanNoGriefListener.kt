@@ -11,7 +11,7 @@ import tk.skulk.plugin.framework.Listener
 class EndermanNoGriefListener(extension: EntityOverrideExtension) : Listener<SNPlugin, EntityOverrideExtension>(
     extension
 ) {
-    @EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     fun onEntityChangeBlock(event: EntityChangeBlockEvent) {
         if (event.entityType != EntityType.ENDERMAN) {
             return

@@ -10,7 +10,7 @@ import tk.skulk.plugin.framework.Listener
 class ExplosionDropAllListener(extension: EntityOverrideExtension) : Listener<SNPlugin, EntityOverrideExtension>(
     extension
 ) {
-    @EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     fun onEntityExplode(event: EntityExplodeEvent) {
         event.yield = 100F
     }

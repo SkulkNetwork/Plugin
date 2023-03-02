@@ -13,7 +13,7 @@ import tk.skulk.plugin.util.sendMessage
 class CookieResetInsomniaListener(extension: FoodBehaviourExtension) : Listener<SNPlugin, FoodBehaviourExtension>(
 extension
 ) {
-    @EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     fun onPlayerItemConsume(event: PlayerItemConsumeEvent) {
         if (event.item.type != Material.COOKIE) {
             return
