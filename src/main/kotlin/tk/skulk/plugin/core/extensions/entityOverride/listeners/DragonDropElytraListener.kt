@@ -3,7 +3,6 @@ package tk.skulk.plugin.core.extensions.entityOverride.listeners
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.TextDecoration
 import org.bukkit.Material
-import org.bukkit.NamespacedKey
 import org.bukkit.attribute.Attribute
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.EntityType
@@ -15,8 +14,8 @@ import org.bukkit.event.entity.EntityDeathEvent
 import org.bukkit.inventory.EquipmentSlot
 import org.bukkit.inventory.ItemStack
 import tk.skulk.plugin.core.SNPlugin
-import tk.skulk.plugin.core.booleanPersistentDataType
 import tk.skulk.plugin.core.extensions.entityOverride.EntityOverrideExtension
+import tk.skulk.plugin.core.redis
 import tk.skulk.plugin.framework.Listener
 import tk.skulk.plugin.util.addAttribute
 import tk.skulk.plugin.util.format
@@ -68,8 +67,6 @@ class DragonDropElytraListener(extension: EntityOverrideExtension) : Listener<SN
         it.itemMeta = meta
     }
 
-    private val hasGottenElytraKey = NamespacedKey(extension.plugin, "hasGottenElytra")
-
     private var lastDragonDamager: Player? = null
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
@@ -95,9 +92,7 @@ class DragonDropElytraListener(extension: EntityOverrideExtension) : Listener<SN
         val player = lastDragonDamager ?: return
 
 
-        if (player.persistentDataContainer.getOrDefault(
-                hasGottenElytraKey, booleanPersistentDataType, false
-            )) {
+        if (redis.get(player.uniqueId.toString() + ":killedDragon") == "true") {
             return
         }
 
@@ -130,6 +125,6 @@ class DragonDropElytraListener(extension: EntityOverrideExtension) : Listener<SN
 
         player.sendMessage("light_purple", '!', message)
 
-        player.persistentDataContainer.set(hasGottenElytraKey, booleanPersistentDataType, true)
+        redis.set(player.uniqueId.toString() + ":killedDragon", "true")
     }
 }
