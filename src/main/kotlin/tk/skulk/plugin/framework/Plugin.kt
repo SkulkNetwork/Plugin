@@ -1,6 +1,5 @@
 package tk.skulk.plugin.framework
 
-import org.bukkit.Bukkit
 import org.bukkit.plugin.java.JavaPlugin
 
 /**
@@ -49,7 +48,7 @@ abstract class Plugin : JavaPlugin() {
 
     /** Unloads all loaded extensions. **/
     override fun onDisable() {
-        Bukkit.getScheduler().cancelTasks(this)
+        server.scheduler.cancelTasks(this)
 
         loadedExtensions.forEach {
             it.unload()
