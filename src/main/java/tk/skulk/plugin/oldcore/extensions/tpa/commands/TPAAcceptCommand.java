@@ -4,8 +4,8 @@ import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-import tk.skulk.plugin.oldcore.extensions.tpa.TPAExtension;
 import tk.skulk.plugin.helpers.EffectHelper;
+import tk.skulk.plugin.oldcore.extensions.tpa.TPAExtension;
 import tk.skulk.plugin.wrapper.BaseCommand;
 
 import static tk.skulk.plugin.helpers.MiniMessageHelper.*;

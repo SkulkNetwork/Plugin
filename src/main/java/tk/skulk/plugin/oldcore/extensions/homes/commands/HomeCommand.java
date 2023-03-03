@@ -3,8 +3,8 @@ package tk.skulk.plugin.oldcore.extensions.homes.commands;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import tk.skulk.plugin.oldcore.extensions.homes.HomesExtension;
 import tk.skulk.plugin.helpers.EffectHelper;
+import tk.skulk.plugin.oldcore.extensions.homes.HomesExtension;
 import tk.skulk.plugin.utils.Location;
 import tk.skulk.plugin.wrapper.BaseCommand;
 
