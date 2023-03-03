@@ -17,6 +17,10 @@ import org.bukkit.plugin.java.JavaPlugin
  * ```
  */
 abstract class Plugin : JavaPlugin() {
+    init {
+        @Suppress("LeakingThis") instance = this
+    }
+
     /**
      * The extensions owned by the plugin.
      *
@@ -53,5 +57,11 @@ abstract class Plugin : JavaPlugin() {
         loadedExtensions.forEach {
             it.unload()
         }
+    }
+
+    companion object {
+        /** The instance of the plugin. **/
+        lateinit var instance: Plugin
+            private set
     }
 }
