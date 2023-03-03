@@ -7,7 +7,9 @@ import okhttp3.OkHttpClient
 import redis.clients.jedis.JedisPooled
 import tk.skulk.plugin.core.extensions.entityOverride.EntityOverrideExtension
 import tk.skulk.plugin.core.extensions.foodBehaviour.FoodBehaviourExtension
+import tk.skulk.plugin.core.extensions.messageOverride.MessageOverrideExtension
 import tk.skulk.plugin.core.extensions.silenceMobs.SilenceMobsExtension
+import tk.skulk.plugin.core.extensions.updateChecker.UpdateCheckerExtension
 import tk.skulk.plugin.framework.Plugin
 
 val json = Gson()
@@ -20,6 +22,8 @@ class SNPlugin : Plugin() {
     override val extensions = listOf(
         { EntityOverrideExtension(this) },
         { FoodBehaviourExtension(this) },
+        { MessageOverrideExtension(this) },
         { SilenceMobsExtension(this) },
+        { UpdateCheckerExtension(this) },
     )
 }
