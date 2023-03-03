@@ -2,8 +2,8 @@ package tk.skulk.plugin.framework
 
 import com.google.errorprone.annotations.DoNotCall
 import org.bukkit.command.Command
-import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
+import org.bukkit.command.TabExecutor
 
 /**
  * The class that represents a command.
@@ -13,7 +13,7 @@ import org.bukkit.command.CommandSender
 abstract class Command<P : Plugin, E : Extension<P>>(
     /** The [Extension] that owns the command. **/
     protected val extension: E,
-) : CommandExecutor {
+) : TabExecutor {
     /** The name of the command. Must be overriden. **/
     protected abstract val name: String
 
@@ -32,6 +32,14 @@ abstract class Command<P : Plugin, E : Extension<P>>(
     protected abstract fun execute(sender: CommandSender, args: Array<String>): Boolean
 
     /**
+     * The method that gets called every time the command is tab completed.
+     *
+     * @param sender The [CommandSender] that tab completed the command.
+     * @param args The arguments that were currently written in the prompt.
+     */
+    protected open fun tabComplete(sender: CommandSender, args: Array<String>) = emptyList<String>()
+
+    /**
      * The method that gets called every time the command is unloaded.
      *
      * When the command is unloaded, the command will be unregistered
@@ -48,6 +56,14 @@ abstract class Command<P : Plugin, E : Extension<P>>(
         label: String,
         args: Array<String>,
     ) = execute(sender, args)
+
+    @DoNotCall
+    override fun onTabComplete(
+        sender: CommandSender,
+        command: Command,
+        alias: String,
+        args: Array<String>,
+    ) = tabComplete(sender, args)
 
     @DoNotCall
     fun unload() {
