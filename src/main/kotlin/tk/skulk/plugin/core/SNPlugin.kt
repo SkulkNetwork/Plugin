@@ -10,7 +10,7 @@ import tk.skulk.plugin.core.extensions.foodBehaviour.FoodBehaviourExtension
 import tk.skulk.plugin.core.extensions.silenceMobs.SilenceMobsExtension
 import tk.skulk.plugin.framework.Plugin
 
-val gson = Gson()
+val json = Gson()
 val http = OkHttpClient()
 val miniMessage = MiniMessage.miniMessage()
 val ptSerializer = PlainTextComponentSerializer.plainText()
