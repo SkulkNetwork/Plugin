@@ -12,12 +12,7 @@ class UpdateCommand(extension: UpdateCheckerExtension) : Command<SNPlugin, Updat
     override val description = "Update the plugin."
     override val usage = "/update"
 
-    override fun onCommand(
-        sender: CommandSender,
-        command: org.bukkit.command.Command,
-        label: String,
-        args: Array<String>,
-    ): Boolean {
+    override fun execute(sender: CommandSender, args: Array<String>): Boolean {
         TODO("Not yet implemented")
     }
 }

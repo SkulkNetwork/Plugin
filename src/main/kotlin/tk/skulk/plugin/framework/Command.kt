@@ -1,7 +1,9 @@
 package tk.skulk.plugin.framework
 
 import com.google.errorprone.annotations.DoNotCall
+import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
+import org.bukkit.command.CommandSender
 
 /**
  * The class that represents a command.
@@ -22,6 +24,14 @@ abstract class Command<P : Plugin, E : Extension<P>>(
     protected abstract val usage: String
 
     /**
+     * The method that gets called every time the command is executed.
+     *
+     * @param sender The [CommandSender] that executed the command.
+     * @param args The arguments that were passed to the command.
+     */
+    protected abstract fun execute(sender: CommandSender, args: Array<String>): Boolean
+
+    /**
      * The method that gets called every time the command is unloaded.
      *
      * When the command is unloaded, the command will be unregistered
@@ -30,6 +40,14 @@ abstract class Command<P : Plugin, E : Extension<P>>(
      * executed, the command class will be initialized again.
      */
     protected open fun disable() {}
+
+    @DoNotCall
+    override fun onCommand(
+        sender: CommandSender,
+        command: Command,
+        label: String,
+        args: Array<String>,
+    ) = execute(sender, args)
 
     @DoNotCall
     fun unload() {
