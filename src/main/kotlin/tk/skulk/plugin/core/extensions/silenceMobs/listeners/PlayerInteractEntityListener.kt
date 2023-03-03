@@ -30,14 +30,14 @@ class PlayerInteractEntityListener(extension: SilenceMobsExtension) : Listener<S
             return
         }
 
-        val entity = event.rightClicked
+        val entity = event.rightClicked.apply {
+            if (type == EntityType.UNKNOWN) {
+                return
+            }
 
-        if (entity.type == EntityType.UNKNOWN) {
-            return
+            isSilent = true
+            customName(format("<i><gray>Silenced</gray></i>"))
         }
-
-        entity.isSilent = true
-        entity.customName(format("<i><gray>Silenced</gray></i>"))
 
         if (player.gameMode != GameMode.CREATIVE) {
             nameTags.amount -= 1

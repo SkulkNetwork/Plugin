@@ -28,41 +28,42 @@ class DragonDropElytraListener(extension: EntityOverrideExtension) : Listener<SN
     extension
 ) {
     private val opElytra = ItemStack(Material.ELYTRA).also {
-        val meta = it.itemMeta
+        val meta = it.itemMeta.apply {
 
-        meta.displayName(
-            format("<dark_purple>Dragon Master Wings</dark_purple>").decoration(
-                TextDecoration.ITALIC, false
+            displayName(
+                format("<dark_purple>Dragon Master Wings</dark_purple>").decoration(
+                    TextDecoration.ITALIC, false
+                )
             )
-        )
 
-        meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 4, true)
-        meta.addEnchant(Enchantment.DURABILITY, 3, true)
-        meta.addEnchant(Enchantment.MENDING, 1, true)
-        meta.addEnchant(Enchantment.THORNS, 3, true)
+            addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 4, true)
+            addEnchant(Enchantment.DURABILITY, 3, true)
+            addEnchant(Enchantment.MENDING, 1, true)
+            addEnchant(Enchantment.THORNS, 3, true)
 
-        meta.addAttribute(
-            Attribute.GENERIC_ARMOR,
-            8.0,
-            EquipmentSlot.CHEST,
-        )
-        meta.addAttribute(
-            Attribute.GENERIC_ARMOR_TOUGHNESS,
-            3.0,
-            EquipmentSlot.CHEST,
-        )
-        meta.addAttribute(
-            Attribute.GENERIC_KNOCKBACK_RESISTANCE,
-            1.0,
-            EquipmentSlot.CHEST,
-        )
-
-        meta.lore(
-            listOf(
-                Component.empty(),
-                format("\"<dark_purple>Only true warriors can use these wings...</dark_purple>\"")
+            addAttribute(
+                Attribute.GENERIC_ARMOR,
+                8.0,
+                EquipmentSlot.CHEST,
             )
-        )
+            addAttribute(
+                Attribute.GENERIC_ARMOR_TOUGHNESS,
+                3.0,
+                EquipmentSlot.CHEST,
+            )
+            addAttribute(
+                Attribute.GENERIC_KNOCKBACK_RESISTANCE,
+                1.0,
+                EquipmentSlot.CHEST,
+            )
+
+            lore(
+                listOf(
+                    Component.empty(),
+                    format("\"<dark_purple>Only true warriors can use these wings...</dark_purple>\"")
+                )
+            )
+        }
 
         it.itemMeta = meta
     }
